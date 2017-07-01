@@ -14,7 +14,7 @@ after_script:
 
 addons:
   code_climate:
-    repo_token: 41a1224e82b9ba47225786a59e5a3d986789d83f110549417a2e76cc86a98573
+    repo_token: 2862e27bd8865ad0846d2a64b93510b074603fd035df347589ba67eb4ceffeeb
 after_success:
   - bundle exec codeclimate-test-reporter
 # uncomment and edit the following line if your project needs to run something other than `rake`:
