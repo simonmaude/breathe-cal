@@ -3,7 +3,7 @@ https://www.youtube.com/watch?v=hivkpOmqyRM
 
 Individual ScreenCasts: 
 
-Albert Tung: 
+Albert Tung:
 Angus Hung:
 Dominic Bueno:
 Simon Maude:        https://youtu.be/9B1JBODWMKs
