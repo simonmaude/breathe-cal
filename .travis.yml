@@ -1,8 +1,16 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=2862e27bd8865ad0846d2a64b93510b074603fd035df347589ba67eb4ceffeeb
+    - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
+
+
 language: ruby
 rvm:
  - 2.3.0
 
-
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
 script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
