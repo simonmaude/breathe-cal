@@ -5,7 +5,7 @@ https://www.youtube.com/watch?v=hivkpOmqyRM
 Individual ScreenCasts:    
 Albert Tung:  https://www.youtube.com/watch?v=pt4gJpDjS3M&  # No audio; need to turn on captioning for comments
 Angus Hung:   
-Dominic Bueno:   
+Dominic Bueno:   https://youtu.be/qnPKTKrFqoU
 Simon Maude:        https://youtu.be/9B1JBODWMKs   
 Smit Vachhani:   
 Soroosh Demooei:   
