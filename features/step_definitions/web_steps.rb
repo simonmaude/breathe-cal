@@ -88,6 +88,10 @@ When /^(?:|I )press on the text "([^"]*)"$/ do |text|
   find("#heading" + text).click
 end
 
+When /^(?:|I )press on the icon "([^"]*)"$/ do |text|
+  # pending
+  # find(text).click
+end
 
 When /^(?:|I )follow "([^"]*)"$/ do |link|
   click_link(link)
