@@ -1,5 +1,5 @@
 
-When /I am on the home page of the application/ do
+Given /I am on the home page of the application/ do
     pending
 end
 
@@ -25,17 +25,13 @@ Then /I should see (.*) on the (.*) side/ do |item, location|
 =end
 end
 
-Then /I should see the add allergen button in the information bar/ do 
+
+Then /I should see (.*) on the map/ do |item|
     pending
 end
 
 
-Then /I should see the search box on the map/ do
-    pending
-end
-
-
-And /I should see (.*) on the bar/ do |item|
+Then /I should see (.*) on the bar/ do |item|
     pending
 =begin
         result = false
