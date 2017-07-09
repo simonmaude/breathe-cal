@@ -24,7 +24,7 @@ end
 # end 
 
 Then /I should be on the user homepage/ do
-  #pending
+  assert page.current_path == "http://www.breathebayarea.org/"
 end
 
 Given /I am on the sign_in page/ do
