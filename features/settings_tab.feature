@@ -37,6 +37,15 @@ Scenario: User disables emergency notifications
   When I check "Receive Emergency Alerts"
   #then i should not receive alerts (cookie)
 
+Scenario: User changes email preferences
+  Given I successfully authenticated with Google as "James Jones"
+  When I press "Settings"
+  When I press "Email Preferences"
+  Then I should see "Change Email"
+  And I should see "Do not receive Email"
+  
+ 
+
   
  
   
