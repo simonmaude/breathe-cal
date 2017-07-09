@@ -6,6 +6,10 @@ Given(/^I click on the map$/) do
   page.find("#map").click # Write code here that turns the phrase above into concrete actions
 end
 
+Given(/^"(.*)" users reported "(.*)" in "(.*)"$/) do |number, allergen, place|
+  # pending
+end
+  
 Then(/^I should see "([^"]*)" when it loads$/) do |arg1|
   wait_for_ajax
   wait_until { page.has_content?(arg1)}
