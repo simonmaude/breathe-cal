@@ -1,41 +1,65 @@
-Feature: display list of movies filtered by MPAA rating
+Feature: Add alert when severe (3+ reports) level of allergen through a pop-up 
+
+  As person with allergies
+  So that I can avoid allergens
+  I want to know when there are reports of my allergen
+
+Background: Allergens will be listed globally when not logged in. 
+When logged in, allergen popups will only be triggered for cities visited.
+All popups will appear on the same location.
+When multiple popups will appear, only one will appear at a time -- the first
+will be in alphabetical order, and others will only appear when the first 
+is closed.
+
+Scenario: There are 3 reportings of cats in San Jose and I am not logged in 
+  When I am not logged in
+  And cats is inputted to San Jose 3 times
+  Then I should not see "Warning: Large amounts of cats in San Jose."
+  
+Scenario: There are 3 reportings of cats in San Jose and I am not logged in 
+  When I am not logged in
+  And cats is inputted to San Jose 3 times
+  Then I should see "Warning: Large amounts of cats in San Jose."
+  When I press "close_popup"
+  Then I should not see "Warning: Large amounts of cats in San Jose."
+
+Scenario: There are 3 reportings of cats in San Jose and I am not logged in and
+I uncheck "allergic_to_cats"
+  When I am not logged in
+  And cats is inputted to San Jose 3 times
+  And I uncheck "allergic_to_cats"
+  Then I should not see "Warning: Large amounts of cats in San Jose."
+  
+Scenario: There are 2 reportings of cats in San Jose and 2 reportings 
+of cats in Berkeley
+  When I am not logged in
+  And I am allergic to cats
+  And I am allergic to oak
+  And cats is inputted to Berkeley 2 times
+  And cats is inputted to San Jose 2 times
+  And my favorite cities are San Jose and Berkeley
+  Then I should not see "Warning: Large amounts of cats in San Jose"
+  And I should not see "Warning: Large amounts of cats in Berkeley"
+
+Scenario: There are three reportings of cats in Berkeley and I am logged in
+  When I am logged in
+  And I am allergic to cats
+  And I am allergic to oak
+  And my favorite cities are San Jose and Berkeley
+  And cats is inputted to Berkeley 3 times 
+  Then I should see "Warning: Large amounts of cats in Berkeley"
+
+Scenario: There are three reportings of cats and three reportings of oak in Berkeley and I am 
+logged in
+  When I am logged in
+  And I am allergic to cats and oak
+  And cats is inputted to Berkeley 3 times
+  And oak is inputted to Berkeley 3 times
+  Then I should see "Warning: Large amounts of cats in Berkeley"
+  And I should not see "Warning: Large amounts of oak in Berkeley"
+  When I press "close_popup"
+  Then I should see "Warning: Large amounts of oak in Berkeley"
+  And I should not see "Warning: Large amounts of oak in Berkeley"
+  And I should not see "Warning: Large amounts of cats in Berkeley"
+  
  
-  As a concerned parent
-  So that I can quickly browse movies appropriate for my family
-  I want to see movies matching only certain MPAA ratings
-
-Background: movies have been added to database
-
-  Given the following movies exist:
-  | title                   | rating | release_date |
-  | Aladdin                 | G      | 25-Nov-1992  |
-  | The Terminator          | R      | 26-Oct-1984  |
-  | When Harry Met Sally    | R      | 21-Jul-1989  |
-  | The Help                | PG-13  | 10-Aug-2011  |
-  | Chocolat                | PG-13  | 5-Jan-2001   |
-  | Amelie                  | R      | 25-Apr-2001  |
-  | 2001: A Space Odyssey   | G      | 6-Apr-1968   |
-  | The Incredibles         | PG     | 5-Nov-2004   |
-  | Raiders of the Lost Ark | PG     | 12-Jun-1981  |
-  | Chicken Run             | G      | 21-Jun-2000  |
-
-  And  I am on the RottenPotatoes home page
-
-Scenario: restrict to movies with 'PG' or 'R' ratings
-  # enter step(s) to check the 'PG' and 'R' checkboxes
-  When I check the following ratings: PG, R
-  # enter step(s) to uncheck all other checkboxes
-  And I uncheck PG-13, G
-  # enter step to "submit" the search form on the homepage
-  And I press "ratings_submit"
-  # enter step(s) to ensure that PG and R movies are visible
-  Then I should see "Raiders of the Lost Ark" 
-  And I should see "The Incredibles"
-  # enter step(s) to ensure that other movies are not visible
-  And I should not see "Chicken Run"
-  And I should not see "The Help"
-Scenario: all ratings selected
-  # see assignment
-  When I check the following ratings: G, PG, PG-13, R
-  And I press "ratings_submit"
-  Then I should see all the movies
