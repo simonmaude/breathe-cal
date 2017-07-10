@@ -27,8 +27,3 @@ Scenario: Check to see the subitems are placed in the information bar
     And I should see the "date" on the bar
     And I should see "Sign in with Google+" on the bar
     
-    
-
-Scenario: Check to see the search box is placed on the map
-    Given I am on the home page of the application
-    Then I should see the "search box" on the map
