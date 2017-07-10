@@ -80,6 +80,11 @@ When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
+Then /^(?:|I )should be taken to the google authentication page$/ do 
+  # pending
+  # visit path_to(https://accounts.google.com)
+end
+
 When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
 end
