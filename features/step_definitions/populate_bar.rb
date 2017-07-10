@@ -8,7 +8,7 @@ And /my location is set to "(.*)"/ do |city|
 end
 
 When /I (un)?check "(.*)"/ do |checkbox|
- #Web steps should take care of this I believe
+ #Web steps should take care of this I believe 
  pending
 end
 
