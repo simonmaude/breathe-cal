@@ -1,11 +1,5 @@
 <div style="height: 100%;">
-  <div class="col-md-8 col-ms-12" style="padding-left: 0; padding-right: 0; z-index: 10; height: 100%;" id="left-col">
-    <input id="pac-input" class="controls" type="text" placeholder="Search">
-    <div id="map" style="height: 100%; width: 100%;"></div>
-    <div id="marker-cta" class = "controls" style="margin-top: -40px !important; margin-left: 440px !important; position: absolute !important;">
-      <%= render 'marker_cta' %>
-    </div>
-  </div>
+
   <div class="col-md-4 col-ms-12" style="padding-left: 0; padding-right: 0; max-width: 500px;" id="right-col">
     <div style="text-align: right; font-size: 15px; padding: 10px 15px; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid;">
           <% if current_client %>
@@ -43,6 +37,14 @@
     
 
   </div>  
+  
+    <div class="col-md-8 col-ms-12" style="padding-left: 0; padding-right: 0; z-index: 10; height: 100%;" id="left-col">
+    <input id="pac-input" class="controls" type="text" placeholder="Search">
+    <div id="map" style="height: 100%; width: 100%;"></div>
+    <div id="marker-cta" class = "controls" style="margin-top: -39px !important; margin-left: 423px !important; position: absolute !important;">
+      <%= render 'marker_cta' %>
+    </div>
+  </div>
 <!-- Button trigger modal -->
 
 
