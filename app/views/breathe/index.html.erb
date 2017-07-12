@@ -47,7 +47,17 @@
   </div>
 <!-- Button trigger modal -->
 
-
+<!-- Modal -->
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-body" style="padding: 20px;">
+         <%= render 'about' %>
+       </div>
+     </div>
+   </div>
+ </div>
+ 
 
   <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
 <!--<script src="//nmp.newsgator.com/NGBuzz/buzz.ashx?buzzId=146282&apiToken=C8A8F8F5025D418F8AACB0A7FB2A799A&trkP=6d55b36b-8f3d-4003-b27d-ab20d60a3e6f%2Ceb799aa0-ab4c-4906-9d8f-19aaa62a99eb&trkM=29FA7D07-CEE9-C94B-3CF2-BA83A24ABFAC" type="text/javascript"></script>-->
