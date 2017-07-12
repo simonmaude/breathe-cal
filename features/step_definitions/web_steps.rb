@@ -58,6 +58,7 @@ end
 Then(/^the center of the map should not be approximately "([^"]*)"$/) do |place|  
   not find('#fox-box').has_text?(place)
 end  
+
 And(/^my location is set to "([^"]*)"$/) do |place| 
   find('#pac-input').set(place)
   find('#pac-input').native.send_keys(:Enter)
