@@ -87,14 +87,17 @@ html, body {
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
-  margin-left: 12px;
+  margin-left: -2px;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
   width: 300px;
+  height: 29px;
+  opacity: 0.9;
 }
 
 #pac-input:focus {
-  border-color: #4d90fe;
+  border-color: white;
+  opacity: 1;
 }
 
 .pac-container {
@@ -153,15 +156,15 @@ html, body {
 }
 
 #marker-cta {
-  background-color: #5299a4;
+  background-color: #fff;
   font-family: Roboto;
   font-size: 15px;
-  font-weight: 500;
-  margin-left: 12px;
-  padding: 0 11px 0 13px;
+  font-weight: 300;
+  padding: 1 12px 0 0px;
   text-overflow: ellipsis;
-  width: 240px;
-  color: white;
+  width: 30px;
+  height: 29px;
+  opacity: 0.85;
 
 }
 #marker-cta-mobile {

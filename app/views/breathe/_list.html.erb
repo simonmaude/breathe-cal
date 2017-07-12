@@ -1,6 +1,6 @@
-<div style="padding: 10px 15px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee; text-align: right;">
-  <h5 style="float: left; padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;"><%= @text %></h5>
-  <h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;"><%= link_to "Recent Searches", city_data_back_path, remote: true %> | <%=  link_to "View Favorites", display_favorite_cities_path, remote: true %></h5>
+<div style="padding-left: 0px; padding: 10px 15px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee; text-align: center;">
+  <!--<h5 style="float: left; padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;"><%= @text %></h5>-->
+  <h5 style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;"><%= link_to "Recent Searches", city_data_back_path, remote: true %> | <%=  link_to "View Favorites", display_favorite_cities_path, remote: true %> | <%=  link_to "Add Allergens", display_favorite_cities_path, remote: true %> </h5>
 </div>
 <div style="padding: 0 10px;"> 
   <% if !@cities.nil? and @cities.length > 0 %>
