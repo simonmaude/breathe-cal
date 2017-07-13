@@ -26,8 +26,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'haml'
 gem 'figaro'
 gem 'httparty'
-gem 'feedjira'
-
+gem 'nokogiri'
+gem 'open-uri'
 
 gem 'geocoder'
 gem 'gmaps4rails'
@@ -81,4 +81,4 @@ group :development do
   gem 'spring'
 end
 
-ruby "2.3.0"
+ruby '2.3.0'

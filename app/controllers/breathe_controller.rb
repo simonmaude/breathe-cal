@@ -1,16 +1,30 @@
 require 'date'
+require 'nokogiri'
+require 'open-uri'
 class BreatheController < ApplicationController
   def index
-    begin
-      url = "http://www.baaqmd.gov/Feeds/AlertRSS.aspx"
-      feed = Feedjira::Feed.fetch_and_parse url
-      entry = feed.entries[0]
-      @welcome_message = feed.title 
-      @alert = entry.summary
+  # Save the RSS webpage to 'alerts.html' 
+  # (The RSS feed is improperly formatted as of July 12, 2017
+  # So stuff like Feedjira did not work
+  
+  
+  # begin rescue block (maybe webpage unavailable)
+  begin
+  
+  # first read the website (RSS feed for air alert)
+    html = open('http://www.baaqmd.gov/Feeds/AlertRSS.aspx').read
+
+    # Take in the data with Nokogiri to be able to use xpath
+    html = Nokogiri::HTML(html)
+    @alert = html.xpath('//item/description').text
+    @welcome_message = html.xpath('//item/title').text
+    
+    # if no alert or webpage error, display following
     rescue
       @welcome_message = "Spare the Air Day Info"
       @alert = "Spare the Air Day info is currently unavailable"
-    end
+  #end rescue block
+  end
       
     if @text.nil?
       @text = "Recent Searches"
