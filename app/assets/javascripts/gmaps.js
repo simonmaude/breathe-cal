@@ -89,6 +89,17 @@ function initAutocomplete() {
   
   //var markerEnabler = document.getElementById('marker-cta');
   //map.controls[google.maps.ControlPosition.LEFT_TOP].push(markerEnabler);
+  
+  // Added Sign in and profile icon buttons
+  var signIn = document.getElementById('log-in')
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(signIn);
+  
+  var dropdown = document.getElementById('profile-click')
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(dropdown)
+  
+  
+  var profile = document.getElementById('profile-icon')
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(profile)
 
 
   // Bias the SearchBox results towards current map's viewport.
