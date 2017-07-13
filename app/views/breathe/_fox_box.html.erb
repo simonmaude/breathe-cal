@@ -1,6 +1,6 @@
 <div style="background-color: #<%= get_fox_color(@data) %>; height: 100%; padding:18px 20px;">
     <div style="float: left; margin-top: 5px;">
-        <%= image_tag('lungs.png', id: "breathe") %>
+        <%= link_to(image_tag('breathe_square.png', id: "breathe", width: 75, height: 75), "http://www.breathebayarea.org") %> 
     </div>
     <div style="padding-left: 110px; color: white;">
         <div style="font-family: 'Open Sans', sans-serif; font-size: 24px"><%= greeting1(@data) %></div>

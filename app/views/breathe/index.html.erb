@@ -1,11 +1,5 @@
 <div style="height: 100%;">
-  <div class="col-md-8 col-ms-12" style="padding-left: 0; padding-right: 0; z-index: 10; height: 100%;" id="left-col">
-    <input id="pac-input" class="controls" type="text" placeholder="Search">
-    <div id="map" style="height: 100%; width: 100%;"></div>
-    <div id="marker-cta" class = "controls" style="margin-top: -40px !important; margin-left: 440px !important; position: absolute !important;">
-      <%= render 'marker_cta' %>
-    </div>
-  </div>
+
   <div class="col-md-4 col-ms-12" style="padding-left: 0; padding-right: 0; max-width: 500px;" id="right-col">
     <div style="text-align: right; font-size: 15px; padding: 10px 15px; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid;">
           <% if current_client %>
@@ -31,7 +25,7 @@
     <div id="detail-box-mask" style="margin-left: 500px; background-color: white; position: absolute; width: 100%; overflow-x: hidden; overflow-y: scroll; z-index: 10;"></div>
     <br>
     <div style="text-align: center; position: absolute; width: 100%; bottom: 10px; z-index: 5;">
-      <%= image_tag('bcal.jpg', :style => "width: 160px;") %>
+      <%= link_to(image_tag('bcal.jpg', :style => "width: 160px;"), "http://www.breathebayarea.org") %>
           <div type="button" data-toggle="modal" data-target="#myModal">
             <a>Learn more about this project</a>
           </div>
@@ -43,19 +37,28 @@
     
 
   </div>  
+  
+    <div class="col-md-8 col-ms-12" style="padding-left: 0; padding-right: 0; z-index: 10; height: 100%;" id="left-col">
+    <input id="pac-input" class="controls" type="text" placeholder="Search">
+    <div id="map" style="height: 100%; width: 100%;"></div>
+    <!--<div id="marker-cta" class = "controls" style="margin-top: -39px !important; margin-left: 420px !important; position: absolute !important;">-->
+    <!--  <%= render 'marker_cta' %>-->
+    <!--</div>-->
+  </div>
 <!-- Button trigger modal -->
 
-
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body" style="padding: 20px;">
-        <%= render 'about' %>
-      </div>
-    </div>
-  </div>
-</div>
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-body" style="padding: 20px;">
+         <%= render 'about' %>
+       </div>
+     </div>
+   </div>
+ </div>
+ 
+
   <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
 <!--<script src="//nmp.newsgator.com/NGBuzz/buzz.ashx?buzzId=146282&apiToken=C8A8F8F5025D418F8AACB0A7FB2A799A&trkP=6d55b36b-8f3d-4003-b27d-ab20d60a3e6f%2Ceb799aa0-ab4c-4906-9d8f-19aaa62a99eb&trkM=29FA7D07-CEE9-C94B-3CF2-BA83A24ABFAC" type="text/javascript"></script>-->
 </div>

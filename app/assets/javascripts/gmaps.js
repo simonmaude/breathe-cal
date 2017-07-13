@@ -183,10 +183,12 @@ function initAutocomplete() {
     });
   }
  
+ // CHANGE TO SEARCH BOX
+ 
   // allow user to put down a marker
   $("#marker-cta").click(function(){
     loggedIn();
-    $("#marker-cta span").text("Click map to place marker")
+    $("#marker-cta span").text("Click map to place marker, BUT NOW PLACE MARKER ON MAP")
   });
 
 
@@ -202,7 +204,7 @@ function initAutocomplete() {
       canMark = false;
       map.setOptions({ draggableCursor :"auto"});
       $("#marker-cta").css("cursor", "pointer");
-      $("#marker-cta span").text("Click here to add an allergen");
+      $("#marker-cta span").text("SEARCH BOX, BUT NOW CLICK HERE TO ADD ALLERGEN");
     }
   });
   
