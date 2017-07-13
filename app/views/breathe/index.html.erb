@@ -1,13 +1,37 @@
 <div style="height: 100%;">
+<!-- profile sign in and profile icon START -->
+  <% if current_client %>
+    <%userName = current_client.name%>
+    <%firstLetter = userName[0]%>
+    <div onclick= "profileClick()" id = "profile-icon" class = "round-hover">
+      <div  id = "profile-image">
+        <%= firstLetter %>
+      </div>
+      <div id="myDropdown" class="dropdown-content drop-allign">
+        <div  id = "profile-image-header">
+          <%= firstLetter %>
+          </div>
+        <div id="user-name-header">
+          <strong><%=current_client.name %></strong>
+        </div>
+        <a href="#email">Friends</a>
+        <a href="#about">Email preferences</a>
+        <%= link_to 'Sign Out', signout_path, id: "sign_out" %>
+      </div>
+    </div>
+  <% else %>
+    <%= link_to "Sign in", "/auth/google_oauth2", id: "log-in", class: "button"%>
+  <% end %>   
+
+<script>
+  function profileClick() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+</script>
+<!-- profile sign in and profile icon END -->
 
   <div class="col-md-4 col-ms-12" style="padding-left: 0; padding-right: 0; max-width: 500px;" id="right-col">
     <div style="text-align: right; font-size: 15px; padding: 10px 15px; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid;">
-          <% if current_client %>
-            <strong><%=current_client.name %></strong>!
-            <%= link_to 'Sign Out', signout_path, id: "sign_out", class:"signout_link" %>
-          <% else %>
-            <%= link_to "Sign in with Google+", "/auth/google_oauth2", id: "sign_in" %>
-          <% end %>    
     </div>
     <div class="datetime-box" style="padding: 20px; font-size: 20px; font-family: 'Open Sans', sans-serif; height: 65px;">Today is <%= @dt %>
     </div>
