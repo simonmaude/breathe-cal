@@ -169,6 +169,11 @@ html, body {
   width: 60px;
   height: 40px;
 }
+
+#marker-cta:hover {
+    text-decoration: underline;
+}
+
 #marker-cta-mobile {
   background-color: #5299a4;
   font-family: Roboto;
