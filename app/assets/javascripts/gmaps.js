@@ -87,8 +87,8 @@ function initAutocomplete() {
   var searchBox = new google.maps.places.SearchBox(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   
-  var markerEnabler = document.getElementById('marker-cta');
-  map.controls[google.maps.ControlPosition.LEFT_TOP].push(markerEnabler);
+  //var markerEnabler = document.getElementById('marker-cta');
+  //map.controls[google.maps.ControlPosition.LEFT_TOP].push(markerEnabler);
 
 
   // Bias the SearchBox results towards current map's viewport.
@@ -188,7 +188,7 @@ function initAutocomplete() {
   // allow user to put down a marker
   $("#marker-cta").click(function(){
     loggedIn();
-    $("#marker-cta span").text("Click map to place marker, BUT NOW PLACE MARKER ON MAP")
+    // $("#marker-cta span").text("Click map to place marker, BUT NOW PLACE MARKER ON MAP")
   });
 
 

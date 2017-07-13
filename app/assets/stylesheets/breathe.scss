@@ -155,17 +155,19 @@ html, body {
   // border-radius: 50%;
 }
 
-#marker-cta {
-  background-color: #fff;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: 300;
-  padding: 1 12px 0 0px;
-  text-overflow: ellipsis;
-  width: 30px;
-  height: 29px;
-  opacity: 0.85;
 
+#marker-cta {
+  border-bottom-color: transparent;
+  background-color: white;
+  box-shadow: none;
+  color: #3672B2;
+  // font-family: Roboto;
+  // font-size: 14px;
+  // font-weight: 600;
+  // padding: 0 0px 0 0px;
+  text-overflow: ellipsis;
+  width: 60px;
+  height: 40px;
 }
 #marker-cta-mobile {
   background-color: #5299a4;

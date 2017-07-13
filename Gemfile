@@ -27,7 +27,7 @@ gem 'haml'
 gem 'figaro'
 gem 'httparty'
 gem 'nokogiri'
-gem 'open-uri'
+# gem 'open-uri'
 
 gem 'geocoder'
 gem 'gmaps4rails'
