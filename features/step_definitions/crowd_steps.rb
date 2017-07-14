@@ -3,7 +3,7 @@ Given(/^I touch the add marker CTA$/) do
 end
 
 Given(/^I click on the map$/) do
-  page.find("#map").click # Write code here that turns the phrase above into concrete actions
+  page.find("#map").click 
 end
 
 Given(/^"(.*)" users reported "(.*)" in "(.*)"$/) do |number, allergen, place|

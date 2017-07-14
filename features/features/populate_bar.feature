@@ -9,14 +9,14 @@ Feature: Fix the bar on the blank box area that is empty so that it
 Scenario: Check to see if the bar is visisble 
   Given I am on the landing page
     And my location is set to "Berkeley"
-    When I click on "add alergen button" 
-    When I check "cats"
+    When I press "add alergen button" 
+    # When I check "cats"
     # Then I should see a populated bar
 
 Scenario: Check to see if the bar has relevant information
   Given I am on the landing page
     And my location is set to "Berkeley"
-    When I click on "add alergen button" 
+    When I press "add alergen button" 
     # When I check "Asthma?"
     # Then I should see a populated bar
     # And I should see information about "Asthma" listed
