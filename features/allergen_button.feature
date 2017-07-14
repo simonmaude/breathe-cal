@@ -19,7 +19,7 @@ Scenario: Check to see the search box is placed on the map
 
 Scenario: Check to see the subitems are placed in the information bar
     Given I am on the landing page
-    # When I click the add allergen button
+    When I click the add allergen button
     # Then I should be able to add an allergen to the map 
     
 

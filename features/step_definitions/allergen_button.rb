@@ -7,4 +7,5 @@ end
 
 When /I click the add allergen button/ do
     pending
+    # click_on("marker-cta")
 end
