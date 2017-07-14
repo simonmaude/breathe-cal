@@ -17,12 +17,12 @@ end
 #   pending
 # end
 
-Then /I should (not)? see a populated bar/ do
+Then(/I should (not)? see a populated bar/) do
     #show specific air zones in the area
-  pending
+    pending
 end
 
-And /I should (not)? see information about "(.*)" listed/ do |listed|
+And(/I should (not)? see information about "(.*)" listed/) do |listed|
     #populated bar should have relevant information
     pending
 end
@@ -38,7 +38,7 @@ end
 #   pending
 # end
 
-And /I should see nearby "(.*)" allergens/ do |allergen|
+And(/I should see nearby "(.*)" allergens/) do |allergen|
  #show cat allergens 
  pending
 end
