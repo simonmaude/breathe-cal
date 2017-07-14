@@ -24,7 +24,7 @@ Scenario: If I click the add marker CTA and I am not logged in then I should be 
   When I am not logged in
   And I click on the map
   Then I should be taken to the google authentication page
-  Given I log in as "james"
+  Given I am logged in as "james"  
   Then I should see "Title" when it loads
 
    @javascript  
