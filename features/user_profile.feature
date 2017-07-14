@@ -2,12 +2,13 @@ Feature: User profiles (a user can access a personal profile, add a picture, and
   
 Scenario: User profile icon appears when not logged in
   Given I am on the landing page 
-  Then I should see an icon "default_user"
+  When I am not logged in
+  Then I should see the text on the side "Sign in"
   
 Scenario: User profile image appears when logged in
   Given I am on the landing page 
   Given I successfully authenticated with Google as "Oski Bear"
-  Then I should see an icon "user_profile_img"
+  Then I should see a profile icon "profile-icon"
   
 Scenario: User should see change profile picture when logged in 
   Given I am on the landing page 

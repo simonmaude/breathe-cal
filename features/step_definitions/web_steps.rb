@@ -339,6 +339,11 @@ And(/^I should see an icon "(.+)"$/) do |image|
   page.should have_xpath("//img[contains(@src, \"#{image.split('-')[0]}\")]")
 end
 
+And(/^I should see a profile icon "(.+)"$/) do |image|
+  pending
+  # page.should have_xpath("//img[contains(@src, \"#{image}\")]")
+end
+
 
 And(/^I should see a weather icon inside/) do 
   page.should have_xpath("//img[contains(@src, \"#{"-s".split('-')[0]}\")]")
