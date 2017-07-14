@@ -17,7 +17,7 @@ end
 #   pending
 # end
 
-Then(/I should (not)? see a populated bar/) do
+Then(/I should see a populated bar/) do
     #show specific air zones in the area
     pending
 end
