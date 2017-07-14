@@ -7,9 +7,9 @@ Background:
 @javascript
 Scenario: I should be able to see the lung logo when searching for a city's allergn 
     Given I am on the landing page
-    Then I should see an icon "lung"
+    Then I should see an icon "breathe"
     And my location is set to "Berkeley"
-	And I should see an icon "lung"
+	And I should see an icon "breathe"
 	
 @javascript
 Scenario: I should notice the breathe for bay area more noticable. 
@@ -20,8 +20,8 @@ Scenario: I should notice the breathe for bay area more noticable.
 	
 @javascript
 Scenario: I should be able to access the client homepage by clicking the lung logo. 
-    Given I see an icon "lung" 
-    And I press an icon "lung" 
+    Given I see an icon "breathe" 
+    And I press an icon "breathe" 
     Then I should see "As the clean air and healthy lungs leader" when it loads
 	Then I should be on the user homepage
 	
