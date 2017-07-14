@@ -20,8 +20,8 @@ Scenario: I should notice the breathe for bay area more noticable.
 	
 @javascript
 Scenario: I should be able to access the client homepage by clicking the lung logo. 
-    Given I see an icon "breathe" 
-    And I press an icon "breathe" 
+    Given I am on the landing page 
+    And I press the icon "breathe" 
     Then I should see "As the clean air and healthy lungs leader" when it loads
 	Then I should be on the user homepage
 	

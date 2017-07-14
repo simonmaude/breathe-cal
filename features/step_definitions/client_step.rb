@@ -45,7 +45,8 @@ Then /^(?:|I )should see the link "([^"]*)"$/ do |link|
 end
 
 When /^(?:|I )press the icon "([^"]*)"$/ do |icon|
-  find('img.gmail_icon').click
+  pending
+  # find(icon).click
 end
 
 Given /^(?:|I )successfully authenticated with Google as "([^"]*)"$/ do |name|
