@@ -1,5 +1,6 @@
-When /I press add alergen button/ do 
-#  page.find('Add Allergen').click
+When /I press add allergen button/ do 
+    #  page.find('Add Allergen').click
+    pending
 end
 
 # And /my location is set to "(.*)"/ do |city|
