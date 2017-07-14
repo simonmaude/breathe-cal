@@ -29,5 +29,5 @@ Scenario: As a logged in user I should be able to logout when I press the sign o
   When I follow "Sign Out"
   Then I should be on the landing page
   And I should not see "James Jones"
-  And I should see the text on the side "Sign in with Google+"
+  And I should see the text on the side "Sign in"
   
