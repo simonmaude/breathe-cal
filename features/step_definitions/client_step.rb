@@ -36,22 +36,28 @@ Given(/I am on the sign_up page/) do
 end 
 
 Then(/^(?:|I )should see the button "([^"]*)"$/) do |text|
-  pending
+  if page.respond_to? :should
+    page.should have_content(text)
+  else
+    assert page.has_content?(text)
+  end
 end
-
 
 Then(/^(?:|I )should see the link "([^"]*)"$/) do |link|
   find_link(link).visible?
 end
 
 When(/I press the user icon/) do 
-  pending
-  # find(icon).click
+  find("log-in").click
 end
 
 When(/^(?:|I )press the icon "([^"]*)"$/) do |icon|
-  pending
-  # find(icon).click
+  # pending
+  find(icon).click
+end
+
+And(/^(?:|I )press the square Breathe icon/) do 
+  # pending
 end
 
 Given(/^(?:|I )successfully authenticated with Google as "([^"]*)"$/) do |name|

@@ -1,5 +1,5 @@
 
-When /I am (not)? logged in/ do |logged_in|
+When /I am not logged in/ do 
   # Does nothing when not logged in
   # Otherwise, logs in as generic user
   pending

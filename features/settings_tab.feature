@@ -5,12 +5,12 @@ Feature: Settings Tab
   
 Scenario: Settings button appears
   Given I am on the landing page
-  Then I should see the button "Sign In"
+  Then I should see the button "Sign in"
  
 Scenario: User is logged in and clicks settings 
   Given I successfully authenticated with Google as "James Jones"
   Then I should be on the landing page
-  And I should see the button "Settings"
+  And I should see the button "Email preferences"
   # When I press the user icon
   # Then I should see the button "Notifications"
   # And I should see the button "Location"

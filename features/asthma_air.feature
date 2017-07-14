@@ -7,8 +7,8 @@ Feature: Add an option/feature to tailor the map to individuals that have
 
 Scenario: User wants to see and select the asthma option from the pop up box in Berkeley
   Given I am on the landing page
-    # And my location is set to "Berkeley"
-    # When I click on "add alergen button" 
+    And my location is set to "Berkeley"
+    # When I press "add alergen button" 
     # When I check "Asthma?"
     # Then I should see clean air and polluted air zones
 
@@ -16,7 +16,7 @@ Scenario: User wants to see polluted areas near San Jose when hes logged in
   Given I am on the landing page
   Given I am logged in as "James Jones"
   And my location is set to "San Jose"
-  When I click on "add alergen button"
+  # When I press "add alergen button"
   # When I click "Asthma?"
   # Then I should see clean air and polluted air zones
  

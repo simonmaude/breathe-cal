@@ -340,8 +340,8 @@ And(/^I should see an icon "(.+)"$/) do |image|
 end
 
 And(/^I should see a profile icon "(.+)"$/) do |image|
-  pending
-  # page.should have_xpath("//img[contains(@src, \"#{image}\")]")
+  # pending
+  page.should have_xpath("//img[contains(@src, \"#{image}\")]")
 end
 
 And(/^I should see a weather icon inside/) do 
@@ -375,4 +375,5 @@ Then /^(?:|I )should see the text on the side "([^"]*)"$/ do |text|
     assert page.has_content?(text)
   end
 end
+
 

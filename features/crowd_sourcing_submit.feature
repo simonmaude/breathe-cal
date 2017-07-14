@@ -21,7 +21,7 @@ Scenario: If I click the add marker CTA and I am logged in then I should see a m
 Scenario: If I click the add marker CTA and I am not logged in then I should be asked to log in before 
   seeing a marker with a form.
   Given I touch the add marker CTA
-  When I am not logged in
+  # When I am not logged in
   And I click on the map
   Then I should be taken to the google authentication page
   Given I am logged in as "james"  

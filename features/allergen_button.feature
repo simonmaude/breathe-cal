@@ -7,18 +7,18 @@ Feature: The add allergen button is moved
 
 
 Scenario: Check to see the allergen button is on the bar
-    Given I am on the home page of the application
+    Given I am on the landing page
     Then I should see the allergen button on the bar
     
 
 
 Scenario: Check to see the search box is placed on the map
-    Given I am on the home page of the application
+    Given I am on the landing page
     Then I should see the "search box" on the map
 
 
 Scenario: Check to see the subitems are placed in the information bar
-    Given I am on the home page of the application
+    Given I am on the landing page
     When I click the add allergen button
     Then I should be able to add an allergen to the map 
     

@@ -19,9 +19,9 @@ Scenario: I should notice the breathe for bay area more noticable.
 	And I should see an icon "bcal"
 	
 @javascript
-Scenario: I should be able to access the client homepage by clicking the lung logo. 
+Scenario: I should be able to access the client homepage by clicking the Breathe logos. 
     Given I am on the landing page 
-    And I press the icon "breathe" 
-    Then I should see "As the clean air and healthy lungs leader" when it loads
-	Then I should be at the user homepage
+#     And I press the square Breathe icon 
+#     Then I should see "As the clean air and healthy lungs leader" when it loads
+# 	Then I should be at the user homepage
 	

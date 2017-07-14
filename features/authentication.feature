@@ -20,7 +20,7 @@ Scenario: If I input legitimate google credentials I should be taken to the home
   Then I should be on the landing page
   And I should see the text on the side "James Jones"
   And I should not see "Some Guy"
-  And I should see the button "Sign Out"
+  And I should see the text on the side "Sign Out"
   
 @javascript
 Scenario: As a logged in user I should be able to logout when I press the sign out link

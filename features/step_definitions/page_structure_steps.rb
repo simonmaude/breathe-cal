@@ -1,9 +1,4 @@
 
-Given /I am on the home page of the application/ do
-    pending
-end
-
-
 Then /I should see (.*) on the (.*) side/ do |item, location|
     pending
 
