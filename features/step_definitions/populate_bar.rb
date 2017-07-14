@@ -1,6 +1,5 @@
-When /I click on "(.*)"/ do |button_name|
- #Web steps should take care of this I believe
- pending
+When /I press add alergen button/ do 
+#  page.find('Add Allergen').click
 end
 
 # And /my location is set to "(.*)"/ do |city|
