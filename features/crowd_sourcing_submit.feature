@@ -37,6 +37,6 @@ Scenario: If I am logged in and 4 users have placed markers in Berkeley for Bees
   Then I touch the add marker CTA
   And I click on the map
   Then I should see "Title" when it loads
-  And I check "Bees"
+  And I check "bees"
   And I press "Submit"
   And I should see "Bees" as a global marker
