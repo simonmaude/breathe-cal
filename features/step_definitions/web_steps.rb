@@ -61,7 +61,6 @@ end
 
 And(/^my location is set to "([^"]*)"$/) do |place| 
   find('#pac-input').set(place)
-  find('#pac-input').native.send_keys(:Enter)
 end
 
 Then (/^I should see "(.*)" next to "(.*)"$/) do |rating, category|
