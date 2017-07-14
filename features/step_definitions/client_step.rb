@@ -44,7 +44,7 @@ Then(/^(?:|I )should see the link "([^"]*)"$/) do |link|
   find_link(link).visible?
 end
 
-When(/^(?:|I )press the user icon"$/) do 
+When(/I press the user icon/) do 
   pending
   # find(icon).click
 end
