@@ -7,10 +7,10 @@ end
 #   pending
 # end
 
-# When /I (un)?check "(.*)"/ do |checkbox|
-#  #Web steps should take care of this I believe
-#  pending
-# end
+When /I (un)?check Asthma?/ do |checkbox|
+ #Web steps should take care of this I believe
+ pending
+end
 
 # Then /I should (not)? see clean air and polluted air zones/ do
 #     #show specific air zones in the area
