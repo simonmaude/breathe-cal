@@ -8,7 +8,6 @@ Feature: Locations
 Scenario: Searching for a location  
     Given I am on the landing page
     And the map has been loaded
- 
     And my location is set to "Berkeley"
     Then the center of the map should be approximately "Berkeley"
     And the center of the map should not be approximately "Chicago"
