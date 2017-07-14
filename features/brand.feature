@@ -23,5 +23,5 @@ Scenario: I should be able to access the client homepage by clicking the lung lo
     Given I am on the landing page 
     And I press the icon "breathe" 
     Then I should see "As the clean air and healthy lungs leader" when it loads
-	Then I should be on the user homepage
+	Then I should be at the user homepage
 	

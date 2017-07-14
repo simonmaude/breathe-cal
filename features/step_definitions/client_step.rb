@@ -23,7 +23,7 @@ Then(/I should see an empty search history/) do
     pending
 end 
 
-Then(/I should be on the user homepage/) do
+Then(/I should be at the user homepage/) do
   assert page.current_path == "http://www.breathebayarea.org/"
 end
 
