@@ -2,7 +2,7 @@
 When /I am not logged in/ do 
   # Does nothing when not logged in
   # Otherwise, logs in as generic user
-  pending
+  step %{I should see the text on the side "Sign in"}
 end
   
 And /(.*) is inputted to (.*) (.*) times/ do |allergen, city, times| 

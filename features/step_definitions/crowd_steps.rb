@@ -1,5 +1,5 @@
 Given(/^I touch the add marker CTA$/) do
-  find("#marker-cta").click
+  step %{I press add allergen button}
 end
 
 When /I press add allergen button/ do 
