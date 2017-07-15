@@ -12,7 +12,7 @@ Scenario: I should see sign-in button on the landing page
 Scenario: If I click on the sign-in button I should  
   Given I am on the landing page
   When I follow "Sign in"
-  # Then I should be taken to the google authentication page
+  Then I should be at the web address "accounts.google.com"
 
 @javascript
 Scenario: If I input legitimate google credentials I should be taken to the homepage as a user

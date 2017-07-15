@@ -80,11 +80,6 @@ When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
-Then /^(?:|I )should be taken to the google authentication page$/ do 
-  # pending
-  # visit path_to(https://accounts.google.com)
-end
-
 When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
 end
@@ -280,6 +275,16 @@ Then /^(?:|I )should be on (.+)$/ do |page_name|
     current_path.should == path_to(page_name)
   else
     assert_equal path_to(page_name), current_path
+  end
+end
+
+Then /^(?:|I )should be at the web address (.+)$/ do |page_address|
+  current_path = URI.parse(current_url).hostname
+  page_address = page_address.slice(1..-2)
+  if current_path.respond_to? :should
+    current_path.should == page_address
+  else
+    assert_equal page_address, current_path
   end
 end
 

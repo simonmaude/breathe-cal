@@ -1,6 +1,3 @@
-When /I press add allergen button/ do 
-    find('#marker-cta',:visible => true).click
-end
 
 # And /my location is set to "(.*)"/ do |city|
 #   pending

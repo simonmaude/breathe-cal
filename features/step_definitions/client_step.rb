@@ -27,8 +27,17 @@ Then(/I should be at the user homepage/) do
   assert page.current_path == "http://www.breathebayarea.org/"
 end
 
+
+Then(/I should be taken to the google authentication page/) do 
+  if page.respond_to? :should
+    page.should have_content("to continue to")
+  else
+    assert page.has_content?("to continue to")
+  end
+end
+
 Given(/I am on the sign_in page/) do
-  pending
+  step %{"I should be taken to the google authentication page"}
 end 
 
 Given(/I am on the sign_up page/) do

@@ -7,11 +7,11 @@ Feature: crowd sourcing
   Given I am on the landing page
 
 @javascript  
-Scenario: If I click the add marker CTA and I am logged in then I should see a marker with a form.
+Scenario: If I click the add allergen button and I am logged in then I should see a marker with a form.
   Given I am logged in as "james"
-  Given I touch the add marker CTA
-  # And I click on the map
-  # Then I should see "Title" when it loads
+  Given I press add allergen button
+  And I click on the map
+  Then I should see "Title" when it loads
   # And I check "peanut"
   # And I press "Submit"
   # And I should see "peanut"

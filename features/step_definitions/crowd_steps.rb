@@ -2,8 +2,12 @@ Given(/^I touch the add marker CTA$/) do
   find("#marker-cta").click
 end
 
+When /I press add allergen button/ do 
+  find("#marker-cta").click
+end
+
 Given(/^I click on the map$/) do
-  page.find("#map").click 
+  page.find("#left-col").click 
 end
 
 Given(/^"(.*)" users reported "(.*)" in "(.*)"$/) do |number, allergen, place|
