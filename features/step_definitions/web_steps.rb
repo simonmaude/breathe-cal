@@ -94,8 +94,7 @@ When /^(?:|I )press on the text "([^"]*)"$/ do |text|
 end
 
 When /^(?:|I )press on the icon "([^"]*)"$/ do |text|
-  # pending
-  # find(text).click
+  click_link(text)
 end
 
 When /^(?:|I )follow "([^"]*)"$/ do |link|

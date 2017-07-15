@@ -1,6 +1,5 @@
 When /I press add allergen button/ do 
-    #  page.find('Add Allergen').click
-    pending
+    find('#marker-cta',:visible => true).click
 end
 
 # And /my location is set to "(.*)"/ do |city|
