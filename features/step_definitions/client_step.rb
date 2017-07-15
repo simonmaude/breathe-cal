@@ -60,13 +60,13 @@ When(/I press the user icon/) do
   find("log-in").click
 end
 
-When(/^(?:|I )press the icon "([^"]*)"$/) do |icon|
-  # pending
-  find(icon).click
-end
+# When(/^(?:|I )press the icon "([^"]*)"$/) do |icon|
+#   # pending
+#   find(icon).click
+# end
 
-And(/^(?:|I )press the square Breathe icon/) do 
-  # pending
+When(/^(?:|I )press the icon "([^"]*)"$/) do |icon|
+  find(:xpath, "//img[contains(@src, \"#{icon.split('-')[0]}\")]").click
 end
 
 Given(/^(?:|I )successfully authenticated with Google as "([^"]*)"$/) do |name|

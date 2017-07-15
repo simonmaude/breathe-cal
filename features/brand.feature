@@ -3,25 +3,26 @@ Feature: Locations Details
        for Breathe for California for the Bay Area 
       
 Background: 
+  Given I am on the landing page
 
 @javascript
 Scenario: I should be able to see the lung logo when searching for a city's allergn 
-    Given I am on the landing page
-    Then I should see an icon "breathe"
+    Given I should see an icon "breathe"
     And my location is set to "Berkeley"
 	And I should see an icon "breathe"
 	
 @javascript
 Scenario: I should notice the breathe for bay area more noticable. 
-    Given I am on the landing page
-    Then I should see an icon "bcal" 
-    And my location is set to "Berkeley"
-	And I should see an icon "bcal"
+    Given I should see an icon "bcal" 
+    When I press the icon "bcal"
+    # Then I should see "As the clean air and healthy lungs leader" when it loads
+    And I should be at the web address "www.breathebayarea.org"
 	
 @javascript
 Scenario: I should be able to access the client homepage by clicking the Breathe logos. 
-    Given I am on the landing page 
-#     And I press the square Breathe icon 
-#     Then I should see "As the clean air and healthy lungs leader" when it loads
-# 	Then I should be at the user homepage
+    Given I should see an icon "breathe" 
+    When I press the icon "breathe" 
+    Then I should see "As the clean air and healthy lungs leader" when it loads
+    And I should be at the web address "www.breathebayarea.org"
 	
+
