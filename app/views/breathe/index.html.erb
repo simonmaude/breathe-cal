@@ -1,16 +1,30 @@
 <div style="height: 100%;">
 <!-- profile sign in and profile icon START -->
   <% if current_client %>
+    <% resp = HTTParty.get('https://www.googleapis.com/plus/v1/people/'+current_client.uid+'?fields=image&key=AIzaSyD5n5xHL4TbbHjVE_gxkVw6f-CRVyN8npc').body%>
+    <% result = JSON.parse resp%>
+    <% begin; source = result['image']['url']; custom = true; rescue Exception; custom = false; end%>
+    <% begin; is_default =  result['image']['isDefault']; rescue Exception; is_default = "true"; end%>
+    <% p is_default %>
     <%userName = current_client.name%>
     <%firstLetter = userName[0]%>
+    
     <div onclick= "profileClick()" id = "profile-icon" class = "round-hover">
-      <div  id = "profile-image">
-        <%= firstLetter %>
-      </div>
-      <div id="myDropdown" class="dropdown-content drop-allign">
-        <div  id = "profile-image-header">
+      <% if is_default%>
+        <div  id = "profile-image">
           <%= firstLetter %>
+        </div>
+      <% else %>
+        <img class= "img-circle round" src=<%=source%>>
+      <% end %>
+      <div id="myDropdown" class="dropdown-content drop-allign">
+        <% if !is_default %>
+          <img class= "profile-custom-header"src=<%=source%>>
+        <% else %>
+          <div  id = "profile-image-header">
+            <%= firstLetter %>
           </div>
+        <% end %>
         <div id="user-name-header">
           <strong><%=current_client.name %></strong>
         </div>
