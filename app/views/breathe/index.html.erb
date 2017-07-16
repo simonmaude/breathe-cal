@@ -1,7 +1,6 @@
 <div style="height: 100%;">
 <!-- profile sign in and profile icon START -->
   <% if current_client %>
-    <% date = @dt %>
     <% resp = HTTParty.get('https://www.googleapis.com/plus/v1/people/'+current_client.uid+'?fields=image&key=AIzaSyD5n5xHL4TbbHjVE_gxkVw6f-CRVyN8npc').body%>
     <% result = JSON.parse resp%>
     <% begin; source = result['image']['url']; custom = true; rescue Exception; custom = false; end%>
@@ -65,7 +64,7 @@
     </div>
     <div id="detail-box-mask" style="margin-left: 500px; background-color: white; position: absolute; width: 100%; overflow-x: hidden; overflow-y: scroll; z-index: 10;"></div>
     <br>
-    <div style="text-align: center; position: absolute; width: 100%; bottom: 10px; z-index: 5;">
+    <div id="logo" style="text-align: center; position: absolute; width: 100%; bottom: 10px; z-index: 5;">
       <%= link_to(image_tag('bcal.jpg', :style => "width: 160px;"), "http://www.breathebayarea.org") %>
           <div type="button" data-toggle="modal" data-target="#myModal">
             <a>Learn more about this project</a>
