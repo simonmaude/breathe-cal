@@ -7,7 +7,7 @@
     <% begin; is_default =  result['image']['isDefault']; rescue Exception; is_default = "true"; end%>
     <%userName = current_client.name%>
     <%firstLetter = userName[0]%>
-    
+  
     <div onclick= "profileClick()" id = "profile-icon" class = "round-hover">
       <% if is_default%>
         <div  id = "profile-image">
@@ -16,7 +16,11 @@
       <% else %>
         <img class= "img-circle round" src=<%=source%>>
       <% end %>
+      <div id="arrow" class = "arrow-up"></div> 
       <div id="myDropdown" class="dropdown-content drop-allign">
+        <div id="user-name-header">
+          <%=current_client.name %>
+        </div>
         <% if !is_default %>
           <img class= "profile-custom-header"src=<%=source%>>
         <% else %>
@@ -24,12 +28,10 @@
             <%= firstLetter %>
           </div>
         <% end %>
-        <div id="user-name-header">
-          <strong><%=current_client.name %></strong>
-        </div>
-        <a href="#friends">Friends</a>
-        <a href="#email">Email preferences</a>
-        <%= link_to 'Sign Out', signout_path, id: "sign_out" %>
+        <div id = "spacing"></div>
+        <a href="#friends" class="dropdown-sub-title">Friends</a>
+        <a href="#email" class="dropdown-sub-title">Email preferences</a>
+        <%= link_to 'Sign Out', signout_path, id: "sign_out", class: "dropdown-sub-title" %>
       </div>
     </div>
   <% else %>
@@ -39,6 +41,7 @@
 <script>
   function profileClick() {
     document.getElementById("myDropdown").classList.toggle("show");
+    document.getElementById("arrow").classList.toggle("show")
 }
 </script>
 <!-- profile sign in and profile icon END -->
