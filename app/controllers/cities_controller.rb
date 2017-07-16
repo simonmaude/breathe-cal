@@ -56,10 +56,9 @@ class CitiesController < ApplicationController
     
     def city_data_back
       @text = "Recent Searches"
-      if session[:cities]
-        if session[:cities].length > 5
-          session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
-        end 
+      if session[:cities] && session[:cities].length > 5
+        session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
+      end 
         @cities = session[:cities].reverse
       else
         @cities = []
@@ -76,19 +75,19 @@ class CitiesController < ApplicationController
       @text = "Favorite Cities"
       if session[:client_id]
         @cities = session[:favorites]
-      if @cities == nil || @cities.empty? 
+        if @cities == nil || @cities.empty? 
           @no_cities = "You currently have no favorite cities!"
         end
       else 
         @cities = []
         @no_cities = "Please login in order to favorite a city!"
       end
-        respond_to do |format|
+      respond_to do |format|
         format.js {
           render :template => "cities/city_data_back.js.erb"
         }
-        end
       end
+    end
 
 
     def favorite_city
@@ -133,7 +132,7 @@ class CitiesController < ApplicationController
         format.js {
           render :template => "cities/city_data.js.erb"
         }
-        end
+      end
     end
       
 
