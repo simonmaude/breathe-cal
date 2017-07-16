@@ -30,6 +30,9 @@ Scenario: If I am logged in and only 3 users have placed markers in Berkeley for
   Given I am logged in as "james"
   And the center of the map should be approximately "Berkeley"
   And "3" users reported "Bees" in "Berkeley"
-  # Then I should not see "bees"
-  # And I should not see "peanut"
+      # line below is a pending holder till the info bar is implemented 
+	Then pending holder
+  
+   Then I should not see "bees"
+   And I should not see "peanut"
   

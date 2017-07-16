@@ -57,7 +57,7 @@ Then(/^(?:|I )should see the link "([^"]*)"$/) do |link|
 end
 
 When(/I press the user icon/) do 
-  find("log-in").click
+  find("#profile-icon").click
 end
 
 # When(/^(?:|I )press the icon "([^"]*)"$/) do |icon|

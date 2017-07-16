@@ -34,7 +34,6 @@ World(WithinHelpers)
 
 Given(/^I am on the landing page$/) do  
   visit root_path
-  
 end  
 
 # Single-line step scoper
@@ -345,8 +344,7 @@ And(/^I should see an icon "(.+)"$/) do |image|
 end
 
 And(/^I should see a profile icon "(.+)"$/) do |image|
-  # pending
-  page.should have_xpath("//img[contains(@src, \"#{image}\")]")
+  find("#profile-icon")
 end
 
 And(/^I should see a weather icon inside/) do 
@@ -373,7 +371,7 @@ Then(/^I should see a map$/) do
   page.evaluate_script('map') 
 end
 
-Then /^(?:|I )should see the text on the side "([^"]*)"$/ do |text|
+Then(/^(?:|I )should see the text on the side "([^"]*)"$/) do |text|
   if page.respond_to? :should
     page.should have_content(text)
   else
@@ -381,4 +379,6 @@ Then /^(?:|I )should see the text on the side "([^"]*)"$/ do |text|
   end
 end
 
-
+Given(/^pending holder$/) do
+  pending
+end
