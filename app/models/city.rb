@@ -2,8 +2,17 @@ class City < ActiveRecord::Base
   belongs_to :client
   serialize :daily_data, JSON
   
+  #Temporary Notes:
+  #API key for Accuweather 5 day forecast is pulled through the second key in the get_api_key(i) array.
+  #Note: Not sure if information is the most relevant so may need to look into other API keys or creating our own?
+  #Pretty sure this key will work forever as well but if not another one can be retrieved here by creating an account
+  #and going to this link for those that intend on taking this project on after: http://bit.ly/2uwNsb8
+  
+  
+#Defined as a function 
   def self.get_api_key(i)
-    ["nvdxlfErdFcQssANvU52VQYNj9JauI4z", "IGE0pfTgoL1OGJKvEcnAbbqpmQGjvbpo", "5NMWDxuXmQpNLf7AQ2gj0Y8uBkLXT8q3", "CdE0YANGAu4AsDAReO0e6CZ01RwfFe9a"][i]
+    #Second key corresponds to working accuweather API key.
+    ["nvdxlfErdFcQssANvU52VQYNj9JauI4z", "bR7GAIQ7GOI6aVzu01bSrD2amGwOChgG", "5NMWDxuXmQpNLf7AQ2gj0Y8uBkLXT8q3", "CdE0YANGAu4AsDAReO0e6CZ01RwfFe9a"][i]
   end
   def self.rescue_api(res, i, url, query, iMAX=3)
     if i == iMAX or res.code == 200
