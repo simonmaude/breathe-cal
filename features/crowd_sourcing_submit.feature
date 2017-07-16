@@ -23,7 +23,7 @@ Scenario: If I click the add marker CTA and I am not logged in then I should be 
   seeing a marker with a form.
   Given I press add allergen button
       # line below is a pending holder till the info bar is implemented 
-	Then pending holder
+# 	Then pending holder
 	
   Then I should be taken to the google authentication page
   Given I am logged in as "james"
