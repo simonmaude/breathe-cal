@@ -65,7 +65,7 @@ Scenario: If 5 users have placed markers in Berkeley for Bees and I click the ad
   And I follow "Sign Out"
   And I successfully authenticated with Google as "Fozzie Bear"
  
-   # line below is a pending holder till the info bar is implemented 
+    # line below is a pending holder till the info bar is implemented 
 	Then pending holder
   
   Then I should see "bees"
