@@ -101,8 +101,9 @@ $("#detail-box").html("<%= j render 'breathe/detail.mobile' %>");
 $("#fox-box").html("<%= j render 'breathe/fox_box.mobile' %>");
 $("#weather-box").html("<%= j render 'breathe/weather_box.mobile' %>");
 <% else %>
+$("#logo").html("");
 $("#detail-box").html("<%= j render 'breathe/detail.html' %>");
-$("#fox-box").html("<%= j render 'breathe/fox_box.html' %>");
+$("#fox-box").html("<%= j render 'breathe/fox_box_city.html' %>");
 $("#weather-box").html("<%= j render 'breathe/weather_box.html' %>");
 <% end %>
 
