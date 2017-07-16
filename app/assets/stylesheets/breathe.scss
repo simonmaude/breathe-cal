@@ -15,6 +15,15 @@
 
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
+
+@media screen and (min-width: 1500px) {
+    #containsAll {
+        width: 111%;
+    }
+}
+
+
+
 #map {
   height: 50%;
   width: 50%;
@@ -149,7 +158,6 @@ html, body {
 #left-col {
     background-color: #FFFFFF;
     box-shadow: 2px 2px 2px rgba(0,0,0,0.09), 0 2px 0 rgba(0,0,0,0.1);
-  
 }
 
 .gmail_icon {
