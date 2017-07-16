@@ -5,7 +5,6 @@
     <% result = JSON.parse resp%>
     <% begin; source = result['image']['url']; custom = true; rescue Exception; custom = false; end%>
     <% begin; is_default =  result['image']['isDefault']; rescue Exception; is_default = "true"; end%>
-    <% p is_default %>
     <%userName = current_client.name%>
     <%firstLetter = userName[0]%>
     
@@ -28,8 +27,8 @@
         <div id="user-name-header">
           <strong><%=current_client.name %></strong>
         </div>
-        <a href="#email">Friends</a>
-        <a href="#about">Email preferences</a>
+        <a href="#friends">Friends</a>
+        <a href="#email">Email preferences</a>
         <%= link_to 'Sign Out', signout_path, id: "sign_out" %>
       </div>
     </div>
