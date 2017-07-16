@@ -16,7 +16,7 @@ Then /I should see (.*) on the (.*) side/ do |item, location|
             elseif location.include? "right"
                 result = ...
             end       
-        assert result
+        assert result == true
 =end
 end
 
