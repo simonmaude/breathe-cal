@@ -180,9 +180,9 @@ function initAutocomplete() {
     fetchMarkers();
   });
   
-  searchBtn.onclick = function () {
-    addListener(map,searchBox,markers);
-  }
+  // searchBtn.onclick = function () {
+  //   addListener(map,searchBox,markers);
+  // }
   
 
   
