@@ -5,34 +5,67 @@ Feature: crowd sourcing
   
   Background:
   Given I am on the landing page
-
-@javascript  
-Scenario: If I am logged in and enough users have placed markers in Berkeley for Bees then I should 
-          see a Bees marker in Berkeley on my map.
-   When I am not logged in
-  And the center of the map should be approximately "Berkeley"
-  And "5" users reported "Bees" in "Berkeley" 
+  Given I am logged in as "Oski Bear"
+  Then I should not see "Bees" 
+  Then I press add allergen button
+  And I click on the map
+  And I check "bees"
+  And I press "Submit"
+  And I should see "bees"
+  Then I press the user icon
+  And I follow "Sign Out"
+  And I successfully authenticated with Google as "Paddington Bear"
+  Then I should not see "Bees" 
+  Then I press add allergen button
+  And I click on the map
+  And I check "bees"
+  And I press "Submit"
   Then I should see "bees"
-   And I should not see "peanut"
-
-@javascript  
-Scenario: If I am logged in and enough users have placed markers in Berkeley for Bees then I should 
-          see a Bees marker in Berkeley on my map.
-  Given I am logged in as "james"
-  And the center of the map should be approximately "Berkeley"
-  And "5" users reported "Bees" in "Berkeley" 
-   Then I should see "bees"
-   And I should not see "peanut"
+  Then I press the user icon
+  And I follow "Sign Out"
+  And I successfully authenticated with Google as "Yogi Bear"
+  Then I should not see "Bees" 
+  Then I press add allergen button
+  And I click on the map
+  And I check "bees"
+  And I press "Submit"
+  Then I should see "bees"
+  Then I press the user icon
+  And I follow "Sign Out"
+  
   
   @javascript  
 Scenario: If I am logged in and only 3 users have placed markers in Berkeley for Bees then I should 
           not see a Bees marker in Berkeley on my map.
-  Given I am logged in as "james"
+         
+  Given I successfully authenticated with Google as "Baloo Bear"
   And the center of the map should be approximately "Berkeley"
-  And "3" users reported "Bees" in "Berkeley"
-      # line below is a pending holder till the info bar is implemented 
+  Then I should not see "Bees" 
+  
+  
+     @javascript  
+Scenario: If 5 users have placed markers in Berkeley for Bees and I click the add 
+          marker CTA to add Bees then I should see Bees appear as a global marker in Berkeley on my map.
+  
+  And I successfully authenticated with Google as "Smokey Bear"
+  Then I press add allergen button
+  And I click on the map
+  And I check "bees"
+  And I press "Submit"
+  Then I should see "bees"
+  Then I press the user icon
+  And I follow "Sign Out"
+  And I successfully authenticated with Google as "Rupert Bear"
+  Then I press add allergen button
+  And I click on the map
+  And I check "bees"
+  And I press "Submit"
+  Then I should see "bees"
+  Then I press the user icon
+  And I follow "Sign Out"
+  And I successfully authenticated with Google as "Fozzie Bear"
+ 
+   # line below is a pending holder till the info bar is implemented 
 	Then pending holder
   
-   Then I should not see "bees"
-   And I should not see "peanut"
-  
+  Then I should see "bees"

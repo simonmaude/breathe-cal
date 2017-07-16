@@ -375,7 +375,15 @@ Then(/^(?:|I )should see the text on the side "([^"]*)"$/) do |text|
   if page.respond_to? :should
     page.should have_content(text)
   else
-    assert page.has_content?(text)
+    assert page.evaluate_script("$('#{text}').is(':hidden');")
+  end
+end
+
+Then(/^there should be hidden text on the side "([^"]*)"$/) do |text|
+  if page.respond_to? :should
+    page.evaluate_script("$('#{text}').is(':hidden');")
+  else
+    assert page.evaluate_script("$('#{text}').is(':hidden');")
   end
 end
 

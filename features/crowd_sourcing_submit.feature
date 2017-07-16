@@ -28,16 +28,3 @@ Scenario: If I click the add marker CTA and I am not logged in then I should be 
   Then I should be taken to the google authentication page
   Given I am logged in as "james"
 
-   @javascript  
-Scenario: If I am logged in and 4 users have placed markers in Berkeley for Bees and I click the add 
-          marker CTA to add Bees then I should see a Bees appear as a global marker in Berkeley on my map.
-  Given I am logged in as "james"
-  And the center of the map should be approximately "Berkeley"
-  And "4" users reported "Bees" in "Berkeley"
-  Then I should not see "Bees" 
-  Then I touch the add marker CTA
-  And I click on the map
-  Then I should see "Title" when it loads
-  And I check "bees"
-  And I press "Submit"
-  And I should see "bees"

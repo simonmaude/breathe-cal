@@ -8,11 +8,11 @@ class Marker < ActiveRecord::Base
     markersLeft = Marker.where("lng < ?", left)
     markersRight = Marker.where("lng > ?", right)
 
-    between = markersBottom & markersTop & markersLeft & markersRight
-    return between
-    # markers = Marker.where("lng < (?) AND lat < (?) AND lng > (?) AND lat > (?) ", right, top, left, bottom)
+    return markersBottom & markersTop & markersLeft & markersRight
   end
       
-  
+  def self.distinct_count_within_bounds(list,type,top,bottom,left,right)
+    return list.group(client_id).uniq.count(type)
+  end
   
 end
