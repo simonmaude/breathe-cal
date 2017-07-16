@@ -9,7 +9,7 @@ Feature: The page is correctly structured
 
 Scenario: Check to see the map is on the right side 
     Given I am on the landing page
-    # Then I should see the map on the right side
+    Then I should see the map on the right side
     
 
 
