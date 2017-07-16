@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
     if test_check
       client = Client.new()
       client.name = params[:name]
+      client.uid = params[:uid]
       client.provider = 'some provider'
       client.oauth_token = 'some token'
       client.oauth_expires_at = Time.at(Time.new(2017, 10, 30))

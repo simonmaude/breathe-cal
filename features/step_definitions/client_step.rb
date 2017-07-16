@@ -70,10 +70,18 @@ When(/^(?:|I )press the icon "([^"]*)"$/) do |icon|
 end
 
 Given(/^(?:|I )successfully authenticated with Google as "([^"]*)"$/) do |name|
-  visit auth_test_path(:name => name, :test_check => true)
+  visit auth_test_path(:name => name, :uid => "101010101010101", :test_check => true)
 end
 
 Given(/^(?:|I )am logged in as "([^"]*)"$/) do |name|
-  visit auth_test_path(:name => name, :test_check => true)
+  visit auth_test_path(:name => name, :uid => "101010101010101",  :test_check => true)
 end 
 
+When /I am not logged in/ do 
+  # Does nothing when not logged in
+  # Otherwise, logs in as generic user
+  unless (step %{I should see the text on the side "Sign in"})
+    step %{I follow "Sign out"}
+  end
+  step %{I should see the text on the side "Sign in"}
+end

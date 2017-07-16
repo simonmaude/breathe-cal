@@ -7,11 +7,15 @@ When /I press add allergen button/ do
 end
 
 Given(/^I click on the map$/) do
-  page.find("#left-col").click 
+  find("#map").click 
+end
+
+Given(/^I click on the map screen$/) do
+  find("#map",:visible => true).click
 end
 
 Given(/^"(.*)" users reported "(.*)" in "(.*)"$/) do |number, allergen, place|
-  # pending
+  pending
 end
   
 Then(/^I should see "([^"]*)" when it loads$/) do |arg1|

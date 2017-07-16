@@ -5,6 +5,7 @@ Feature: crowd sourcing
   
   Background:
   Given I am on the landing page
+  And I am not logged in
 
 @javascript  
 Scenario: If I click the add allergen button and I am logged in then I should see a marker with a form.
@@ -21,11 +22,8 @@ Scenario: If I click the add allergen button and I am logged in then I should se
 Scenario: If I click the add marker CTA and I am not logged in then I should be asked to log in before 
   seeing a marker with a form.
   Given I press add allergen button
-  When I am not logged in
-  # And I click on the map
-  # Then I should be taken to the google authentication page
-  # Given I am logged in as "james"  
-  # Then I should see "Title" when it loads
+  Then I should be taken to the google authentication page
+  Given I am logged in as "james"
 
    @javascript  
 Scenario: If I am logged in and 4 users have placed markers in Berkeley for Bees and I click the add 
@@ -35,8 +33,8 @@ Scenario: If I am logged in and 4 users have placed markers in Berkeley for Bees
   And "4" users reported "Bees" in "Berkeley"
   Then I should not see "Bees" 
   Then I touch the add marker CTA
-  # And I click on the map
-  # Then I should see "Title" when it loads
-  # And I check "bees"
-  # And I press "Submit"
-  # And I should see "Bees" as a global marker
+  And I click on the map
+  Then I should see "Title" when it loads
+  And I check "bees"
+  And I press "Submit"
+  And I should see "bees"

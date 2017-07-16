@@ -1,10 +1,4 @@
 
-When /I am not logged in/ do 
-  # Does nothing when not logged in
-  # Otherwise, logs in as generic user
-  step %{I should see the text on the side "Sign in"}
-end
-  
 And /(.*) is inputted to (.*) (.*) times/ do |allergen, city, times| 
   # Specifies what allergy is inputted to what city
   # however many number of times
