@@ -1,6 +1,7 @@
 <div style="height: 100%;">
 <!-- profile sign in and profile icon START -->
   <% if current_client %>
+    <% date = @dt %>
     <% resp = HTTParty.get('https://www.googleapis.com/plus/v1/people/'+current_client.uid+'?fields=image&key=AIzaSyD5n5xHL4TbbHjVE_gxkVw6f-CRVyN8npc').body%>
     <% result = JSON.parse resp%>
     <% begin; source = result['image']['url']; custom = true; rescue Exception; custom = false; end%>
@@ -49,8 +50,7 @@
   <div class="col-md-4 col-ms-12" style="padding-left: 0; padding-right: 0; max-width: 500px;" id="right-col">
     <!--<div style="text-align: right; font-size: 15px; padding: 10px 15px; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid;">-->
     <!--</div>-->
-    <div class="datetime-box" style="padding: 20px; font-size: 20px; font-family: 'Open Sans', sans-serif; height: 65px; text-align:center;">Today is <%= @dt %>
-    </div>
+   
   
     
 
@@ -70,8 +70,6 @@
           <div type="button" data-toggle="modal" data-target="#myModal">
             <a>Learn more about this project</a>
           </div>
-    <div class = "welcome" > <%= "Today's " + @welcome_message + ":" %> 
-      <div id = "spare_alert" > <%= @alert %> </div>
     </div>
     </div>
     
