@@ -58,7 +58,6 @@ class CitiesController < ApplicationController
       @text = "Recent Searches"
       if session[:cities] && session[:cities].length > 5
         session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
-      end 
         @cities = session[:cities].reverse
       else
         @cities = []
