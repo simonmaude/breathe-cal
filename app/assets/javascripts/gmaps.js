@@ -83,11 +83,17 @@ function initAutocomplete() {
   $('#right-col').css('height', (window.innerHeight).toString());
   $('#detail-box').css('height', (window.innerHeight - 50 - 50 - 50 - 50).toString());
   $('#detail-box-mask').css('height', (window.innerHeight - 50 - 50 - 50 - 50).toString());
+    
+    
+  
+  
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
+  var searchBtn = document.getElementById('search-button');
   var searchBox = new google.maps.places.SearchBox(input);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
   //var markerEnabler = document.getElementById('marker-cta');
   //map.controls[google.maps.ControlPosition.LEFT_TOP].push(markerEnabler);
   
@@ -173,6 +179,12 @@ function initAutocomplete() {
     map.fitBounds(bounds);
     fetchMarkers();
   });
+  
+  searchBtn.onclick = function () {
+    addListener(map,searchBox,markers);
+  }
+  
+
   
   var canMark = false;
   
