@@ -18,6 +18,7 @@
 #map {
   height: 50%;
   width: 50%;
+  z-index: 0;
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
@@ -88,11 +89,13 @@ html, body {
   font-size: 15px;
   font-weight: 300;
   margin-left: -2px;
-  padding: 0 11px 0 13px;
+  text-indent: 5px;
+  padding: 0 11px 0 0px;
   text-overflow: ellipsis;
   width: 300px;
   height: 29px;
   opacity: 0.9;
+  z-index: 1000;
 }
 
 #pac-input:focus {
@@ -153,6 +156,29 @@ html, body {
   width: 40px;
   height: 40px;
   // border-radius: 50%;
+}
+
+
+
+button[id="search-button"] {
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 300;
+  margin-left: -31px;
+  padding: 0 11px 0 0px;
+  text-overflow: ellipsis;
+  width: 30px;
+  height: 29px;
+  opacity: 0.9;
+  z-index: 1000;
+  opacity: 0.45;
+}
+
+button[id="search-button"]:hover {
+  opacity: 0.75;
 }
 
 
