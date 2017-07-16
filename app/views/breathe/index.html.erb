@@ -7,6 +7,7 @@
     <% begin; is_default =  result['image']['isDefault']; rescue Exception; is_default = "true"; end%>
     <%userName = current_client.name%>
     <%firstLetter = userName[0]%>
+    <%firstName = userName.split(" ").first%>
   
     <div onclick= "profileClick()" id = "profile-icon" class = "round-hover">
       <% if is_default%>
@@ -49,13 +50,25 @@
   <div class="col-md-4 col-ms-12" style="padding-left: 0; padding-right: 0; max-width: 500px;" id="right-col">
     <!--<div style="text-align: right; font-size: 15px; padding: 10px 15px; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid;">-->
     <!--</div>-->
-    <div class="datetime-box" style="padding: 20px; font-size: 20px; font-family: 'Open Sans', sans-serif; height: 65px; text-align:center;">Today is <%= @dt %>
-    </div>
+ 
     
 
     
     <div id="fox-box" style="height: 120px;">
-      <%= render 'fox_box' %>
+      <div style="background-color: #1DA1F2; height: 100%; padding:18px 20px;">
+          <div style="float: left; margin-top: 5px;">
+              <%= link_to(image_tag('breathe_square.png', id: "breathe", alt: "Breathe Bay Area", width: 75, height: 75), "http://www.breathebayarea.org") %> 
+          </div>
+          <div style="padding-left: 110px; color: white;">
+              <div style="font-family: 'Open Sans', sans-serif; font-size: 24px">Welcome <%=firstName || "user"%></div>
+              <div style="font-family: 'Open Sans', sans-serif; font-size: 20px">
+                <%= @dt %> 
+              </div>
+          </div>
+           <marquee behavior="scroll" direction="left" scrollamount="5" >
+                <div id = "spare_alert" > High pollen levels in Berkeley, CA </div>
+              </marquee>
+      </div>
     </div>
     <div id="list-box" style="position: absolute; width: 100%;">
       <%= render 'list' %>  
@@ -69,8 +82,7 @@
           <div type="button" data-toggle="modal" data-target="#myModal">
             <a>Learn more about this project</a>
           </div>
-    <div class = "welcome" > <%= "Today's " + @welcome_message + ":" %> 
-      <div id = "spare_alert" > <%= @alert %> </div>
+
     </div>
     </div>
     
