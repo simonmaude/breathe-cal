@@ -5,9 +5,10 @@
     <% result = JSON.parse resp%>
     <% begin; source = result['image']['url']; custom = true; rescue Exception; custom = false; end%>
     <% begin; is_default =  result['image']['isDefault']; rescue Exception; is_default = "true"; end%>
+    <% p is_default %>
     <%userName = current_client.name%>
     <%firstLetter = userName[0]%>
-  
+    
     <div onclick= "profileClick()" id = "profile-icon" class = "round-hover">
       <% if is_default%>
         <div  id = "profile-image">
@@ -16,11 +17,7 @@
       <% else %>
         <img class= "img-circle round" src=<%=source%>>
       <% end %>
-      <div id="arrow" class = "arrow-up"></div> 
       <div id="myDropdown" class="dropdown-content drop-allign">
-        <div id="user-name-header">
-          <%=current_client.name %>
-        </div>
         <% if !is_default %>
           <img class= "profile-custom-header"src=<%=source%>>
         <% else %>
@@ -28,10 +25,12 @@
             <%= firstLetter %>
           </div>
         <% end %>
-        <div id = "spacing"></div>
-        <a href="#friends" class="dropdown-sub-title">Friends</a>
-        <a href="#email" class="dropdown-sub-title">Email preferences</a>
-        <%= link_to 'Sign Out', signout_path, id: "sign_out", class: "dropdown-sub-title" %>
+        <div id="user-name-header">
+          <strong><%=current_client.name %></strong>
+        </div>
+        <a href="#email">Friends</a>
+        <a href="#about">Email preferences</a>
+        <%= link_to 'Sign Out', signout_path, id: "sign_out" %>
       </div>
     </div>
   <% else %>
@@ -41,7 +40,6 @@
 <script>
   function profileClick() {
     document.getElementById("myDropdown").classList.toggle("show");
-    document.getElementById("arrow").classList.toggle("show")
 }
 </script>
 <!-- profile sign in and profile icon END -->
@@ -51,7 +49,6 @@
     <!--</div>-->
     <div class="datetime-box" style="padding: 20px; font-size: 20px; font-family: 'Open Sans', sans-serif; height: 65px; text-align:center;">Today is <%= @dt %>
     </div>
-  
     
 
     
@@ -82,7 +79,7 @@
     <div class="col-md-8 col-ms-12" style="padding-left: 0; padding-right: 0; z-index: 10; height: 100%;" id="left-col">
     <input id="pac-input" class="controls" type="text" placeholder="Search">
 
-    <!--<button id="search-button" class="controls" style="z-index: 1001; position: relative; left: 100px; top: 200px;">🔍</button>-->
+    <button id="search-button" class="controls" style="z-index: 1001; position: relative; left: 100px; top: 200px;">🔍</button>
 
     <div id="map" style="height: 100%; width: 100%;"></div>
   
@@ -104,4 +101,3 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
 <!--<script src="//nmp.newsgator.com/NGBuzz/buzz.ashx?buzzId=146282&apiToken=C8A8F8F5025D418F8AACB0A7FB2A799A&trkP=6d55b36b-8f3d-4003-b27d-ab20d60a3e6f%2Ceb799aa0-ab4c-4906-9d8f-19aaa62a99eb&trkM=29FA7D07-CEE9-C94B-3CF2-BA83A24ABFAC" type="text/javascript"></script>-->
 </div>
-
