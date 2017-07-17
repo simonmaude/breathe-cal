@@ -56,9 +56,10 @@ RSpec.describe Marker, type: :model do
       Marker.create!(lat: 15, lng: 15, dog: true)
       Marker.create!(lat: 15, lng: 15, dog: true)
       Marker.create!(lat: 15, lng: 15, dog: true)
-      Marker.create!(lat: 20, lng: 20, dog: true)
+      Marker.create!(lat: 19, lng: 19, dog: true)
       markers = Marker.find_all_in_bounds(20,10,20,10)
-      expect(Marker.get_global_markers(markers,global_number_show,10,20,20,10).length).to eq(4)
+      expect(markers.length).to eq(5)
+      expect(Marker.get_global_markers(markers,global_number_show,20,10,10,20).length).to eq(4)
     end
   end
 
