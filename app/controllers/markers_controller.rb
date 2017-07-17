@@ -13,22 +13,21 @@ class MarkersController < ApplicationController
   
   def show
     global_number_show = 5
-    up = bound_params[:uplat]
-    down = bound_params[:downlat]
+    top = bound_params[:uplat]
+    bottom = bound_params[:downlat]
     left = bound_params[:leftlong]
     right = bound_params[:rightlong]
     
-    markers = Marker.find_all_within_bounds(up,down,left,right)
+    markers = Marker.find_all_in_bounds(top,bottom,left,right)
+    global_markers = Marker.get_global_markers(markers,global_number_show,top,bottom,left,right)
     
     markers.each do |marker|
-      distinct_count = Marker.distinct_count_within_bounds(markers,marker,up,down,left,right)
-      unless marker.client_id == session[:client_id] || distinct_count >= global_number_show
+      unless ((marker.client_id == session[:client_id]) || (global_markers.include? marker)) 
         markers -= marker 
       end
     end
-    p markers
+    # p markers
     render :json => markers
-    # render :json => output
   end
   
   private 
