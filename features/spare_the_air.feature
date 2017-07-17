@@ -6,5 +6,5 @@ Feature: Spare the Air Alert System
 @javascript   
 Scenario: I should see alerts for San Francisco
     Given I am on the landing page
-    Then I should see "Today's Spare the Air Status for"
+    Then I should see "Today's Spare the Air Day Info"
     And I should see "No Alert"
