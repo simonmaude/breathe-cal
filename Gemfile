@@ -31,7 +31,8 @@ gem 'nokogiri'
 
 gem 'geocoder'
 gem 'gmaps4rails'
-gem 'phantomjs', '1.9.8'
+# Use Phantomjs - a WebKit scriptable with a JavaScript API
+gem 'phantomjs', '1.9.8.0' 
 gem 'poltergeist'
 gem 'selenium-webdriver'
 

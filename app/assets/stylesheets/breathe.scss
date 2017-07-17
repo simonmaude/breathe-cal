@@ -46,6 +46,7 @@ html, body {
 #spare_alert {
   position:relative;
   font-weight:bold;
+  color: white;
 }
 
 .controls {
@@ -430,3 +431,9 @@ html, body {
 .dropdown-sub-title {
   font-size: 14px;
 }
+
+#fox-box {
+  background: #1DA1F2;
+  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); /* Standard syntax */
+}
+

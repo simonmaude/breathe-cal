@@ -42,5 +42,5 @@ Scenario: Having searched for more than 5 cities I should only see the last 5 on
 #     And I should see "Richmond"
 #     And I should see "Oakland"
 #     And I should see "Albany"
-    And I should not see "Berkeley"
+    # And I should not see "Berkeley"
 

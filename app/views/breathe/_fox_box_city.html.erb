@@ -1,0 +1,11 @@
+<div style="height: 100%; padding:18px 20px;">
+    <% begin; current_city = @data[0]; rescue Exception; current_city = nil; end %>
+    <% begin; air_quality = @data[1]["DailyForecasts"][0]["AirAndPollen"][0]["Category"]; rescue Exception; air_quality = nil; end %>
+    <div style="float: left; margin-top: 5px;">
+        <%= link_to(image_tag('breathe_square.png', id: "breathe", alt: "Breathe Bay Area", width: 75, height: 75), "http://www.breathebayarea.org") %> 
+    </div>
+    <div style="padding-left: 110px; color: white;">
+        <div style="font-family: 'Open Sans', sans-serif; font-size: 28px"><%= current_city || "Current City"%></div>
+        <div style="font-family: 'Open Sans', sans-serif; font-size: 20px">Air quality: <%= air_quality %></div>
+    </div>
+</div>

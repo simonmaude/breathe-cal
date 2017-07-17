@@ -1,7 +1,9 @@
 <% if mobile_device? %>
 $("#list-box").html("<%= j render 'breathe/list.mobile' %>");
 <% else %>
+$("#logo").html("<%= j render 'breathe/logo.html' %>");
 $("#list-box").html("<%= j render 'breathe/list.html' %>");
+$("#fox-box").html("<%= j render 'breathe/fox_box.html' %>");
 <% end %>
 var offset = parseInt($('#detail-box').parent().css('width')) + 'px'
 $("#list-box").animate
