@@ -26,7 +26,6 @@ class MarkersController < ApplicationController
         markers -= marker 
       end
     end
-    # p markers
     render :json => markers
   end
   

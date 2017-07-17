@@ -3,22 +3,25 @@ class Marker < ActiveRecord::Base
   
   @@allergen_list = [:dog, :cat, :mold, :bees, :perfume, :oak, :dust, :smoke, :gluten, :peanut]
   
+  
   def self.find_all_in_bounds(top, bottom, left, right)
     markersTop = Marker.where("lat < (?)", top)
     markersBottom = Marker.where("lat > (?)", bottom)
     markersLeft = Marker.where("lng < ?", left)
     markersRight = Marker.where("lng > ?", right)
-    return markersBottom & markersTop & markersLeft & markersRight
+    return  markersBottom & markersTop & markersRight & markersLeft
   end
  
-  def self.find_all_in_zoom(top,bottom,left,right)        
-    zoom_lat = (top - bottom) * 0.33
-    zoom_long = (right - left) * 0.33
-    zoom_top = top - zoom_lat
-    zoom_bottom = bottom + zoom_lat
-    zoom_left = left + zoom_long
-    zoom_right = right - zoom_long
-    return find_all_in_bounds(zoom_top, zoom_bottom, zoom_left, zoom_right)
+ 
+  def self.find_all_in_zoom(top,bottom,left,right, lat, long)        
+    zoom_ratio = 0.125
+    zoom_lat = (top - bottom) * zoom_ratio
+    zoom_long = (left - right) * zoom_ratio
+    zoom_top = lat + zoom_lat
+    zoom_bottom = lat - zoom_lat
+    zoom_left = long + zoom_long
+    zoom_right = long - zoom_long
+    return self.find_all_in_bounds(zoom_top, zoom_bottom, zoom_left, zoom_right)
   end  
       
       
@@ -29,17 +32,20 @@ class Marker < ActiveRecord::Base
       unless output.include? marker
       # for each allergen listed as true
         break_test = false
+        # check all other markers in zoomed in area to see if global_show - 1 are also true
+        zoom_markers = self.find_all_in_zoom(top,bottom,left,right, marker.lat.to_f, marker.lng.to_f)
+        # for every allergen
         @@allergen_list.each do |allergen|
           # breakout of loop if marker has been added already
           if break_test == true then break end
           allergen_count = 0
-          if marker.send(allergen) == true 
-            # check all other markers in zoomed in area to see if global_show - 1 are also true
-            zoom_markers = find_all_in_zoom(top,bottom,left,right)
- 
+          # if the marker has this allergen ticked
+          if (marker.send(allergen) == true) 
+            # for every marker in the zoomed area around this marker
             zoom_markers.each do |zoom_marker|
-              if zoom_marker.allergen == true 
-                allergen_count += 1 
+              # if it also has this allergen ticked
+              if (zoom_marker.send(allergen) == true) 
+                allergen_count += 1
                 if allergen_count >= global_number_show
                   # add marker to ouput if > global appear in zoomed area 
                   output << marker
