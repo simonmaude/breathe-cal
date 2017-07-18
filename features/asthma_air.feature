@@ -28,3 +28,20 @@ Scenario: User unchecks asthma and checks allergen to see cats nearby
   # And I uncheck "Asthma?"
   # Then I should not see clean air and polluted air zones
   # And I should see nearby cat allergens
+
+Scenario: User searches a city 
+  Given I am on the landing page
+  # And I search a city
+  # And I scroll down the side bar
+  # Then I should see clean air button/tab
+  # When I click clean air button/tab
+  # I should see ...? Not sure yet. ASK TROY 
+
+Scenario: User searches a city and wants to see shaded areas for air quality
+  Given I am on the landing page
+  Given I am logged in as "James Jones"
+  #When I search for "San Jose"
+  #I should see clean air quality button/tab
+  #When I click clean air button/tab
+  #When I check air quality map 
+  #I should see shaded regions for air quality in "San Jose"
