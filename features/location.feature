@@ -4,7 +4,7 @@ Feature: Locations
      visualize the data (utilizing colors and graphs)  and be able 
      to clearly understand the information on the page.   
     
-Background: 
+Background:
 
 @javascript
 Scenario: I should be able to open the page on a desktop understand the purpose of the page 
@@ -16,18 +16,17 @@ Scenario: I should be able to open the page on a desktop understand the purpose 
 
 	
 @javascript
-Scenario: I should be able to see the allergn details of the page 
+Scenario: I should be able to see the allergen details of the page
 	When I go to the landing page
 	And my location is set to "Berkeley, CA United States"
 	And I should see the alert section
 	# line below is a pending holder till the info bar is implemented 
 	Then pending holder
-	And I should see the text on the side "Berkeley Air Quality:"
-    And I should see an icon "Tree"
-    And I should see an icon "Grass"
-    And I should see an icon "Ragweed"
-    And I should see an icon "Mold"
-    And I should see an icon "UVIndex"
+	And I should see the text on the side "Berkeley"
+	And I should see the text on the side "Air quality:"
+	And I should see the text on the side "Allergens"
+	And I should see the text on the side "Air Quality"
+	And I should see the text on the side "Asthma"
 
         
 @javascript     
@@ -44,22 +43,22 @@ Scenario: I should be able to see the breathing details of the page
     
  
  @javascript   
-Scenario: I should be able to see the other forcasts details of the page 
+Scenario: I should be able to see the other forcast details of the page
 	Given I am on the landing page
 	And my location is set to "Berkeley"
 	# line below is a pending holder till the info bar is implemented 
 	Then pending holder
 
     And I should see the text on the side "Other Forecasts"
-    
- @javascript   
-Scenario: I should be able to see the weather forcasts details of the page 
+
+
+
+	@javascript
+Scenario: I should be able to see the weather forcast details of the page
 	Given I am on the landing page
 	And my location is set to "Berkeley"
 	# line below is a pending holder till the info bar is implemented 
 	Then pending holder
-	
  	And I should see the weather section 
 	And I should see a weather icon inside
-    
-    
+
