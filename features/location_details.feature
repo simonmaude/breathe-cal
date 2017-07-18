@@ -2,9 +2,40 @@ Feature: Locations Details
       As an allergy sufferer, i want to know more information about
       the allergen and what each level actually stands for.    
       
-Background: 
+Background:
 
 @javascript
+Scenario: When I click on allergens it expands to give my a more detailed look per allergen
+    Given I am on the landing page
+    And my location is set to "Berkeley, CA United States"
+    Then pending holder # until we implement
+    When I press on the text "Allergens"
+    Then I should see the text "Grass"
+    And  I should see the text "Mold"
+    And  I should see the text "Ragweed"
+    And  I should see the text "Tree"
+    And  I should see the text "UVIndex"
+
+@javascript
+Scenario: When I click on air quality I should see a more detailed view of various air quality measures
+
+    Given I am on the landing page
+    And my location is set to "Berkeley, CA United States"
+    Then pending holder # until we implement
+    When I press on the text "Air"
+    Then I should see the text "Quality"
+    And  I should see the text "Wind"
+    And  I should see the text "Precip"
+
+@javascript
+Scenario: When I click on Asthma I should see a more detailed view of various air quality measures
+
+    Given I am on the landing page
+    And my location is set to "Berkeley, CA United States"
+    Then pending holder # until we implement
+    When I press on the text "Ashtma"
+
+  @javascript
 Scenario: I should be able to click on an allergen and key main points about allergen
     Given I am on the landing page
     And my location is set to "Berkeley"	
