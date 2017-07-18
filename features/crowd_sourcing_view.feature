@@ -69,3 +69,32 @@ Scenario: If 5 users have placed markers in Berkeley for Bees and I click the ad
 	Then pending holder
   
   Then I should see "bees"
+  
+@javascript  
+Scenario: If 5 users have placed markers in Berkeley for Bees then the area around the markers should 
+  become shaded.
+  
+  And I successfully authenticated with Google as "Smokey Bear"
+  Then I press add allergen button
+  And I click on the map
+  And I check "bees"
+  And I press "Submit"
+  Then I should see "bees"
+  Then I press the user icon
+  And I follow "Sign Out"
+  And I successfully authenticated with Google as "Rupert Bear"
+  Then I press add allergen button
+  And I click on the map
+  And I check "bees"
+  And I press "Submit"
+  Then I should see "bees"
+  Then I press the user icon
+  And I follow "Sign Out"
+  And I successfully authenticated with Google as "Fozzie Bear"
+   
+    # line below is a pending holder till shading implemented 
+	Then pending holder
+	
+	
+  Then the area around the marker "bees" should appear shaded
+ 
