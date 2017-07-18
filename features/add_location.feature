@@ -3,7 +3,8 @@ Feature: As a user, I want to be able to add my location and have it remembered,
   
 Scenario: User should be able to see the add city button
   Given I am on the landing page
-  # Then I should see "Add location"
+  Given I fill in "pac-input" with "Piedmont, CA"
+  # Then I should see "add as a favorite city"
   
 Scenario: User enters a new city and adds it
   Given I am on the landing page

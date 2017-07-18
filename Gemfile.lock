@@ -447,7 +447,7 @@ DEPENDENCIES
   omniauth-facebook
   omniauth-google-oauth2
   pg
-  phantomjs (= 1.9.8)
+  phantomjs (= 1.9.8.0)
   poltergeist
   rails (= 4.2.6)
   rails_12factor
@@ -466,4 +466,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.14.4
+   1.15.1

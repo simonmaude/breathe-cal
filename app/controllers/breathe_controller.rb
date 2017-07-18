@@ -12,13 +12,16 @@ class BreatheController < ApplicationController
   begin
   
   # first read the website (RSS feed for air alert)
-    html = open('http://www.baaqmd.gov/Feeds/AlertRSS.aspx').read
+    # html = open('http://www.baaqmd.gov/Feeds/AlertRSS.aspx').read
 
-    # Take in the data with Nokogiri to be able to use xpath
-    html = Nokogiri::HTML(html)
-    @alert = html.xpath('//item/description').text
-    @welcome_message = html.xpath('//item/title').text
+    # # Take in the data with Nokogiri to be able to use xpath
+    # html = Nokogiri::HTML(html)
+    # @alert = html.xpath('//item/description').text
+    # @welcome_message = html.xpath('//item/title').text
     
+    
+      @welcome_message = "Spare the Air Day Info"
+      @alert = "No Alert"
     # if no alert or webpage error, display following
     rescue
       @welcome_message = "Spare the Air Day Info"

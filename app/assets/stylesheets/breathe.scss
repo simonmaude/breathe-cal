@@ -27,7 +27,7 @@
 #map {
   height: 50%;
   width: 50%;
-  z-index: 0;
+  // z-index: 0;
 }
 /* Optional: Makes the sample page fill the window. */
 html, body {
@@ -46,6 +46,7 @@ html, body {
 #spare_alert {
   position:relative;
   font-weight:bold;
+  color: white;
 }
 
 .controls {
@@ -98,13 +99,13 @@ html, body {
   font-size: 15px;
   font-weight: 300;
   margin-left: -2px;
-  text-indent: 5px;
-  padding: 0 11px 0 0px;
+  // text-indent: 5px;
+  // padding: 0 11px 0 0px;
   text-overflow: ellipsis;
   width: 300px;
   height: 29px;
   opacity: 0.9;
-  z-index: 1000;
+  // z-index: 1000;
 }
 
 #pac-input:focus {
@@ -430,3 +431,9 @@ button[id="search-button"]:hover {
 .dropdown-sub-title {
   font-size: 14px;
 }
+
+#fox-box {
+  background: #1DA1F2;
+  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); /* Standard syntax */
+}
+

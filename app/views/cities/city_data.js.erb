@@ -1,5 +1,8 @@
 <% unless @cached.nil? %>
 var input = document.getElementById('pac-input');
+var signIn = document.getElementById('log-in');
+var dropdown = document.getElementById('profile-click');
+var profile = document.getElementById('profile-icon');
 var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: <%= @geo[0] %>, lng: <%= @geo[1] %>},
           mapTypeId: 'roadmap',
@@ -12,6 +15,10 @@ var marker = new google.maps.Marker({
         });
   var searchBox = new google.maps.places.SearchBox(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+  
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(signIn);
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(dropdown);
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(profile);
 
   // Bias the SearchBox results towards current map's viewport.
   map.addListener('bounds_changed', function() {
@@ -94,8 +101,9 @@ $("#detail-box").html("<%= j render 'breathe/detail.mobile' %>");
 $("#fox-box").html("<%= j render 'breathe/fox_box.mobile' %>");
 $("#weather-box").html("<%= j render 'breathe/weather_box.mobile' %>");
 <% else %>
+$("#logo").html("");
 $("#detail-box").html("<%= j render 'breathe/detail.html' %>");
-$("#fox-box").html("<%= j render 'breathe/fox_box.html' %>");
+$("#fox-box").html("<%= j render 'breathe/fox_box_city.html' %>");
 $("#weather-box").html("<%= j render 'breathe/weather_box.html' %>");
 <% end %>
 

@@ -48,11 +48,15 @@ def finished_all_ajax_requests?
 end
 
 
-Then /^(?:|I )should see "([^"]*)" as a global marker$/ do |text|
+Then (/^(?:|I )should see "([^"]*)" as a global marker$/) do |text|
   # pending
   # if page.respond_to? :should
   #   page.should have_content(text)
   # else
   #   assert page.has_content?(text)
   # end
+end
+
+Then (/the area around the marker "(.*)" should appear shaded$/) do |marker|
+  pending
 end
