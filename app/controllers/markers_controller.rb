@@ -23,10 +23,12 @@ class MarkersController < ApplicationController
     
     markers.each do |marker|
       unless ((marker.client_id == session[:client_id]) || (global_markers.include? marker)) 
-        markers -= marker 
+        markers -= [marker] 
       end
     end
     render :json => markers
+      
+            
   end
   
   private 
