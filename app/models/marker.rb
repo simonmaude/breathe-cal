@@ -13,7 +13,7 @@ class Marker < ActiveRecord::Base
   end
  
  
-  def self.find_all_in_zoom(top,bottom,left,right, lat, long)        
+  def self.find_all_in_zoom(top,bottom,left,right,lat, long)        
     zoom_ratio = 0.125
     zoom_lat = (top - bottom) * zoom_ratio
     zoom_long = (left - right) * zoom_ratio
@@ -26,6 +26,7 @@ class Marker < ActiveRecord::Base
       
       
   def self.get_global_markers(markers,global_number_show,top,bottom,left,right)
+    p 'x' * 88
     output = []
     # for each marker that is not listed already
     markers.each do |marker|
@@ -33,7 +34,7 @@ class Marker < ActiveRecord::Base
       # for each allergen listed as true
         break_test = false
         # check all other markers in zoomed in area to see if global_show - 1 are also true
-        zoom_markers = self.find_all_in_zoom(top,bottom,left,right, marker.lat.to_f, marker.lng.to_f)
+        zoom_markers = self.find_all_in_zoom(top.to_f,bottom.to_f,left.to_f,right.to_f,marker.lat.to_f, marker.lng.to_f)
         # for every allergen
         @@allergen_list.each do |allergen|
           # breakout of loop if marker has been added already
@@ -49,6 +50,8 @@ class Marker < ActiveRecord::Base
                 if allergen_count >= global_number_show
                   # add marker to ouput if > global appear in zoomed area 
                   output << marker
+                      p "*" * 88
+                  p "id: " + marker.client_id.to_s + ", peanut: " +marker.peanut.to_s + ", perfume: " +marker.perfume.to_s
                   break_test = true
                   # breakout of loop if marker has been added already
                   break
