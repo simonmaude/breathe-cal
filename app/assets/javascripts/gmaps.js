@@ -89,11 +89,11 @@ function initAutocomplete() {
   
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
-  var searchBtn = document.getElementById('search-button');
+  // var searchBtn = document.getElementById('search-button');
   var searchBox = new google.maps.places.SearchBox(input);
   
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
+  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
   //var markerEnabler = document.getElementById('marker-cta');
   //map.controls[google.maps.ControlPosition.LEFT_TOP].push(markerEnabler);
   
