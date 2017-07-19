@@ -250,7 +250,8 @@ function initAutocomplete() {
       }
     }
     var contentString ="<div id='wrap'>" + 
-                      "Allergens at " + title + "<br>" +
+                      title + "<br>" +
+                      "<a href=#editMarker>edit</a>"
                       "<div id='left_col'>" + 
                       leftContentString + 
                       "</div>" + 
@@ -272,22 +273,23 @@ function initAutocomplete() {
     })
     
     var contentString = $(
+      
       "<div id='wrap'>" + 
       "<form id='markerForm' action='markers' method='POST'>"+
-      "Title <input type='text' name='title'> <br>" + 
+      "<datalist id='options'>"+
+      "<option value='Cats'>" +
+      "<option value='Bees'>" +
+      "<option value='Perfume'>" +
+      "<option value='Oak'>" +
+      "<option value='Peanut'>" +
+      "<option value='Gluten'>" +
+      "<option value='Dog'>" +
+      "<option value='Dust'>" +
+      "<option value='Smoke'>" +
+      "<option value='Mold'>" +
+      "</datalist>" +
+      "Allergen: <input type='text' name='title' list='options'> <br>" + 
       "<div id='left_col'>" + 
-      "<input type = 'checkbox' name='cat' value='true'> Cats <br>"+
-      "<input type = 'checkbox' name='bees' value='true'> Bees <br>"+
-      "<input type = 'checkbox' name='perfume' value='true'> Perfume <br>"+
-      "<input type = 'checkbox' name='oak' value='true'> Oak <br>"+
-      "<input type = 'checkbox' name='peanut' value='true'> Peanut <br>"+
-      "</div>" +
-      "<div id='right_col'>" + 
-      "<input type = 'checkbox' name='gluten' value='true'> Gluten <br>"+
-      "<input type = 'checkbox' name='dog' value='true'> Dogs <br>"+
-      "<input type = 'checkbox' name='dust' value='true'> Dust <br>"+
-      "<input type = 'checkbox' name='smoke' value='true'> Smoke <br>"+
-      "<input type = 'checkbox' name='mold' value='true'> Mold <br>"+
       "</div>" +
       "<input type='submit' value='Submit'>"+
       "</form>" +
