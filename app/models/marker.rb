@@ -26,7 +26,6 @@ class Marker < ActiveRecord::Base
       
       
   def self.get_global_markers(markers,global_number_show,top,bottom,left,right)
-    p 'x' * 88
     output = []
     # for each marker that is not listed already
     markers.each do |marker|
@@ -50,10 +49,8 @@ class Marker < ActiveRecord::Base
                 if allergen_count >= global_number_show
                   # add marker to ouput if > global appear in zoomed area 
                   output << marker
-                      p "*" * 88
-                  p "id: " + marker.client_id.to_s + ", peanut: " +marker.peanut.to_s + ", perfume: " +marker.perfume.to_s
-                  break_test = true
                   # breakout of loop if marker has been added already
+                  break_test = true
                   break
                 end
               end

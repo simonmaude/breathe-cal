@@ -7,8 +7,7 @@ class MarkersController < ApplicationController
       render :json => marker
     else 
       render :nothing => true
-    end
-    #i assume i get some JSON from the post 
+    end 
   end
   
   def show
