@@ -59,26 +59,52 @@ function initAutocomplete() {
     })
   }
   
+  var map = new google.maps.Map(document.getElementById('map'), {center: { lat: 37.8716, lng: -122.2727}, zoom: 15, mapTypeId: 'roadmap'});
   
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {
-      lat: 37.8716,
-      lng: -122.2727
-    },
-    zoom: 13,
-    mapTypeId: 'roadmap'
-  });
+  var infowindow = new google.maps.InfoWindow;
+    
+  if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found.');
+      infoWindow.open(map);
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
   
-  var geocoder = new google.maps.Geocoder();
   
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+     infoWindow.setPosition(pos);
+     infoWindow.setContent(browserHasGeolocation ?
+              'Error: The Geolocation service failed.' :
+              'Error: Your browser doesn\'t support geolocation.');
+     infoWindow.open(map);
+  }
+      
+      
   google.maps.event.addDomListener(window, "resize", function() {
    var center = map.getCenter();
    google.maps.event.trigger(map, "resize");
    map.setCenter(center); 
   });
   
-  $('#marker-cta').css('cursor','pointer');
   
+  
+  
+  
+  
+  
+  
+  $('#marker-cta').css('cursor','pointer');
   $('#left-col').css('height', (window.innerHeight).toString());
   $('#right-col').css('height', (window.innerHeight).toString());
   $('#detail-box').css('height', (window.innerHeight - 50 - 50 - 50 - 50).toString());
@@ -294,7 +320,13 @@ function initAutocomplete() {
       "</div>"
     );
     
-    var infowindow = new google.maps.InfoWindow();
+      
+    
+    
+    
+    
+    
+    
     infowindow.open(map,marker);
     infowindow.setContent(contentString[0]);
     marker.infowindow = infowindow;
