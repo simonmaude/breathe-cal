@@ -63,32 +63,31 @@ function initAutocomplete() {
   
   var infowindow = new google.maps.InfoWindow;
     
+    
+  var pp = {
+        lat: 32.1231,
+        lng: -121.2342
+  };
+
+      
   if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
       
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
-      infoWindow.open(map);
+      // Getting current location
+      var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+      
+      infowindow.setPosition(pos);
+      infowindow.setContent('Current Location');
+      infowindow.open(map);
       map.setCenter(pos);
+      
     }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
+      handleLocationError(true, infowindow, map.getCenter());
     });
   } else {
-    handleLocationError(false, infoWindow, map.getCenter());
+    handleLocationError(false, infowindow, map.getCenter());
   }
   
-  
-  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-     infoWindow.setPosition(pos);
-     infoWindow.setContent(browserHasGeolocation ?
-              'Error: The Geolocation service failed.' :
-              'Error: Your browser doesn\'t support geolocation.');
-     infoWindow.open(map);
-  }
       
       
   google.maps.event.addDomListener(window, "resize", function() {
@@ -97,12 +96,7 @@ function initAutocomplete() {
    map.setCenter(center); 
   });
   
-  
-  
-  
-  
-  
-  
+
   
   $('#marker-cta').css('cursor','pointer');
   $('#left-col').css('height', (window.innerHeight).toString());
@@ -322,11 +316,6 @@ function initAutocomplete() {
     
       
     
-    
-    
-    
-    
-    
     infowindow.open(map,marker);
     infowindow.setContent(contentString[0]);
     marker.infowindow = infowindow;
@@ -342,6 +331,16 @@ function initAutocomplete() {
       recentMarker = null;
     });
     
+    // Handle location finder error
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+     infoWindow.setPosition(pos);
+     infoWindow.setContent(browserHasGeolocation ?
+              'Error: Could not find location' :
+              'Error: Browswer does not support location.');
+     infoWindow.open(map);
+     }
+  
+  
     // disallow marker spawn if its already here. this means i need the UniqueID 
     
     
