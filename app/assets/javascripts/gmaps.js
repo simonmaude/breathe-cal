@@ -39,9 +39,11 @@ function initAutocomplete() {
             var location = {};
             location.lat = parseFloat(data[i].lat);
             location.lng = parseFloat(data[i].lng);
-            labelNum += 1;
+            // labelNum += 1;
+            labelClientId = data[i].client_id
             var marker = new google.maps.Marker({
-                  label: labelNum.toString(),
+                  // label: labelNum.toString(),
+                  label: labelClientId.toString(),
                   position: location,
                   map: map,
                   draggable: false,
