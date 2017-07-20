@@ -233,9 +233,12 @@ function initAutocomplete() {
   });
   
   var recentMarker = null;
-  
+
+
+
   function createContentString(data){
     var title = data.title;
+    markerTitle = title;
     var attributes = ["cat", "bees", "perfume", "oak", "peanut", "gluten", "dog", "dust", "smoke", "mold"];
     var leftContentString = "";
     var rightContentString = "";
@@ -251,7 +254,9 @@ function initAutocomplete() {
     }
     var contentString ="<div id='wrap'>" + 
                       title + "<br>" +
-                      "<a href=#editMarker>edit</a>"
+                      "<a href=#editMarker>edit</a>" +
+                      " | "+
+                      "<a href=#editMarker>delete</a>" +
                       "<div id='left_col'>" + 
                       leftContentString + 
                       "</div>" + 
@@ -263,10 +268,86 @@ function initAutocomplete() {
     return content;
   }
   
+  var beeMarker = {
+      url: 'https://image.flaticon.com/icons/svg/235/235425.svg', 
+      scaledSize : new google.maps.Size(50, 50)
+  };
+  var catMarker = {
+    url: 'https://image.flaticon.com/icons/svg/12/12160.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  };
+  var perfumeMarker = {
+    url: 'https://image.flaticon.com/icons/svg/223/223811.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var oakMarker = {
+    url: 'https://image.flaticon.com/icons/svg/424/424041.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var peanutMarker = {
+    url: 'https://image.flaticon.com/icons/svg/204/204697.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var glutenMarker = {
+    url: 'https://image.flaticon.com/icons/svg/204/204705.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var dogMarker = {
+    url: 'https://image.flaticon.com/icons/svg/91/91544.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var dustMarker = {
+    url: 'https://image.flaticon.com/icons/svg/471/471794.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var smokeMarker = {
+    url: 'https://image.flaticon.com/icons/svg/394/394631.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var moldMarker = {
+    url: 'https://d30y9cdsu7xlg0.cloudfront.net/png/183061-200.png',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  
+  
+  var icons = {
+          bees: {
+            icon: beeMarker
+          },
+          cats: {
+            icon: catMarker
+          },
+          perfume: {
+            icon: perfumeMarker
+          },
+          oak: {
+            icon: oakMarker
+          },
+          peanut: {
+            icon: peanutMarker
+          },
+          gluten: {
+            icon: glutenMarker
+          },
+          dog: {
+            icon: dogMarker
+          },
+          dust: {
+            icon: dustMarker
+          },
+          smoke: {
+            icon: smokeMarker
+          },
+          mold: {
+            icon: moldMarker
+          }
+        };
+
+  
   function placeMarker(location) {
     labelNum += 1;
     var marker = new google.maps.Marker({
-      label: labelNum.toString() ,
+      label: "",
       position: location,
       map: map,
       draggable: true,
@@ -306,6 +387,7 @@ function initAutocomplete() {
     
     recentMarker = marker;
     
+    
     var listenerHandle = google.maps.event.addListener(infowindow, 'closeclick', function(){
       labelNum -=1;
       recentMarker.setMap(null);
@@ -334,12 +416,16 @@ function initAutocomplete() {
         success: function(d){
           fetchedMarkers[d.id] = true;
           var newContent = createContentString(d);
+
+          
           // var newContent = $("<div>"+
           //                     "cat " + d.cat + 
           //                     "<br> dog " + d.dog +
           //                     "<br> mold " + d.mold + "</div>");
-          console.log(d.id);
+         
+    
           recentMarker.infowindow.setContent(newContent[0]);
+          recentMarker.setIcon(icons[d.title.toLowerCase()].icon);
           recentMarker.infowindow.open(map,recentMarker);
           recentMarker.draggable = false;
           recentMarker = null;
@@ -351,6 +437,8 @@ function initAutocomplete() {
       return false;
     });
   }
+  
+
   
   // maybe just send a list of attributes to tell javascript to use....? 
   function setMapOnAll(map) {
