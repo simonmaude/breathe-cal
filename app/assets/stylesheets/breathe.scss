@@ -220,8 +220,7 @@ button[id="search-button"]:hover {
 
 }
 #wrap {
-  width:180px;
-  margin:0 auto;
+  
 }
 
 #left_col {
@@ -435,3 +434,50 @@ button[id="search-button"]:hover {
   background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); /* Standard syntax */
 }
 
+.marker-backdrop {
+  background-color: blue;
+  opacity: 0.5;
+}
+
+#input-title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  color: white;
+  padding-left: 18px;
+  
+}
+
+.text-box {
+  width: 100px;
+
+}
+
+input[type="submit"]{
+    /* change these properties to whatever you want */
+    background-color: #FF851B;
+    font-size: 10px;
+    color: #FFFFFF;
+    border-radius: 40%;
+    
+}
+
+.marker-title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  padding-bottom: 5px;
+  color: white;
+  width: 75px;
+  height: 60px;
+}
+#edit-delete {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  color: black;
+  position: absolute;
+  background-color: white;
+  text-align: center;
+  width: 75px;
+
+  
+}
