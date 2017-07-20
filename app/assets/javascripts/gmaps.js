@@ -380,7 +380,7 @@ function initAutocomplete() {
     var markerInfo = new InfoBubble({
 
       shadowStyle: 0,
-      backgroundColor: 'rgba(44, 181, 232, 0.9)',
+      backgroundColor: 'rgba(29, 161, 242, 0.8)',
       borderRadius: 10,
       arrowSize: 10,
       borderWidth: 2,
