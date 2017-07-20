@@ -46,6 +46,9 @@ Scenario: If I am logged in and only 3 users have placed markers in Berkeley for
      @javascript  
 Scenario: If 5 users have placed markers in Berkeley for Bees and I click the add 
           marker CTA to add Bees then I should see Bees appear as a global marker in Berkeley on my map.
+ 
+    # line below is a pending holder till the info bar is implemented 
+	Then pending holder
   
   And I successfully authenticated with Google as "Smokey Bear"
   Then I press add allergen button
@@ -64,9 +67,6 @@ Scenario: If 5 users have placed markers in Berkeley for Bees and I click the ad
   Then I press the user icon
   And I follow "Sign Out"
   And I successfully authenticated with Google as "Fozzie Bear"
- 
-    # line below is a pending holder till the info bar is implemented 
-	Then pending holder
   
   Then I should see "bees"
   
