@@ -252,18 +252,20 @@ function initAutocomplete() {
         rightContentString += attributes[i] + "<br>";  
       }
     }
-    var contentString ="<div id='wrap'>" + 
-                      title + "<br>" +
-                      "<a href=#editMarker>edit</a>" +
-                      " | "+
-                      "<a href=#editMarker>delete</a>" +
-                      "<div id='left_col'>" + 
-                      leftContentString + 
-                      "</div>" + 
-                      "<div id='right_col'>" + 
-                      rightContentString +
-                      "</div>" + 
+    var contentString ="<div>"+
+    
+                        "<div class='marker-title'>" + 
+                          title +
+                          "<div id = 'spacing'></div>" + 
+                          "<div id= 'edit-delete'>" +
+                          "<a href=#editMarker>edit</a>" +
+                          " | "+
+                          "<a href=#editMarker>delete</a>" +
+                        "</div>"+
+                        "</div>"+
+                      
                       "</div>";
+                      
     var content = $(contentString);
     return content;
   }
@@ -370,8 +372,12 @@ function initAutocomplete() {
             "<option value='Mold'>" +
             "</datalist>" +
           "<div id= 'input-title'>Allergen:</div>" +
+          "<div id='spacing'></div>"+
           "<input class = 'text-box' type='text' name='title' list='options'>" + 
-          "<input id = 'plus-button' type='submit' value='+'>"+
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          //"<input id = 'plus-button' type='submit' value='+'>"+
         "</form>" +
       "</div>"
     );

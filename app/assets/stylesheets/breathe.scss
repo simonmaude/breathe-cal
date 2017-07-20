@@ -459,6 +459,27 @@ input[type="submit"]{
     background-color: #FF851B;
     font-size: 10px;
     color: #FFFFFF;
-    border-radius: 50%;
+    border-radius: 40%;
     
+}
+
+.marker-title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  padding-bottom: 5px;
+  color: white;
+  width: 75px;
+  height: 60px;
+}
+#edit-delete {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  color: black;
+  position: absolute;
+  background-color: white;
+  text-align: center;
+  width: 75px;
+
+  
 }
