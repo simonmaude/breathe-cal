@@ -1,4 +1,4 @@
-When /I add a marker with (.*) (and (.*))?/ do |allergen1, allergens*|
+When /I add a marker with (.*) (and (.*))?/ do |allergen1, *allergens|
  pending
 end  
 
