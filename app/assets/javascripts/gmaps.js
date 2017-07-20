@@ -7,7 +7,9 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+
 var fetchedMarkers = {};
+var heatmapData = [];
 
 function initAutocomplete() {
   
@@ -33,9 +35,12 @@ function initAutocomplete() {
       url: "markers",
       data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}},
       success: function(data){
+        heatmapData = [];
         for(var i=0;i<data.length; i++){
           var id = data[i].id;
           if (true){
+            heatmapData.push(new google.maps.LatLng(data[i].lat, data[i].lng));
+            console.log(heatmapData);
             var location = {};
             location.lat = parseFloat(data[i].lat);
             location.lng = parseFloat(data[i].lng);
@@ -62,6 +67,7 @@ function initAutocomplete() {
   }
   
   
+    
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 37.8716,
@@ -78,6 +84,12 @@ function initAutocomplete() {
    google.maps.event.trigger(map, "resize");
    map.setCenter(center); 
   });
+  
+  var heatmap = new google.maps.visualization.HeatmapLayer({
+    data: heatmapData,
+    map: map
+  });
+  heatmap.setMap(map);
   
   $('#marker-cta').css('cursor','pointer');
   
@@ -180,6 +192,7 @@ function initAutocomplete() {
     });
     map.fitBounds(bounds);
     fetchMarkers();
+    
   });
   
   // searchBtn.onclick = function () {
