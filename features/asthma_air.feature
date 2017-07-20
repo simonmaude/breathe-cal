@@ -47,3 +47,5 @@ Scenario: User searches a city and wants to see shaded areas for air quality and
   When I click clean air button/tab
   When I check air quality map 
   Then I should see "shaded regions for air quality"
+  When I check air quality map
+  Then I should not see "shaded regions for air quality"
