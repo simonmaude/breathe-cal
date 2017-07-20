@@ -31,3 +31,23 @@ And /I should see nearby "(.*)" allergens/ do |allergen|
  #show cat allergens 
  pending
 end
+
+Given(/^I search a city$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given(/^I scroll down the side bar$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When(/^I click clean air button\/tab$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When(/^I search for "([^"]*)"$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When(/^I check air quality map$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
