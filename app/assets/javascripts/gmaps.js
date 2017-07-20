@@ -356,36 +356,61 @@ function initAutocomplete() {
     var contentString = $(
       
       "<div id='wrap'>" + 
-      "<form id='markerForm' action='markers' method='POST'>"+
-      "<datalist id='options'>"+
-      "<option value='Cats'>" +
-      "<option value='Bees'>" +
-      "<option value='Perfume'>" +
-      "<option value='Oak'>" +
-      "<option value='Peanut'>" +
-      "<option value='Gluten'>" +
-      "<option value='Dog'>" +
-      "<option value='Dust'>" +
-      "<option value='Smoke'>" +
-      "<option value='Mold'>" +
-      "</datalist>" +
-      "Allergen: <input type='text' name='title' list='options'> <br>" + 
-      "<div id='left_col'>" + 
-      "</div>" +
-      "<input type='submit' value='Submit'>"+
-      "</form>" +
+        "<form id='markerForm' action='markers' method='POST'>"+
+          "<datalist id='options'>"+
+            "<option value='Cats'>" +
+            "<option value='Bees'>" +
+            "<option value='Perfume'>" +
+            "<option value='Oak'>" +
+            "<option value='Peanut'>" +
+            "<option value='Gluten'>" +
+            "<option value='Dog'>" +
+            "<option value='Dust'>" +
+            "<option value='Smoke'>" +
+            "<option value='Mold'>" +
+            "</datalist>" +
+          "<div id= 'input-title'>Allergen:</div>" +
+          "<input class = 'text-box' type='text' name='title' list='options'>" + 
+          "<input id = 'plus-button' type='submit' value='+'>"+
+        "</form>" +
       "</div>"
     );
     
+
+    var markerInfo = new InfoBubble({
+
+      shadowStyle: 0,
+      backgroundColor: 'rgba(44, 181, 232, 0.9)',
+      borderRadius: 10,
+      arrowSize: 10,
+      borderWidth: 2,
+      borderColor: '#ffffff',
+      disableAutoPan: true,
+      hideCloseButton: false,
+      arrowPosition: 50,
+      maxWidth: '600px',
+      minWidth: '600px',
+      arrowStyle: 0
+      
+    });
+
+    
     var infowindow = new google.maps.InfoWindow();
-    infowindow.open(map,marker);
+    //infowindow.open(map,marker);
     infowindow.setContent(contentString[0]);
     marker.infowindow = infowindow;
+    recentMarker = marker;
+ 
+    markerInfo.open(map, marker);
+    markerInfo.setContent(contentString[0]);
+    marker.markerInfo = markerInfo;
+    recentMarker = marker;
+   
     google.maps.event.addListener(marker, 'click', function(){
-      marker.infowindow.open(map,marker);
+      markerInfo.open(map,marker);
     });
     
-    recentMarker = marker;
+
     
     
     var listenerHandle = google.maps.event.addListener(infowindow, 'closeclick', function(){
@@ -424,9 +449,9 @@ function initAutocomplete() {
           //                     "<br> mold " + d.mold + "</div>");
          
     
-          recentMarker.infowindow.setContent(newContent[0]);
+          recentMarker.markerInfo.setContent(newContent[0]);
           recentMarker.setIcon(icons[d.title.toLowerCase()].icon);
-          recentMarker.infowindow.open(map,recentMarker);
+          recentMarker.markerInfo.open(map,recentMarker);
           recentMarker.draggable = false;
           recentMarker = null;
           google.maps.event.removeEventListener(listenerHandle);
