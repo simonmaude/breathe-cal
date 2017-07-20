@@ -18,15 +18,17 @@ class MarkersController < ApplicationController
     right = bound_params[:rightlong]
     
     markers = Marker.find_all_in_bounds(top,bottom,left,right)
+    
     global_markers = Marker.get_global_markers(markers,global_number_show,top,bottom,left,right)
     
+    # heatmap = markers
     markers.each do |marker|
       unless ((marker.client_id == session[:client_id]) || (global_markers.include? marker)) 
         markers -= [marker] 
       end
     end
     render :json => markers
-      
+    # render :json => heatmap  
             
   end
   

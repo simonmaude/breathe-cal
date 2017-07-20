@@ -4,14 +4,13 @@ class Marker < ActiveRecord::Base
   @@allergen_list = [:dog, :cat, :mold, :bees, :perfume, :oak, :dust, :smoke, :gluten, :peanut]
   
   
-  def self.find_all_in_bounds(top, bottom, left, right)
-    markersTop = Marker.where("lat < (?)", top)
+  def self.find_all_in_bounds(top, bottom, left, right, id = '')
+    markersTop = Marker.where("lat < (?)", top).where(id)
     markersBottom = Marker.where("lat > (?)", bottom)
     markersLeft = Marker.where("lng < ?", left)
     markersRight = Marker.where("lng > ?", right)
     return  markersBottom & markersTop & markersRight & markersLeft
   end
- 
  
   def self.find_all_in_zoom(top,bottom,left,right,lat, long)        
     zoom_ratio = 0.125
