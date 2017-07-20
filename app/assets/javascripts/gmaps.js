@@ -92,6 +92,7 @@ function initAutocomplete() {
   var searchBtn = document.getElementById('search-button');
   var searchBox = new google.maps.places.SearchBox(input);
   
+  
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
   //var markerEnabler = document.getElementById('marker-cta');
@@ -125,17 +126,14 @@ function initAutocomplete() {
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
 
-
     if (places.length === 0) {
       return;
     }
-
 
     markers.forEach(function(marker) {
       marker.setMap(null);
     });
     markers = [];
-
 
     var bounds = new google.maps.LatLngBounds();
     places.forEach(function(place) {
@@ -180,10 +178,18 @@ function initAutocomplete() {
     fetchMarkers();
   });
   
-  // searchBtn.onclick = function () {
-  //   addListener(map,searchBox,markers);
-  // }
   
+  searchBtn.onclick = function () {
+    var searchText = document.getElementById('pac-input');
+    
+    // Trigerring a search as if enter key pressed
+    google.maps.event.trigger(searchText, 'focus');
+    google.maps.event.trigger(searchText, 'keydown', {
+        keyCode: 13
+    });
+  }
+  
+
 
   
   var canMark = false;
