@@ -171,7 +171,7 @@ html, body {
 
 button[id="search-button"] {
   border-color: transparent;
-  background-color: transparent;
+  background-color: white;
   box-shadow: none;
   font-family: Roboto;
   font-size: 16px;
@@ -181,13 +181,11 @@ button[id="search-button"] {
   text-overflow: ellipsis;
   width: 30px;
   height: 29px;
-  opacity: 0.9;
-  z-index: 1000;
-  opacity: 0.45;
+  opacity: 0.6;
 }
 
 button[id="search-button"]:hover {
-  opacity: 0.75;
+  opacity: 0.85;
 }
 
 
