@@ -274,10 +274,10 @@ function initAutocomplete() {
         // Getting current location
         var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
         
-        infowindow.setPosition(pos);
-        infowindow.setContent('Location found.');
-        infowindow.open(map);
-        map.setCenter(pos);
+        // infowindow.setPosition(pos);
+        // infowindow.setContent('Location found.');
+        // infowindow.open(map);
+        // map.setCenter(pos);
         
         
         // handling errors
