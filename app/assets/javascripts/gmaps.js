@@ -73,6 +73,17 @@ function initAutocomplete() {
             data: heatmapData,
             radius: 50,
             opacity: 0.4,
+            gradient: [     
+            'rgba(24, 249, 235, 0)',
+            '#0fb8ad',
+            '#2cb5e8',
+            '#1fc8db',
+            'rgba(117, 142, 255, 1)',
+            'rgba(118, 103, 252, 1)',
+            'rgba(101, 84, 249, 1)',
+            'rgba(100, 22, 226, 1)',
+          
+            ],
             map:map
           });
 
