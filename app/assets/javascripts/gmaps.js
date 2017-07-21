@@ -283,6 +283,21 @@ function initAutocomplete() {
         reverseGC.geocode(loc_curr, function(results, status) {
       
       
+          if (status === 'OK') {
+          if (results[1]) {
+          
+          var address = results[1].address_components[1].short_name;
+          // initialLocationLookup(address);
+          
+          } else {
+            return ('No results found');
+          }
+          } else {
+            return ('Geocoder failed due to: ' + status);
+          }
+      
+      
+      
         });
         // handling errors
       }, function() {
