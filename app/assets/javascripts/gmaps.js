@@ -279,9 +279,12 @@ function initAutocomplete() {
   });
   
   var recentMarker = null;
-  
+
+
+
   function createContentString(data){
     var title = data.title;
+    markerTitle = title;
     var attributes = ["cat", "bees", "perfume", "oak", "peanut", "gluten", "dog", "dust", "smoke", "mold"];
     var leftContentString = "";
     var rightContentString = "";
@@ -295,60 +298,172 @@ function initAutocomplete() {
         rightContentString += attributes[i] + "<br>";  
       }
     }
-    var contentString ="<div id='wrap'>" + 
-                      "Allergens at " + title + "<br>" +
-                      "<div id='left_col'>" + 
-                      leftContentString + 
-                      "</div>" + 
-                      "<div id='right_col'>" + 
-                      rightContentString +
-                      "</div>" + 
+    var contentString ="<div>"+
+    
+                        "<div class='marker-title'>" + 
+                          title +
+                          "<div id = 'spacing'></div>" + 
+                          "<div id= 'edit-delete'>" +
+                          "<a href=#editMarker>edit</a>" +
+                          " | "+
+                          "<a href=#editMarker>delete</a>" +
+                        "</div>"+
+                        "</div>"+
+                      
                       "</div>";
+                      
     var content = $(contentString);
     return content;
   }
   
+  var beeMarker = {
+      url: 'https://image.flaticon.com/icons/svg/235/235425.svg', 
+      scaledSize : new google.maps.Size(50, 50)
+  };
+  var catMarker = {
+    url: 'https://image.flaticon.com/icons/svg/12/12160.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  };
+  var perfumeMarker = {
+    url: 'https://image.flaticon.com/icons/svg/223/223811.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var oakMarker = {
+    url: 'https://image.flaticon.com/icons/svg/424/424041.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var peanutMarker = {
+    url: 'https://image.flaticon.com/icons/svg/204/204697.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var glutenMarker = {
+    url: 'https://image.flaticon.com/icons/svg/204/204705.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var dogMarker = {
+    url: 'https://image.flaticon.com/icons/svg/91/91544.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var dustMarker = {
+    url: 'https://image.flaticon.com/icons/svg/471/471794.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var smokeMarker = {
+    url: 'https://image.flaticon.com/icons/svg/394/394631.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var moldMarker = {
+    url: 'https://d30y9cdsu7xlg0.cloudfront.net/png/183061-200.png',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  
+  
+  var icons = {
+          bees: {
+            icon: beeMarker
+          },
+          cats: {
+            icon: catMarker
+          },
+          perfume: {
+            icon: perfumeMarker
+          },
+          oak: {
+            icon: oakMarker
+          },
+          peanut: {
+            icon: peanutMarker
+          },
+          gluten: {
+            icon: glutenMarker
+          },
+          dog: {
+            icon: dogMarker
+          },
+          dust: {
+            icon: dustMarker
+          },
+          smoke: {
+            icon: smokeMarker
+          },
+          mold: {
+            icon: moldMarker
+          }
+        };
+
+  
   function placeMarker(location) {
     labelNum += 1;
     var marker = new google.maps.Marker({
-      label: labelNum.toString() ,
+      label: "",
       position: location,
       map: map,
       draggable: true,
     })
     
     var contentString = $(
+      
       "<div id='wrap'>" + 
-      "<form id='markerForm' action='markers' method='POST'>"+
-      "Title <input type='text' name='title'> <br>" + 
-      "<div id='left_col'>" + 
-      "<input type = 'checkbox' name='cat' value='true'> Cats <br>"+
-      "<input type = 'checkbox' name='bees' value='true'> Bees <br>"+
-      "<input type = 'checkbox' name='perfume' value='true'> Perfume <br>"+
-      "<input type = 'checkbox' name='oak' value='true'> Oak <br>"+
-      "<input type = 'checkbox' name='peanut' value='true'> Peanut <br>"+
-      "</div>" +
-      "<div id='right_col'>" + 
-      "<input type = 'checkbox' name='gluten' value='true'> Gluten <br>"+
-      "<input type = 'checkbox' name='dog' value='true'> Dogs <br>"+
-      "<input type = 'checkbox' name='dust' value='true'> Dust <br>"+
-      "<input type = 'checkbox' name='smoke' value='true'> Smoke <br>"+
-      "<input type = 'checkbox' name='mold' value='true'> Mold <br>"+
-      "</div>" +
-      "<input type='submit' value='Submit'>"+
-      "</form>" +
+        "<form id='markerForm' action='markers' method='POST'>"+
+          "<datalist id='options'>"+
+            "<option value='Cats'>" +
+            "<option value='Bees'>" +
+            "<option value='Perfume'>" +
+            "<option value='Oak'>" +
+            "<option value='Peanut'>" +
+            "<option value='Gluten'>" +
+            "<option value='Dog'>" +
+            "<option value='Dust'>" +
+            "<option value='Smoke'>" +
+            "<option value='Mold'>" +
+            "</datalist>" +
+          "<div id= 'input-title'>Allergen:</div>" +
+          "<div id='spacing'></div>"+
+          "<input class = 'text-box' type='text' name='title' list='options'>" + 
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          //"<input id = 'plus-button' type='submit' value='+'>"+
+        "</form>" +
       "</div>"
     );
     
+
+    var markerInfo = new InfoBubble({
+
+      shadowStyle: 0,
+      backgroundColor: 'rgba(29, 161, 242, 0.8)',
+      borderRadius: 10,
+      arrowSize: 10,
+      borderWidth: 2,
+      borderColor: '#ffffff',
+      disableAutoPan: true,
+      hideCloseButton: false,
+      arrowPosition: 50,
+      maxWidth: '600px',
+      minWidth: '600px',
+      arrowStyle: 0
+      
+    });
+
+    
     var infowindow = new google.maps.InfoWindow();
-    infowindow.open(map,marker);
+    //infowindow.open(map,marker);
     infowindow.setContent(contentString[0]);
     marker.infowindow = infowindow;
+    recentMarker = marker;
+ 
+    markerInfo.open(map, marker);
+    markerInfo.setContent(contentString[0]);
+    marker.markerInfo = markerInfo;
+    recentMarker = marker;
+   
     google.maps.event.addListener(marker, 'click', function(){
-      marker.infowindow.open(map,marker);
+      markerInfo.open(map,marker);
     });
     
-    recentMarker = marker;
+
+    
     
     var listenerHandle = google.maps.event.addListener(infowindow, 'closeclick', function(){
       labelNum -=1;
@@ -378,13 +493,17 @@ function initAutocomplete() {
         success: function(d){
           fetchedMarkers[d.id] = true;
           var newContent = createContentString(d);
+
+          
           // var newContent = $("<div>"+
           //                     "cat " + d.cat + 
           //                     "<br> dog " + d.dog +
           //                     "<br> mold " + d.mold + "</div>");
-          console.log(d.id);
-          recentMarker.infowindow.setContent(newContent[0]);
-          recentMarker.infowindow.open(map,recentMarker);
+         
+    
+          recentMarker.markerInfo.setContent(newContent[0]);
+          recentMarker.setIcon(icons[d.title.toLowerCase()].icon);
+          recentMarker.markerInfo.open(map,recentMarker);
           recentMarker.draggable = false;
           recentMarker = null;
           google.maps.event.removeEventListener(listenerHandle);
@@ -395,6 +514,8 @@ function initAutocomplete() {
       return false;
     });
   }
+  
+
   
   // maybe just send a list of attributes to tell javascript to use....? 
   function setMapOnAll(map) {
