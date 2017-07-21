@@ -270,24 +270,87 @@ function initAutocomplete() {
     // Finding user location using google's geolocation
     if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-        
-        // Getting current location
-        var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
-        
-        infowindow.setPosition(pos);
-        infowindow.setContent('Location found.');
-        infowindow.open(map);
-        map.setCenter(pos);
-        
-        
-        // handling errors
+      
+      // Getting current location
+      var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+      
+
+      
+      // Actually changed the map
+      // map.setCenter(pos);
+
+      //Reverse lat/lon city lookup
+      latlonCityLookup(reverseGC, position.coords.latitude, position.coords.longitude);
+      
+      // Sets the information window with text at your location
+      showLocationWindow(map, infowindow, pos);
+      
+      // handling errors
       }, function() {
         handleLocationError(true, infowindow, map.getCenter());
       });
     } else {
       handleLocationError(false, infowindow, map.getCenter());
     }
+    
+    
+    var showLocationWindow = function(map, iw, pos) {
+    setTimeout( function() {
+      // iw.setPosition(pos);
+      // iw.setContent('Current Location');
+      // iw.open(map);
+      var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(pos.lat, pos.lng),
+      map: map,
+      animation: google.maps.Animation.DROP
+    })
+    
+    // setTimeout(function() {
+    //     marker.setMap(null);
+    // }, 2000);
+    
+    }, 1000);
+    
+    
+    
+  };
+  
+  
+  function latlonCityLookup(geocoder, lat, lng) {
+    var latlng = {lat, lng};
+    var loc = {'location': latlng};
+    
+    geocoder.geocode(loc, function(results, status) {
+      if (status === 'OK') {
+        if (results[1]) {
+          
+          var address = results[1].address_components[1].short_name;
+          initialLocationLookup(address);
+          
+        } else {
+          return ('No results found');
+        }
+      } else {
+        return ('Geocoder failed due to: ' + status);
+      }
+    });
   }
+      
+      
+  var initialLocationLookup = function (address) {
+    if ((address == false) || (address.length == 0)){
+      return false;
+    }
+    
+    else {
+      document.getElementById("pac-input").value = address;
+      document.getElementById("search-button").onclick();
+      document.getElementById("pac-input").value = "";
+    }
+  };
+    
+    
+  };
 
   
   var canMark = false;
