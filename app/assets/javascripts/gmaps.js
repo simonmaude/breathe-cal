@@ -291,6 +291,35 @@ function initAutocomplete() {
                 document.getElementById("pac-input").value = address;
                 document.getElementById("search-button").onclick();
                 document.getElementById("pac-input").value = "";
+                
+                
+                var image = {
+                  url: 'https://www.vshoo.com/img/general/login/loading.gif',
+                  scaledSize : new google.maps.Size(60, 60)  
+                }; 
+    
+    
+                setTimeout( function() {
+                  var marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(pos.lat, pos.lng),
+                  map: map,
+                  optimized: false,
+                  icon: image,
+                  // animation: google.maps.Animation.DROP
+                })
+    
+                // setTimeout(function() {
+                //     marker.setAnimation(google.maps.Animation.BOUNCE);
+                // }, 500);
+                
+                setTimeout(function() {
+                    marker.setMap(null);
+                }, 4000);
+                
+                
+                }, 800);
+                
+                
               }
             } else {
               return ('No results found');
