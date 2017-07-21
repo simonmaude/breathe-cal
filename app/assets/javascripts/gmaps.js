@@ -90,8 +90,49 @@ function initAutocomplete() {
     mapTypeId: 'roadmap'
   });
   
-  var geocoder = new google.maps.Geocoder();
+  var infowindow = new google.maps.InfoWindow;
+    
+  // Reverse lat/lon city lookup
+  var reverseGC = new google.maps.Geocoder;
   
+  //   // Finding user location using google's geolocation
+  // if (navigator.geolocation) {
+  // navigator.geolocation.getCurrentPosition(function(position) {
+      
+  //     // Getting current location
+  //     var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+      
+
+      
+  //     // Actually changed the map
+  //     // map.setCenter(pos);
+
+  //     //Reverse lat/lon city lookup
+  //     latlonCityLookup(reverseGC, position.coords.latitude, position.coords.longitude);
+      
+  //     // Sets the information window with text at your location
+  //     showLocationWindow(map, infowindow, pos);
+      
+  //     // handling errors
+  //   }, function() {
+  //     handleLocationError(true, infowindow, map.getCenter());
+  //   });
+  // } else {
+  //   handleLocationError(false, infowindow, map.getCenter());
+  // }
+  
+  
+  
+    // Handle location finder error
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+     infoWindow.setPosition(pos);
+     infoWindow.setContent(browserHasGeolocation ?
+              'Error: Could not find location' :
+              'Error: Browswer does not support location.');
+     infoWindow.open(map);
+     }
+  
+
   google.maps.event.addDomListener(window, "resize", function() {
    var center = map.getCenter();
    google.maps.event.trigger(map, "resize");
@@ -117,10 +158,13 @@ function initAutocomplete() {
   var input = document.getElementById('pac-input');
   var searchBtn = document.getElementById('search-button');
   var searchBox = new google.maps.places.SearchBox(input);
-  
+  var myLocationBtn = document.getElementById('find-my-location');
+
   
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(myLocationBtn);
+
   //var markerEnabler = document.getElementById('marker-cta');
   //map.controls[google.maps.ControlPosition.LEFT_TOP].push(markerEnabler);
   
