@@ -165,6 +165,7 @@ function initAutocomplete() {
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(myLocationBtn);
 
+
   //var markerEnabler = document.getElementById('marker-cta');
   //map.controls[google.maps.ControlPosition.LEFT_TOP].push(markerEnabler);
   
@@ -262,7 +263,31 @@ function initAutocomplete() {
     });
   }
   
-
+  
+  myLocationBtn.onclick = function () {
+    var reverseGC = new google.maps.Geocoder;
+    
+    // Finding user location using google's geolocation
+    if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        
+        // Getting current location
+        var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+        
+        infowindow.setPosition(pos);
+        infowindow.setContent('Location found.');
+        infowindow.open(map);
+        map.setCenter(pos);
+        
+        
+        // handling errors
+      }, function() {
+        handleLocationError(true, infowindow, map.getCenter());
+      });
+    } else {
+      handleLocationError(false, infowindow, map.getCenter());
+    }
+  }
 
   
   var canMark = false;
