@@ -273,13 +273,17 @@ function initAutocomplete() {
         
         // Getting current location
         var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+        var loc_curr = {'location': pos};
         
         // infowindow.setPosition(pos);
         // infowindow.setContent('Location found.');
         // infowindow.open(map);
         // map.setCenter(pos);
         
-        
+        reverseGC.geocode(loc_curr, function(results, status) {
+      
+      
+        });
         // handling errors
       }, function() {
         handleLocationError(true, infowindow, map.getCenter());
