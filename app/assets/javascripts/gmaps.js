@@ -51,18 +51,35 @@ function initAutocomplete() {
                 var location = {};
                 location.lat = parseFloat(user_marker.lat);
                 location.lng = parseFloat(user_marker.lng);
+                console.log(user_marker.title);
                 var labelClientId = user_marker.client_id
                 var marker = new google.maps.Marker({
-                      label: labelClientId.toString(),
+                      //label: labelClientId.toString(),
+                      label: '',
                       position: location,
                       map: map,
+                      icon: icons[user_marker.title.toLowerCase()].icon,
                       draggable: false,
                       });
                 var newContent = createContentString(user_marker);      
                 marker.info = new google.maps.InfoWindow();
                 marker.info.setContent(newContent[0]);
+                marker.buble = new InfoBubble({
+                  shadowStyle: 0,
+                  backgroundColor: 'rgba(29, 161, 242, 0.8)',
+                  borderRadius: 10,
+                  arrowSize: 10,
+                  borderWidth: 2,
+                  borderColor: '#ffffff',
+                  disableAutoPan: true,
+                  hideCloseButton: false,
+                  arrowPosition: 50,
+                  maxWidth: '600px',
+                  minWidth: '600px',
+                  arrowStyle: 0});
+                marker.buble.setContent(newContent[0]);
                 google.maps.event.addListener(marker, 'click', function(){
-                  this.info.open(map, this);
+                  marker.buble.open(map, this);
                 });
               // }
               markers.push(marker);
@@ -72,7 +89,7 @@ function initAutocomplete() {
           var heatmap = new google.maps.visualization.HeatmapLayer({
             data: heatmapData,
             radius: 50,
-            opacity: 0.4,
+            opacity: 0.1,
             gradient: [     
             'rgba(24, 249, 235, 0)',
             '#0fb8ad',
