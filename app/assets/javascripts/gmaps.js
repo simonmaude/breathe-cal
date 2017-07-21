@@ -52,6 +52,8 @@ function initAutocomplete() {
                 location.lat = parseFloat(user_marker.lat);
                 location.lng = parseFloat(user_marker.lng);
                 console.log(user_marker.title);
+                var newContent = createContentString(user_marker);
+                console.log(newContent.html());
                 var labelClientId = user_marker.client_id
                 var marker = new google.maps.Marker({
                       //label: labelClientId.toString(),
@@ -61,10 +63,10 @@ function initAutocomplete() {
                       icon: icons[user_marker.title.toLowerCase()].icon,
                       draggable: false,
                       });
-                var newContent = createContentString(user_marker);      
-                marker.info = new google.maps.InfoWindow();
-                marker.info.setContent(newContent[0]);
-                marker.buble = new InfoBubble({
+                    
+        
+            
+                bubble = new InfoBubble({
                   shadowStyle: 0,
                   backgroundColor: 'rgba(29, 161, 242, 0.8)',
                   borderRadius: 10,
@@ -77,9 +79,11 @@ function initAutocomplete() {
                   maxWidth: '600px',
                   minWidth: '600px',
                   arrowStyle: 0});
-                marker.buble.setContent(newContent[0]);
+                bubble.setContent(newContent[0]);
+                marker.bubble = bubble;
+                
                 google.maps.event.addListener(marker, 'click', function(){
-                  marker.buble.open(map, this);
+                  this.bubble.open(map, this);
                 });
               // }
               markers.push(marker);
@@ -301,22 +305,7 @@ function initAutocomplete() {
 
   function createContentString(data){
     var title = data.title;
-    markerTitle = title;
-    var attributes = ["cat", "bees", "perfume", "oak", "peanut", "gluten", "dog", "dust", "smoke", "mold"];
-    var leftContentString = "";
-    var rightContentString = "";
-    for(var i=0; i<attributes.length/2; i++){
-      if (data[attributes[i]]){
-        leftContentString += attributes[i] + "<br>";  
-      }
-    }
-    for(i=attributes.length/2; i<attributes.length; i++){
-      if (data[attributes[i]]){
-        rightContentString += attributes[i] + "<br>";  
-      }
-    }
     var contentString ="<div>"+
-    
                         "<div class='marker-title'>" + 
                           title +
                           "<div id = 'spacing'></div>" + 
@@ -326,9 +315,7 @@ function initAutocomplete() {
                           "<a href=#editMarker>delete</a>" +
                         "</div>"+
                         "</div>"+
-                      
                       "</div>";
-                      
     var content = $(contentString);
     return content;
   }
