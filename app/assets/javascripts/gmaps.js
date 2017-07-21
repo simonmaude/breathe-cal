@@ -287,8 +287,17 @@ function initAutocomplete() {
           if (results[1]) {
           
           var address = results[1].address_components[1].short_name;
-          // initialLocationLookup(address);
-          
+
+          alert(address);
+
+
+          if (!((address == false) || (address.length == 0))) {
+            document.getElementById("pac-input").value = address;
+            document.getElementById("search-button").onclick();
+            document.getElementById("pac-input").value = "";
+          }
+
+
           } else {
             return ('No results found');
           }
