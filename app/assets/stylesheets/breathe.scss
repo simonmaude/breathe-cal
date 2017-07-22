@@ -481,3 +481,9 @@ input[type="submit"]{
 
   
 }
+
+.scrollFix {
+    line-height: 1.35;
+    overflow: hidden !important;
+    white-space: nowrap;
+}

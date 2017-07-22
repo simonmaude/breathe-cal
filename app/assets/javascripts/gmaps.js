@@ -11,6 +11,8 @@
 var fetchedMarkers = {};
 var heatmapData = [];
 
+
+
 function initAutocomplete() {
   
   var labelNum = 0;
@@ -23,7 +25,10 @@ function initAutocomplete() {
     return map.getProjection().fromPointToLatLng(worldPoint);
   }
   
-  function fetchMarkers(){
+  
+
+  
+  function fetchMarkers() {
     deleteMarkers();
     labelNum = 0;
     var bounds = map.getBounds();
@@ -38,34 +43,37 @@ function initAutocomplete() {
         heatmapData = [];
         // if (data.length > 1){
           // var client_id = data[0].client_id;
-          for(var i=0;i<data[1].length; i++){
+          for (var i=0;i<data[1].length; i++) {
             var heatmap_marker = data[1][i];
             heatmapData.push(new google.maps.LatLng(heatmap_marker.lat, heatmap_marker.lng));
           }
           
-          for(var i=0;i<data[0].length; i++){
+          for (var i=0;i<data[0].length; i++) {
+            console.log()
+            
             var user_marker = data[0][i];
-            if (true){
+        
+            if (true) {
               // if (id != client_id){
               // } else {
                 var location = {};
                 location.lat = parseFloat(user_marker.lat);
                 location.lng = parseFloat(user_marker.lng);
-                console.log(user_marker.title);
                 var newContent = createContentString(user_marker);
-                console.log(newContent.html());
                 var labelClientId = user_marker.client_id
+                if (user_marker.title.toLowerCase() in icons) {
+                  var customMarker = icons[user_marker.title.toLowerCase()].icon;
+                } else {
+                  customMarker = null;
+                }
                 var marker = new google.maps.Marker({
                       //label: labelClientId.toString(),
                       label: '',
                       position: location,
                       map: map,
-                      icon: icons[user_marker.title.toLowerCase()].icon,
+                      icon: customMarker,
                       draggable: false,
-                      });
-                    
-        
-            
+                });
                 bubble = new InfoBubble({
                   shadowStyle: 0,
                   backgroundColor: 'rgba(29, 161, 242, 0.8)',
@@ -81,14 +89,16 @@ function initAutocomplete() {
                   arrowStyle: 0});
                 bubble.setContent(newContent[0]);
                 marker.bubble = bubble;
+
                 
                 google.maps.event.addListener(marker, 'click', function(){
                   this.bubble.open(map, this);
                 });
               // }
+              
               markers.push(marker);
-            }
-          }
+            } 
+         }
         // }
           var heatmap = new google.maps.visualization.HeatmapLayer({
             data: heatmapData,
@@ -216,7 +226,7 @@ function initAutocomplete() {
         data: JSON.stringify({geo: place.geometry.location, name: place.name}),
         success: function(data){
           $("#city-info").text(JSON.stringify(data));
-          console.log("hello");
+        
         }
       });
       
@@ -305,7 +315,7 @@ function initAutocomplete() {
 
   function createContentString(data){
     var title = data.title;
-    var contentString ="<div>"+
+    var contentString ="<div class='scrollFix'>"+
                         "<div class='marker-title'>" + 
                           title +
                           "<div id = 'spacing'></div>" + 
@@ -489,6 +499,7 @@ function initAutocomplete() {
         convData[obj.name] = obj.value;
       })
       
+    
       $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -503,10 +514,17 @@ function initAutocomplete() {
           //                     "cat " + d.cat + 
           //                     "<br> dog " + d.dog +
           //                     "<br> mold " + d.mold + "</div>");
+          
+          
+        if (d.title.toLowerCase() in icons) {
+          var customMarker = icons[d.title.toLowerCase()].icon;
+        } else {
+          customMarker = null;
+        }
          
     
           recentMarker.markerInfo.setContent(newContent[0]);
-          recentMarker.setIcon(icons[d.title.toLowerCase()].icon);
+          recentMarker.setIcon(customMarker);
           recentMarker.markerInfo.open(map,recentMarker);
           recentMarker.draggable = false;
           recentMarker = null;
