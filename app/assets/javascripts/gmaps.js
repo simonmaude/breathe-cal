@@ -94,34 +94,7 @@ function initAutocomplete() {
     
   // Reverse lat/lon city lookup
   var reverseGC = new google.maps.Geocoder;
-  
-  //   // Finding user location using google's geolocation
-  // if (navigator.geolocation) {
-  // navigator.geolocation.getCurrentPosition(function(position) {
-      
-  //     // Getting current location
-  //     var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
-      
 
-      
-  //     // Actually changed the map
-  //     // map.setCenter(pos);
-
-  //     //Reverse lat/lon city lookup
-  //     latlonCityLookup(reverseGC, position.coords.latitude, position.coords.longitude);
-      
-  //     // Sets the information window with text at your location
-  //     showLocationWindow(map, infowindow, pos);
-      
-  //     // handling errors
-  //   }, function() {
-  //     handleLocationError(true, infowindow, map.getCenter());
-  //   });
-  // } else {
-  //   handleLocationError(false, infowindow, map.getCenter());
-  // }
-  
-  
   
     // Handle location finder error
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -284,11 +257,12 @@ function initAutocomplete() {
       
           if (status === 'OK') {
             if (results[1]) {
-            
-              var address = results[1].address_components[1].short_name;
+              
+              var specific_address = results[1].formatted_address;
+              var city_address = results[1].address_components[1].short_name;
     
-              if (!((address == false) || (address.length == 0))) {
-                document.getElementById("pac-input").value = address;
+              if (!((specific_address == false) || (specific_address.length == 0))) {
+                document.getElementById("pac-input").value = specific_address;
                 document.getElementById("search-button").onclick();
                 document.getElementById("pac-input").value = "";
                 
@@ -308,14 +282,11 @@ function initAutocomplete() {
                   // animation: google.maps.Animation.DROP
                 })
     
-                // setTimeout(function() {
-                //     marker.setAnimation(google.maps.Animation.BOUNCE);
-                // }, 500);
-                
                 setTimeout(function() {
                     marker.setMap(null);
-                }, 4000);
+                }, 2000);
                 
+          
                 
                 }, 800);
                 
