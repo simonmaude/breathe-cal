@@ -284,7 +284,7 @@ function initAutocomplete() {
     
                 setTimeout(function() {
                     marker.setMap(null);
-                }, 2000);
+                }, 4000);
                 
           
                 
