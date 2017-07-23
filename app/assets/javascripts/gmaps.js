@@ -7,7 +7,9 @@
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+
 var fetchedMarkers = {};
+var heatmapData = [];
 
 function initAutocomplete() {
   
@@ -33,33 +35,52 @@ function initAutocomplete() {
       url: "markers",
       data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}},
       success: function(data){
-        for(var i=0;i<data.length; i++){
-          var id = data[i].id;
-          if (true){
-            var location = {};
-            location.lat = parseFloat(data[i].lat);
-            location.lng = parseFloat(data[i].lng);
-            labelNum += 1;
-            var marker = new google.maps.Marker({
-                  label: labelNum.toString(),
-                  position: location,
-                  map: map,
-                  draggable: false,
-                  });
-            var newContent = createContentString(data[i]);      
-            marker.info = new google.maps.InfoWindow();
-            marker.info.setContent(newContent[0]);
-            google.maps.event.addListener(marker, 'click', function(){
-              this.info.open(map, this);
-            });
-            markers.push(marker);
+        heatmapData = [];
+        // if (data.length > 1){
+          // var client_id = data[0].client_id;
+          for(var i=0;i<data[1].length; i++){
+            var heatmap_marker = data[1][i];
+            heatmapData.push(new google.maps.LatLng(heatmap_marker.lat, heatmap_marker.lng));
           }
-        }
+          
+          for(var i=0;i<data[0].length; i++){
+            var user_marker = data[0][i];
+            if (true){
+              // if (id != client_id){
+              // } else {
+                var location = {};
+                location.lat = parseFloat(user_marker.lat);
+                location.lng = parseFloat(user_marker.lng);
+                var labelClientId = user_marker.client_id
+                var marker = new google.maps.Marker({
+                      label: labelClientId.toString(),
+                      position: location,
+                      map: map,
+                      draggable: false,
+                      });
+                var newContent = createContentString(user_marker);      
+                marker.info = new google.maps.InfoWindow();
+                marker.info.setContent(newContent[0]);
+                google.maps.event.addListener(marker, 'click', function(){
+                  this.info.open(map, this);
+                });
+              // }
+              markers.push(marker);
+            }
+          }
+        // }
+          var heatmap = new google.maps.visualization.HeatmapLayer({
+            data: heatmapData,
+            radius: 50,
+            opacity: 0.4,
+            map:map
+          });
+
       }
     })
   }
   
-  
+    
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 37.8716,
@@ -69,12 +90,31 @@ function initAutocomplete() {
     mapTypeId: 'roadmap'
   });
   
-  var geocoder = new google.maps.Geocoder();
+  var infowindow = new google.maps.InfoWindow;
+    
+  // Reverse lat/lon city lookup
+  var reverseGC = new google.maps.Geocoder;
+
   
+    // Handle location finder error
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+     infoWindow.setPosition(pos);
+     infoWindow.setContent(browserHasGeolocation ?
+              'Error: Could not find location' :
+              'Error: Browswer does not support location.');
+     infoWindow.open(map);
+     }
+  
+
   google.maps.event.addDomListener(window, "resize", function() {
    var center = map.getCenter();
    google.maps.event.trigger(map, "resize");
    map.setCenter(center); 
+  });
+  
+  var heatmap = new google.maps.visualization.HeatmapLayer({
+    data: heatmapData,
+    map: map
   });
   
   $('#marker-cta').css('cursor','pointer');
@@ -91,10 +131,14 @@ function initAutocomplete() {
   var input = document.getElementById('pac-input');
   var searchBtn = document.getElementById('search-button');
   var searchBox = new google.maps.places.SearchBox(input);
-  
+  var myLocationBtn = document.getElementById('find-my-location');
+
   
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(myLocationBtn);
+
+
   //var markerEnabler = document.getElementById('marker-cta');
   //map.controls[google.maps.ControlPosition.LEFT_TOP].push(markerEnabler);
   
@@ -133,7 +177,9 @@ function initAutocomplete() {
     markers.forEach(function(marker) {
       marker.setMap(null);
     });
+    heatmap.setMap(null);
     markers = [];
+    heatmapData = [];
 
     var bounds = new google.maps.LatLngBounds();
     places.forEach(function(place) {
@@ -176,6 +222,7 @@ function initAutocomplete() {
     });
     map.fitBounds(bounds);
     fetchMarkers();
+    
   });
   
   
@@ -189,7 +236,78 @@ function initAutocomplete() {
     });
   }
   
-
+  
+  myLocationBtn.onclick = function () {
+    var reverseGC = new google.maps.Geocoder;
+    
+    // Finding user location using google's geolocation
+    if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        
+        // Getting current location
+        var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+        var loc_curr = {'location': pos};
+        
+        // infowindow.setPosition(pos);
+        // infowindow.setContent('Location found.');
+        // infowindow.open(map);
+        // map.setCenter(pos);
+        
+        reverseGC.geocode(loc_curr, function(results, status) {
+      
+          if (status === 'OK') {
+            if (results[1]) {
+              
+              var specific_address = results[1].formatted_address;
+              var city_address = results[1].address_components[1].short_name;
+    
+              if (!((specific_address == false) || (specific_address.length == 0))) {
+                document.getElementById("pac-input").value = specific_address;
+                document.getElementById("search-button").onclick();
+                document.getElementById("pac-input").value = "";
+                
+                
+                var image = {
+                  url: 'https://www.vshoo.com/img/general/login/loading.gif',
+                  scaledSize : new google.maps.Size(60, 60)  
+                }; 
+    
+    
+                setTimeout( function() {
+                  var marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(pos.lat, pos.lng),
+                  map: map,
+                  optimized: false,
+                  icon: image,
+                  // animation: google.maps.Animation.DROP
+                })
+    
+                setTimeout(function() {
+                    marker.setMap(null);
+                }, 4000);
+                
+          
+                
+                }, 800);
+                
+                
+              }
+            } else {
+              return ('No results found');
+            }
+          } else {
+            return ('Geocoder failed due to: ' + status);
+          }
+        });
+        
+        // handling errors
+      }, function() {
+        handleLocationError(true, infowindow, map.getCenter());
+      });
+    } else {
+      handleLocationError(false, infowindow, map.getCenter());
+    }
+  }
 
   
   var canMark = false;
@@ -361,6 +479,7 @@ function initAutocomplete() {
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(map);
     }
+    heatmap.setMap(map);
   }
   
   function clearMarkers() {
