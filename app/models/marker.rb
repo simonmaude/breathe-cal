@@ -4,6 +4,11 @@ class Marker < ActiveRecord::Base
   @@allergen_list = [:dog, :cat, :mold, :bees, :perfume, :oak, :dust, :smoke, :gluten, :peanut]
   
   
+
+  def self.delete_marker(id)
+    Marker.find(id).destroy
+  end
+  
   def self.find_all_in_bounds(top, bottom, left, right, id = '', search_allergen = '')
     markersTop = Marker.where("lat < (?)", top).where(id).where(search_allergen)
     markersBottom = Marker.where("lat > (?)", bottom)
@@ -12,7 +17,8 @@ class Marker < ActiveRecord::Base
     return markersBottom & markersTop & markersRight & markersLeft
   end
  
-  def self.find_all_in_zoom(top,bottom,left,right,lat, long)        
+  def self.find_all_in_zoom(top,bottom,left,right,lat, long)  
+    
     zoom_ratio = 0.125
     zoom_lat = (top - bottom) * zoom_ratio
     zoom_long = (left - right) * zoom_ratio
@@ -24,6 +30,7 @@ class Marker < ActiveRecord::Base
   end  
       
       
+
   def self.get_global_markers(markers,global_number_show,top,bottom,left,right,search_allergen = '')
     output = []
     # for each marker that is not listed already
