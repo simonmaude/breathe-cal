@@ -473,11 +473,13 @@ input[type="submit"]{
 #edit-delete {
   font-family: 'Open Sans', sans-serif;
   font-size: 10px;
-  color: black;
+
+  border: none;
+  color: blue;
   position: absolute;
   background-color: white;
   text-align: center;
-  width: 75px;
+  width: 50px;
 }
 
 .scrollFix {
