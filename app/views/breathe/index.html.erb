@@ -1,4 +1,5 @@
 <div style="height: 100%;">
+
 <!-- profile sign in and profile icon START -->
   <% if current_client %>
     <% p asset_path("images/bee_marker.png")%>
@@ -43,7 +44,20 @@
   function profileClick() {
     document.getElementById("myDropdown").classList.toggle("show");
     document.getElementById("arrow").classList.toggle("show")
-}
+  }
+
+  function deleteMarker(id) {
+    $.ajax({
+        type: "DELETE",
+        contentType: "application/json; charset=utf-8",
+        url: "markers",
+        data: JSON.stringify({id: id}),
+        success: function() {
+          
+        }
+    });
+  }
+ 
 </script>
 <!-- profile sign in and profile icon END -->
 

@@ -26,9 +26,11 @@ function initAutocomplete() {
   }
   
   
-
+  
   
   function fetchMarkers() {
+    if (this.bubble) {this.bubble.close(); }
+    
     deleteMarkers();
     labelNum = 0;
     var bounds = map.getBounds();
@@ -49,7 +51,7 @@ function initAutocomplete() {
           }
           
           for (var i=0;i<data[0].length; i++) {
-            console.log()
+          
             
             var user_marker = data[0][i];
         
@@ -61,11 +63,8 @@ function initAutocomplete() {
                 location.lng = parseFloat(user_marker.lng);
                 var newContent = createContentString(user_marker);
                 var labelClientId = user_marker.client_id
-                if (user_marker.title.toLowerCase() in icons) {
-                  var customMarker = icons[user_marker.title.toLowerCase()].icon;
-                } else {
-                  customMarker = null;
-                }
+                var customMarker = getIcon(user_marker);
+                
                 var marker = new google.maps.Marker({
                       //label: labelClientId.toString(),
                       label: '',
@@ -84,11 +83,12 @@ function initAutocomplete() {
                   disableAutoPan: true,
                   hideCloseButton: false,
                   arrowPosition: 50,
-                  maxWidth: '600px',
-                  minWidth: '600px',
+                  minWidth: 100,
+                  minHeight: 75,
                   arrowStyle: 0});
                 bubble.setContent(newContent[0]);
                 marker.bubble = bubble;
+                marker.id = user_marker.id;
 
                 
                 google.maps.event.addListener(marker, 'click', function(){
@@ -122,7 +122,25 @@ function initAutocomplete() {
     })
   }
   
-    
+  function deleteMarker(id) {
+
+    $.ajax({
+        type: "DELETE",
+        contentType: "application/json; charset=utf-8",
+        url: "markers",
+        data: JSON.stringify({id: id}),
+        success: function() {
+          fetchMarkers();
+          
+        }
+    });
+  }
+  function getIcon(marker) {
+    if (marker.title.toLowerCase() in icons) {
+      return icons[marker.title.toLowerCase()].icon;
+    }
+    return null;
+  }
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 37.8716,
@@ -315,20 +333,25 @@ function initAutocomplete() {
 
   function createContentString(data){
     var title = data.title;
-    var contentString ="<div class='scrollFix'>"+
+     var  ncontent=document.createElement('div'),
+              button;
+              button=ncontent.appendChild(document.createElement('input'));
+              button.id = 'edit-delete'
+              button.type='button';
+              button.value='delete'
+              google.maps.event.addDomListener(button,'click', function(){
+                                                                 deleteMarker(data.id);})
+    var contentString ="<div id= 'marker-bubble' class='scrollFix'>"+
                         "<div class='marker-title'>" + 
                           title +
-                          "<div id = 'spacing'></div>" + 
-                          "<div id= 'edit-delete'>" +
-                          "<a href=#editMarker>edit</a>" +
-                          " | "+
-                          "<a href=#editMarker>delete</a>" +
-                        "</div>"+
-                        "</div>"+
-                      "</div>";
+                          "<div id = 'spacing'></div>";
+                        
     var content = $(contentString);
+    content.append(ncontent);
+    content.append('</div></div>')
     return content;
   }
+
   
   var beeMarker = {
       url: 'https://image.flaticon.com/icons/svg/235/235425.svg', 
@@ -456,6 +479,7 @@ function initAutocomplete() {
       arrowPosition: 50,
       maxWidth: '600px',
       minWidth: '600px',
+      minHeight: 75,
       arrowStyle: 0
       
     });
@@ -516,13 +540,7 @@ function initAutocomplete() {
           //                     "<br> mold " + d.mold + "</div>");
           
           
-        if (d.title.toLowerCase() in icons) {
-          var customMarker = icons[d.title.toLowerCase()].icon;
-        } else {
-          customMarker = null;
-        }
-         
-    
+          var customMarker = getIcon(d);
           recentMarker.markerInfo.setContent(newContent[0]);
           recentMarker.setIcon(customMarker);
           recentMarker.markerInfo.open(map,recentMarker);
@@ -562,7 +580,6 @@ function initAutocomplete() {
 $(document).ready(initAutocomplete);
 $(document).on('page:load', initAutocomplete);
 $(document).on('page:change', initAutocomplete);
-
 
 
 
