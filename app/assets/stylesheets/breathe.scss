@@ -104,13 +104,15 @@ html, body {
   text-overflow: ellipsis;
   width: 300px;
   height: 29px;
-  opacity: 0.9;
+  opacity: 0.95;
   // z-index: 1000;
+  left: 113px !important;
 }
 
 #pac-input:focus {
   border-color: white;
   opacity: 1;
+  left: 113px !important;
 }
 
 .pac-container {
@@ -182,10 +184,12 @@ button[id="search-button"] {
   width: 30px;
   height: 29px;
   opacity: 0.5;
+  left: 411px !important;
 }
 
 button[id="search-button"]:hover {
   opacity: 0.9;
+  left: 411px !important;
 }
 
 button[id="find-my-location"] {
@@ -203,7 +207,13 @@ button[id="find-my-location"] {
   width: 30px;
   height: 29px;
   outline: none; // this one
+  left: 410px !important;
 }
+
+button[id="find-my-location"]:hover {
+  left: 410px !important;
+}
+
 
 
 #loc-img {
