@@ -10,6 +10,7 @@
 
 var fetchedMarkers = {};
 var heatmapData = [];
+var bubble_map = {};
 
 
 
@@ -29,7 +30,7 @@ function initAutocomplete() {
   
   
   function fetchMarkers() {
-    if (this.bubble) {this.bubble.close(); }
+
     
     deleteMarkers();
     labelNum = 0;
@@ -88,7 +89,10 @@ function initAutocomplete() {
                   arrowStyle: 0});
                 bubble.setContent(newContent[0]);
                 marker.bubble = bubble;
+               
                 marker.id = user_marker.id;
+                bubble_map[user_marker.id] = marker;
+                
 
                 
                 google.maps.event.addListener(marker, 'click', function(){
@@ -130,6 +134,11 @@ function initAutocomplete() {
         url: "markers",
         data: JSON.stringify({id: id}),
         success: function() {
+          if (id in bubble_map) {
+            bubble_map[id].bubble.close();
+            bubble_map[id].setMap(null);
+          }
+          
           fetchMarkers();
           
         }
@@ -333,14 +342,15 @@ function initAutocomplete() {
 
   function createContentString(data){
     var title = data.title;
-     var  ncontent=document.createElement('div'),
-              button;
-              button=ncontent.appendChild(document.createElement('input'));
-              button.id = 'edit-delete'
-              button.type='button';
-              button.value='delete'
-              google.maps.event.addDomListener(button,'click', function(){
-                                                                 deleteMarker(data.id);})
+    var ncontent=document.createElement('div'),
+    button;
+    button=ncontent.appendChild(document.createElement('input'));
+    button.id = 'edit-delete'
+    button.type='button';
+    button.value='delete'
+    google.maps.event.addDomListener(button,'click', function(){
+      deleteMarker(data.id);
+    })
     var contentString ="<div id= 'marker-bubble' class='scrollFix'>"+
                         "<div class='marker-title'>" + 
                           title +
@@ -495,8 +505,9 @@ function initAutocomplete() {
     markerInfo.setContent(contentString[0]);
     marker.markerInfo = markerInfo;
     recentMarker = marker;
-   
+ 
     google.maps.event.addListener(marker, 'click', function(){
+      
       markerInfo.open(map,marker);
     });
     
@@ -513,8 +524,12 @@ function initAutocomplete() {
     
     
     $(document).on('submit', '#markerForm', function(e){
+      
       e.preventDefault();
       infowindow.close();
+      
+      
+   
       var postData = $(this).serializeArray();
       postData.push({name: "lat", value: location.lat()});
       postData.push({name: "lng", value: location.lng()});
@@ -532,14 +547,6 @@ function initAutocomplete() {
         success: function(d){
           fetchedMarkers[d.id] = true;
           var newContent = createContentString(d);
-
-          
-          // var newContent = $("<div>"+
-          //                     "cat " + d.cat + 
-          //                     "<br> dog " + d.dog +
-          //                     "<br> mold " + d.mold + "</div>");
-          
-          
           var customMarker = getIcon(d);
           recentMarker.markerInfo.setContent(newContent[0]);
           recentMarker.setIcon(customMarker);
@@ -550,7 +557,6 @@ function initAutocomplete() {
           markers.push(recentMarker);
         }
       })
-      
       return false;
     });
   }
