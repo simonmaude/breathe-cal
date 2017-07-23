@@ -16,8 +16,6 @@ var bubble_map = {};
 
 function initAutocomplete() {
   
-  var labelNum = 0;
-  
   function point2LatLng(point, map) {
     var topRight = map.getProjection().fromLatLngToPoint(map.getBounds().getNorthEast());
     var bottomLeft = map.getProjection().fromLatLngToPoint(map.getBounds().getSouthWest());
@@ -33,7 +31,6 @@ function initAutocomplete() {
 
     
     deleteMarkers();
-    labelNum = 0;
     var bounds = map.getBounds();
     var NECorner = bounds.getNorthEast();
     var SWCorner = bounds.getSouthWest();
@@ -159,8 +156,22 @@ function initAutocomplete() {
     mapTypeId: 'roadmap'
   });
   
-  var geocoder = new google.maps.Geocoder();
+  var infowindow = new google.maps.InfoWindow;
+    
+  // Reverse lat/lon city lookup
+  var reverseGC = new google.maps.Geocoder;
+
   
+    // Handle location finder error
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+     infoWindow.setPosition(pos);
+     infoWindow.setContent(browserHasGeolocation ?
+              'Error: Could not find location' :
+              'Error: Browswer does not support location.');
+     infoWindow.open(map);
+     }
+  
+
   google.maps.event.addDomListener(window, "resize", function() {
    var center = map.getCenter();
    google.maps.event.trigger(map, "resize");
@@ -186,10 +197,14 @@ function initAutocomplete() {
   var input = document.getElementById('pac-input');
   var searchBtn = document.getElementById('search-button');
   var searchBox = new google.maps.places.SearchBox(input);
-  
+  var myLocationBtn = document.getElementById('find-my-location');
+
   
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(myLocationBtn);
+
+
   //var markerEnabler = document.getElementById('marker-cta');
   //map.controls[google.maps.ControlPosition.LEFT_TOP].push(markerEnabler);
   
@@ -287,7 +302,78 @@ function initAutocomplete() {
     });
   }
   
-
+  
+  myLocationBtn.onclick = function () {
+    var reverseGC = new google.maps.Geocoder;
+    
+    // Finding user location using google's geolocation
+    if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        
+        // Getting current location
+        var pos = {lat: position.coords.latitude, lng: position.coords.longitude};
+        var loc_curr = {'location': pos};
+        
+        // infowindow.setPosition(pos);
+        // infowindow.setContent('Location found.');
+        // infowindow.open(map);
+        // map.setCenter(pos);
+        
+        reverseGC.geocode(loc_curr, function(results, status) {
+      
+          if (status === 'OK') {
+            if (results[1]) {
+              
+              var specific_address = results[1].formatted_address;
+              var city_address = results[1].address_components[1].short_name;
+    
+              if (!((specific_address == false) || (specific_address.length == 0))) {
+                document.getElementById("pac-input").value = specific_address;
+                document.getElementById("search-button").onclick();
+                document.getElementById("pac-input").value = "";
+                
+                
+                var image = {
+                  url: 'https://www.vshoo.com/img/general/login/loading.gif',
+                  scaledSize : new google.maps.Size(60, 60)  
+                }; 
+    
+    
+                setTimeout( function() {
+                  var marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(pos.lat, pos.lng),
+                  map: map,
+                  optimized: false,
+                  icon: image,
+                  // animation: google.maps.Animation.DROP
+                })
+    
+                setTimeout(function() {
+                    marker.setMap(null);
+                }, 4000);
+                
+          
+                
+                }, 800);
+                
+                
+              }
+            } else {
+              return ('No results found');
+            }
+          } else {
+            return ('Geocoder failed due to: ' + status);
+          }
+        });
+        
+        // handling errors
+      }, function() {
+        handleLocationError(true, infowindow, map.getCenter());
+      });
+    } else {
+      handleLocationError(false, infowindow, map.getCenter());
+    }
+  }
 
   
   var canMark = false;
@@ -440,7 +526,6 @@ function initAutocomplete() {
 
   
   function placeMarker(location) {
-    labelNum += 1;
     var marker = new google.maps.Marker({
       label: "",
       position: location,
@@ -515,7 +600,6 @@ function initAutocomplete() {
     
     
     var listenerHandle = google.maps.event.addListener(infowindow, 'closeclick', function(){
-      labelNum -=1;
       recentMarker.setMap(null);
       recentMarker = null;
     });
