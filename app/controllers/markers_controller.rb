@@ -9,13 +9,20 @@ class MarkersController < ApplicationController
       render :nothing => true
     end 
   end
-  
+
+  def delete 
+    Marker.delete_marker(params[:id])
+    render :json => Marker.all
+  end
   def show
+    
     global_number_show = 5
-    top = bound_params[:uplat]
-    bottom = bound_params[:downlat]
-    left = bound_params[:leftlong]
-    right = bound_params[:rightlong]
+    
+    top = bound_params[:uplat].to_f
+    bottom = bound_params[:downlat].to_f
+    
+    left = bound_params[:leftlong].to_f
+    right = bound_params[:rightlong].to_f
     
     markers = Marker.find_all_in_bounds(top,bottom,left,right)
     global_markers = Marker.get_global_markers(markers,global_number_show,top,bottom,left,right)
