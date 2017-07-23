@@ -13,8 +13,6 @@ var heatmapData = [];
 
 function initAutocomplete() {
   
-  var labelNum = 0;
-  
   function point2LatLng(point, map) {
     var topRight = map.getProjection().fromLatLngToPoint(map.getBounds().getNorthEast());
     var bottomLeft = map.getProjection().fromLatLngToPoint(map.getBounds().getSouthWest());
@@ -25,7 +23,6 @@ function initAutocomplete() {
   
   function fetchMarkers(){
     deleteMarkers();
-    labelNum = 0;
     var bounds = map.getBounds();
     var NECorner = bounds.getNorthEast();
     var SWCorner = bounds.getSouthWest();
@@ -298,9 +295,7 @@ function initAutocomplete() {
   }
   
   function placeMarker(location) {
-    labelNum += 1;
     var marker = new google.maps.Marker({
-      label: labelNum.toString() ,
       position: location,
       map: map,
       draggable: true,
@@ -340,7 +335,6 @@ function initAutocomplete() {
     recentMarker = marker;
     
     var listenerHandle = google.maps.event.addListener(infowindow, 'closeclick', function(){
-      labelNum -=1;
       recentMarker.setMap(null);
       recentMarker = null;
     });
