@@ -28,6 +28,7 @@ class Marker < ActiveRecord::Base
   # a zoomed in area around it to see if (global_show-1) same allergen markers exist there
   def self.get_global_markers(markers, global_number_show, coords, search_allergen = '')
     output = Set.new
+
     markers.each do |marker|
       unless output.include? marker
         zoom_markers = self.find_all_in_zoom(coords, marker.lat.to_f, marker.lng.to_f)
