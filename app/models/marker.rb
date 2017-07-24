@@ -3,24 +3,35 @@ class Marker < ActiveRecord::Base
   
   @@allergen_list = [:dog, :cat, :mold, :bees, :perfume, :oak, :dust, :smoke, :gluten, :peanut]
   
-  def self.find_all_in_bounds(coords, id = '', search_allergen = '')
-    markersTop = Marker.where("lat < (?)", coords[:top]).where(id).where(search_allergen)
-    markersBottom = Marker.where("lat > (?)", coords[:bottom])
-    markersLeft = Marker.where("lng < ?", coords[:left])
-    markersRight = Marker.where("lng > ?", coords[:right])
+  
+
+  def self.delete_marker(id)
+    Marker.find(id).destroy
+  end
+  
+  def self.find_all_in_bounds(top, bottom, left, right, id = '', search_allergen = '')
+    markersTop = Marker.where("lat < (?)", top).where(id).where(search_allergen)
+    markersBottom = Marker.where("lat > (?)", bottom)
+    markersLeft = Marker.where("lng < ?", left)
+    markersRight = Marker.where("lng > ?", right)
     return markersBottom & markersTop & markersRight & markersLeft
   end
  
-  def self.find_all_in_zoom(coords, lat, long)   
+  def self.find_all_in_zoom(top,bottom,left,right,lat, long)  
+    
     zoom_ratio = 0.125
-    zoom_lat = (coords[:top].to_f - coords[:bottom].to_f) * zoom_ratio
-    zoom_long = (coords[:left].to_f - coords[:right].to_f) * zoom_ratio
-    zoom_coords = {top:(lat + zoom_lat), bottom:(lat - zoom_lat), left:(long + zoom_long), right:(long - zoom_long)}
-    return self.find_all_in_bounds(zoom_coords)
+    zoom_lat = (top - bottom) * zoom_ratio
+    zoom_long = (left - right) * zoom_ratio
+    zoom_top = lat + zoom_lat
+    zoom_bottom = lat - zoom_lat
+    zoom_left = long + zoom_long
+    zoom_right = long - zoom_long
+    return self.find_all_in_bounds(zoom_top, zoom_bottom, zoom_left, zoom_right)
   end  
       
       
-  def self.get_global_markers(markers, global_number_show, coords, search_allergen = '')
+
+  def self.get_global_markers(markers,global_number_show,top,bottom,left,right,search_allergen = '')
     output = []
     # for each marker that is not listed already
     markers.each do |marker|
@@ -28,7 +39,7 @@ class Marker < ActiveRecord::Base
       # for each allergen listed as true
         break_test = false
         # check all other markers in zoomed in area to see if global_show - 1 are also true
-        zoom_markers = self.find_all_in_zoom(coords, marker.lat.to_f, marker.lng.to_f)
+        zoom_markers = self.find_all_in_zoom(top.to_f,bottom.to_f,left.to_f,right.to_f,marker.lat.to_f, marker.lng.to_f)
         # for every allergen
         search_allergen == '' ? (allergens = @@allergen_list) : (allergens = [search_allergen])
         allergens.each do |allergen|

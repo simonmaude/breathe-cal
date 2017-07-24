@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   post '/markers' => 'markers#create'
   get '/markers' => 'markers#show'
+  delete '/markers' => 'markers#delete'
   
   resources :cities, :clients
   
