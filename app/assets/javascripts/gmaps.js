@@ -27,7 +27,7 @@ function initAutocomplete() {
   
   
   
-  function fetchMarkers() {
+  function fetchMarkers(filtered_allergens={}) {
 
     
     deleteMarkers();
@@ -38,7 +38,7 @@ function initAutocomplete() {
       type: "GET",
       contentType: "application/json; charset=utf-8",
       url: "markers",
-      data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}},
+      data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}, filter :filtered_allergens},
       success: function(data){
         // used for filtering allergens
         var i;
@@ -46,7 +46,7 @@ function initAutocomplete() {
         for (i = 0; i < marker_types_in_bounds.length; i++) {
           filter_id = 'filter-'+marker_types_in_bounds[i];
           if (! $('#'+filter_id).length) {
-            $('#sidebar-filter').append('<div><input type="checkbox" value="1" id="'+filter_id+'" checked/><label for="'+filter_id+'">&nbsp&nbsp&nbsp&nbsp'+marker_types_in_bounds[i]+'</div>');
+            $('#filter-header').append('<div><input type="checkbox" value="'+marker_types_in_bounds[i]+'" class="filter_checkbox" id="'+filter_id+'" checked/><label for="'+filter_id+'">&nbsp&nbsp&nbsp&nbsp'+marker_types_in_bounds[i]+'</div>');
           }
         }
         //

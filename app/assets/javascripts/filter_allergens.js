@@ -6,3 +6,10 @@ function showFilterCheckboxes() {
     window.fetchMarkers();
 }
 
+function filter() {
+    filtered_allergens = {}
+    $('.filter_checkbox:checked').each(function() {
+        filtered_allergens[$(this).val()] = 1
+    });
+    window.fetchMarkers(filtered_allergens)
+}

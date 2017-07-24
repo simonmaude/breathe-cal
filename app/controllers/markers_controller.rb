@@ -31,8 +31,16 @@ class MarkersController < ApplicationController
     @marker_types_in_bounds = markers.uniq { |m| m.title }
     @marker_types_in_bounds = @marker_types_in_bounds.map { |m| m.title }
     
+    # do the filtering
+    if params[:filter] && (params[:filter].keys.length > 0)
+      filtered_allergens = params[:filter]
+      markers = markers.select { |m| filtered_allergens.include? m.title }
+    end
+    
     global_markers = Marker.get_global_markers(markers,global_number_show,top,bottom,left,right,search_allergen="")
 
+
+    
 
     marker_container = [markers, global_markers, @marker_types_in_bounds]
     # pass collection to gmaps.js
