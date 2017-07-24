@@ -9,9 +9,9 @@ class Marker < ActiveRecord::Base
   
   def self.find_all_in_bounds(coords, id = '', search_allergen = '')
     markersTop = Marker.where("lat < ?", coords[:top].to_s).where(id).where(search_allergen)
-    markersBottom = Marker.where("lat > ?", coords[:bottom])
-    markersLeft = Marker.where("lng < ?", coords[:left])
-    markersRight = Marker.where("lng > ?", coords[:right])
+    markersBottom = Marker.where("lat > ?", coords[:bottom].to_s)
+    markersLeft = Marker.where("lng < ?", coords[:left].to_s)
+    markersRight = Marker.where("lng > ?", coords[:right].to_s)
     return markersBottom & markersTop & markersRight & markersLeft
   end
  
