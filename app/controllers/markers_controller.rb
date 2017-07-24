@@ -13,15 +13,13 @@ class MarkersController < ApplicationController
   def show
     global_number_show = 5
     current_user_id = session[:client_id]
-    top = bound_params[:uplat]
-    bottom = bound_params[:downlat]
-    left = bound_params[:leftlong]
-    right = bound_params[:rightlong]
-    # search_allergen = [:allergen] 
+    coords = {top: bound_params[:uplat], bottom: bound_params[:downlat], 
+              left: bound_params[:leftlong], right: bound_params[:rightlong]}
+    # search_allergen = params[:allergen] 
     search_allergen = ''
     
-    markers = Marker.find_all_in_bounds(top,bottom,left,right,"client_id = #{current_user_id}")
-    global_markers = Marker.get_global_markers(markers,global_number_show,top,bottom,left,right,search_allergen)
+    markers = Marker.find_all_in_bounds(coords,"client_id = #{current_user_id}",search_allergen)
+    global_markers = Marker.get_global_markers(markers,global_number_show,coords,search_allergen)
 
     marker_container = [markers, global_markers]
     # pass collection to gmaps.js
