@@ -3,6 +3,6 @@
 function showFilterCheckboxes() {
     $('#sidebar-favorite').hide();
     $('#sidebar-filter').show();
-//    initAutocomplete();
+    window.fetchMarkers();
 }
 

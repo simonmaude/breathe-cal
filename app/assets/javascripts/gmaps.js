@@ -133,7 +133,7 @@ function initAutocomplete() {
       }
     })
   }
-  
+  window.fetchMarkers = fetchMarkers;
   function deleteMarker(id) {
 
     $.ajax({
