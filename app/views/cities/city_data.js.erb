@@ -8,14 +8,13 @@ var map = new google.maps.Map(document.getElementById('map'), {
           mapTypeId: 'roadmap',
           zoom: 13
         });
-<!--var  waqiMapOverlay  =  new  google.maps.ImageMapType({  -->
-<!--                  getTileUrl:  function(coord,  zoom)  {  -->
-<!--                            return  'https://tiles.waqi.info/tiles/usepa-aqi/'  +  zoom  +  "/"  +  coord.x  +  "/"  +  coord.y  +  ".png?token=c18b43c1fe86c25643ca8e4fecbc1f23be1cc78a";  -->
-<!--                  },  -->
-<!--                  name:  "Air  Quality",  -->
-<!--        });  -->
+var  waqiMapOverlay  =  new  google.maps.ImageMapType({  
+                  getTileUrl:  function(coord,  zoom)  {  
+                        return  'https://tiles.waqi.info/tiles/usepa-aqi/'  +  zoom  +  "/"  +  coord.x  +  "/"  +  coord.y  +  ".png?token=c18b43c1fe86c25643ca8e4fecbc1f23be1cc78a";  
+                  },  
+                  name:  "Air  Quality",  
+        });  
   
-map.overlayMapTypes.insertAt(0,waqiMapOverlay);  
 var geo = {lat: <%= @geo[0] %>, lng: <%= @geo[1] %>}
 var marker = new google.maps.Marker({
           map: map,
@@ -127,3 +126,4 @@ $("#detail-box").animate
             'margin-left' : '0px'
         });
 $("#detail-box").show();
+map.overlayMapTypes.insertAt(0,waqiMapOverlay);  

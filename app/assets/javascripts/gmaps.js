@@ -90,6 +90,16 @@ function initAutocomplete() {
     mapTypeId: 'roadmap'
   });
   
+  var  waqiMapOverlay  =  new  google.maps.ImageMapType({  
+                  getTileUrl:  function(coord,  zoom)  {  
+                        return  'https://tiles.waqi.info/tiles/usepa-aqi/'  +  zoom  +  "/"  +  coord.x  +  "/"  +  coord.y  +  ".png?token=c18b43c1fe86c25643ca8e4fecbc1f23be1cc78a";  
+                  },  
+                  name:  "Air  Quality",  
+        });  
+        
+  map.overlayMapTypes.insertAt(0,waqiMapOverlay);  
+
+  
   var infowindow = new google.maps.InfoWindow;
     
   // Reverse lat/lon city lookup
