@@ -8,8 +8,8 @@ class Marker < ActiveRecord::Base
   end
   
   def self.find_all_in_bounds(coords, id = '', search_allergen = '')
-    markersTop = Marker.where("lat < (?)", coords[:top]).where(id).where(search_allergen)
-    markersBottom = Marker.where("lat > (?)", coords[:bottom])
+    markersTop = Marker.where("lat < ?", coords[:top].to_s).where(id).where(search_allergen)
+    markersBottom = Marker.where("lat > ?", coords[:bottom])
     markersLeft = Marker.where("lng < ?", coords[:left])
     markersRight = Marker.where("lng > ?", coords[:right])
     return markersBottom & markersTop & markersRight & markersLeft
@@ -34,7 +34,9 @@ class Marker < ActiveRecord::Base
         search_allergen == '' ? (allergens = @@allergen_list) : (allergens = [search_allergen])
         allergens.each do |allergen|
           allergen_count = 0 
+          p "test"
           if (marker.send(allergen) == true) || marker.title == allergen
+            p "true"
             id_set = Set.new
             zoom_markers.each do |zoom_marker|
               if (!id_set.include? zoom_marker.client_id) && ((zoom_marker.send(allergen) == true) || zoom_marker.title == allergen)
