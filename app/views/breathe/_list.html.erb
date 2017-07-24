@@ -7,7 +7,8 @@
   <%=  link_to "View Favorites", display_favorite_cities_path, remote: true, :style => 'color: 3672B2' %> |
   <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center;" id="marker-cta" class = "controls" <%=  link_to "Add Allergen", remote: true %>  </span> |
   
-  <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center;" id="filter" class = "" <%=  link_to "Filter Allergens", '#', :onclick => "showFilterCheckboxes()" %>  </span>
+  <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center;" id="filter" class = "">
+  <%=  link_to "Filter Allergens", '#', :onclick => "showFilterCheckboxes()" %>  </span>
     
   </h5>
 
@@ -32,8 +33,14 @@
       <% else %> 
         <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
           
-          <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+          <div id="sidebar-favorite" class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
             <%= @no_cities %>
+          </div>
+
+          <div id="sidebar-filter" class="col-lg-10" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898; display: none">
+            Allergens on Map
+            <%= @marker_types_in_bounds %>     
+            <%= 243342 %>
           </div>
     
         </div>

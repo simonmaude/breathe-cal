@@ -25,12 +25,24 @@ class MarkersController < ApplicationController
     # search_allergen = [:allergen] 
     search_allergen = ''
     
-    markers = Marker.find_all_in_bounds(top,bottom,left,right,"client_id = #{current_user_id}")
-    global_markers = Marker.get_global_markers(markers,global_number_show,top,bottom,left,right,search_allergen)
+    markers = Marker.find_all_in_bounds(top,bottom,left,right,"client_id = #{current_user_id}", search_allergen="")
+
+    # gets all possible markers in bounds
+    @marker_types_in_bounds = markers.uniq { |m| m.title }
+    @marker_types_in_bounds = @marker_types_in_bounds.map { |m| m.title }
+    
+    global_markers = Marker.get_global_markers(markers,global_number_show,top,bottom,left,right,search_allergen="")
+
 
     marker_container = [markers, global_markers]
     # pass collection to gmaps.js
-    render :json => marker_container
+    
+    respond_to do |format|
+      format.js
+      format.json {
+        render json: marker_container
+      }
+    end
             
   end
   
