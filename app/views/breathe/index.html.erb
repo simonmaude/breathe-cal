@@ -1,6 +1,8 @@
 <div style="height: 100%;">
+
 <!-- profile sign in and profile icon START -->
   <% if current_client %>
+    <% p asset_path("images/bee_marker.png")%>
     <% resp = HTTParty.get('https://www.googleapis.com/plus/v1/people/'+current_client.uid+'?fields=image&key=AIzaSyD5n5xHL4TbbHjVE_gxkVw6f-CRVyN8npc').body%>
     <% result = JSON.parse resp%>
     <% begin; source = result['image']['url']; custom = true; rescue Exception; custom = false; end%>
@@ -42,7 +44,20 @@
   function profileClick() {
     document.getElementById("myDropdown").classList.toggle("show");
     document.getElementById("arrow").classList.toggle("show")
-}
+  }
+
+  function deleteMarker(id) {
+    $.ajax({
+        type: "DELETE",
+        contentType: "application/json; charset=utf-8",
+        url: "markers",
+        data: JSON.stringify({id: id}),
+        success: function() {
+          
+        }
+    });
+  }
+ 
 </script>
 <!-- profile sign in and profile icon END -->
 

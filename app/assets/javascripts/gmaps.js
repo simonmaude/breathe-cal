@@ -10,6 +10,9 @@
 
 var fetchedMarkers = {};
 var heatmapData = [];
+var bubble_map = {};
+
+
 
 function initAutocomplete() {
   
@@ -21,7 +24,12 @@ function initAutocomplete() {
     return map.getProjection().fromPointToLatLng(worldPoint);
   }
   
-  function fetchMarkers(){
+  
+  
+  
+  function fetchMarkers() {
+
+    
     deleteMarkers();
     var bounds = map.getBounds();
     var NECorner = bounds.getNorthEast();
@@ -35,41 +43,79 @@ function initAutocomplete() {
         heatmapData = [];
         // if (data.length > 1){
           // var client_id = data[0].client_id;
-          for(var i=0;i<data[1].length; i++){
+          for (var i=0;i<data[1].length; i++) {
             var heatmap_marker = data[1][i];
             heatmapData.push(new google.maps.LatLng(heatmap_marker.lat, heatmap_marker.lng));
           }
           
-          for(var i=0;i<data[0].length; i++){
+          for (var i=0;i<data[0].length; i++) {
+          
+            
             var user_marker = data[0][i];
-            if (true){
+        
+            if (true) {
               // if (id != client_id){
               // } else {
                 var location = {};
                 location.lat = parseFloat(user_marker.lat);
                 location.lng = parseFloat(user_marker.lng);
+                var newContent = createContentString(user_marker);
                 var labelClientId = user_marker.client_id
+                var customMarker = getIcon(user_marker);
+                
                 var marker = new google.maps.Marker({
-                      label: labelClientId.toString(),
+                      //label: labelClientId.toString(),
+                      label: '',
                       position: location,
                       map: map,
+                      icon: customMarker,
                       draggable: false,
-                      });
-                var newContent = createContentString(user_marker);      
-                marker.info = new google.maps.InfoWindow();
-                marker.info.setContent(newContent[0]);
+                });
+                bubble = new InfoBubble({
+                  shadowStyle: 0,
+                  backgroundColor: 'rgba(29, 161, 242, 0.8)',
+                  borderRadius: 10,
+                  arrowSize: 10,
+                  borderWidth: 2,
+                  borderColor: '#ffffff',
+                  disableAutoPan: true,
+                  hideCloseButton: false,
+                  arrowPosition: 50,
+                  minWidth: 100,
+                  minHeight: 75,
+                  arrowStyle: 0});
+                bubble.setContent(newContent[0]);
+                marker.bubble = bubble;
+               
+                marker.id = user_marker.id;
+                bubble_map[user_marker.id] = marker;
+                
+
+                
                 google.maps.event.addListener(marker, 'click', function(){
-                  this.info.open(map, this);
+                  this.bubble.open(map, this);
                 });
               // }
+              
               markers.push(marker);
-            }
-          }
+            } 
+         }
         // }
           var heatmap = new google.maps.visualization.HeatmapLayer({
             data: heatmapData,
             radius: 50,
-            opacity: 0.4,
+            opacity: 0.1,
+            gradient: [     
+            'rgba(24, 249, 235, 0)',
+            '#0fb8ad',
+            '#2cb5e8',
+            '#1fc8db',
+            'rgba(117, 142, 255, 1)',
+            'rgba(118, 103, 252, 1)',
+            'rgba(101, 84, 249, 1)',
+            'rgba(100, 22, 226, 1)',
+          
+            ],
             map:map
           });
 
@@ -77,7 +123,30 @@ function initAutocomplete() {
     })
   }
   
-    
+  function deleteMarker(id) {
+
+    $.ajax({
+        type: "DELETE",
+        contentType: "application/json; charset=utf-8",
+        url: "markers",
+        data: JSON.stringify({id: id}),
+        success: function() {
+          if (id in bubble_map) {
+            bubble_map[id].bubble.close();
+            bubble_map[id].setMap(null);
+          }
+          
+          fetchMarkers();
+          
+        }
+    });
+  }
+  function getIcon(marker) {
+    if (marker.title.toLowerCase() in icons) {
+      return icons[marker.title.toLowerCase()].icon;
+    }
+    return null;
+  }
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 37.8716,
@@ -199,7 +268,7 @@ function initAutocomplete() {
         data: JSON.stringify({geo: place.geometry.location, name: place.name}),
         success: function(data){
           $("#city-info").text(JSON.stringify(data));
-          console.log("hello");
+        
         }
       });
       
@@ -354,74 +423,181 @@ function initAutocomplete() {
   });
   
   var recentMarker = null;
-  
+
+
+
   function createContentString(data){
     var title = data.title;
-    var attributes = ["cat", "bees", "perfume", "oak", "peanut", "gluten", "dog", "dust", "smoke", "mold"];
-    var leftContentString = "";
-    var rightContentString = "";
-    for(var i=0; i<attributes.length/2; i++){
-      if (data[attributes[i]]){
-        leftContentString += attributes[i] + "<br>";  
-      }
-    }
-    for(i=attributes.length/2; i<attributes.length; i++){
-      if (data[attributes[i]]){
-        rightContentString += attributes[i] + "<br>";  
-      }
-    }
-    var contentString ="<div id='wrap'>" + 
-                      "Allergens at " + title + "<br>" +
-                      "<div id='left_col'>" + 
-                      leftContentString + 
-                      "</div>" + 
-                      "<div id='right_col'>" + 
-                      rightContentString +
-                      "</div>" + 
-                      "</div>";
+    var ncontent=document.createElement('div'),
+    button;
+    button=ncontent.appendChild(document.createElement('input'));
+    button.id = 'edit-delete'
+    button.type='button';
+    button.value='delete'
+    google.maps.event.addDomListener(button,'click', function(){
+      deleteMarker(data.id);
+    })
+    var contentString ="<div id= 'marker-bubble' class='scrollFix'>"+
+                        "<div class='marker-title'>" + 
+                          title +
+                          "<div id = 'spacing'></div>";
+                        
     var content = $(contentString);
+    content.append(ncontent);
+    content.append('</div></div>')
     return content;
   }
+
+  
+  var beeMarker = {
+      url: 'https://image.flaticon.com/icons/svg/235/235425.svg', 
+      scaledSize : new google.maps.Size(50, 50)
+  };
+  var catMarker = {
+    url: 'https://image.flaticon.com/icons/svg/12/12160.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  };
+  var perfumeMarker = {
+    url: 'https://image.flaticon.com/icons/svg/223/223811.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var oakMarker = {
+    url: 'https://image.flaticon.com/icons/svg/424/424041.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var peanutMarker = {
+    url: 'https://image.flaticon.com/icons/svg/204/204697.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var glutenMarker = {
+    url: 'https://image.flaticon.com/icons/svg/204/204705.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var dogMarker = {
+    url: 'https://image.flaticon.com/icons/svg/91/91544.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var dustMarker = {
+    url: 'https://image.flaticon.com/icons/svg/471/471794.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var smokeMarker = {
+    url: 'https://image.flaticon.com/icons/svg/394/394631.svg',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  var moldMarker = {
+    url: 'https://d30y9cdsu7xlg0.cloudfront.net/png/183061-200.png',
+    scaledSize : new google.maps.Size(50, 50)
+  }
+  
+  
+  var icons = {
+          bees: {
+            icon: beeMarker
+          },
+          cats: {
+            icon: catMarker
+          },
+          perfume: {
+            icon: perfumeMarker
+          },
+          oak: {
+            icon: oakMarker
+          },
+          peanut: {
+            icon: peanutMarker
+          },
+          gluten: {
+            icon: glutenMarker
+          },
+          dog: {
+            icon: dogMarker
+          },
+          dust: {
+            icon: dustMarker
+          },
+          smoke: {
+            icon: smokeMarker
+          },
+          mold: {
+            icon: moldMarker
+          }
+        };
+
   
   function placeMarker(location) {
     var marker = new google.maps.Marker({
+      label: "",
       position: location,
       map: map,
       draggable: true,
     })
     
     var contentString = $(
+      
       "<div id='wrap'>" + 
-      "<form id='markerForm' action='markers' method='POST'>"+
-      "Title <input type='text' name='title'> <br>" + 
-      "<div id='left_col'>" + 
-      "<input type = 'checkbox' name='cat' value='true'> Cats <br>"+
-      "<input type = 'checkbox' name='bees' value='true'> Bees <br>"+
-      "<input type = 'checkbox' name='perfume' value='true'> Perfume <br>"+
-      "<input type = 'checkbox' name='oak' value='true'> Oak <br>"+
-      "<input type = 'checkbox' name='peanut' value='true'> Peanut <br>"+
-      "</div>" +
-      "<div id='right_col'>" + 
-      "<input type = 'checkbox' name='gluten' value='true'> Gluten <br>"+
-      "<input type = 'checkbox' name='dog' value='true'> Dogs <br>"+
-      "<input type = 'checkbox' name='dust' value='true'> Dust <br>"+
-      "<input type = 'checkbox' name='smoke' value='true'> Smoke <br>"+
-      "<input type = 'checkbox' name='mold' value='true'> Mold <br>"+
-      "</div>" +
-      "<input type='submit' value='Submit'>"+
-      "</form>" +
+        "<form id='markerForm' action='markers' method='POST'>"+
+          "<datalist id='options'>"+
+            "<option value='Cats'>" +
+            "<option value='Bees'>" +
+            "<option value='Perfume'>" +
+            "<option value='Oak'>" +
+            "<option value='Peanut'>" +
+            "<option value='Gluten'>" +
+            "<option value='Dog'>" +
+            "<option value='Dust'>" +
+            "<option value='Smoke'>" +
+            "<option value='Mold'>" +
+            "</datalist>" +
+          "<div id= 'input-title'>Allergen:</div>" +
+          "<div id='spacing'></div>"+
+          "<input class = 'text-box' type='text' name='title' list='options'>" + 
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          //"<input id = 'plus-button' type='submit' value='+'>"+
+        "</form>" +
       "</div>"
     );
     
+
+    var markerInfo = new InfoBubble({
+
+      shadowStyle: 0,
+      backgroundColor: 'rgba(29, 161, 242, 0.8)',
+      borderRadius: 10,
+      arrowSize: 10,
+      borderWidth: 2,
+      borderColor: '#ffffff',
+      disableAutoPan: true,
+      hideCloseButton: false,
+      arrowPosition: 50,
+      maxWidth: '600px',
+      minWidth: '600px',
+      minHeight: 75,
+      arrowStyle: 0
+      
+    });
+
+    
     var infowindow = new google.maps.InfoWindow();
-    infowindow.open(map,marker);
+    //infowindow.open(map,marker);
     infowindow.setContent(contentString[0]);
     marker.infowindow = infowindow;
+    recentMarker = marker;
+ 
+    markerInfo.open(map, marker);
+    markerInfo.setContent(contentString[0]);
+    marker.markerInfo = markerInfo;
+    recentMarker = marker;
+ 
     google.maps.event.addListener(marker, 'click', function(){
-      marker.infowindow.open(map,marker);
+      
+      markerInfo.open(map,marker);
     });
     
-    recentMarker = marker;
+
+    
     
     var listenerHandle = google.maps.event.addListener(infowindow, 'closeclick', function(){
       recentMarker.setMap(null);
@@ -432,8 +608,12 @@ function initAutocomplete() {
     
     
     $(document).on('submit', '#markerForm', function(e){
+      
       e.preventDefault();
       infowindow.close();
+      
+      
+   
       var postData = $(this).serializeArray();
       postData.push({name: "lat", value: location.lat()});
       postData.push({name: "lng", value: location.lng()});
@@ -442,6 +622,7 @@ function initAutocomplete() {
         convData[obj.name] = obj.value;
       })
       
+    
       $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
@@ -450,23 +631,21 @@ function initAutocomplete() {
         success: function(d){
           fetchedMarkers[d.id] = true;
           var newContent = createContentString(d);
-          // var newContent = $("<div>"+
-          //                     "cat " + d.cat + 
-          //                     "<br> dog " + d.dog +
-          //                     "<br> mold " + d.mold + "</div>");
-          console.log(d.id);
-          recentMarker.infowindow.setContent(newContent[0]);
-          recentMarker.infowindow.open(map,recentMarker);
+          var customMarker = getIcon(d);
+          recentMarker.markerInfo.setContent(newContent[0]);
+          recentMarker.setIcon(customMarker);
+          recentMarker.markerInfo.open(map,recentMarker);
           recentMarker.draggable = false;
           recentMarker = null;
           google.maps.event.removeEventListener(listenerHandle);
           markers.push(recentMarker);
         }
       })
-      
       return false;
     });
   }
+  
+
   
   // maybe just send a list of attributes to tell javascript to use....? 
   function setMapOnAll(map) {

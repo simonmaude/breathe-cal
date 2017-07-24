@@ -9,8 +9,13 @@ class MarkersController < ApplicationController
       render :nothing => true
     end 
   end
-  
+
+  def delete 
+    Marker.delete_marker(params[:id])
+    render :json => Marker.all
+  end
   def show
+    
     global_number_show = 5
     current_user_id = session[:client_id]
     coords = {top: bound_params[:uplat], bottom: bound_params[:downlat], 
