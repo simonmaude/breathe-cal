@@ -40,6 +40,17 @@ function initAutocomplete() {
       url: "markers",
       data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}},
       success: function(data){
+        // used for filtering allergens
+        var i;
+        var marker_types_in_bounds = data[2];
+        for (i = 0; i < marker_types_in_bounds.length; i++) {
+          filter_id = 'filter-'+marker_types_in_bounds[i];
+          if (! $('#'+filter_id).length) {
+            $('#sidebar-filter').append('<div><input type="checkbox" value="1" id="'+filter_id+'" checked/><label for="'+filter_id+'">&nbsp&nbsp&nbsp&nbsp'+marker_types_in_bounds[i]+'</div>');
+          }
+        }
+        //
+        
         heatmapData = [];
         // if (data.length > 1){
           // var client_id = data[0].client_id;
@@ -268,7 +279,6 @@ function initAutocomplete() {
         data: JSON.stringify({geo: place.geometry.location, name: place.name}),
         success: function(data){
           $("#city-info").text(JSON.stringify(data));
-        
         }
       });
       

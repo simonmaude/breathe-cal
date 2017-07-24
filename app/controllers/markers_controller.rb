@@ -34,14 +34,11 @@ class MarkersController < ApplicationController
     global_markers = Marker.get_global_markers(markers,global_number_show,top,bottom,left,right,search_allergen="")
 
 
-    marker_container = [markers, global_markers]
+    marker_container = [markers, global_markers, @marker_types_in_bounds]
     # pass collection to gmaps.js
     
     respond_to do |format|
-      format.js
-      format.json {
-        render json: marker_container
-      }
+      format.json { render :json => marker_container }
     end
             
   end
