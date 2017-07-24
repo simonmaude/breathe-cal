@@ -17,7 +17,7 @@ RSpec.describe Marker, type: :model do
   
   describe ".find_all_in_zoom" do
     it "returns no markers with impossible specs" do
-      expect(Marker.find_all_in_zoom({top:10, bottom:20, left:20, right:10}, 15,15)).to be_empty
+      expect(Marker.find_all_in_zoom({top:10, bottom:20, left:20, right:10},15,15)).to be_empty
     end
     
     it "returns all markers in the bounds" do
@@ -25,7 +25,7 @@ RSpec.describe Marker, type: :model do
       Marker.create!(lat: 16, lng: 16, cat: true)
       Marker.create!(lat: 14, lng: 14, cat: true)
       Marker.create!(lat: 30, lng: 30, cat: true)
-      expect(Marker.find_all_in_zoom({top:20, bottom:10, left:20, right:10}).length).to eq(2)
+      expect(Marker.find_all_in_zoom({top:20, bottom:10, left:20, right:10},15,15).length).to eq(2)
     end
   end
   
@@ -60,6 +60,17 @@ RSpec.describe Marker, type: :model do
       markers = Marker.find_all_in_bounds({top:20, bottom:10, left:20, right:10})
       expect(Marker.get_global_markers(markers,global_number_show,{top:20, bottom:10, left:20, right:10}).length).to eq(0)
     end
+    
+    it "returns no markers if equal to the global_number_show are present in a zoomed area but not from unique client_ids" do
+      global_number_show = 4
+      Marker.create!(lat: 15, lng: 15, client_id: 1, dog: true)
+      Marker.create!(lat: 15, lng: 15, client_id: 2, dog: true)
+      Marker.create!(lat: 15, lng: 15, client_id: 3, dog: true)
+      Marker.create!(lat: 15, lng: 15, client_id: 3, dog: true)
+      markers = Marker.find_all_in_bounds({top:20, bottom:10, left:20, right:10})
+      expect(markers.length).to eq(4)
+      expect(Marker.get_global_markers(markers,global_number_show,{top:20, bottom:10, left:20, right:10}).length).to eq(0)
+    end   
     
     it "returns markers if equal to the global_number_show are present in a zoomed area" do
       global_number_show = 4
