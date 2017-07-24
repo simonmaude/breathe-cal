@@ -14,10 +14,6 @@ Scenario: If I click the add allergen button and I am logged in then I should be
   Then I should see "Allergen:" when it loads
   Then I fill in "title" with "peanut"
   And I should see "peanut"
-  
-#     # line below is a pending holder till the edit text input is implemented 
-# 	Then pending holder
-  
   Then I press "edit"
   And I fill in "title" with "cats"
   Then I should see "cats"
@@ -48,10 +44,6 @@ Scenario: If I am logged out then I should not be able to delete global markers.
   Then I should see "bees"
   Then I press the user icon
   And I follow "Sign Out"
-  
-#     # line below is a pending holder till the delete button is implemented
-# 	Then pending holder
-  
   And I shoud see "bees"
   And I should not see "delete"
   
