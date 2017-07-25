@@ -147,6 +147,10 @@ function initAutocomplete() {
     }
     return null;
   }
+  
+  
+  // San Jose: 37.3382, -121.8863
+  
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 37.8716,
