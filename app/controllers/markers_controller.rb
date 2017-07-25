@@ -9,35 +9,26 @@ class MarkersController < ApplicationController
       render :nothing => true
     end 
   end
-  
+
+  def delete 
+    Marker.delete_marker(params[:id])
+    render :json => Marker.all
+  end
   def show
+    
     global_number_show = 5
-    top = bound_params[:uplat]
-    bottom = bound_params[:downlat]
-    left = bound_params[:leftlong]
-    right = bound_params[:rightlong]
+    current_user_id = session[:client_id]
+    coords = {top: bound_params[:uplat], bottom: bound_params[:downlat], 
+              left: bound_params[:leftlong], right: bound_params[:rightlong]}
+    # search_allergen = params[:allergen] 
+    search_allergen = ''
     
-    markers = Marker.find_all_in_bounds(top,bottom,left,right)
-    global_markers = Marker.get_global_markers(markers,global_number_show,top,bottom,left,right)
-    
-    # remove markers that do not belong to the current user or aren't clustered 
-    markers.each do |marker|
-      unless (marker.client_id == session[:client_id]) 
-        markers -= [marker] 
-      end
-    end
-    
-    # duct-tape way of passing current client_id to gmaps.js - todo: refactor with better solution
+    markers = Marker.find_all_in_bounds(coords,"client_id = #{current_user_id}",search_allergen)
+    global_markers = Marker.get_global_markers(markers,global_number_show,coords,search_allergen)
+
     marker_container = [markers, global_markers]
-    
-    # duct-tape way of passing current client_id to gmaps.js - todo: refactor with better solution
-    # client_id_dummy = Marker.new
-    # client_id_dummy.client_id = :client_id
-    # markers.insert(0, client_id_dummy)
-    
     # pass collection to gmaps.js
     render :json => marker_container
-    # render :json => heatmap  
             
   end
   
