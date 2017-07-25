@@ -150,12 +150,12 @@ function initAutocomplete() {
   
   
 function addOverlay() {
-  alert("hello")
+  // alert("hello")
   map.overlayMapTypes.insertAt(1,waqiMapOverlay);
 }
 
 function removeOverlay() {
-  alert("boo")
+  // alert("boo")
   map.overlayMapTypes.clear();
 }
 cleanAirBtn.onclick = function() {
