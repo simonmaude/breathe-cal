@@ -220,6 +220,31 @@ function initAutocomplete() {
   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(profile)
 
 
+  var translation_element = document.getElementById('google_translate_element')
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(translation_element)
+
+  // var e = document.getElementById("google_translate_element");
+  // var strUser = e.options[e.selectedIndex].value;
+  
+
+  
+  var right_to_left_languages = ["Arabic", "Azeri", "Azerbaijani", "Bakhtiari", 
+  "Balochi", "Farsi", "Persian", "Gilaki", "Javanese", "Kashmiri", "Kazakh", "Kurdish", 
+  "Sorani", "Malay", "Malayalam", "Pashto", "Punjabi", "Qashqai", "Sindhi", "Somali", "Sulu", 
+  "Takestani", "Turkmen", "Uighur", "Western Cham", "Hebrew", "Ladino",
+  "Judezmo", "Yiddish", "Mandekan", "Assyrian", "Modern Aramaic Koine", "Syriac", 
+  "Thaana", "Thâna", "Dhivehi", "Maldivian", "Tifinar", "Tamashek", "Urdu"];
+
+  $("body").on("change", "#google_translate_element select", function (e) {
+      if (right_to_left_languages.indexOf($(this).find(":selected").text()) > -1) {
+        // alert("Persian");
+	      $("#right-col").insertAfter("#left-col");
+      } else {
+        $("#left-col").insertAfter("#right-col");
+      }
+  });  
+  
+  
   // Bias the SearchBox results towards current map's viewport.
   map.addListener('bounds_changed', function() {
     searchBox.setBounds(map.getBounds());

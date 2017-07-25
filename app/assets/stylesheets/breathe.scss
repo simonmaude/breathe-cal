@@ -93,6 +93,41 @@ html, body {
 #remove {
   content: "add as a favorite city";
 }
+
+#google_translate_element {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 0 11px 0 0px;
+  text-overflow: ellipsis;
+  width: 30px;
+  height: 29px;
+  left: 460px !important;
+  top: 11px !important;
+
+}
+
+#google_translate_element{width:300px;float:right;text-align:right;display:block}
+.goog-te-banner-frame.skiptranslate { display: none !important;} 
+body { top: 0px !important; }
+#goog-gt-tt{display: none !important; top: 0px !important; } 
+.goog-tooltip skiptranslate{display: none !important; top: 0px !important; } 
+.activity-root { display: hide !important;} 
+.status-message { display: hide !important;}
+.started-activity-container { display: hide !important;}
+ 
+.goog-logo-link {
+   display:none !important;
+}
+.goog-te-gadget{
+   color: transparent !important;
+}
+.goog-te-gadget .goog-te-combo{
+   color: black !important;
+  font-family: Roboto;
+  font-size: 20px;
+}
+
 #pac-input {
   background-color: #fff;
   font-family: Roboto;
@@ -141,6 +176,12 @@ html, body {
     top: 8px;
 }
 
+.gm-style-mtc
+{
+  max-width: 50px;
+}
+
+
 #navigation_cities {
   position:relative;
   left:120px;
@@ -183,12 +224,12 @@ button[id="search-button"] {
   text-overflow: ellipsis;
   width: 30px;
   height: 29px;
-  opacity: 0.5;
+  opacity: 0.6;
   left: 411px !important;
 }
 
 button[id="search-button"]:hover {
-  opacity: 0.9;
+  opacity: 1;
   left: 411px !important;
 }
 
