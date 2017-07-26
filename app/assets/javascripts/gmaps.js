@@ -11,7 +11,7 @@
 var fetchedMarkers = {};
 var heatmapData = [];
 var bubble_map = {};
-
+var global1 = true;
 
 
 function initAutocomplete() {
@@ -202,17 +202,55 @@ function initAutocomplete() {
     
     
   
-  
+   var  waqiMapOverlay  =  new  google.maps.ImageMapType({  
+                  getTileUrl:  function(coord,  zoom)  {  
+                        return  'https://tiles.waqi.info/tiles/usepa-aqi/'  +  zoom  +  "/"  +  coord.x  +  "/"  +  coord.y  +  ".png?token=c18b43c1fe86c25643ca8e4fecbc1f23be1cc78a";  
+                  },  
+                  name:  "Air  Quality",  
+        });  
+        
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
   var searchBtn = document.getElementById('search-button');
   var searchBox = new google.maps.places.SearchBox(input);
   var myLocationBtn = document.getElementById('find-my-location');
+  var cleanAirBtn = document.getElementById('clean-air');
+  // var tempVar = document.getElementById('tempNum');
 
   
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(myLocationBtn);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtn);
+  
+  
+  
+      var cleanAirBtn2 = document.getElementById('clean-air-button');
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtn2);
+
+
+
+
+function addOverlay() {
+  // alert("hello")
+  map.overlayMapTypes.insertAt(1,waqiMapOverlay);
+}
+
+function removeOverlay() {
+  // alert("boo")
+  map.overlayMapTypes.clear();
+}
+cleanAirBtn2.onclick = function() {
+  $('#myonoffswitch').trigger("click");
+  if (global1 == true) {
+    addOverlay();
+    global1 = false;
+  }
+  else {
+    global1 = true;
+    removeOverlay(); 
+    }
+}
 
 
   //var markerEnabler = document.getElementById('marker-cta');
