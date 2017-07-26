@@ -28,6 +28,7 @@ class MarkersController < ApplicationController
     global_markers = Marker.get_global_markers(all_markers,global_number_show,coords,search_allergen)
 
     marker_container = [user_markers, global_markers]
+    
     # pass collection to gmaps.js
     render :json => marker_container
             
