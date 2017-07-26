@@ -83,6 +83,7 @@ class CitiesController < ApplicationController
       end
       respond_to do |format|
         format.js {
+          p (@cities)
           render :template => "cities/city_data_back.js.erb"
         }
       end

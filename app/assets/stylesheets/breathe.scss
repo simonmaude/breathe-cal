@@ -266,6 +266,7 @@ button[id="find-my-location"]:hover {
 
 #marker-cta:hover {
     text-decoration: underline;
+    color : #3B3E80 !important;
 }
 
 #marker-cta-mobile {
@@ -608,4 +609,11 @@ input[type="submit"]{
     right: 0px; 
     background-color: #999999; 
     height : 29px;
+}
+
+
+.favCity:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color : #3B3E80 !important;
 }
