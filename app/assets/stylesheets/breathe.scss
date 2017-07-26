@@ -570,7 +570,8 @@ input[type="submit"]{
 .onoffswitch-inner {
     display: block; width: 200%; margin-left: -100%;
     transition: margin 0.3s ease-in 0s;
-      height: 33px !important;
+    height: 33px !important;
+    opacity: 0.95;
 }
 .onoffswitch-inner:before, .onoffswitch-inner:after {
     display: block; float: left; width: 50%; height: 29px; padding: 0; line-height: 25px;
