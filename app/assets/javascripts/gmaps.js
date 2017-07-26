@@ -243,8 +243,10 @@ function initAutocomplete() {
       if (right_to_left_languages.indexOf($(this).find(":selected").text()) > -1) {
         // alert("Persian");
 	      $("#right-col").insertAfter("#left-col");
+	   	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="right" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
       } else {
         $("#left-col").insertAfter("#right-col");
+	   	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="left" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
       }
   });  
   
