@@ -192,6 +192,28 @@ button[id="search-button"]:hover {
   left: 411px !important;
 }
 
+button[id="clean-air-button"] {
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 300;
+  margin-left: 48px;
+  margin-top: 10px;
+  padding: 0 11px 0 0px;
+  text-overflow: ellipsis;
+  width: 130px;
+  height: 29px;
+  opacity: 0.75;
+  left: 411px !important;
+}
+
+button[id="clean-air"]:hover {
+  opacity: 0.9;
+  left: 411px !important;
+}
+
 button[id="find-my-location"] {
   border-color: transparent;
   background-color: white;
@@ -244,6 +266,7 @@ button[id="find-my-location"]:hover {
 
 #marker-cta:hover {
     text-decoration: underline;
+    color : #3B3E80 !important;
 }
 
 #marker-cta-mobile {
@@ -527,3 +550,70 @@ input[type="submit"]{
     white-space: nowrap;
 }
 
+
+
+
+.onoffswitch {
+    position: relative; width: 128px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    margin-top: 10px !important;
+    margin-left: 10px !important;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid white; border-radius: 0px;
+    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
+    height: 29px !important;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+    height: 33px !important;
+    opacity: 0.95;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 29px; padding: 0; line-height: 25px;
+    font-size: 12px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+    border: 2px solid white;
+    background-clip: padding-box;
+}
+.onoffswitch-inner:before {
+    content: "Show Air Quality";
+    padding-left: 4px;
+    background-color: #FFFFFF; color: #999999;
+}
+.onoffswitch-inner:after {
+    content: "Hide Air Quality";
+    padding-right: 8px;
+    background-color: #FFFFFF; color: #7B68EE;
+    text-align: right;
+}
+
+
+.onoffswitch-switch {
+    display: block; width: 17px; margin: 0px;
+    background: #7B68EE;
+    position: absolute; top: 0; bottom: 0;
+    right: 111px;
+    transition: all 0.3s ease-in 0s; 
+    height : 29px;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
+    background-color: #999999; 
+    height : 29px;
+}
+
+
+.favCity:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color : #3B3E80 !important;
+}
