@@ -39,7 +39,7 @@ class Marker < ActiveRecord::Base
             zoom_markers.each do |zoom_marker|
               if (!id_set.include? zoom_marker.client_id) && ((zoom_marker.send(allergen) == true) || zoom_marker.title == allergen)
                 allergen_count += 1
-                # id_set << zoom_marker.client_id
+                id_set << zoom_marker.client_id
                 if (allergen_count >= global_number_show)
                   output << marker 
                 end
