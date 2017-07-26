@@ -149,6 +149,13 @@ function initAutocomplete() {
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtn);
   
   
+  
+      var cleanAirBtn2 = document.getElementById('clean-air-button');
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtn2);
+
+
+
+
 function addOverlay() {
   // alert("hello")
   map.overlayMapTypes.insertAt(1,waqiMapOverlay);
@@ -158,7 +165,8 @@ function removeOverlay() {
   // alert("boo")
   map.overlayMapTypes.clear();
 }
-cleanAirBtn.onclick = function() {
+cleanAirBtn2.onclick = function() {
+  $('#myonoffswitch').trigger("click");
   if (global1 == true) {
     addOverlay();
     global1 = false;
@@ -527,7 +535,6 @@ cleanAirBtn.onclick = function() {
 $(document).ready(initAutocomplete);
 $(document).on('page:load', initAutocomplete);
 $(document).on('page:change', initAutocomplete);
-
 
 
 
