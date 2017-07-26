@@ -28,7 +28,7 @@ gem 'figaro'
 gem 'httparty'
 gem 'nokogiri'
 # gem 'open-uri'
-
+gem 'mailgun-ruby', '~>1.1.6'
 gem 'geocoder'
 gem 'gmaps4rails'
 # Use Phantomjs - a WebKit scriptable with a JavaScript API
@@ -48,6 +48,7 @@ gem 'omniauth-google-oauth2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'capybara'
+gem 'whenever', :require => false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'sqlite3'
