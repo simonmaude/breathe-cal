@@ -93,10 +93,23 @@
   
     <div class="col-md-8 col-ms-12" style="padding-left: 0; padding-right: 0; z-index: 10; height: 100%;" id="left-col">
     <input id="pac-input" class="controls" type="text" placeholder="Search">
-
     <button id="search-button" class="controls">🔍</button>
     <button id="find-my-location"> <img id = "loc-img" height="30" width="30" src="https://cdn3.iconfinder.com/data/icons/glypho-travel/64/map-pin-marker-circle-512.png"> </button>
-
+   
+   
+   
+    <!--<button id="clean-air"> <img id = "loc-img" height="30" width="30" src="http://cleanairasia.org/wp-content/uploads/2015/07/Air_Quality_and_Climate_Change.png"> </button>-->
+    <button id="clean-air-button" class="controls"></button>
+  
+    <div id="clean-air" class="onoffswitch">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+        <label class="onoffswitch-label" for="myonoffswitch">
+            <span class="onoffswitch-inner"></span>
+            <span class="onoffswitch-switch"></span>
+        </label>
+    </div>
+    
+  
     <div id="map" style="height: 100%; width: 100%;"></div>
   
   </div>
@@ -117,4 +130,3 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
 <!--<script src="//nmp.newsgator.com/NGBuzz/buzz.ashx?buzzId=146282&apiToken=C8A8F8F5025D418F8AACB0A7FB2A799A&trkP=6d55b36b-8f3d-4003-b27d-ab20d60a3e6f%2Ceb799aa0-ab4c-4906-9d8f-19aaa62a99eb&trkM=29FA7D07-CEE9-C94B-3CF2-BA83A24ABFAC" type="text/javascript"></script>-->
 </div>
-
