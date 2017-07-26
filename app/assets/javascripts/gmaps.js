@@ -202,13 +202,8 @@ function initAutocomplete() {
     
     
   
-   var  waqiMapOverlay  =  new  google.maps.ImageMapType({  
-                  getTileUrl:  function(coord,  zoom)  {  
-                        return  'https://tiles.waqi.info/tiles/usepa-aqi/'  +  zoom  +  "/"  +  coord.x  +  "/"  +  coord.y  +  ".png?token=c18b43c1fe86c25643ca8e4fecbc1f23be1cc78a";  
-                  },  
-                  name:  "Air  Quality",  
-        });  
-        
+
+
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
   var searchBtn = document.getElementById('search-button');
@@ -240,6 +235,17 @@ function removeOverlay() {
   // alert("boo")
   map.overlayMapTypes.clear();
 }
+
+   var  waqiMapOverlay  =  new  google.maps.ImageMapType({  
+                  getTileUrl:  function(coord,  zoom)  {  
+                        return  'https://tiles.waqi.info/tiles/usepa-aqi/'  +  zoom  +  "/"  +  coord.x  +  "/"  +  coord.y  +  ".png?token=c18b43c1fe86c25643ca8e4fecbc1f23be1cc78a";  
+                  },  
+                  name:  "Air  Quality",  
+        });  
+        
+  removeOverlay(); 
+  
+  
 cleanAirBtn2.onclick = function() {
   $('#myonoffswitch').trigger("click");
   if (global1 == true) {
