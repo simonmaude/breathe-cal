@@ -32,19 +32,79 @@
         <% end %>
         <div id = "spacing"></div>
         <a href="#friends" class="dropdown-sub-title">Friends</a>
-        <a href="#email" class="dropdown-sub-title">Email preferences</a>
+        <div onclick= "settingsClick()", class="dropdown-sub-title">
+          <a>Settings</a>
+        </div>
         <%= link_to 'Sign Out', signout_path, id: "sign_out", class: "dropdown-sub-title" %>
       </div>
+      
+      <div id="settingsDropdown" class="dropdown-content drop-allign">
+        <div id="user-name-header">
+          <%=current_client.name %>
+        </div>
+        <% if !is_default %>
+          <img class= "profile-custom-header"src=<%=source%>>
+        <% else %>
+          <div  id = "profile-image-header">
+            <%= firstLetter %>
+          </div>
+        <% end %>
+        <div id = "spacing"></div>
+        <a class="dropdown-sub-title">Location preferences</a>
+        <div class="dropdown-sub-title">
+          Default Location:   
+          <input type="submit"value="Save" style="float: right" />
+          <input type="text" style="width: 75%;" value="no location set" />
+        </div> 
+        <div id = "spacing"></div>
+        <a class="dropdown-sub-title"> Email preferences</a>
+          Alerts email address:
+          <input type="submit"value="Save" style="float: right" />
+          <input type="text" style="width: 75%;" value="no email saved"/>
+          </br>
+          Receive alert emails? 
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+          </br>
+          Receive daily digest emails? 
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        <div onclick= "backClick()", class="dropdown-sub-title">
+          
+          <a>Back</a>
+        </div>
+      </div>
+      
     </div>
   <% else %>
     <%= link_to "Sign in", "/auth/google_oauth2", id: "log-in", class: "button"%>
-  <% end %>   
+  <% end %>    
+  
 
 <script>
   function profileClick() {
     document.getElementById("myDropdown").classList.toggle("show");
     document.getElementById("arrow").classList.toggle("show")
+    // document.getElementById("settingsDropdown").classList.toggle("show");
   }
+
+  function settingsClick() {
+    document.getElementById("myDropdown").classList.toggle("show");
+    document.getElementById("arrow").classList.toggle("show")
+    document.getElementById("settingsDropdown").classList.toggle("show");
+  }
+  
+  function backClick() {
+    document.getElementById("settingsDropdown").classList.toggle("show");
+    document.getElementById("arrow").classList.toggle("show")
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  
 
   function deleteMarker(id) {
     $.ajax({
