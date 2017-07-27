@@ -19,5 +19,9 @@
 # Task to run daily emails
 every 1.day, :at => '6:00 am' do
   #runner "Client.daily_email"
+  runner "EmailManager.email_digest"
 end
 
+every 1.hour do 
+    runner "EmailManager.email_alerts"
+end

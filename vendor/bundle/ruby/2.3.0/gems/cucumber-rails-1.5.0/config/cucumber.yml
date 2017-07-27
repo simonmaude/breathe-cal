@@ -1,0 +1,20 @@
+<%
+rerun_file = '.cucumber.rerun'
+failing_scenarios = IO.read(rerun_file) rescue ''
+path = if failing_scenarios.empty?
+  'features'
+else
+  puts "Running failed scenarios"
+  failing_scenarios
+end
+opts = [
+  "--format #{path == 'features' ? 'progress' : 'pretty'}",
+  "--format rerun -o #{rerun_file}"
+]
+rails_version = `bundle exec rails --version`.match(/[\d.]+$/).to_s
+if Gem::Version.new(rails_version) < Gem::Version.new('4.2')
+  opts << '--tags ~@requires-rails-version-42'
+end
+optlist = opts.join(' ')
+%>
+default: <%= path %> <%= optlist %> --tags ~@broken
