@@ -27,7 +27,7 @@ class MarkersController < ApplicationController
     all_markers = Marker.find_all_in_bounds(coords,'',search_allergen)
     
     # gets all possible markers in bounds
-    @marker_types_in_bounds = markers.uniq { |m| m.title }
+    @marker_types_in_bounds = user_markers.uniq { |m| m.title }
     @marker_types_in_bounds = @marker_types_in_bounds.map { |m| m.title }
     
     # do the filtering
