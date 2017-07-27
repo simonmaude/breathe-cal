@@ -50,23 +50,23 @@
           </div>
         <% end %>
         <div id = "spacing"></div>
-        <a class="dropdown-sub-title">Location preferences</a>
-        <div class="dropdown-sub-title">
+        <div class="dropdown-sub-title-settings">Location preferences</div>
+        <div class="dropdown-sub-title-content">
           Default Location:   
           </br>
-          <input type="text" style="width: 70%;" value="no location set" />
+          <input type="text" style="width: 65%;" value="no location set" />
           <input type="submit"value="Save" style="float: right" />
         </div> 
         <div id = "spacing"></div>
-        <a class="dropdown-sub-title"> Email preferences</a>
-        <div class="dropdown-sub-title">
-          Alerts email address:
+        <div class="dropdown-sub-title-settings"> Email preferences</div>
+        <div class="dropdown-sub-title-content">
+          Email address:
           </br>
-          <input type="text" style="width: 70%;" value="no email saved"/>
+          <input type="text" style="width: 65%;" value="no email saved"/>
           <input type="submit"value="Save" style="float: right" />
           </br>
         </div> 
-        <div class="dropdown-sub-title">
+        <div class="dropdown-sub-title-content">
           Receive alert emails? 
           <label class="switch" style="float: right">
             <input type="checkbox">
@@ -74,8 +74,8 @@
           </label>
           </br>
         </div> 
-        <div class="dropdown-sub-title">
-          Receive daily digest emails? 
+        <div class="dropdown-sub-title-content">
+          Receive daily update? 
           <label class="switch" style="float: right">
             <input type="checkbox">
             <span class="slider round"></span>
@@ -97,7 +97,9 @@
   function profileClick() {
     document.getElementById("myDropdown").classList.toggle("show");
     document.getElementById("arrow").classList.toggle("show")
-    // document.getElementById("settingsDropdown").classList.toggle("show");
+    // if document.getElementById("myDropdown") == ("show"){
+    //   document.getElementById("settingsDropdown").classList.toggle("show");
+    // }
   }
 
   function settingsClick() {
