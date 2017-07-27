@@ -22,8 +22,28 @@
     <% @cities.each do |c| %>
       <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
         <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
-          
-          <%= link_to c["name"].capitalize, cached_city_data_path(name: c["name"]), remote: true %>
+
+        
+        <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
+          <%= c["name"].capitalize %>
+        </div>
+        
+        
+          <script>
+            var favClicked = document.getElementsByClassName("favCity");
+
+            var seeCity = function(cityDiv) {
+              var searchText = cityDiv.innerHTML;
+              searchBar = document.getElementById('pac-input');
+              searchBar.value += searchText;
+              document.getElementById('search-button').click();
+              searchBar.value = "";
+             }
+          </script>
+
+
+
+          <!--<%= link_to c["name"].capitalize, cached_city_data_path(name: c["name"]), remote: true %>-->
         </div>
         <div class="col-lg-4">
           <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(c["quality"]) %>; margin-top: 2px;"></div>
