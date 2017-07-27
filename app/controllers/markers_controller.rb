@@ -43,9 +43,13 @@ class MarkersController < ApplicationController
     
     # pass collection to gmaps.js
     
-    respond_to do |format|
-      format.json { render :json => marker_container }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.js
+    #   format.json { render :json => marker_container }
+    # end
+    
+    render :json => marker_container
             
   end
   
