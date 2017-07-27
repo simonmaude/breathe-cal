@@ -21,12 +21,6 @@ And /I select the language "(.*)"/ do |language|
     pending
 end
 
-
-Then /I should see "(.*)"/ do |word|
-    pending
-end
-
-
-Then /I should not see "(.*)"/ do |word|
+Given /I am on the language settings tab/ do 
     pending
 end
