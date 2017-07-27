@@ -27,7 +27,7 @@ function initAutocomplete() {
   
   
   
-  function fetchMarkers() {
+  function fetchMarkers(filtered_allergens={}) {
 
     
     deleteMarkers();
@@ -38,8 +38,19 @@ function initAutocomplete() {
       type: "GET",
       contentType: "application/json; charset=utf-8",
       url: "markers",
-      data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}},
+      data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}, filter :filtered_allergens},
       success: function(data){
+        // used for filtering allergens
+        var i;
+        var marker_types_in_bounds = data[2];
+        for (i = 0; i < marker_types_in_bounds.length; i++) {
+          filter_id = 'filter-'+marker_types_in_bounds[i];
+          if (! $('#'+filter_id).length) {
+            $('#filter-header').append('<div><input type="checkbox" value="'+marker_types_in_bounds[i]+'" class="filter_checkbox" id="'+filter_id+'" checked/><label for="'+filter_id+'">&nbsp&nbsp&nbsp&nbsp'+marker_types_in_bounds[i]+'</div>');
+          }
+        }
+        //
+        
         heatmapData = [];
         // if (data.length > 1){
           // var client_id = data[0].client_id;
@@ -122,7 +133,7 @@ function initAutocomplete() {
       }
     })
   }
-  
+  window.fetchMarkers = fetchMarkers;
   function deleteMarker(id) {
 
     $.ajax({
@@ -315,7 +326,6 @@ cleanAirBtn2.onclick = function() {
         data: JSON.stringify({geo: place.geometry.location, name: place.name}),
         success: function(data){
           $("#city-info").text(JSON.stringify(data));
-        
         }
       });
       
