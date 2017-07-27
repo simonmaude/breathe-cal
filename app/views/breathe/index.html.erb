@@ -52,34 +52,36 @@
         <div id = "spacing"></div>
         <div class="dropdown-sub-title-settings">Location preferences</div>
         <div class="dropdown-sub-title-content">
-          Default Location:   
-          </br>
-          <input type="text" style="width: 65%;" value="no location set" />
+          Default Location:   </br> 
+        </div> 
+        <div class="dropdown-sub-title-content">
+          <input type="text" style="width: 65%;" placeholder="no location set" id="saved_location_text" />
           <input type="submit"value="Save" style="float: right" />
         </div> 
         <div id = "spacing"></div>
         <div class="dropdown-sub-title-settings"> Email preferences</div>
         <div class="dropdown-sub-title-content">
-          Email address:
+          Email address: </br>
           </br>
-          <input type="text" style="width: 65%;" value="no email saved"/>
+          <input type="text" style="width: 65%;" placeholder="no email saved" id="saved_email_text"/>
           <input type="submit"value="Save" style="float: right" />
           </br>
         </div> 
         <div class="dropdown-sub-title-content">
           Receive alert emails? 
-          <label class="switch" style="float: right">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
+            <label class="switch" style="float: right">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
           </br>
         </div> 
+        
         <div class="dropdown-sub-title-content">
           Receive daily update? 
-          <label class="switch" style="float: right">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
+            <label class="switch" style="float: right">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
         </div> 
         <div onclick= "backClick()", class="dropdown-sub-title">
           
@@ -106,6 +108,11 @@
     document.getElementById("myDropdown").classList.toggle("show");
     document.getElementById("arrow").classList.toggle("show")
     document.getElementById("settingsDropdown").classList.toggle("show");
+    document.getElementById("alertsDropdown").classList.toggle("show");
+  }
+  
+  function alertClick() {
+    document.getElementById("alertsDropdown").classList.toggle("show");
   }
   
   function backClick() {
