@@ -14,6 +14,11 @@ class MarkersController < ApplicationController
     Marker.delete_marker(params[:id])
     render :json => Marker.all
   end
+  
+  def edit
+    Marker.edit_marker(params[:id], params[:title])
+    render :json => Marker.all
+  end
   def show
     
     global_number_show = 5

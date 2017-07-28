@@ -516,9 +516,11 @@ input[type="submit"]{
   border: none;
   color: blue;
   position: absolute;
-  background-color: white;
+  background-color: transparent;
   text-align: center;
-  width: 50px;
+  width: 75%;
+  max-height: 20px;
+  margin:0;
 }
 
 .scrollFix {
@@ -531,3 +533,25 @@ input[type="submit"]{
   max-height: 50px;
 }
 
+.delete-btn {
+  background: url('/assets/trash.svg');
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-color: transparent;
+  height: 16px;
+  width: 16px;
+
+  border: none;
+
+}
+.delete-pos{
+  padding-top: 1px;
+  padding-left: 20px;
+}
+
+.edit-pos {
+  padding-top: 1px;
+}
+.edit-pos, .delete-pos{
+  float:left;
+}

@@ -3,6 +3,14 @@ class Marker < ActiveRecord::Base
   
   @@allergen_list = [:dog, :cat, :mold, :bees, :perfume, :oak, :dust, :smoke, :gluten, :peanut]
   
+  def self.edit_marker(id, new_title)
+    edit = Marker.find(id)
+    edit.title = new_title
+    edit.save
+    
+    
+
+  end
   def self.delete_marker(id)
     Marker.find(id).destroy
   end
