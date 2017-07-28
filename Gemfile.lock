@@ -196,6 +196,7 @@ GEM
     lumberjack (1.0.12)
     mail (2.6.6)
       mime-types (>= 1.16, < 4)
+    mailgun (0.11)
     main (6.2.2)
       arrayfields (~> 4.7, >= 4.7.4)
       chronic (~> 0.6, >= 0.6.2)
@@ -446,6 +447,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  mailgun
   metric_fu
   nokogiri
   omniauth-facebook
