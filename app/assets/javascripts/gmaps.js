@@ -85,7 +85,9 @@ function initAutocomplete() {
                   arrowPosition: 50,
                   minWidth: 100,
                   minHeight: 75,
-                  arrowStyle: 0});
+                  arrowStyle: 0,
+                  closeSrc: 'https://www.google.com/intl/en_us/mapfiles/close.gif'
+                });
                 bubble.setContent(newContent[0]);
                 marker.bubble = bubble;
                console.log("FETCH");
@@ -527,7 +529,7 @@ function initAutocomplete() {
     editBtn.classList.add('edit-btn')
     var deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = "";
-    deleteBtn.classList.add('delete-btn');
+    deleteBtn.classList.add('remove-btn');
     google.maps.event.addDomListener(editBtn,'click', function(){
       editMarker(data);
     })
@@ -718,7 +720,8 @@ function initAutocomplete() {
       minWidth: '600px',
       minHeight: 75,
       height: '100%',
-      arrowStyle: 0
+      arrowStyle: 0,
+      closeSrc: 'https://www.google.com/intl/en_us/mapfiles/close.gif'
       
     });
 
