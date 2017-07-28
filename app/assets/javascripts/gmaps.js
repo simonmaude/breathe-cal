@@ -525,7 +525,7 @@ function initAutocomplete() {
     
     var title = data.title;
     var editBtn = document.createElement("button");
-    editBtn.innerHTML = "edit";
+    editBtn.innerHTML = "Edit";
     editBtn.classList.add('edit-btn')
     var deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = "";
