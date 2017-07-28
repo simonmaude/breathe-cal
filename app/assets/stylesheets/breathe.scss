@@ -551,7 +551,7 @@ input[type="submit"]{
   background-color: transparent;
   color: white;
   border: solid;
-  border-radius: 10%;
+  border-radius: 5px;
   border-width: 1px;
   border-color: white;
 }
@@ -565,12 +565,12 @@ input[type="submit"]{
   background-color: transparent;
   color: white;
   border: solid;
-  border-radius: 10%;
+  border-radius: 5px;
   border-width: 1px;
   border-color: white;
   padding-top: 1px;
   height: 20px;
-  
+  line-height: 15px;
 }
 
 .edit-pos {
