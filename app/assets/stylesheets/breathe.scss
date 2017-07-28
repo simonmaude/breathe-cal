@@ -94,6 +94,19 @@ html, body {
   content: "add as a favorite city";
 }
 
+#languageSelect {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 300;
+  padding: 0 11px 0 0px;
+  text-overflow: ellipsis;
+  width: 150px;
+  height: 29px;
+  left: 460px !important;
+  top: 11px !important;
+
+}
+
 #google_translate_element {
   font-family: Roboto;
   font-size: 16px;
@@ -102,7 +115,7 @@ html, body {
   text-overflow: ellipsis;
   width: 30px;
   height: 29px;
-  left: 460px !important;
+  left: 660px !important;
   top: 11px !important;
 
 }

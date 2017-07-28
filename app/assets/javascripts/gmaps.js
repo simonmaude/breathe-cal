@@ -228,6 +228,12 @@ function initAutocomplete() {
   var translation_element = document.getElementById('google_translate_element')
   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(translation_element)
 
+
+  var translation_element = document.getElementById('languageSelect')
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(translation_element)
+
+
+
   // var e = document.getElementById("google_translate_element");
   // var strUser = e.options[e.selectedIndex].value;
   
