@@ -509,7 +509,7 @@ input[type="submit"]{
   width: 75px;
  
 }
-#edit-delete {
+.edit-delete {
   font-family: 'Open Sans', sans-serif;
   font-size: 10px;
 
@@ -525,5 +525,9 @@ input[type="submit"]{
     line-height: 1.35;
     overflow: hidden !important;
     white-space: nowrap;
+}
+
+#marker-bubble {
+  max-height: 50px;
 }
 

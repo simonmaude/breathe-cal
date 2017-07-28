@@ -428,13 +428,16 @@ function initAutocomplete() {
 
   function createContentString(data){
     var title = data.title;
-    var ncontent=document.createElement('div'),
-    button;
-    button=ncontent.appendChild(document.createElement('input'));
-    button.id = 'edit-delete'
-    button.type='button';
-    button.value='delete'
-    google.maps.event.addDomListener(button,'click', function(){
+    var editBtn = document.createElement("button");
+    editBtn.innerHTML = "edit";
+    editBtn.classList.add('edit-btn')
+    var deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "delete";
+    deleteBtn.classList.add('delete-btn');
+    google.maps.event.addDomListener(editBtn,'click', function(){
+      deleteMarker(data.id);
+    })
+    google.maps.event.addDomListener(deleteBtn,'click', function(){
       deleteMarker(data.id);
     })
     var contentString ="<div id= 'marker-bubble' class='scrollFix'>"+
@@ -443,7 +446,10 @@ function initAutocomplete() {
                           "<div id = 'spacing'></div>";
                         
     var content = $(contentString);
-    content.append(ncontent);
+
+    content.append(editBtn);
+    content.append(deleteBtn);
+
     content.append('</div></div>')
     return content;
   }
@@ -535,7 +541,7 @@ function initAutocomplete() {
     
     var contentString = $(
       
-      "<div id='wrap'>" + 
+      "<div id= 'marker-bubble' class='scrollFix'>" + 
         "<form id='markerForm' action='markers' method='POST'>"+
           "<datalist id='options'>"+
             "<option value='Cats'>" +
