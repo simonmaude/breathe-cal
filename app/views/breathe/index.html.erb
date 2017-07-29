@@ -50,16 +50,23 @@
           </div>
         <% end %>
         <div id = "spacing"></div>
-        <div class="dropdown-sub-title-settings">Location preferences</div>
+       
+        <div class="dropdown-sub-title-settings">
+          <div id = 'location-icon'></div>
+          Location preferences
+        </div>
         <div class="dropdown-sub-title-content">
           Default Location:   </br> 
         </div> 
         <div class="dropdown-sub-title-content">
           <input type="text" style="width: 65%;" placeholder="no location set" id="saved_location_text" />
-          <input type="submit"value="Save" style="float: right" />
+          <button id = 'location-btn' class = 'settings-btn' type="submit" value="Save" style="float: right">Save</button>
         </div> 
         
-        <div class="dropdown-sub-title-settings"> Language preferences</div>
+        <div class="dropdown-sub-title-settings"> 
+          <div id="language-icon"></div>
+          Language preferences
+        </div>
         <div class="dropdown-sub-title-content">
           Select Language: </br>
         </div>
@@ -174,7 +181,10 @@
         </div> 
         
         <div id = "spacing"></div>
-        <div class="dropdown-sub-title-settings"> Email preferences</div>
+        <div class="dropdown-sub-title-settings"> 
+          <div id="email-icon"></div>
+          Email preferences
+        </div>
         <div class="dropdown-sub-title-content">
           Email address: </br>
           </br>
@@ -185,7 +195,7 @@
             <% email_value = current_client.email %>
           <% end %>  
           <input type="text" style="width: 65%;" placeholder='<%= email_placeholder %>' value='<%= email_value %>' id="saved_email_text"/>
-          <input type="submit" value="Save" style="float: right" />
+          <button id 'email-btn' class = 'settings-btn' type="submit" value="Save" style="float: right">Save</button>
           </br>
         </div> 
         <div class="dropdown-sub-title-content" id="accordion">
