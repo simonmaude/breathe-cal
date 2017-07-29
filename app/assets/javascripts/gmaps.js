@@ -420,7 +420,19 @@ cleanAirBtn2.onclick = function() {
         
         // handling errors
       }, function() {
-        handleLocationError(true, infowindow, map.getCenter());
+        
+
+        infoWindow = new google.maps.InfoWindow;
+        infoWindow.setPosition(map.getCenter());
+        infoWindow.setContent('Location Disabled');
+        infoWindow.open(map);
+        
+        if (infoWindow) {
+          setTimeout(function(){
+            infoWindow.close();
+          }, 3000);
+        }
+        
       });
     } else {
       handleLocationError(false, infowindow, map.getCenter());
