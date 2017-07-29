@@ -59,8 +59,9 @@
           Default Location:   </br> 
         </div> 
         <div class="dropdown-sub-title-content">
-          <input type="text" style="width: 65%;" placeholder="no location set" id="saved_location_text" />
-          <button id = 'location-btn' class = 'settings-btn' type="submit" value="Save" style="float: right">Save</button>
+          <!--<input type="text" style="width: 65%;" placeholder="no location set" id="saved_location_text" />-->
+          <input id="autocomplete" placeholder="no location set" onFocus="geolocate()" type="text"></input>
+          <!--<button id = 'location-btn' class = 'settings-btn' type="submit" value="Save" style="float: right">Save</button>-->
         </div> 
         
         <div class="dropdown-sub-title-settings"> 
@@ -177,7 +178,7 @@
           	<option value="yo">Yoruba</option>
           	<option value="zu">Zulu</option>
           </select>
-        <div class="dropdown-sub-title-update" id="language_updated_text" >Language updated</div> 
+          <div class="dropdown-sub-title-update" id="language_updated_text">Language updated</div> 
         </div> 
         
         <div class="dropdown-sub-title-settings"> 
@@ -228,23 +229,28 @@
               <span class="slider round"></span>
             </label>
           </br>
-          <div id="collapseDailyUpdate" class="dropdown-sub-title collapse out">
-            </br>
-              <input type="checkbox"> Cats
-              <input type="checkbox"> Bees
-            </br>
-              <input type="checkbox"> Perfume
-              <input type="checkbox"> Oak
-            </br>
-            <input type="checkbox"> Peanut
-            <input type="checkbox"> Gluten
-            </br>
-            <input type="checkbox"> Dog
-            <input type="checkbox"> Dust
-            </br>
-            <input type="checkbox"> Smoke
-            <input type="checkbox"> Mold
-            </br>
+          <div id="collapseDailyUpdate" class="dropdown-sub-title-collapse collapse out">
+              
+            <div>
+            <ul class="checkbox"> 
+              <li><input type="checkbox" id="cb1" value="Cats" /><label for="cb1">Cats</label></li> 
+              <li><input type="checkbox" id="cb2" value="Bees" /><label for="cb2">Bees</label></li> 
+              <li><input type="checkbox" id="cb3" value="Perfume" /><label for="cb3">Perfume</label></li> 
+              <li><input type="checkbox" id="cb4" value="Oak" /><label for="cb4">Oak</label></li> 
+              <li><input type="checkbox" id="cb5" value="Peanut" /><label for="cb5">Peanut</label></li> 
+            </ul> 
+            </div>
+            
+            <div >
+            <ul class="checkbox"> 
+              <li><input type="checkbox" id="cb6" value="Gluten" /><label for="cb6>">Gluten</label></li> 
+              <li><input type="checkbox" id="cb7" value="Dog" /><label for="cb7>">Dog</label></li> 
+              <li><input type="checkbox" id="cb8" value="Dust" /><label for="cb8>">Dust</label></li> 
+              <li><input type="checkbox" id="cb9" value="Smoke" /><label for="cb9>">Smoke</label></li> 
+              <li><input type="checkbox" id="cb10" value="Mold" /><label for="cb10>">Mold</label></li> 
+            </ul> 
+            </div>
+            
           </div>
         </div> 
         
@@ -289,9 +295,45 @@
     document.getElementById("settingsDropdown").classList.toggle("show");
     document.getElementById("arrow").classList.toggle("show")
     document.getElementById("myDropdown").classList.toggle("show");
+    document.getElementById("language_updated_text").style.display = "none"
   }
   
+var placeSearch, autocomplete;
+ 
+  function initSettingsAutocomplet() {
+    // Create the autocomplete object, restricting the search to geographical
+    // location types.
+    autocomplete = new google.maps.places.Autocomplete(
+        /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+        {types: ['geocode']});
+
+    // When the user selects an address from the dropdown, populate the address
+    // fields in the form.
+    autocomplete.addListener('place_changed', fillInAddress);
+  }
   
+  function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+        document.getElementById(addressType).value = val;
+        // autocomplete
+  }
+  
+  function geolocate() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        var circle = new google.maps.Circle({
+          center: geolocation,
+          radius: position.coords.accuracy
+        });
+        autocomplete.setBounds(circle.getBounds());
+      });
+    }
+  }
 
   function deleteMarker(id) {
     $.ajax({
@@ -304,8 +346,9 @@
         }
     });
   }
- 
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADu11EsyctzmtrEGB8iR-bPG22aU4baFg&libraries=places&callback=initSettingsAutocomplet"
+    async defer></script>
 <!-- profile sign in and profile icon END -->
 
   <div class="col-md-4 col-ms-12" style="padding-left: 0; padding-right: 0; max-width: 500px;" id="right-col">
