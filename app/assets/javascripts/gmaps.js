@@ -16,6 +16,10 @@ var global1 = true;
 
 function initAutocomplete() {
   
+  autocomplete2 = new google.maps.places.Autocomplete(
+    /** @type {!HTMLInputElement} */(document.getElementById('autocomplete2')),
+    {types: ['geocode']});
+        
   function point2LatLng(point, map) {
     var topRight = map.getProjection().fromLatLngToPoint(map.getBounds().getNorthEast());
     var bottomLeft = map.getProjection().fromLatLngToPoint(map.getBounds().getSouthWest());
