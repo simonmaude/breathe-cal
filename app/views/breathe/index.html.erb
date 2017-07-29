@@ -71,7 +71,7 @@
           Select Language: </br>
         </div>
         <div class="dropdown-sub-title-content">
-          <select class="languageSelect">
+          <select class="languageSelect" onchange='$("#language_updated_text").show()'>
           	<option value="nl">English</option>
           	<option value="af">Afrikaans</option>
           	<option value="sq">Albanian</option>
@@ -177,10 +177,9 @@
           	<option value="yo">Yoruba</option>
           	<option value="zu">Zulu</option>
           </select>
-          </br>
+        <div class="dropdown-sub-title-update" id="language_updated_text" >Language updated</div> 
         </div> 
         
-        <div id = "spacing"></div>
         <div class="dropdown-sub-title-settings"> 
           <div id="email-icon"></div>
           Email preferences
@@ -262,6 +261,7 @@
   
 
 <script>
+
   function profileClick() {
     document.getElementById("arrow").classList.toggle("show")
     if (document.getElementById("myDropdown").style.display == "none"){
