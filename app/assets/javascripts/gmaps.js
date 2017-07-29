@@ -258,14 +258,24 @@ var autocomplete2 = new google.maps.places.Autocomplete(
     }
     return null;
   }
+  
+  
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {
-      lat: 37.8716,
-      lng: -122.2727
+      lat: 37.3382,
+      lng: -121.8863
     },
     zoom: 13,
     mapTypeId: 'roadmap'
   });
+  
+  
+  setTimeout(function(){
+    document.getElementById("pac-input").value = "San Jose";
+    document.getElementById("search-button").onclick();
+    document.getElementById("pac-input").value = "";
+  }, 300);
+
   
   var  waqiMapOverlay  =  new  google.maps.ImageMapType({  
                   getTileUrl:  function(coord,  zoom)  {  
