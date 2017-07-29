@@ -732,7 +732,7 @@ $(document).on('page:change', initAutocomplete);
      
   setTimeout(function(){
     document.getElementById("pac-input").value = "Central San Jose, San Jose, CA, United States";
-    document.getElementById("search-button").onclick();
+    // document.getElementById("search-button").onclick();
     document.getElementById("pac-input").value = "";
   }, 1000);
      
