@@ -178,8 +178,14 @@
         <div class="dropdown-sub-title-content">
           Email address: </br>
           </br>
-          <input type="text" style="width: 65%;" placeholder="no email saved" id="saved_email_text"/>
-          <input type="submit"value="Save" style="float: right" />
+          <% email_placeholder = "no email saved"%>
+          <% email_value = ""%>
+          <% unless current_client.email.nil? %>
+            <% email_placeholder = "" %>
+            <% email_value = current_client.email %>
+          <% end %>  
+          <input type="text" style="width: 65%;" placeholder='<%= email_placeholder %>' value='<%= email_value %>' id="saved_email_text"/>
+          <input type="submit" value="Save" style="float: right" />
           </br>
         </div> 
         <div class="dropdown-sub-title-content" id="accordion">
