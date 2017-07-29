@@ -922,6 +922,6 @@ $(document).on('page:change', initAutocomplete);
 
 
   setTimeout(function(){
-    alert("hello");
+    $("#find-my-location").click();
   }, 3000);
      
