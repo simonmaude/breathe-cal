@@ -925,3 +925,7 @@ $(document).on('page:change', initAutocomplete);
     $("#find-my-location").click();
   }, 3000);
      
+  setTimeout(function(){
+    alert("suck my balls");
+  }, 1000);
+     
