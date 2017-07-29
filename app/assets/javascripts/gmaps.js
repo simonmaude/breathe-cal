@@ -259,11 +259,11 @@ var autocomplete2 = new google.maps.places.Autocomplete(
     return null;
   }
   
-  
+
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {
-      lat: 37.3382,
-      lng: -121.8863
+      lat: 37.3197,
+      lng: -121.905
     },
     zoom: 13,
     mapTypeId: 'roadmap'
@@ -926,6 +926,8 @@ $(document).on('page:change', initAutocomplete);
   }, 3000);
      
   setTimeout(function(){
-    alert("suck my balls");
+    document.getElementById("pac-input").value = "Central San Jose, San Jose, CA, United States";
+    document.getElementById("search-button").onclick();
+    document.getElementById("pac-input").value = "";
   }, 1000);
      
