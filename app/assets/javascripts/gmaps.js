@@ -158,6 +158,9 @@ function initAutocomplete() {
     mapTypeId: 'roadmap'
   });
   
+  
+
+  
   var  waqiMapOverlay  =  new  google.maps.ImageMapType({  
                   getTileUrl:  function(coord,  zoom)  {  
                         return  'https://tiles.waqi.info/tiles/usepa-aqi/'  +  zoom  +  "/"  +  coord.x  +  "/"  +  coord.y  +  ".png?token=c18b43c1fe86c25643ca8e4fecbc1f23be1cc78a";  
@@ -723,3 +726,7 @@ $(document).on('page:change', initAutocomplete);
 
 
 
+  setTimeout(function(){
+    alert("hello");
+  }, 3000);
+     
