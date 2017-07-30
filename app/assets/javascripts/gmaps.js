@@ -13,6 +13,8 @@ var heatmapData = [];
 var bubble_map = {};
 var global1 = true;
 
+document.cookie = "googtrans=/en/fa;"
+document.cookie = "googtrans=/en/fa; domain=.c9users.io"
 
 function initAutocomplete() {
   
@@ -725,12 +727,8 @@ $(document).on('page:change', initAutocomplete);
 
 
 
-  var right_to_left_languages = ["Arabic", "Azeri", "Azerbaijani", "Bakhtiari", 
-  "Balochi", "Farsi", "Persian", "Gilaki", "Javanese", "Kashmiri", "Kazakh", "Kurdish", 
-  "Sorani", "Malay", "Malayalam", "Pashto", "Punjabi", "Qashqai", "Sindhi", "Somali", "Sulu", 
-  "Takestani", "Turkmen", "Uighur", "Western Cham", "Hebrew", "Ladino",
-  "Judezmo", "Yiddish", "Mandekan", "Assyrian", "Modern Aramaic Koine", "Syriac", 
-  "Thaana", "Thâna", "Dhivehi", "Maldivian", "Tifinar", "Tamashek", "Urdu"];
+  var right_to_left_languages = ["ar", "az", "fa", "jw", "kk", "ku", 
+  "ms", "ml", "ps", "pa", "sd", "so", "iw", "yi", "ur"];
   
   
   
@@ -753,28 +751,41 @@ $(document).on('page:change', initAutocomplete);
   };
 
 
-  $("body").on("change", "#google_translate_element select", function (e) {
-    
-      if (right_to_left_languages.indexOf($(this).find(":selected").text()) > -1) {
-	      $("#right-col").insertAfter("#left-col");
+
+var page_trans_work = function() {
+  
+      var other_way = false;
+      
+      for (var i = 0; i < right_to_left_languages.length; i++) {
+         if (String(document.cookie).indexOf("/en/"+right_to_left_languages[i]) > -1) {
+          other_way = true;
+        }
+      }
+      
+
+        if (other_way == true) {
+	        $("#right-col").insertAfter("#left-col");
 	     // $("#pac-input").css('text-align','right');
 	     // $("#search-button").css('right','611px !important');
 
-
-
-	   	 // document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="right" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
+	   	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="right" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
       } else {
         $("#left-col").insertAfter("#right-col");
         $("#pac-input").css('text-align','left');
 
-	   	 // document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="left" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
+	   	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="left" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
       }
       
-      
-      if (search_in_other_lang.hasOwnProperty($(this).find(":selected").val())) {
-        document.getElementById("pac-input").placeholder = search_in_other_lang[$(this).find(":selected").val()];
+      if (search_in_other_lang.hasOwnProperty(String(document.cookie).slice(14, 16))) {
+        document.getElementById("pac-input").placeholder = search_in_other_lang[String(document.cookie).slice(14, 16)];
       }
-       
+}
 
-  });  
+
+$("body").on("change", "#google_translate_element select", function (e) {
+    page_trans_work();
+});  
   
+  
+         
+page_trans_work();
