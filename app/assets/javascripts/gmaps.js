@@ -320,14 +320,14 @@ var autocomplete2 = new google.maps.places.Autocomplete(
   var searchBtn = document.getElementById('search-button');
   var searchBox = new google.maps.places.SearchBox(input);
   var myLocationBtn = document.getElementById('find-my-location');
-  var cleanAirBtn = document.getElementById('clean-air');
+  // var cleanAirBtn = document.getElementById('clean-air');
   // var tempVar = document.getElementById('tempNum');
 
   
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(myLocationBtn);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtn);
+  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtn);
   
   
   
@@ -350,17 +350,17 @@ function removeOverlay() {
   removeOverlay(); 
   
   
-cleanAirBtn2.onclick = function() {
-  $('#myonoffswitch').trigger("click");
-  if (global1 == true) {
-    addOverlay();
-    global1 = false;
-  }
-  else {
-    global1 = true;
-    removeOverlay(); 
-    }
-}
+// cleanAirBtn2.onclick = function() {
+//   $('#myonoffswitch').trigger("click");
+//   if (global1 == true) {
+//     addOverlay();
+//     global1 = false;
+//   }
+//   else {
+//     global1 = true;
+//     removeOverlay(); 
+//     }
+// }
 
 
   //var markerEnabler = document.getElementById('marker-cta');
@@ -746,16 +746,16 @@ cleanAirBtn2.onclick = function() {
       "<div id= 'marker-bubble' class='scrollFix'>" + 
         "<form id='markerForm' action='markers' method='POST'>"+
           "<datalist id='options'>"+
-            "<option value='Cats'>" +
-            "<option value='Bees'>" +
-            "<option value='Perfume'>" +
-            "<option value='Oak'>" +
-            "<option value='Peanut'>" +
-            "<option value='Gluten'>" +
-            "<option value='Dog'>" +
-            "<option value='Dust'>" +
-            "<option value='Smoke'>" +
-            "<option value='Mold'>" +
+            "<option value='Cats'> Cats </option>" +
+            "<option value='Bees'> Bees </option>" +
+            "<option value='Perfume'> Perfume </option>" +
+            "<option value='Oak'> Oak </option>" +
+            "<option value='Peanut'> Peanut </option>" +
+            "<option value='Gluten'> Gluten </option>" +
+            "<option value='Dog'> Dog </option>" +
+            "<option value='Dust'> Dust </option>" +
+            "<option value='Smoke'> Smoke </option>" +
+            "<option value='Mold'> Mold </option>" +
             "</datalist>" +
           "<div id= 'input-title'>Allergen:</div>" +
           "<div id='spacing'></div>"+
@@ -916,3 +916,56 @@ $(document).on('page:change', initAutocomplete);
 
 
 
+  var right_to_left_languages = ["Arabic", "Azeri", "Azerbaijani", "Bakhtiari", 
+  "Balochi", "Farsi", "Persian", "Gilaki", "Javanese", "Kashmiri", "Kazakh", "Kurdish", 
+  "Sorani", "Malay", "Malayalam", "Pashto", "Punjabi", "Qashqai", "Sindhi", "Somali", "Sulu", 
+  "Takestani", "Turkmen", "Uighur", "Western Cham", "Hebrew", "Ladino",
+  "Judezmo", "Yiddish", "Mandekan", "Assyrian", "Modern Aramaic Koine", "Syriac", 
+  "Thaana", "Thâna", "Dhivehi", "Maldivian", "Tifinar", "Tamashek", "Urdu"];
+  
+  
+  
+ 
+
+  var search_in_other_lang = {
+  	"af": "Soek","sq": "kërkim","am": "ፈልግ","ar": "بحث","hy": "Որոնում","az": "Axtarış","eu": "Search","be": "пошук",
+  	"bn": "অনুসন্ধান","bs": "Pretraga","bg": "Търсене","ca": "Cerca","ceb": "Pagpangita","ny": "Sakani","zh-CN": "搜索",
+  	"zh-TW": "搜索","co": "Ricerca","hr": "traži","cs": "Vyhledávání","da": "Søg","nl": "Zoeken","en": "Search","eo": "Serĉu",
+  	"et": "Otsing","tl": "Paghahanap","fi": "Haku","fr": "Recherche","fy": "Search","gl": "Busca","ka": "ძებნა","de": "Suche",
+  	"el": "έρευνα","gu": "શોધ","ht": "Search","ha": "Search","haw": "Search","iw": "חיפוש","hi": "खोज","hmn": "Nrhiav",
+  	"hu": "Keresés","is": "Leit","ig": "Search","id": "Pencarian","ga": "Cuardach","it": "Ricerca","ja": "検索","jw": "Search",
+  	"kn": "ಹುಡುಕು","kk": "іздеу","km": "ស្វែងរក","ko": "수색","ku": "Search","ky": "издөө","lo": "ຄົ້ນຫາ","la": "Quaerere","lv": "Meklēšana",
+  	"lt": "Paieška","lb": "Sich","mk": "Барај","mg": "Search","ms": "Carian","ml": "തിരയൽ","mt": "Fittex","mi": "Rapu","mr": "शोध",
+  	"mn": "хайх","my": "ရှာဖှေ","ne": "खोज","no": "Søk","ps": "لټون","fa": "جستجو","pl": "Poszukiwanie","pt": "Pesquisa","pa": "ਖੋਜ",
+  	"ro": "Căutare","ru": "поиск","sm": "Suʻe","gd": "Rannsachadh","sr": "претраживање","st": "Search","sn": "kutsvaka","sd": "ڳولا",
+  	"si": "සොයන්න","sk": "Vyhľadávanie","sl": "Iskanje","so": "Search","es": "Búsqueda","su": "Neangan","sw": "Search","sv": "Sök",
+  	"tg": "кофтуков","ta": "தேடல்","te": "శోధన","th": "ค้นหา","tr": "Arama","uk": "пошук","ur": "تلاش کریں","uz": "Qidiruv",
+  	"vi": "Tìm kiếm","cy": "Chwilio","xh": "Search","yi": "זוכן","yo": "Search","zu": "Ukucinga"
+  };
+
+
+  $("body").on("change", "#google_translate_element select", function (e) {
+    
+      if (right_to_left_languages.indexOf($(this).find(":selected").text()) > -1) {
+	      $("#right-col").insertAfter("#left-col");
+	     // $("#pac-input").css('text-align','right');
+	     // $("#search-button").css('right','611px !important');
+
+
+
+	   	 // document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="right" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
+      } else {
+        $("#left-col").insertAfter("#right-col");
+        $("#pac-input").css('text-align','left');
+
+	   	 // document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="left" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
+      }
+      
+      
+      if (search_in_other_lang.hasOwnProperty($(this).find(":selected").val())) {
+        document.getElementById("pac-input").placeholder = search_in_other_lang[$(this).find(":selected").val()];
+      }
+       
+
+  });  
+  
