@@ -215,14 +215,14 @@ function initAutocomplete() {
   var searchBtn = document.getElementById('search-button');
   var searchBox = new google.maps.places.SearchBox(input);
   var myLocationBtn = document.getElementById('find-my-location');
-  // var cleanAirBtn = document.getElementById('clean-air');
+  var cleanAirBtn = document.getElementById('clean-air');
   // var tempVar = document.getElementById('tempNum');
 
   
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(myLocationBtn);
-  // map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtn);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtn);
   
   
   
@@ -233,34 +233,28 @@ function initAutocomplete() {
 
 
 function addOverlay() {
-  // alert("hello")
   map.overlayMapTypes.insertAt(1,waqiMapOverlay);
 }
 
 function removeOverlay() {
-  // alert("boo")
   map.overlayMapTypes.clear();
 }
 
   removeOverlay(); 
   
   
-// cleanAirBtn2.onclick = function() {
-//   $('#myonoffswitch').trigger("click");
-//   if (global1 == true) {
-//     addOverlay();
-//     global1 = false;
-//   }
-//   else {
-//     global1 = true;
-//     removeOverlay(); 
-//     }
-// }
+cleanAirBtn2.onclick = function() {
+  $('#myonoffswitch').trigger("click");
+  if (global1 == true) {
+    addOverlay();
+    global1 = false;
+  }
+  else {
+    global1 = true;
+    removeOverlay(); 
+    }
+}
 
-
-  //var markerEnabler = document.getElementById('marker-cta');
-  //map.controls[google.maps.ControlPosition.LEFT_TOP].push(markerEnabler);
-  
   // Added Sign in and profile icon buttons
   var signIn = document.getElementById('log-in')
   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(signIn);
