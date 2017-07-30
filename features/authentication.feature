@@ -31,6 +31,9 @@ Scenario: As a logged in user I should be able to logout when I press the sign o
   Then I should be on the landing page
   When I press the user icon
   Then I should see the text on the side "Sign Out"
+  
+  Then pending holder 
+  
   When I follow "Sign Out"
   And I should not see "James Jones"
   And I should see the text on the side "Sign in"

@@ -14,28 +14,31 @@ class MarkersController < ApplicationController
     Marker.delete_marker(params[:id])
     render :json => Marker.all
   end
+  
+  
   def show
-    
-    global_number_show = 5
+    global_number_show = 4
     current_user_id = session[:client_id]
     coords = {top: bound_params[:uplat], bottom: bound_params[:downlat], 
               left: bound_params[:leftlong], right: bound_params[:rightlong]}
-    # search_allergen = params[:allergen] 
-    search_allergen = ''
+    # search_allergen = params[:allergen] || ''
+    search_allergen = Marker.sanitize(params[:allergen] || '')
+    # test data:
+    # search_allergen = 'mold'
     
-    user_markers = Marker.find_all_in_bounds(coords,"client_id = #{current_user_id}",search_allergen)
     all_markers = Marker.find_all_in_bounds(coords,'',search_allergen)
+    user_markers = Marker.find_all_in_bounds(coords,"client_id = #{current_user_id}",search_allergen)
     
     # gets all possible markers in bounds
     @marker_types_in_bounds = user_markers.uniq { |m| m.title }
     @marker_types_in_bounds = @marker_types_in_bounds.map { |m| m.title }
     
-    # do the filtering
-    if params[:filter] && (params[:filter].keys.length > 0)
-      filtered_allergens = params[:filter]
-      user_markers = user_markers.select { |m| filtered_allergens.include? m.title }
-      all_markers = all_markers.select { |m| filtered_allergens.include? m.title }
-    end
+#     # do the filtering
+#     if params[:filter] && (params[:filter].keys.length > 0)
+#       filtered_allergens = params[:filter]
+#       user_markers = user_markers.select { |m| filtered_allergens.include? m.title }
+#       all_markers = all_markers.select { |m| filtered_allergens.include? m.title }
+#     end
     
     global_markers = Marker.get_global_markers(all_markers,global_number_show,coords,search_allergen)
 
@@ -50,7 +53,6 @@ class MarkersController < ApplicationController
     # end
     
     render :json => marker_container
-            
   end
   
   
