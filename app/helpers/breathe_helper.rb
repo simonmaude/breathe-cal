@@ -130,6 +130,10 @@ Think about replacing your grass lawn with low pollen ground cover - Irish Moss,
       end
     end    
   end
+  def get_allergens(name, category)
+    dict = POLLEN_RANGE_HASH
+    return dict
+  end
   def get_pollen_range(name, category)
     dict = POLLEN_RANGE_HASH
     if dict[name.downcase]
