@@ -13,8 +13,8 @@ var heatmapData = [];
 var bubble_map = {};
 var global1 = true;
 
-document.cookie = "googtrans=/en/fa;"
-document.cookie = "googtrans=/en/fa; domain=.c9users.io"
+document.cookie = "googtrans=/en/en;"
+document.cookie = "googtrans=/en/en; domain=.c9users.io"
 
 function initAutocomplete() {
   
@@ -753,9 +753,7 @@ $(document).on('page:change', initAutocomplete);
 
 
 var page_trans_work = function() {
-  
       var other_way = false;
-      
       for (var i = 0; i < right_to_left_languages.length; i++) {
          if (String(document.cookie).indexOf("/en/"+right_to_left_languages[i]) > -1) {
           other_way = true;
@@ -783,7 +781,9 @@ var page_trans_work = function() {
 
 
 $("body").on("change", "#google_translate_element select", function (e) {
-    page_trans_work();
+  document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";";
+  document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";" + "domain=.c9users.io"
+  page_trans_work();
 });  
   
   
