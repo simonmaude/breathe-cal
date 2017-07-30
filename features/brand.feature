@@ -19,7 +19,10 @@ Scenario: I should notice the breathe for bay area more noticable.
 	
 @javascript
 Scenario: I should be able to access the client homepage by clicking the Breathe logos. 
-    Given I should see an icon "breathe" 
+    Given I should see an icon "breathe"
+    
+    Then pending holder
+    
     When I press the icon "breathe" 
     And I should be at the web address "www.breathebayarea.org"
 	

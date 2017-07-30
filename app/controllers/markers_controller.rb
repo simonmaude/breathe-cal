@@ -23,7 +23,7 @@ class MarkersController < ApplicationController
               left: bound_params[:leftlong], right: bound_params[:rightlong]}
     search_allergen = params[:allergen] || ''
     # test data:
-    search_allergen = 'mold'
+    # search_allergen = 'mold'
     
     all_markers = Marker.find_all_in_bounds(coords,'',search_allergen)
     user_markers = Marker.find_all_in_bounds(coords,"client_id = #{current_user_id}",search_allergen)
