@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @user.name %></h1>
+    <p>
+        This is a daily digest.
+        Alert status: <%= @alert %>
+        Will add information about favorite cities later
+        <% #@users.cities.each do |city| %>
+          <%#= city  %>
+        <%#end %>
+    </p>
+  </body>
+</html>
