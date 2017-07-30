@@ -21,8 +21,8 @@ class MarkersController < ApplicationController
     current_user_id = session[:client_id]
     coords = {top: bound_params[:uplat], bottom: bound_params[:downlat], 
               left: bound_params[:leftlong], right: bound_params[:rightlong]}
-    # search_allergen = params[:allergen] || ''
-    search_allergen = Marker.sanitize(params[:allergen] || '')
+    search_allergen = params[:allergen] || ''
+    # search_allergen = Marker.sanitize(params[:allergen] || '')
     # test data:
     # search_allergen = 'mold'
     
