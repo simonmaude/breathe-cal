@@ -13,8 +13,25 @@ var heatmapData = [];
 var bubble_map = {};
 var global1 = true;
 
+
+
+// Page should be in English by default
 document.cookie = "googtrans=/en/en;"
 document.cookie = "googtrans=/en/en; domain=.c9users.io"
+// **** add extra domain when deployed to heroku
+// **** also add heroku link to google online 
+
+
+// Setting the page language to the language selected by the user
+
+// if (user is signed in) {
+//   language = users language in database
+//   document.cookie = "googtrans=/en/...;"
+//   document.cookie = "googtrans=/en/...; domain=.c9users.io"
+// }
+
+
+
 
 function initAutocomplete() {
   
@@ -775,11 +792,14 @@ var page_trans_work = function() {
 
 
 $("body").on("change", "#google_translate_element select", function (e) {
+  // change data base language for user
+  // user.language = $(".goog-te-combo").val() 
+  
+  // now change current pages language
   document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";";
   document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";" + "domain=.c9users.io"
   page_trans_work();
 });  
-  
-  
-         
+      
+// Need to change the language of the page to the current cookie value, set at the top of the page   
 page_trans_work();
