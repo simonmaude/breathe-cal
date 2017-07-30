@@ -34,19 +34,19 @@ class MarkersController < ApplicationController
     @marker_types_in_bounds = user_markers.uniq { |m| m.title }
     @marker_types_in_bounds = @marker_types_in_bounds.map { |m| m.title }
     
-#     # do the filtering
-#     if params[:filter] && (params[:filter].keys.length > 0)
-#       filtered_allergens = params[:filter]
-#       user_markers = user_markers.select { |m| filtered_allergens.include? m.title }
-#       all_markers = all_markers.select { |m| filtered_allergens.include? m.title }
-#     end
+    # do the filtering
+    if params[:filter] && (params[:filter].keys.length > 0)
+      filtered_allergens = params[:filter]
+      user_markers = user_markers.select { |m| filtered_allergens.include? m.title }
+      all_markers = all_markers.select { |m| filtered_allergens.include? m.title }
+    end
     
 
-    # if params[:allergen] && (params[:allergen].keys.length > 0)
+    if params[:filter] && (params[:filter].keys.length > 0)
       global_markers = Marker.get_global_markers(all_markers,global_number_show,coords,search_allergen)
-    # else
-      # global_markers = []
-    # end
+    else
+      global_markers = []
+    end
     
 
     # pass collection to gmaps.js
