@@ -8,6 +8,8 @@
     <% begin; source = result['image']['url']; custom = true; rescue Exception; custom = false; end%>
     <% begin; is_default =  result['image']['isDefault']; rescue Exception; is_default = "true"; end%>
     <%userName = current_client.name%>
+    <%uID = current_client.id%>
+    
     <%firstLetter = userName[0]%>
   
     <div onclick= "profileClick()" id = "profile-icon" class = "round-hover">
@@ -58,9 +60,10 @@
         <div class="dropdown-sub-title-content">
           Default Location:   </br> 
         </div> 
-        <div class="dropdown-sub-title-content">
-          <input id="autocomplete2" placeholder="no location set" onchange='$("#location_updated_text").show()' type="text"></input>
-          <!--<button id = 'location-btn' class = 'settings-btn' type="submit" value="Save" style="float: right">Save</button>-->
+       <% location_placeholder = current_client.location || "no location saved"%>
+        <div class="dropdown-sub-title-content">  
+          <input id="autocomplete2" placeholder='<%= location_placeholder %>' onchange='$("#location_updated_text").show()' type="text"></input>
+           <!--<button id='location-btn' onClick='fillInAddress("")' class='settings-btn' type="submit" value="Reset" style="float: right">Reset</button>-->
           <div class="dropdown-sub-title-update" id="location_updated_text">Location updated</div> 
         </div> 
         
@@ -195,7 +198,8 @@
             <% email_value = current_client.email %>
           <% end %>  
           <input type="text" style="width: 65%;" placeholder='<%= email_placeholder %>' value='<%= email_value %>' id="saved_email_text"/>
-          <button id 'email-btn' class = 'settings-btn' type="submit" value="Save" style="float: right">Save</button>
+          <button id='email-btn' onclick=fillInEmail() class='settings-btn' type="submit" value="Save" style="float: right">Save</button>
+          <div class="dropdown-sub-title-update" id="email_updated_text">Email updated</div>
           </br>
         </div> 
         <div class="dropdown-sub-title-content" id="accordion">
@@ -206,18 +210,27 @@
             </label>
           </br>
           <div id="collapseAlertEmails" class="dropdown-sub-title collapse out">
-            <ul class="checkbox"> 
-              <li><input type="checkbox" id="cb1" value="Cats" /><label for="cb1">Cats</label></li> 
-              <li><input type="checkbox" id="cb2" value="Bees" /><label for="cb2">Bees</label></li> 
-              <li><input type="checkbox" id="cb3" value="Perfume" /><label for="cb3">Perfume</label></li> 
-              <li><input type="checkbox" id="cb4" value="Oak" /><label for="cb4">Oak</label></li> 
-              <li><input type="checkbox" id="cb5" value="Peanut" /><label for="cb5">Peanut</label></li> 
-              <li><input type="checkbox" id="cb6" value="Gluten" /><label for="cb6>">Gluten</label></li> 
-              <li><input type="checkbox" id="cb7" value="Dog" /><label for="cb7>">Dog</label></li> 
-              <li><input type="checkbox" id="cb8" value="Dust" /><label for="cb8>">Dust</label></li> 
-              <li><input type="checkbox" id="cb9" value="Smoke" /><label for="cb9>">Smoke</label></li> 
-              <li><input type="checkbox" id="cb10" value="Mold" /><label for="cb10>">Mold</label></li> 
-            </ul> 
+              
+            <div>
+              <ul class="checkbox"> 
+                <li><input type="checkbox" id="cb1" value="Cats" /><label for="cb1">Cats</label></li> 
+                <li><input type="checkbox" id="cb2" value="Bees" /><label for="cb2">Bees</label></li> 
+                <li><input type="checkbox" id="cb3" value="Perfume" /><label for="cb3">Perfume</label></li> 
+                <li><input type="checkbox" id="cb4" value="Oak" /><label for="cb4">Oak</label></li> 
+                <li><input type="checkbox" id="cb5" value="Peanut" /><label for="cb5">Peanut</label></li> 
+              </ul> 
+            </div>
+            
+            <div >
+              <ul class="checkbox"> 
+                <li><input type="checkbox" id="cb6" value="Gluten" /><label for="cb6>">Gluten</label></li> 
+                <li><input type="checkbox" id="cb7" value="Dog" /><label for="cb7>">Dog</label></li> 
+                <li><input type="checkbox" id="cb8" value="Dust" /><label for="cb8>">Dust</label></li> 
+                <li><input type="checkbox" id="cb9" value="Smoke" /><label for="cb9>">Smoke</label></li> 
+                <li><input type="checkbox" id="cb10" value="Mold" /><label for="cb10>">Mold</label></li> 
+              </ul> 
+            </div>
+            
           </div>
         </div> 
         
@@ -232,23 +245,23 @@
           <div id="collapseDailyUpdate" class="dropdown-sub-title-collapse collapse out">
               
             <div>
-            <ul class="checkbox"> 
-              <li><input type="checkbox" id="cb1" value="Cats" /><label for="cb1">Cats</label></li> 
-              <li><input type="checkbox" id="cb2" value="Bees" /><label for="cb2">Bees</label></li> 
-              <li><input type="checkbox" id="cb3" value="Perfume" /><label for="cb3">Perfume</label></li> 
-              <li><input type="checkbox" id="cb4" value="Oak" /><label for="cb4">Oak</label></li> 
-              <li><input type="checkbox" id="cb5" value="Peanut" /><label for="cb5">Peanut</label></li> 
-            </ul> 
+              <ul class="checkbox"> 
+                <li><input type="checkbox" id="cb1" value="Cats" /><label for="cb1">Cats</label></li> 
+                <li><input type="checkbox" id="cb2" value="Bees" /><label for="cb2">Bees</label></li> 
+                <li><input type="checkbox" id="cb3" value="Perfume" /><label for="cb3">Perfume</label></li> 
+                <li><input type="checkbox" id="cb4" value="Oak" /><label for="cb4">Oak</label></li> 
+                <li><input type="checkbox" id="cb5" value="Peanut" /><label for="cb5">Peanut</label></li> 
+              </ul> 
             </div>
             
             <div >
-            <ul class="checkbox"> 
-              <li><input type="checkbox" id="cb6" value="Gluten" /><label for="cb6>">Gluten</label></li> 
-              <li><input type="checkbox" id="cb7" value="Dog" /><label for="cb7>">Dog</label></li> 
-              <li><input type="checkbox" id="cb8" value="Dust" /><label for="cb8>">Dust</label></li> 
-              <li><input type="checkbox" id="cb9" value="Smoke" /><label for="cb9>">Smoke</label></li> 
-              <li><input type="checkbox" id="cb10" value="Mold" /><label for="cb10>">Mold</label></li> 
-            </ul> 
+              <ul class="checkbox"> 
+                <li><input type="checkbox" id="cb6" value="Gluten" /><label for="cb6>">Gluten</label></li> 
+                <li><input type="checkbox" id="cb7" value="Dog" /><label for="cb7>">Dog</label></li> 
+                <li><input type="checkbox" id="cb8" value="Dust" /><label for="cb8>">Dust</label></li> 
+                <li><input type="checkbox" id="cb9" value="Smoke" /><label for="cb9>">Smoke</label></li> 
+                <li><input type="checkbox" id="cb10" value="Mold" /><label for="cb10>">Mold</label></li> 
+              </ul> 
             </div>
             
           </div>
@@ -269,8 +282,8 @@
 <script>
 
   function profileClick() {
-    document.getElementById("arrow").classList.toggle("show")
     if (document.getElementById("myDropdown").style.display == "none"){
+      document.getElementById("arrow").classList.toggle("show")
       
       console.log(document.getElementById("myDropdown").style.visibility);
       document.getElementById("settingsDropdown").classList.toggle("show");
@@ -282,21 +295,46 @@
 
   function settingsClick() {
     document.getElementById("myDropdown").classList.toggle("show");
-    document.getElementById("arrow").classList.toggle("show")
+    document.getElementById("arrow").classList.toggle("show");
     document.getElementById("settingsDropdown").classList.toggle("show");
-    document.getElementById("alertsDropdown").classList.toggle("show");
-  }
-  
-  function alertClick() {
-    document.getElementById("alertsDropdown").classList.toggle("show");
   }
   
   function backClick() {
     document.getElementById("settingsDropdown").classList.toggle("show");
-    document.getElementById("arrow").classList.toggle("show")
+    document.getElementById("arrow").classList.toggle("show");
     document.getElementById("myDropdown").classList.toggle("show");
-    document.getElementById("language_updated_text").style.display = "none"
     document.getElementById("location_updated_text").style.display = "none"
+    document.getElementById("language_updated_text").style.display = "none"
+    document.getElementById("email_updated_text").style.display = "none"
+  }
+  
+  function fillInAddress(place) {
+    
+    $.ajax({
+        type: "PUT",
+        url: "client/" + $('uID'),
+        data: JSON.stringify({location: place, id: $('uID')}),
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+        }
+    });    
+  }  
+  
+  function fillInEmail(email) {
+    document.getElementById("email_updated_text").style.display = "block"
+    
+    $.ajax({
+        type: "PUT",
+        url: "client/" + $('uID'),
+        data: JSON.stringify({email: $('#saved_email_text').val(), id: $('uID')}),
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+        }
+    });    
   }
 
   function deleteMarker(id) {
