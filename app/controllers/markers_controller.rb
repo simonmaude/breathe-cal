@@ -14,24 +14,25 @@ class MarkersController < ApplicationController
     Marker.delete_marker(params[:id])
     render :json => Marker.all
   end
+  
+  
   def show
-    
-    global_number_show = 5
+    global_number_show = 4
     current_user_id = session[:client_id]
     coords = {top: bound_params[:uplat], bottom: bound_params[:downlat], 
               left: bound_params[:leftlong], right: bound_params[:rightlong]}
-    # search_allergen = params[:allergen] 
-    search_allergen = ''
+    search_allergen = params[:allergen] || ''
+    # test data:
+    search_allergen = 'mold'
     
-    user_markers = Marker.find_all_in_bounds(coords,"client_id = #{current_user_id}",search_allergen)
     all_markers = Marker.find_all_in_bounds(coords,'',search_allergen)
+    user_markers = Marker.find_all_in_bounds(coords,"client_id = #{current_user_id}",search_allergen)
     global_markers = Marker.get_global_markers(all_markers,global_number_show,coords,search_allergen)
 
     marker_container = [user_markers, global_markers]
     
     # pass collection to gmaps.js
     render :json => marker_container
-            
   end
   
   
