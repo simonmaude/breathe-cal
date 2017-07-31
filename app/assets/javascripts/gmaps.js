@@ -733,16 +733,16 @@ cleanAirBtn2.onclick = function() {
       "<div id= 'marker-bubble' class='scrollFix'>" + 
         "<form id='markerForm' action='markers' method='POST'>"+
           "<datalist id='options'>"+
-            "<option value='Cats'>" +
-            "<option value='Bees'>" +
-            "<option value='Perfume'>" +
-            "<option value='Oak'>" +
-            "<option value='Peanut'>" +
-            "<option value='Gluten'>" +
-            "<option value='Dog'>" +
-            "<option value='Dust'>" +
-            "<option value='Smoke'>" +
-            "<option value='Mold'>" +
+            "<option value='Cats'> Cats </option>" +
+            "<option value='Bees'> Bees </option>" +
+            "<option value='Perfume'> Perfume </option>" +
+            "<option value='Oak'> Oak </option>" +
+            "<option value='Peanut'> Peanut </option>" +
+            "<option value='Gluten'> Gluten </option>" +
+            "<option value='Dog'> Dog </option>" +
+            "<option value='Dust'> Dust </option>" +
+            "<option value='Smoke'> Smoke </option>" +
+            "<option value='Mold'> Mold </option>" +
             "</datalist>" +
           "<div id= 'input-title'>Allergen:</div>" +
           "<div id='spacing'></div>"+
