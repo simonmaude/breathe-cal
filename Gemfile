@@ -26,7 +26,7 @@ gem 'mailgun'
 gem 'haml'
 gem 'figaro'
 gem 'httparty'
-gem 'nokogiri'
+gem "nokogiri", ">= 1.6.7.rc"
 # gem 'open-uri'
 
 gem 'geocoder'

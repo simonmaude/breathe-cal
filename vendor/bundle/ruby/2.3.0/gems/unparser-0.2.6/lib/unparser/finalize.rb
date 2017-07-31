@@ -1,1 +1,0 @@
-Unparser::Emitter::REGISTRY.freeze
