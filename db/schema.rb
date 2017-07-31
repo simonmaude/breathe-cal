@@ -43,7 +43,14 @@ ActiveRecord::Schema.define(version: 20170730003252) do
     t.datetime "oauth_expires_at"
     t.string   "location"
     t.boolean  "email_digest"
-    t.boolean  "email_alerts"
+    t.boolean  "email_alert"
+  end
+
+  create_table "email_managers", force: :cascade do |t|
+    t.string   "alert"
+    t.string   "previous_alert"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "markers", force: :cascade do |t|
