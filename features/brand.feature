@@ -17,10 +17,13 @@ Scenario: I should be able to see the lung logo when searching for a city's alle
 #     When I press the icon "bcal"
 #     And I should be at the web address "www.breathebayarea.org"
 	
-# @javascript
-# Scenario: I should be able to access the client homepage by clicking the Breathe logos. 
-#     Given I should see an icon "breathe" 
-#     When I press the icon "breathe" 
-#     And I should be at the web address "www.breathebayarea.org"
+@javascript
+Scenario: I should be able to access the client homepage by clicking the Breathe logos. 
+    Given I should see an icon "breathe"
+    
+    Then pending holder
+    
+    When I press the icon "breathe" 
+    And I should be at the web address "www.breathebayarea.org"
 	
 
