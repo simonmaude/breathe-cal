@@ -279,14 +279,19 @@ var autocomplete2 = new google.maps.places.Autocomplete(
     }
     return null;
   }
+  
+  
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {
-      lat: 37.8716,
-      lng: -122.2727
+      lat: 37.3382,
+      lng: -121.8863
     },
     zoom: 13,
     mapTypeId: 'roadmap'
   });
+  
+  
+
   
   var  waqiMapOverlay  =  new  google.maps.ImageMapType({  
                   getTileUrl:  function(coord,  zoom)  {  
@@ -542,7 +547,19 @@ cleanAirBtn2.onclick = function() {
         
         // handling errors
       }, function() {
-        handleLocationError(true, infowindow, map.getCenter());
+        
+
+        infoWindow = new google.maps.InfoWindow;
+        infoWindow.setPosition(map.getCenter());
+        infoWindow.setContent('Location Disabled');
+        infoWindow.open(map);
+        
+        if (infoWindow) {
+          setTimeout(function(){
+            infoWindow.close();
+          }, 3000);
+        }
+        
       });
     } else {
       handleLocationError(false, infowindow, map.getCenter());
@@ -999,3 +1016,8 @@ $("body").on("change", "#google_translate_element select", function (e) {
       
 // Need to change the language of the page to the current cookie value, set at the top of the page   
 page_trans_work();
+
+
+   setTimeout(function(){
+     $("#find-my-location").click();
+    }, 3000);
