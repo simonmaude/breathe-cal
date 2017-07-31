@@ -266,8 +266,18 @@ a[x-apple-data-detectors=true] {
                   
                     <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 30px; padding-left: 30px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
 <div style="color:#555555;line-height:180%;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif; padding-right: 30px; padding-left: 30px; padding-top: 10px; padding-bottom: 10px;">	
-	<div style="font-size:12px;line-height:22px;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;color:#555555;text-align:left;"><span style="font-size:16px; line-height:29px;">&#160;<span style="line-height: 28px; font-size: 16px;">Hello <%=@user.name %>,</span></span><br><span style="font-size:16px; line-height:29px;"><span style="line-height: 28px; font-size: 16px;">This is your Daily Digest from Breathe California.</span></span></div><div style="font-size:12px;line-height:22px;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;color:#555555;text-align:left;"><span style="font-size:16px; line-height:29px;"><span style="line-height: 28px; font-size: 16px;">
-	  You are receiving this emails because there has been an air alert. The air alert is: <%= @alert %>.
+	<div style="font-size:12px;line-height:22px;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;color:#555555;text-align:left;"><span style="font-size:16px; line-height:29px;">&#160;<span style="line-height: 28px; font-size: 16px;">Hello <%=@user.name %>,</span></span><br><span style="font-size:16px; line-height:29px;"><span style="line-height: 28px; font-size: 16px;"> &nbsp; &nbsp; &nbsp; This is your Daily Digest from Breathe California.</span></span></div><div style="font-size:12px;line-height:22px;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;color:#555555;text-align:left;"><span style="font-size:16px; line-height:29px; "><span style="line-height: 28px; font-size: 16px;">
+	  <% if City.where(client_id: @user.id).any? %> 
+	  &nbsp;&nbsp;&nbsp;&nbsp; Your favorite cities are:<br>
+	    <% City.where(client_id: @user.id).each do |city| %>
+	      <%= city %>
+	    <% end %>
+	  .
+	  <% else %>
+	  &nbsp;&nbsp;&nbsp;&nbsp; You currently have no favorite cities.
+	  <% end %>
+	  <br>
+	  &nbsp;&nbsp;&nbsp;&nbsp; Current air alert: <%= @alert %>  
 	  </span></span><span style="font-size:18px; line-height:32px;"></span></div>	
 </div>
 <!--[if mso]></td></tr></table><![endif]-->
