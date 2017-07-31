@@ -568,6 +568,12 @@
           "Value": 3,
           "Category": "Moderate",
           "CategoryValue": 2
+        },
+        {
+          "Name": "Air Quality",
+          "Value": 3,
+          "Category": "Moderate",
+          "CategoryValue": 2
         }
       ],
       "Day": {

@@ -13,11 +13,15 @@ var heatmapData = [];
 var bubble_map = {};
 var recentMarker = null;
 var editedMarker = null;
-
-
+var global1 = true;
 
 function initAutocomplete() {
-  
+var autocomplete2 = new google.maps.places.Autocomplete(
+    /** @type {!HTMLInputElement} */(document.getElementById('autocomplete2')),
+    {types: ['geocode']});
+  var place = autocomplete2.getPlace();
+  autocomplete2.addListener('place_changed', fillInAddress(place)); 
+        
   function point2LatLng(point, map) {
     var topRight = map.getProjection().fromLatLngToPoint(map.getBounds().getNorthEast());
     var bottomLeft = map.getProjection().fromLatLngToPoint(map.getBounds().getSouthWest());
@@ -29,7 +33,7 @@ function initAutocomplete() {
   
   
   
-  function fetchMarkers() {
+  function fetchMarkers(filtered_allergens={}) {
 
     
     deleteMarkers();
@@ -40,8 +44,19 @@ function initAutocomplete() {
       type: "GET",
       contentType: "application/json; charset=utf-8",
       url: "markers",
-      data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}},
+      data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}, filter :filtered_allergens},
       success: function(data){
+        // used for filtering allergens
+        var i;
+        var marker_types_in_bounds = data[2];
+        for (i = 0; i < marker_types_in_bounds.length; i++) {
+          filter_id = 'filter-'+marker_types_in_bounds[i];
+          if (! $('#'+filter_id).length) {
+            $('#filter-header').append('<div><input type="checkbox" value="'+marker_types_in_bounds[i]+'" class="filter_checkbox" id="'+filter_id+'" checked/><label for="'+filter_id+'">&nbsp&nbsp&nbsp&nbsp'+marker_types_in_bounds[i]+'</div>');
+          }
+        }
+        //
+        
         heatmapData = [];
         // if (data.length > 1){
           // var client_id = data[0].client_id;
@@ -127,7 +142,7 @@ function initAutocomplete() {
       }
     })
   }
-  
+  window.fetchMarkers = fetchMarkers;
   function deleteMarker(id) {
 
     $.ajax({
@@ -249,6 +264,16 @@ function initAutocomplete() {
     mapTypeId: 'roadmap'
   });
   
+  var  waqiMapOverlay  =  new  google.maps.ImageMapType({  
+                  getTileUrl:  function(coord,  zoom)  {  
+                        return  'https://tiles.waqi.info/tiles/usepa-aqi/'  +  zoom  +  "/"  +  coord.x  +  "/"  +  coord.y  +  ".png?token=c18b43c1fe86c25643ca8e4fecbc1f23be1cc78a";  
+                  },  
+                  name:  "Air  Quality",  
+        });  
+        
+  map.overlayMapTypes.insertAt(0,waqiMapOverlay);  
+
+  
   var infowindow = new google.maps.InfoWindow;
     
   // Reverse lat/lon city lookup
@@ -285,17 +310,54 @@ function initAutocomplete() {
     
     
   
-  
+
+
   // Create the search box and link it to the UI element.
   var input = document.getElementById('pac-input');
   var searchBtn = document.getElementById('search-button');
   var searchBox = new google.maps.places.SearchBox(input);
   var myLocationBtn = document.getElementById('find-my-location');
+  var cleanAirBtn = document.getElementById('clean-air');
+  // var tempVar = document.getElementById('tempNum');
 
   
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(myLocationBtn);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtn);
+  
+  
+  
+      var cleanAirBtn2 = document.getElementById('clean-air-button');
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtn2);
+
+
+
+
+function addOverlay() {
+  // alert("hello")
+  map.overlayMapTypes.insertAt(1,waqiMapOverlay);
+}
+
+function removeOverlay() {
+  // alert("boo")
+  map.overlayMapTypes.clear();
+}
+
+  removeOverlay(); 
+  
+  
+cleanAirBtn2.onclick = function() {
+  $('#myonoffswitch').trigger("click");
+  if (global1 == true) {
+    addOverlay();
+    global1 = false;
+  }
+  else {
+    global1 = true;
+    removeOverlay(); 
+    }
+}
 
 
   //var markerEnabler = document.getElementById('marker-cta');
@@ -363,7 +425,6 @@ function initAutocomplete() {
         data: JSON.stringify({geo: place.geometry.location, name: place.name}),
         success: function(data){
           $("#city-info").text(JSON.stringify(data));
-        
         }
       });
       
@@ -848,7 +909,6 @@ function initAutocomplete() {
 $(document).ready(initAutocomplete);
 $(document).on('page:load', initAutocomplete);
 $(document).on('page:change', initAutocomplete);
-
 
 
 

@@ -2,9 +2,15 @@
   <!--<h5 style="float: left; padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;"><%= @text %></h5>-->
   
   
-  <h5 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 16px;"><%= link_to "Recent Searches", city_data_back_path, remote: true, :style => 'color: 3672B2' %> |
-  <%=  link_to "View Favorites", display_favorite_cities_path, remote: true, :style => 'color: 3672B2' %> | 
-  <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center;" id="marker-cta" class = "controls" <%=  link_to "Add Allergen", remote: true %>  </span>  </h5>
+  <h5 style="font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 16px;">
+  <%= link_to "Recent Searches", city_data_back_path, remote: true, :style => 'color: 3672B2' %> |
+  <%=  link_to "View Favorites", display_favorite_cities_path, remote: true, :style => 'color: 3672B2' %> |
+  <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center;" id="marker-cta" class = "controls" <%=  link_to "Add Allergen", remote: true %>  </span> |
+  
+  <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center;" id="filter" class = "">
+  <%=  link_to "Filter Allergens", 'javascript:;',  :onclick => "showFilterCheckboxes()" %>  </span>
+    
+  </h5>
 
 
 </div>
@@ -16,8 +22,28 @@
     <% @cities.each do |c| %>
       <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
         <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
-          
-          <%= link_to c["name"].capitalize, cached_city_data_path(name: c["name"]), remote: true %>
+
+        
+        <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
+          <%= c["name"].capitalize %>
+        </div>
+        
+        
+          <script>
+            var favClicked = document.getElementsByClassName("favCity");
+
+            var seeCity = function(cityDiv) {
+              var searchText = cityDiv.innerHTML;
+              searchBar = document.getElementById('pac-input');
+              searchBar.value += searchText;
+              document.getElementById('search-button').click();
+              searchBar.value = "";
+             }
+          </script>
+
+
+
+          <!--<%= link_to c["name"].capitalize, cached_city_data_path(name: c["name"]), remote: true %>-->
         </div>
         <div class="col-lg-4">
           <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(c["quality"]) %>; margin-top: 2px;"></div>
@@ -26,10 +52,17 @@
       </div>  <% end %>
       <% else %> 
         <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
-          <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+          
+          <div id="sidebar-favorite" class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
             <%= @no_cities %>
           </div>
+
+          <div id="sidebar-filter" class="col-lg-10" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898; display: none">
+            <div id='filter-header'>Allergens on Map</div>
+            <button id='filter-btn' style="color: black" onclick="filter()">Filter</button>
           </div>
+    
+        </div>
 
 
   <% end %>

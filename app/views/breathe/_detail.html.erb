@@ -19,8 +19,15 @@
   <%= image_tag('scale.png') %>  
 </div>
 
+<!--<div style="padding: 10px;" class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">-->
 <div style="padding: 10px;" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;">Allergens</h5>
+        <!--  <a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">-->
+        <!--  Allergens-->
+        <!--</a>-->
+        <!--<div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne">-->
+<!--<div class="row" role="tab" id="headingAllergens" style="padding: 15px 10px; border-top-style: solid; border-top-width: 0.5px; border-top-color: #eee;"-->
+<!--        data-toggle="collapse" data-parent="#accordion1" href="#collapsOne1" aria-expanded="false" aria-controls="collapsOne1"> -->
+        <h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;">Allergens</h5>
     <% get_pollen(@data).each do |p| %>
       <% if p["Name"] != "AirQuality" %>
         <div class="row" role="tab" id="heading<%= p["Name"]%>" style="padding: 15px 10px; border-top-style: solid; border-top-width: 0.5px; border-top-color: #eee;"
@@ -47,6 +54,7 @@
             <% end %>
           </div>
         </div>
+      </div>
       <% end %>
     <% end %>
     
@@ -111,6 +119,10 @@
           </div>
         </div>    
   <% end %>
+  <!--Temporary Heading for a new section based on air quality. Still need to figure out how to add by toggle -->
+  <h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;">Air Quality</h5>
+          <div class="row" role="tab" id="headingAir" style="padding: 15px 10px; border-top-style: solid; border-top-width: 0.5px; border-top-color: #eee;"
+                    <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
   <div class="row" style="text-align: right; padding: 15px 20px; border-top-style: solid; border-top-width: 0.5px; border-top-color: #eee;font-family: 'Open Sans', sans-serif; font-weight: 400; font-size: 12px; color: #989898;">
     Data from AccuWeather
   </div> 
