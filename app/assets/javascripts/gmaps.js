@@ -983,7 +983,7 @@ var page_trans_work = function() {
         if (search_in_other_lang.hasOwnProperty(String(document.cookie).slice(14, 16))) {
           document.getElementById("pac-input").placeholder = search_in_other_lang[String(document.cookie).slice(14, 16)];
         }
-      }, 500);
+      }, 1000);
 }
 
 
