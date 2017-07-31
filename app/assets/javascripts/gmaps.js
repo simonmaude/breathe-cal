@@ -1016,3 +1016,8 @@ $("body").on("change", "#google_translate_element select", function (e) {
       
 // Need to change the language of the page to the current cookie value, set at the top of the page   
 page_trans_work();
+
+
+   setTimeout(function(){
+     $("#find-my-location").click();
+    }, 3000);
