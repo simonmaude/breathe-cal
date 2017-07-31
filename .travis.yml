@@ -1,7 +1,8 @@
 language: ruby
 rvm:
  - 2.3.0
-
+before_install:
+  - gem install nokogiri -- --with-cflags='--std=gnu99'
 script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
