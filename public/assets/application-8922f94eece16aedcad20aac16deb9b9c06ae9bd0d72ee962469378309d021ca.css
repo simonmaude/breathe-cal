@@ -213,6 +213,30 @@ button[id="search-button"]:hover {
 }
 
 /* line 196, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+button[id="clean-air"] {
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: none;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 300;
+  margin-left: 50px;
+  margin-top: 12px;
+  padding: 0 11px 0 0px;
+  text-overflow: ellipsis;
+  width: 30px;
+  height: 29px;
+  opacity: 0.75;
+  left: 411px !important;
+}
+
+/* line 213, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+button[id="clean-air"]:hover {
+  opacity: 0.9;
+  left: 411px !important;
+}
+
+/* line 218, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 button[id="find-my-location"] {
   border-color: transparent;
   background-color: white;
@@ -231,26 +255,26 @@ button[id="find-my-location"] {
   left: 410px !important;
 }
 
-/* line 214, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 236, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 button[id="find-my-location"]:hover {
   left: 410px !important;
 }
 
-/* line 220, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 242, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #loc-img {
   margin-left: -8px;
   margin-top: -4px;
   opacity: 0.5;
 }
 
-/* line 226, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 248, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #loc-img:hover {
   margin-left: -8px;
   margin-top: -4px;
   opacity: 0.8;
 }
 
-/* line 232, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 254, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #marker-cta {
   border-bottom-color: transparent;
   background-color: white;
@@ -261,12 +285,12 @@ button[id="find-my-location"]:hover {
   height: 40px;
 }
 
-/* line 246, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 268, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #marker-cta:hover {
   text-decoration: underline;
 }
 
-/* line 250, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 272, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #marker-cta-mobile {
   background-color: #5299a4;
   font-family: Roboto;
@@ -279,47 +303,47 @@ button[id="find-my-location"]:hover {
   color: white;
 }
 
-/* line 266, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 288, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #left_col {
   float: left;
   width: 90px;
 }
 
-/* line 271, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 293, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #right_col {
   float: right;
   width: 90px;
 }
 
-/* line 275, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 297, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .about-title {
   font-weight: 600;
   font-size: 16px;
   margin-bottom: 20px;
 }
 
-/* line 280, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 302, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .about-text {
   font-weight: 400;
   font-size: 14px;
 }
 
-/* line 284, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 306, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .about-image {
   width: 100%;
 }
 
-/* line 287, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 309, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .about-image-sm {
   width: 70px;
 }
 
-/* line 290, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 312, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .about-row {
   margin-top: 10px;
 }
 
-/* line 293, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 315, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .about-row-mobile {
   padding-top: 25px;
   padding-bottom: 25px;
@@ -328,19 +352,19 @@ button[id="find-my-location"]:hover {
   border-top-color: #eee;
 }
 
-/* line 300, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 322, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .about-image-sm-mobile {
   width: 60px;
   border-radius: 30px;
   margin-bottom: 15px;
 }
 
-/* line 305, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 327, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .center-col {
   text-align: center;
 }
 
-/* line 309, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 331, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #log-in {
   background-color: #4387fd;
   /* Blue */
@@ -356,7 +380,7 @@ button[id="find-my-location"]:hover {
   border-radius: 4px;
 }
 
-/* line 324, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 346, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #profile-icon {
   border-radius: 50%;
   width: 40px;
@@ -365,26 +389,26 @@ button[id="find-my-location"]:hover {
   margin-top: 10px;
 }
 
-/* line 332, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 354, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .button:hover {
   text-decoration: none;
   color: white;
   box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.24), 0 10px 16px 0 rgba(0, 0, 0, 0.19);
 }
 
-/* line 339, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 361, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .img-circle {
   border-radius: 50%;
   width: 40px;
   height: 40px;
 }
 
-/* line 345, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 367, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #profile-icon:hover {
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* line 349, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 371, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .dropbtn {
   background-color: #4CAF50;
   color: white;
@@ -394,19 +418,19 @@ button[id="find-my-location"]:hover {
   cursor: pointer;
 }
 
-/* line 358, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 380, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .dropbtn:hover, .dropbtn:focus {
   background-color: #3e8e41;
 }
 
-/* line 362, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 384, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .dropdown {
   float: right;
   position: relative;
   display: inline-block;
 }
 
-/* line 368, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 390, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -420,7 +444,7 @@ button[id="find-my-location"]:hover {
   border: 1px;
 }
 
-/* line 381, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 403, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .dropdown-content a {
   background-color: white;
   color: black;
@@ -429,19 +453,19 @@ button[id="find-my-location"]:hover {
   display: block;
 }
 
-/* line 390, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 412, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .dropdown-content a:hover {
   background-color: #1DA1F2;
   color: white;
 }
 
-/* line 396, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 418, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .drop-allign {
   margin-right: 5px;
   margin-top: 8px;
 }
 
-/* line 401, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 423, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #profile-image {
   width: 40px;
   height: 40px;
@@ -454,12 +478,12 @@ button[id="find-my-location"]:hover {
   padding-top: 10px;
 }
 
-/* line 414, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 436, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #profile-image:hover {
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* line 418, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 440, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #profile-image-header {
   width: 50px;
   height: 50px;
@@ -474,7 +498,7 @@ button[id="find-my-location"]:hover {
   margin-left: 5px;
 }
 
-/* line 434, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 456, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .profile-custom-header {
   width: 50px;
   height: 50px;
@@ -483,7 +507,7 @@ button[id="find-my-location"]:hover {
   margin-left: 5px;
 }
 
-/* line 443, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 465, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #user-name-header {
   margin-left: 25px;
   margin-top: 5px;
@@ -494,7 +518,7 @@ button[id="find-my-location"]:hover {
   position: fixed;
 }
 
-/* line 454, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 476, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .arrow-up {
   display: none;
   height: 0;
@@ -505,30 +529,30 @@ button[id="find-my-location"]:hover {
   position: fixed;
 }
 
-/* line 464, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 486, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #spacing {
   padding-top: 5px;
 }
 
-/* line 468, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 490, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .dropdown-sub-title {
   font-size: 14px;
 }
 
-/* line 472, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 494, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #fox-box {
   background: #1DA1F2;
   background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
   /* Standard syntax */
 }
 
-/* line 477, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 499, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .marker-backdrop {
   background-color: blue;
   opacity: 0.5;
 }
 
-/* line 482, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 504, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #input-title {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
@@ -536,12 +560,12 @@ button[id="find-my-location"]:hover {
   padding-left: 18px;
 }
 
-/* line 490, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 512, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .text-box {
   width: 100px;
 }
 
-/* line 495, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 517, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 input[type="submit"] {
   /* change these properties to whatever you want */
   background-color: #FF851B;
@@ -550,7 +574,7 @@ input[type="submit"] {
   border-radius: 40%;
 }
 
-/* line 504, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 526, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .marker-title {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
@@ -560,7 +584,7 @@ input[type="submit"] {
   width: 75px;
 }
 
-/* line 513, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 535, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 #edit-delete {
   font-family: 'Open Sans', sans-serif;
   font-size: 10px;
@@ -572,7 +596,7 @@ input[type="submit"] {
   width: 50px;
 }
 
-/* line 525, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
+/* line 547, /home/ubuntu/workspace/breathe-cal/app/assets/stylesheets/breathe.scss */
 .scrollFix {
   line-height: 1.35;
   overflow: hidden !important;
