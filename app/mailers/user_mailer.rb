@@ -31,16 +31,11 @@ class UserMailer < ActionMailer::Base
     @alert = alert 
     
     attachments.inline["bcba_logo.png"] = 
-      #File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
-      File.read(File.join(Rails.root, "app", "assets", "images", "bcba_logo.png"))
+    File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
       
-      
-    attachments.inline["email_borderup.png"] = 
-      File.read("#{Rails.root}/app/assets/images/email_borderup.png")
-      
-    attachments.inline["email_borderdown.png"] = 
-      File.read("#{Rails.root}/app/assets/images/email_borderdown.png")
-      
+    attachments.inline["email_borderup.png"] =  
+    File.read("#{Rails.root}/app/assets/images/email_borderup.png")
+     
     
     mail to: @user.email, subject: "Emergency Air Alert"
   end
@@ -48,21 +43,13 @@ class UserMailer < ActionMailer::Base
   def daily_digest(user, alert)
     @user = user
     @alert = alert
-    attachments.inline["bcba_logo.png"] = File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
-    #attachments.inline["bcba_logo.png"] =  #File.read(Rails.root.join("app", "assets", "images", "bcba_logo.png"))
-    #{
-    #  :data => File.read(Rails.root.join("app", "assets", "images", "bcba_logo.png")),
-    #  :mime_type => "image/png",
-    #  :encoding => "base64"
-    #}
-    #  File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
+    
+    attachments.inline["bcba_logo.png"] = 
+    File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
       
+    attachments.inline["email_borderup.png"] =  
+    File.read("#{Rails.root}/app/assets/images/email_borderup.png")
       
-    #attachments.inline["email_borderup.png"] = 
-    #  File.read("#{Rails.root}/app/assets/images/email_borderup.png")
-      
-    #attachments.inline["email_borderdown.png"] = 
-    #  File.read("#{Rails.root}/app/assets/images/email_borderdown.png")
     
     
     mail to: @user.email, subject: "Daily  Quality Digest"
