@@ -965,7 +965,7 @@ var page_trans_work = function() {
       }
       
 
-        if (other_way == true) {
+      if (other_way == true) {
 	        $("#right-col").insertAfter("#left-col");
 	     // $("#pac-input").css('text-align','right');
 	     // $("#search-button").css('right','611px !important');
@@ -978,9 +978,12 @@ var page_trans_work = function() {
 	   	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="left" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
       }
       
-      if (search_in_other_lang.hasOwnProperty(String(document.cookie).slice(14, 16))) {
-        document.getElementById("pac-input").placeholder = search_in_other_lang[String(document.cookie).slice(14, 16)];
-      }
+      
+      setTimeout(function(){
+        if (search_in_other_lang.hasOwnProperty(String(document.cookie).slice(14, 16))) {
+          document.getElementById("pac-input").placeholder = search_in_other_lang[String(document.cookie).slice(14, 16)];
+        }
+      }, 500);
 }
 
 
