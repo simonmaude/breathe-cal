@@ -39,15 +39,16 @@ class MarkersController < ApplicationController
 #     end
     
 
-    if params[:allergen] && (params[:allergen].keys.length > 0)
+    # if params[:allergen] && (params[:allergen].keys.length > 0)
       global_markers = Marker.get_global_markers(all_markers,global_number_show,coords,search_allergen)
-    else
-      global_markers = []
-    end
+    # else
+      # global_markers = []
+    # end
+    
 
+    # pass collection to gmaps.js
     marker_container = [user_markers, global_markers]
     
-    # pass collection to gmaps.js
     
     # respond_to do |format|
     #   format.html
