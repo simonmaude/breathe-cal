@@ -11,8 +11,9 @@
 var fetchedMarkers = {};
 var heatmapData = [];
 var bubble_map = {};
+var recentMarker = null;
+var editedMarker = null;
 var global1 = true;
-
 
 function initAutocomplete() {
 var autocomplete2 = new google.maps.places.Autocomplete(
@@ -99,10 +100,13 @@ var autocomplete2 = new google.maps.places.Autocomplete(
                   arrowPosition: 50,
                   minWidth: 100,
                   minHeight: 75,
-                  arrowStyle: 0});
+                  arrowStyle: 0,
+                  closeSrc: 'https://www.google.com/intl/en_us/mapfiles/close.gif'
+                });
                 bubble.setContent(newContent[0]);
                 marker.bubble = bubble;
-               
+               console.log("FETCH");
+               console.log(user_marker.id);
                 marker.id = user_marker.id;
                 bubble_map[user_marker.id] = marker;
                 
@@ -150,6 +154,7 @@ var autocomplete2 = new google.maps.places.Autocomplete(
           if (id in bubble_map) {
             bubble_map[id].bubble.close();
             bubble_map[id].setMap(null);
+            delete bubble_map[id]
           }
           
           fetchMarkers();
@@ -157,6 +162,93 @@ var autocomplete2 = new google.maps.places.Autocomplete(
         }
     });
   }
+  
+  function getContentS() {
+    var contentString = $(
+      
+      "<div id= 'marker-bubble' class='scrollFix'>" + 
+        "<form id='markerEdit' action='markers' method='PUT'>"+
+          "<datalist id='options'>"+
+            "<option value='Cats'>" +
+            "<option value='Bees'>" +
+            "<option value='Perfume'>" +
+            "<option value='Oak'>" +
+            "<option value='Peanut'>" +
+            "<option value='Gluten'>" +
+            "<option value='Dog'>" +
+            "<option value='Dust'>" +
+            "<option value='Smoke'>" +
+            "<option value='Mold'>" +
+            "</datalist>" +
+          "<div id= 'input-title'>Allergen:</div>" +
+          "<div id='spacing'></div>"+
+          "<input id = 'title-edit' class = 'text-box' type='text' name='title' list='options'>" + 
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          //"<input id = 'plus-button' type='submit' value='+'>"+
+        "</form>" +
+      "</div>"
+    );
+    return contentString[0];
+  }
+  
+  function editMarker(data) {
+    var id = data.id;
+    bubble_map[id].bubble.close();
+
+    
+    marker = bubble_map[id];
+    bubble = new InfoBubble({
+
+      shadowStyle: 0,
+      backgroundColor: 'rgba(29, 161, 242, 0.8)',
+      borderRadius: 10,
+      arrowSize: 10,
+      borderWidth: 2,
+      borderColor: '#ffffff',
+      disableAutoPan: true,
+      hideCloseButton: false,
+      arrowPosition: 50,
+      maxWidth: '600px',
+      minWidth: '600px',
+      minHeight: 75,
+      height: '100%',
+      arrowStyle: 0
+      
+    });
+    
+    bubble.open(map, marker);
+    bubble.setContent(getContentS());
+    marker.bubble = bubble;
+    editedMarker = marker;
+    editedMarker.bubble = bubble;
+    
+    //fetchMarkers();
+ 
+    /*
+    $.ajax({
+        type: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "markers",
+        data: JSON.stringify({id: id}),
+        success: function() {
+          if (id in bubble_map) {
+            bubble_map[id].bubble.close();
+            bubble_map[id].setMap(null);
+          }
+          
+          fetchMarkers();
+          
+        }
+    });
+    */
+  }
+  
+  
+  
+  
+  
   function getIcon(marker) {
     if (marker.title.toLowerCase() in icons) {
       return icons[marker.title.toLowerCase()].icon;
@@ -289,6 +381,8 @@ cleanAirBtn2.onclick = function() {
   });
 
   google.maps.event.addListener(map, 'dragend', function(){
+    console.log('BubbleMap:');
+    console.log(Object.keys(bubble_map).length);
     fetchMarkers();
   })
 
@@ -484,19 +578,23 @@ cleanAirBtn2.onclick = function() {
     }
   });
   
-  var recentMarker = null;
+
 
 
 
   function createContentString(data){
+    
     var title = data.title;
-    var ncontent=document.createElement('div'),
-    button;
-    button=ncontent.appendChild(document.createElement('input'));
-    button.id = 'edit-delete'
-    button.type='button';
-    button.value='delete'
-    google.maps.event.addDomListener(button,'click', function(){
+    var editBtn = document.createElement("button");
+    editBtn.innerHTML = "Edit";
+    editBtn.classList.add('edit-btn')
+    var deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "";
+    deleteBtn.classList.add('remove-btn');
+    google.maps.event.addDomListener(editBtn,'click', function(){
+      editMarker(data);
+    })
+    google.maps.event.addDomListener(deleteBtn,'click', function(){
       deleteMarker(data.id);
     })
     var contentString ="<div id= 'marker-bubble' class='scrollFix'>"+
@@ -505,7 +603,23 @@ cleanAirBtn2.onclick = function() {
                           "<div id = 'spacing'></div>";
                         
     var content = $(contentString);
-    content.append(ncontent);
+
+    var divBar = document.createElement("div");
+    divBar.classList.add('edit-delete');
+    var deletePos = document.createElement("div");
+    deletePos.classList.add('delete-pos');
+    var editPos = document.createElement("div");
+    editPos.classList.add('edit-pos');
+    
+    deletePos.appendChild(deleteBtn);
+    editPos.appendChild(editBtn);
+    
+        
+    divBar.appendChild(editPos);
+    divBar.appendChild(deletePos);
+    content.append(divBar);
+
+
     content.append('</div></div>')
     return content;
   }
@@ -595,9 +709,38 @@ cleanAirBtn2.onclick = function() {
       draggable: true,
     })
     
+  function getContent() {
     var contentString = $(
       
-      "<div id='wrap'>" + 
+      "<div id= 'marker-bubble' class='scrollFix'>" + 
+        "<form id='markerForm' action='markers' method='POST'>"+
+          "<datalist id='options'>"+
+            "<option value='Cats'>" +
+            "<option value='Bees'>" +
+            "<option value='Perfume'>" +
+            "<option value='Oak'>" +
+            "<option value='Peanut'>" +
+            "<option value='Gluten'>" +
+            "<option value='Dog'>" +
+            "<option value='Dust'>" +
+            "<option value='Smoke'>" +
+            "<option value='Mold'>" +
+            "</datalist>" +
+          "<div id= 'input-title'>Allergen:</div>" +
+          "<div id='spacing'></div>"+
+          "<input class = 'text-box' type='text' name='title' list='options'>" + 
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          //"<input id = 'plus-button' type='submit' value='+'>"+
+        "</form>" +
+      "</div>"
+    );
+    return contentString[0];
+  }
+  var contentString = $(
+      
+      "<div id= 'marker-bubble' class='scrollFix'>" + 
         "<form id='markerForm' action='markers' method='POST'>"+
           "<datalist id='options'>"+
             "<option value='Cats'>" +
@@ -637,7 +780,9 @@ cleanAirBtn2.onclick = function() {
       maxWidth: '600px',
       minWidth: '600px',
       minHeight: 75,
-      arrowStyle: 0
+      height: '100%',
+      arrowStyle: 0,
+      closeSrc: 'https://www.google.com/intl/en_us/mapfiles/close.gif'
       
     });
 
@@ -706,6 +851,38 @@ cleanAirBtn2.onclick = function() {
       return false;
     });
   }
+  
+  
+  $(document).on('submit', '#markerEdit', function(e){
+      
+      e.preventDefault();
+
+      var newTitle = $('#title-edit').val();
+      
+      var id = editedMarker.id;
+   
+      
+    
+      $.ajax({
+        type: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "markers",
+        data: JSON.stringify({title: newTitle, id: editedMarker.id}),
+        success: function(d){
+          
+          console.log(id);
+          bubble_map[id].bubble.close();
+          
+          fetchMarkers();
+          bubble_map[id].bubble.open(map, bubble_map[id].bubble);
+          
+          editedMarker = null;
+          
+        }
+      })
+      return false;
+    });
+  
   
 
   
