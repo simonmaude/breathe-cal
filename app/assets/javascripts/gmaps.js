@@ -11,7 +11,29 @@
 var fetchedMarkers = {};
 var heatmapData = [];
 var bubble_map = {};
+var recentMarker = null;
+var editedMarker = null;
 var global1 = true;
+
+
+
+// Page should be in English by default
+document.cookie = "googtrans=/en/en;"
+document.cookie = "googtrans=/en/en; domain=.c9users.io"
+// **** add extra domain when deployed to heroku
+// **** also add heroku link to google online 
+
+
+// Setting the page language to the language selected by the user
+
+// if (user is signed in) {
+//   language = users language in database
+//   document.cookie = "googtrans=/en/...;"
+//   document.cookie = "googtrans=/en/...; domain=.c9users.io"
+// }
+
+
+
 
 
 function initAutocomplete() {
@@ -32,7 +54,8 @@ var autocomplete2 = new google.maps.places.Autocomplete(
   
   
   
-  function fetchMarkers(filtered_allergens={}) {
+  function fetchMarkers() {
+  // function fetchMarkers(filtered_allergens={}) {
 
     
     deleteMarkers();
@@ -43,17 +66,19 @@ var autocomplete2 = new google.maps.places.Autocomplete(
       type: "GET",
       contentType: "application/json; charset=utf-8",
       url: "markers",
-      data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}, filter :filtered_allergens},
+      data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}},
+      // data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}, filter :filtered_allergens},
       success: function(data){
+        
         // used for filtering allergens
-        var i;
-        var marker_types_in_bounds = data[2];
-        for (i = 0; i < marker_types_in_bounds.length; i++) {
-          filter_id = 'filter-'+marker_types_in_bounds[i];
-          if (! $('#'+filter_id).length) {
-            $('#filter-header').append('<div><input type="checkbox" value="'+marker_types_in_bounds[i]+'" class="filter_checkbox" id="'+filter_id+'" checked/><label for="'+filter_id+'">&nbsp&nbsp&nbsp&nbsp'+marker_types_in_bounds[i]+'</div>');
-          }
-        }
+        // var i;
+        // var marker_types_in_bounds = data[2];
+        // for (i = 0; i < marker_types_in_bounds.length; i++) {
+        //   filter_id = 'filter-'+marker_types_in_bounds[i];
+        //   if (! $('#'+filter_id).length) {
+        //     $('#filter-header').append('<div><input type="checkbox" value="'+marker_types_in_bounds[i]+'" class="filter_checkbox" id="'+filter_id+'" checked/><label for="'+filter_id+'">&nbsp&nbsp&nbsp&nbsp'+marker_types_in_bounds[i]+'</div>');
+        //   }
+        // }
         //
         
         heatmapData = [];
@@ -99,10 +124,13 @@ var autocomplete2 = new google.maps.places.Autocomplete(
                   arrowPosition: 50,
                   minWidth: 100,
                   minHeight: 75,
-                  arrowStyle: 0});
+                  arrowStyle: 0,
+                  closeSrc: 'https://www.google.com/intl/en_us/mapfiles/close.gif'
+                });
                 bubble.setContent(newContent[0]);
                 marker.bubble = bubble;
-               
+               console.log("FETCH");
+               console.log(user_marker.id);
                 marker.id = user_marker.id;
                 bubble_map[user_marker.id] = marker;
                 
@@ -138,11 +166,93 @@ var autocomplete2 = new google.maps.places.Autocomplete(
       }
     })
   }
-  window.fetchMarkers = fetchMarkers;
+  // window.fetchMarkers = fetchMarkers;
   function deleteMarker(id) {
 
     $.ajax({
         type: "DELETE",
+        contentType: "application/json; charset=utf-8",
+        url: "markers",
+        data: JSON.stringify({id: id}),
+        success: function() {
+          if (id in bubble_map) {
+            bubble_map[id].bubble.close();
+            bubble_map[id].setMap(null);
+            delete bubble_map[id]
+          }
+          
+          fetchMarkers();
+          
+        }
+    });
+  }
+  
+  function getContentS() {
+    var contentString = $(
+      
+      "<div id= 'marker-bubble' class='scrollFix'>" + 
+        "<form id='markerEdit' action='markers' method='PUT'>"+
+          "<datalist id='options'>"+
+            "<option value='Cats'>" +
+            "<option value='Bees'>" +
+            "<option value='Perfume'>" +
+            "<option value='Oak'>" +
+            "<option value='Peanut'>" +
+            "<option value='Gluten'>" +
+            "<option value='Dog'>" +
+            "<option value='Dust'>" +
+            "<option value='Smoke'>" +
+            "<option value='Mold'>" +
+            "</datalist>" +
+          "<div id= 'input-title'>Allergen:</div>" +
+          "<div id='spacing'></div>"+
+          "<input id = 'title-edit' class = 'text-box' type='text' name='title' list='options'>" + 
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          //"<input id = 'plus-button' type='submit' value='+'>"+
+        "</form>" +
+      "</div>"
+    );
+    return contentString[0];
+  }
+  
+  function editMarker(data) {
+    var id = data.id;
+    bubble_map[id].bubble.close();
+
+    
+    marker = bubble_map[id];
+    bubble = new InfoBubble({
+
+      shadowStyle: 0,
+      backgroundColor: 'rgba(29, 161, 242, 0.8)',
+      borderRadius: 10,
+      arrowSize: 10,
+      borderWidth: 2,
+      borderColor: '#ffffff',
+      disableAutoPan: true,
+      hideCloseButton: false,
+      arrowPosition: 50,
+      maxWidth: '600px',
+      minWidth: '600px',
+      minHeight: 75,
+      height: '100%',
+      arrowStyle: 0
+      
+    });
+    
+    bubble.open(map, marker);
+    bubble.setContent(getContentS());
+    marker.bubble = bubble;
+    editedMarker = marker;
+    editedMarker.bubble = bubble;
+    
+    //fetchMarkers();
+ 
+    /*
+    $.ajax({
+        type: "PUT",
         contentType: "application/json; charset=utf-8",
         url: "markers",
         data: JSON.stringify({id: id}),
@@ -156,7 +266,13 @@ var autocomplete2 = new google.maps.places.Autocomplete(
           
         }
     });
+    */
   }
+  
+  
+  
+  
+  
   function getIcon(marker) {
     if (marker.title.toLowerCase() in icons) {
       return icons[marker.title.toLowerCase()].icon;
@@ -243,12 +359,10 @@ var autocomplete2 = new google.maps.places.Autocomplete(
 
 
 function addOverlay() {
-  // alert("hello")
   map.overlayMapTypes.insertAt(1,waqiMapOverlay);
 }
 
 function removeOverlay() {
-  // alert("boo")
   map.overlayMapTypes.clear();
 }
 
@@ -267,10 +381,6 @@ cleanAirBtn2.onclick = function() {
     }
 }
 
-
-  //var markerEnabler = document.getElementById('marker-cta');
-  //map.controls[google.maps.ControlPosition.LEFT_TOP].push(markerEnabler);
-  
   // Added Sign in and profile icon buttons
   var signIn = document.getElementById('log-in')
   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(signIn);
@@ -289,6 +399,8 @@ cleanAirBtn2.onclick = function() {
   });
 
   google.maps.event.addListener(map, 'dragend', function(){
+    console.log('BubbleMap:');
+    console.log(Object.keys(bubble_map).length);
     fetchMarkers();
   })
 
@@ -484,19 +596,23 @@ cleanAirBtn2.onclick = function() {
     }
   });
   
-  var recentMarker = null;
+
 
 
 
   function createContentString(data){
+    
     var title = data.title;
-    var ncontent=document.createElement('div'),
-    button;
-    button=ncontent.appendChild(document.createElement('input'));
-    button.id = 'edit-delete'
-    button.type='button';
-    button.value='delete'
-    google.maps.event.addDomListener(button,'click', function(){
+    var editBtn = document.createElement("button");
+    editBtn.innerHTML = "Edit";
+    editBtn.classList.add('edit-btn')
+    var deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "";
+    deleteBtn.classList.add('remove-btn');
+    google.maps.event.addDomListener(editBtn,'click', function(){
+      editMarker(data);
+    })
+    google.maps.event.addDomListener(deleteBtn,'click', function(){
       deleteMarker(data.id);
     })
     var contentString ="<div id= 'marker-bubble' class='scrollFix'>"+
@@ -505,7 +621,23 @@ cleanAirBtn2.onclick = function() {
                           "<div id = 'spacing'></div>";
                         
     var content = $(contentString);
-    content.append(ncontent);
+
+    var divBar = document.createElement("div");
+    divBar.classList.add('edit-delete');
+    var deletePos = document.createElement("div");
+    deletePos.classList.add('delete-pos');
+    var editPos = document.createElement("div");
+    editPos.classList.add('edit-pos');
+    
+    deletePos.appendChild(deleteBtn);
+    editPos.appendChild(editBtn);
+    
+        
+    divBar.appendChild(editPos);
+    divBar.appendChild(deletePos);
+    content.append(divBar);
+
+
     content.append('</div></div>')
     return content;
   }
@@ -595,21 +727,50 @@ cleanAirBtn2.onclick = function() {
       draggable: true,
     })
     
+  function getContent() {
     var contentString = $(
       
-      "<div id='wrap'>" + 
+      "<div id= 'marker-bubble' class='scrollFix'>" + 
         "<form id='markerForm' action='markers' method='POST'>"+
           "<datalist id='options'>"+
-            "<option value='Cats'>" +
-            "<option value='Bees'>" +
-            "<option value='Perfume'>" +
-            "<option value='Oak'>" +
-            "<option value='Peanut'>" +
-            "<option value='Gluten'>" +
-            "<option value='Dog'>" +
-            "<option value='Dust'>" +
-            "<option value='Smoke'>" +
-            "<option value='Mold'>" +
+            "<option value='Cats'> Cats </option>" +
+            "<option value='Bees'> Bees </option>" +
+            "<option value='Perfume'> Perfume </option>" +
+            "<option value='Oak'> Oak </option>" +
+            "<option value='Peanut'> Peanut </option>" +
+            "<option value='Gluten'> Gluten </option>" +
+            "<option value='Dog'> Dog </option>" +
+            "<option value='Dust'> Dust </option>" +
+            "<option value='Smoke'> Smoke </option>" +
+            "<option value='Mold'> Mold </option>" +
+            "</datalist>" +
+          "<div id= 'input-title'>Allergen:</div>" +
+          "<div id='spacing'></div>"+
+          "<input class = 'text-box' type='text' name='title' list='options'>" + 
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          "<div id='spacing'></div>"+
+          //"<input id = 'plus-button' type='submit' value='+'>"+
+        "</form>" +
+      "</div>"
+    );
+    return contentString[0];
+  }
+  var contentString = $(
+      
+      "<div id= 'marker-bubble' class='scrollFix'>" + 
+        "<form id='markerForm' action='markers' method='POST'>"+
+          "<datalist id='options'>"+
+            "<option value='Cats'> Cats </option>" +
+            "<option value='Bees'> Bees </option>" +
+            "<option value='Perfume'> Perfume </option>" +
+            "<option value='Oak'> Oak </option>" +
+            "<option value='Peanut'> Peanut </option>" +
+            "<option value='Gluten'> Gluten </option>" +
+            "<option value='Dog'> Dog </option>" +
+            "<option value='Dust'> Dust </option>" +
+            "<option value='Smoke'> Smoke </option>" +
+            "<option value='Mold'> Mold </option>" +
             "</datalist>" +
           "<div id= 'input-title'>Allergen:</div>" +
           "<div id='spacing'></div>"+
@@ -637,7 +798,9 @@ cleanAirBtn2.onclick = function() {
       maxWidth: '600px',
       minWidth: '600px',
       minHeight: 75,
-      arrowStyle: 0
+      height: '100%',
+      arrowStyle: 0,
+      closeSrc: 'https://www.google.com/intl/en_us/mapfiles/close.gif'
       
     });
 
@@ -707,6 +870,38 @@ cleanAirBtn2.onclick = function() {
     });
   }
   
+  
+  $(document).on('submit', '#markerEdit', function(e){
+      
+      e.preventDefault();
+
+      var newTitle = $('#title-edit').val();
+      
+      var id = editedMarker.id;
+   
+      
+    
+      $.ajax({
+        type: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "markers",
+        data: JSON.stringify({title: newTitle, id: editedMarker.id}),
+        success: function(d){
+          
+          console.log(id);
+          bubble_map[id].bubble.close();
+          
+          fetchMarkers();
+          bubble_map[id].bubble.open(map, bubble_map[id].bubble);
+          
+          editedMarker = null;
+          
+        }
+      })
+      return false;
+    });
+  
+  
 
   
   // maybe just send a list of attributes to tell javascript to use....? 
@@ -736,3 +931,71 @@ $(document).on('page:change', initAutocomplete);
 
 
 
+  var right_to_left_languages = ["ar", "az", "fa", "jw", "kk", "ku", 
+  "ms", "ml", "ps", "pa", "sd", "so", "iw", "yi", "ur"];
+  
+  
+  
+ 
+
+  var search_in_other_lang = {
+  	"af": "Soek","sq": "kërkim","am": "ፈልግ","ar": "بحث","hy": "Որոնում","az": "Axtarış","eu": "Search","be": "пошук",
+  	"bn": "অনুসন্ধান","bs": "Pretraga","bg": "Търсене","ca": "Cerca","ceb": "Pagpangita","ny": "Sakani","zh-CN": "搜索",
+  	"zh-TW": "搜索","co": "Ricerca","hr": "traži","cs": "Vyhledávání","da": "Søg","nl": "Zoeken","en": "Search","eo": "Serĉu",
+  	"et": "Otsing","tl": "Paghahanap","fi": "Haku","fr": "Recherche","fy": "Search","gl": "Busca","ka": "ძებნა","de": "Suche",
+  	"el": "έρευνα","gu": "શોધ","ht": "Search","ha": "Search","haw": "Search","iw": "חיפוש","hi": "खोज","hmn": "Nrhiav",
+  	"hu": "Keresés","is": "Leit","ig": "Search","id": "Pencarian","ga": "Cuardach","it": "Ricerca","ja": "検索","jw": "Search",
+  	"kn": "ಹುಡುಕು","kk": "іздеу","km": "ស្វែងរក","ko": "수색","ku": "Search","ky": "издөө","lo": "ຄົ້ນຫາ","la": "Quaerere","lv": "Meklēšana",
+  	"lt": "Paieška","lb": "Sich","mk": "Барај","mg": "Search","ms": "Carian","ml": "തിരയൽ","mt": "Fittex","mi": "Rapu","mr": "शोध",
+  	"mn": "хайх","my": "ရှာဖှေ","ne": "खोज","no": "Søk","ps": "لټون","fa": "جستجو","pl": "Poszukiwanie","pt": "Pesquisa","pa": "ਖੋਜ",
+  	"ro": "Căutare","ru": "поиск","sm": "Suʻe","gd": "Rannsachadh","sr": "претраживање","st": "Search","sn": "kutsvaka","sd": "ڳولا",
+  	"si": "සොයන්න","sk": "Vyhľadávanie","sl": "Iskanje","so": "Search","es": "Búsqueda","su": "Neangan","sw": "Search","sv": "Sök",
+  	"tg": "кофтуков","ta": "தேடல்","te": "శోధన","th": "ค้นหา","tr": "Arama","uk": "пошук","ur": "تلاش کریں","uz": "Qidiruv",
+  	"vi": "Tìm kiếm","cy": "Chwilio","xh": "Search","yi": "זוכן","yo": "Search","zu": "Ukucinga"
+  };
+
+
+
+var page_trans_work = function() {
+      var other_way = false;
+      for (var i = 0; i < right_to_left_languages.length; i++) {
+         if (String(document.cookie).indexOf("/en/"+right_to_left_languages[i]) > -1) {
+          other_way = true;
+        }
+      }
+      
+
+      if (other_way == true) {
+	        $("#right-col").insertAfter("#left-col");
+	     // $("#pac-input").css('text-align','right');
+	     // $("#search-button").css('right','611px !important');
+
+	   	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="right" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
+      } else {
+        $("#left-col").insertAfter("#right-col");
+        $("#pac-input").css('text-align','left');
+
+	   	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="left" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
+      }
+      
+      
+      setTimeout(function(){
+        if (search_in_other_lang.hasOwnProperty(String(document.cookie).slice(14, 16))) {
+          document.getElementById("pac-input").placeholder = search_in_other_lang[String(document.cookie).slice(14, 16)];
+        }
+      }, 1000);
+}
+
+
+$("body").on("change", "#google_translate_element select", function (e) {
+  // change data base language for user
+  // user.language = $(".goog-te-combo").val() 
+  
+  // now change current pages language
+  document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";";
+  document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";" + "domain=.c9users.io"
+  page_trans_work();
+});  
+      
+// Need to change the language of the page to the current cookie value, set at the top of the page   
+page_trans_work();

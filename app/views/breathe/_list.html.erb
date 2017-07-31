@@ -28,13 +28,27 @@
           <%= c["name"].capitalize %>
         </div>
         
-        
+          
+          
           <script>
+            // simulating a search when clicked on a favorite city
             var favClicked = document.getElementsByClassName("favCity");
 
             var seeCity = function(cityDiv) {
               var searchText = cityDiv.innerHTML;
               searchBar = document.getElementById('pac-input');
+              
+              // Need to get rid of any tags in order to search
+              // specially important when page is translated
+              searchText = String(searchText);
+              while (searchText.indexOf("<font>") !== -1) {
+                searchText = searchText.replace("<font>",'');
+              }
+              while (searchText.indexOf("</font>") !== -1) {
+                searchText = searchText.replace("</font>",'');
+              }
+
+
               searchBar.value += searchText;
               document.getElementById('search-button').click();
               searchBar.value = "";

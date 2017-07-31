@@ -567,16 +567,17 @@ input[type="text"]{
   width: 75px;
  
 }
-#edit-delete {
+.edit-delete {
   font-family: 'Open Sans', sans-serif;
   font-size: 10px;
 
   border: none;
-  color: blue;
   position: absolute;
-  background-color: white;
+  background-color: transparent;
   text-align: center;
-  width: 50px;
+  width: 85%;
+  max-height: 20px;
+  margin:0;
 }
 
 .scrollFix {
@@ -585,6 +586,58 @@ input[type="text"]{
     white-space: nowrap;
 }
 
+
+#marker-bubble {
+  max-height: 45px;
+}
+
+.delete-btn {
+  background: url('/assets/trash.svg');
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-color: transparent;
+  height: 16px;
+  width: 16px;
+  border: none;
+}
+.remove-btn {
+  background: url('/assets/trash_icon.svg');
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 20px;
+  width: 32px;
+  background-color: transparent;
+  color: white;
+  border: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: white;
+}
+.delete-pos{
+ // padding-bottom: 100px;
+   padding-left: 13%;
+   padding-top: 1px;
+}
+
+.edit-btn {
+  background-color: transparent;
+  color: white;
+  border: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: white;
+  padding-top: 1px;
+  height: 20px;
+  line-height: 15px;
+}
+
+.edit-pos {
+  padding-top: 1px;
+}
+.edit-pos, .delete-pos{
+  float:left;
+}
 
 
 
@@ -766,4 +819,89 @@ input:checked + .slider:before {
   width: 30px;
 }
 
-///9DA5AB
+
+
+.goog-tooltip {
+    display: none !important;
+}
+.goog-tooltip:hover {
+    display: none !important;
+}
+.goog-text-highlight {
+    background-color: transparent !important;
+    border: none !important; 
+    box-shadow: none !important;
+}
+
+
+#searchTrans {
+  font-size:16px;
+  left: 30px !important;
+
+  
+}
+
+
+
+#google_translate_element {
+  font-family: Roboto;
+  font-weight: 100;
+  padding: 0 0px 0px 15px;
+  text-overflow: ellipsis;
+  width: 15px;
+  height: 40px;
+  top: 5px !important;
+  text-align: center;
+  left: 60px !important;
+}
+
+
+.goog-te-banner-frame.skiptranslate { 
+  display: none !important;
+  
+} 
+body { 
+  top: 0px !important; 
+  
+}
+#goog-gt-tt{
+  display: none !important; 
+  top: 0px !important; 
+  
+} 
+.goog-tooltip skiptranslate{
+  display: none !important;
+  top: 0px !important; 
+  
+} 
+.activity-root { 
+  display: hide !important;
+  
+} 
+.status-message { 
+  display: hide !important;
+  
+}
+.started-activity-container { 
+  display: hide !important;
+  
+}
+
+.goog-logo-link {
+   display:none !important;
+}
+.goog-te-gadget{
+   color: transparent !important;
+}
+.goog-te-gadget .goog-te-combo{
+  color: black !important;
+  font-family: Roboto;
+  font-size: 15px;
+}
+
+
+
+
+
+
+
