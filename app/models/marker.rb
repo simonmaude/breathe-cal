@@ -15,21 +15,28 @@ class Marker < ActiveRecord::Base
     Marker.find(id).destroy
   end
   
-  def self.find_all_in_bounds(coords, id = '', search_allergen = '')
+  def self.find_all_in_bounds(coords, client_id = '', search_allergen = '')
     search_allergen != '' ? (search_allergen = "title = '#{search_allergen}'") : (search_allergen = '')
-    markersTop = Marker.where("lat < ?", coords[:top].to_s).where(id).where(search_allergen)
-    markersBottom = Marker.where("lat > ?", coords[:bottom].to_s)
-    markersLeft = Marker.where("lng < ?", coords[:left].to_s)
-    markersRight = Marker.where("lng > ?", coords[:right].to_s)
-    return markersBottom & markersTop & markersRight & markersLeft
+    markers = Marker.where(client_id)
+                    .where("lat < ?", coords[:top].to_s)
+                    .where("lat > ?", coords[:bottom].to_s)
+                    .where("lng < ?", coords[:left].to_s)
+                    .where("lng > ?", coords[:right].to_s)
+                    .where(search_allergen)
+    # markersBottom = Marker.where("lat > ?", coords[:bottom].to_s).where(client_id)
+    # markersLeft = Marker.where("lng < ?", coords[:left].to_s).where(client_id)
+    # markersRight = Marker.where("lng > ?", coords[:right].to_s).where(client_id)
+    # return markersBottom & markersTop & markersRight & markersLeft
+    return markers
   end
  
-  def self.find_all_in_zoom(coords, lat, long, search_allergen = '')   
+  # potentially speed this up by setting zoom_lat & long to be fixed numbers so caching can happen
+  def self.find_all_in_zoom(coords, lat, long, search_allergen = '', client_id = '')   
     zoom_ratio = 0.125
     zoom_lat = (coords[:top].to_f - coords[:bottom].to_f) * zoom_ratio
     zoom_long = (coords[:left].to_f - coords[:right].to_f) * zoom_ratio
     zoom_coords = {top:(lat + zoom_lat), bottom:(lat - zoom_lat), left:(long + zoom_long), right:(long - zoom_long)}
-    return self.find_all_in_bounds(zoom_coords, '', search_allergen)
+    return self.find_all_in_bounds(zoom_coords, client_id, search_allergen)
   end  
       
   # for each marker that is not already in the output array, check all other markers in 
@@ -38,15 +45,20 @@ class Marker < ActiveRecord::Base
     output = Set.new
     markers.each do |marker|
       unless output.include? marker
-        zoom_markers = self.find_all_in_zoom(coords, marker.lat.to_f, marker.lng.to_f, search_allergen)
-        allergen_count = 0 
         id_set = Set.new
+        id_set << marker.client_id
+        client_id = "client_id != #{marker.client_id}"
+        search_allergen = marker.title
+        zoom_markers = self.find_all_in_zoom(coords, marker.lat.to_f, marker.lng.to_f, search_allergen, client_id)
+        allergen_count = 1 
         zoom_markers.each do |zoom_marker|
-          if (!id_set.include? zoom_marker.client_id)
+          if ((!id_set.include? zoom_marker.client_id) && (!output.include? zoom_marker))
             allergen_count += 1
             id_set << zoom_marker.client_id
-            if (allergen_count >= global_number_show)
-              output << marker
+            if (allergen_count >= global_number_show) 
+              output << marker 
+              output.merge(zoom_markers.to_a) 
+              break
             end
           end
         end
