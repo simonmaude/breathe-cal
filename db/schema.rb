@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 20170730003252) do
     t.string   "uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.string   "location"
     t.boolean  "email_digest"
     t.boolean  "email_alert"
+    t.string   "location"
   end
 
   create_table "email_managers", force: :cascade do |t|

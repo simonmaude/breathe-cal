@@ -6,14 +6,7 @@ class UserMailer < ActionMailer::Base
       mail(to: @user.email, subject: 'Sample email')
   end
   
-  def email_image_tag(image, **options)
-    attachments[image] = {
-        :data => File.read(Rails.root.join("app/assets/images/#{image}")),
-        :mime_type => "image/#{image.split('.').last}",
-        #:encoding => "base64"
-        }
-        return attachments[image]
-    end
+  
   # Used for testing mailgun API
   def mailgunner(user)
     @user = user
@@ -53,5 +46,5 @@ class UserMailer < ActionMailer::Base
     
     
     mail to: @user.email, subject: "Daily  Quality Digest"
-  end
+    end
 end
