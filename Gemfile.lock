@@ -449,7 +449,7 @@ DEPENDENCIES
   jquery-turbolinks
   mailgun
   metric_fu
-  nokogiri
+  nokogiri (>= 1.6.7.rc)
   omniauth-facebook
   omniauth-google-oauth2
   pg
