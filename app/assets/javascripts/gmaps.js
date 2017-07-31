@@ -1016,3 +1016,14 @@ $("body").on("change", "#google_translate_element select", function (e) {
       
 // Need to change the language of the page to the current cookie value, set at the top of the page   
 page_trans_work();
+
+
+  setTimeout(function(){
+    $("#find-my-location").click();
+  }, 3000);
+     
+  // setTimeout(function(){
+  //   document.getElementById("pac-input").value = "Central San Jose, San Jose, CA, United States";
+  //   document.getElementById("search-button").onclick();
+  //   document.getElementById("pac-input").value = "";
+  // }, 1000);
