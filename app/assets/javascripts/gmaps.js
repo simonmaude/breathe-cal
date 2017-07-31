@@ -15,6 +15,27 @@ var recentMarker = null;
 var editedMarker = null;
 var global1 = true;
 
+
+
+// Page should be in English by default
+document.cookie = "googtrans=/en/en;"
+document.cookie = "googtrans=/en/en; domain=.c9users.io"
+// **** add extra domain when deployed to heroku
+// **** also add heroku link to google online 
+
+
+// Setting the page language to the language selected by the user
+
+// if (user is signed in) {
+//   language = users language in database
+//   document.cookie = "googtrans=/en/...;"
+//   document.cookie = "googtrans=/en/...; domain=.c9users.io"
+// }
+
+
+
+
+
 function initAutocomplete() {
 var autocomplete2 = new google.maps.places.Autocomplete(
     /** @type {!HTMLInputElement} */(document.getElementById('autocomplete2')),
@@ -338,12 +359,10 @@ var autocomplete2 = new google.maps.places.Autocomplete(
 
 
 function addOverlay() {
-  // alert("hello")
   map.overlayMapTypes.insertAt(1,waqiMapOverlay);
 }
 
 function removeOverlay() {
-  // alert("boo")
   map.overlayMapTypes.clear();
 }
 
@@ -362,10 +381,6 @@ cleanAirBtn2.onclick = function() {
     }
 }
 
-
-  //var markerEnabler = document.getElementById('marker-cta');
-  //map.controls[google.maps.ControlPosition.LEFT_TOP].push(markerEnabler);
-  
   // Added Sign in and profile icon buttons
   var signIn = document.getElementById('log-in')
   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(signIn);
@@ -718,16 +733,16 @@ cleanAirBtn2.onclick = function() {
       "<div id= 'marker-bubble' class='scrollFix'>" + 
         "<form id='markerForm' action='markers' method='POST'>"+
           "<datalist id='options'>"+
-            "<option value='Cats'>" +
-            "<option value='Bees'>" +
-            "<option value='Perfume'>" +
-            "<option value='Oak'>" +
-            "<option value='Peanut'>" +
-            "<option value='Gluten'>" +
-            "<option value='Dog'>" +
-            "<option value='Dust'>" +
-            "<option value='Smoke'>" +
-            "<option value='Mold'>" +
+            "<option value='Cats'> Cats </option>" +
+            "<option value='Bees'> Bees </option>" +
+            "<option value='Perfume'> Perfume </option>" +
+            "<option value='Oak'> Oak </option>" +
+            "<option value='Peanut'> Peanut </option>" +
+            "<option value='Gluten'> Gluten </option>" +
+            "<option value='Dog'> Dog </option>" +
+            "<option value='Dust'> Dust </option>" +
+            "<option value='Smoke'> Smoke </option>" +
+            "<option value='Mold'> Mold </option>" +
             "</datalist>" +
           "<div id= 'input-title'>Allergen:</div>" +
           "<div id='spacing'></div>"+
@@ -746,16 +761,16 @@ cleanAirBtn2.onclick = function() {
       "<div id= 'marker-bubble' class='scrollFix'>" + 
         "<form id='markerForm' action='markers' method='POST'>"+
           "<datalist id='options'>"+
-            "<option value='Cats'>" +
-            "<option value='Bees'>" +
-            "<option value='Perfume'>" +
-            "<option value='Oak'>" +
-            "<option value='Peanut'>" +
-            "<option value='Gluten'>" +
-            "<option value='Dog'>" +
-            "<option value='Dust'>" +
-            "<option value='Smoke'>" +
-            "<option value='Mold'>" +
+            "<option value='Cats'> Cats </option>" +
+            "<option value='Bees'> Bees </option>" +
+            "<option value='Perfume'> Perfume </option>" +
+            "<option value='Oak'> Oak </option>" +
+            "<option value='Peanut'> Peanut </option>" +
+            "<option value='Gluten'> Gluten </option>" +
+            "<option value='Dog'> Dog </option>" +
+            "<option value='Dust'> Dust </option>" +
+            "<option value='Smoke'> Smoke </option>" +
+            "<option value='Mold'> Mold </option>" +
             "</datalist>" +
           "<div id= 'input-title'>Allergen:</div>" +
           "<div id='spacing'></div>"+
@@ -916,3 +931,71 @@ $(document).on('page:change', initAutocomplete);
 
 
 
+  var right_to_left_languages = ["ar", "az", "fa", "jw", "kk", "ku", 
+  "ms", "ml", "ps", "pa", "sd", "so", "iw", "yi", "ur"];
+  
+  
+  
+ 
+
+  var search_in_other_lang = {
+  	"af": "Soek","sq": "kërkim","am": "ፈልግ","ar": "بحث","hy": "Որոնում","az": "Axtarış","eu": "Search","be": "пошук",
+  	"bn": "অনুসন্ধান","bs": "Pretraga","bg": "Търсене","ca": "Cerca","ceb": "Pagpangita","ny": "Sakani","zh-CN": "搜索",
+  	"zh-TW": "搜索","co": "Ricerca","hr": "traži","cs": "Vyhledávání","da": "Søg","nl": "Zoeken","en": "Search","eo": "Serĉu",
+  	"et": "Otsing","tl": "Paghahanap","fi": "Haku","fr": "Recherche","fy": "Search","gl": "Busca","ka": "ძებნა","de": "Suche",
+  	"el": "έρευνα","gu": "શોધ","ht": "Search","ha": "Search","haw": "Search","iw": "חיפוש","hi": "खोज","hmn": "Nrhiav",
+  	"hu": "Keresés","is": "Leit","ig": "Search","id": "Pencarian","ga": "Cuardach","it": "Ricerca","ja": "検索","jw": "Search",
+  	"kn": "ಹುಡುಕು","kk": "іздеу","km": "ស្វែងរក","ko": "수색","ku": "Search","ky": "издөө","lo": "ຄົ້ນຫາ","la": "Quaerere","lv": "Meklēšana",
+  	"lt": "Paieška","lb": "Sich","mk": "Барај","mg": "Search","ms": "Carian","ml": "തിരയൽ","mt": "Fittex","mi": "Rapu","mr": "शोध",
+  	"mn": "хайх","my": "ရှာဖှေ","ne": "खोज","no": "Søk","ps": "لټون","fa": "جستجو","pl": "Poszukiwanie","pt": "Pesquisa","pa": "ਖੋਜ",
+  	"ro": "Căutare","ru": "поиск","sm": "Suʻe","gd": "Rannsachadh","sr": "претраживање","st": "Search","sn": "kutsvaka","sd": "ڳولا",
+  	"si": "සොයන්න","sk": "Vyhľadávanie","sl": "Iskanje","so": "Search","es": "Búsqueda","su": "Neangan","sw": "Search","sv": "Sök",
+  	"tg": "кофтуков","ta": "தேடல்","te": "శోధన","th": "ค้นหา","tr": "Arama","uk": "пошук","ur": "تلاش کریں","uz": "Qidiruv",
+  	"vi": "Tìm kiếm","cy": "Chwilio","xh": "Search","yi": "זוכן","yo": "Search","zu": "Ukucinga"
+  };
+
+
+
+var page_trans_work = function() {
+      var other_way = false;
+      for (var i = 0; i < right_to_left_languages.length; i++) {
+         if (String(document.cookie).indexOf("/en/"+right_to_left_languages[i]) > -1) {
+          other_way = true;
+        }
+      }
+      
+
+      if (other_way == true) {
+	        $("#right-col").insertAfter("#left-col");
+	     // $("#pac-input").css('text-align','right');
+	     // $("#search-button").css('right','611px !important');
+
+	   	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="right" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
+      } else {
+        $("#left-col").insertAfter("#right-col");
+        $("#pac-input").css('text-align','left');
+
+	   	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="left" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
+      }
+      
+      
+      setTimeout(function(){
+        if (search_in_other_lang.hasOwnProperty(String(document.cookie).slice(14, 16))) {
+          document.getElementById("pac-input").placeholder = search_in_other_lang[String(document.cookie).slice(14, 16)];
+        }
+      }, 1000);
+}
+
+
+$("body").on("change", "#google_translate_element select", function (e) {
+  // change data base language for user
+  // user.language = $(".goog-te-combo").val() 
+  
+  // now change current pages language
+  document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";";
+  document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";" + "domain=.c9users.io"
+  page_trans_work();
+});  
+      
+// Need to change the language of the page to the current cookie value, set at the top of the page   
+page_trans_work();
