@@ -280,11 +280,19 @@ var autocomplete2 = new google.maps.places.Autocomplete(
     return null;
   }
   
+<<<<<<< HEAD
   
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 37.3382,
       lng: -121.8863
+=======
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {
+      lat: 37.3197,
+      lng: -121.905
+>>>>>>> 619bf70ac5401e983a08325576008023432f5336
     },
     zoom: 13,
     mapTypeId: 'roadmap'
