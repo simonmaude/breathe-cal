@@ -25,8 +25,7 @@ class MarkersController < ApplicationController
     current_user_id = session[:client_id]
     coords = {top: bound_params[:uplat], bottom: bound_params[:downlat], 
               left: bound_params[:leftlong], right: bound_params[:rightlong]}
-    search_allergen = params[:allergen] || ''
-    # search_allergen = Marker.sanitize(params[:allergen] || '')
+    search_allergen = params[:allergen] ? Marker.sanitize(params[:allergen]) : ''
     
     all_markers = Marker.find_all_in_bounds(coords,'',search_allergen)
     user_markers = Marker.find_all_in_bounds(coords,"client_id = #{current_user_id}",search_allergen)
