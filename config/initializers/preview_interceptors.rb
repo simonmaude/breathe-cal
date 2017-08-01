@@ -1,0 +1,2 @@
+# config/initializer/preview_interceptors.rb
+ActionMailer::Base.register_preview_interceptor(ActionMailer::InlinePreviewInterceptor)
