@@ -54,8 +54,7 @@ var autocomplete2 = new google.maps.places.Autocomplete(
   
   
   
-  function fetchMarkers() {
-  // function fetchMarkers(filtered_allergens={}) {
+  function fetchMarkers(filtered_allergens={}) {
 
     
     deleteMarkers();
@@ -66,20 +65,20 @@ var autocomplete2 = new google.maps.places.Autocomplete(
       type: "GET",
       contentType: "application/json; charset=utf-8",
       url: "markers",
-      data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}},
-      // data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}, filter :filtered_allergens},
+      //data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}},
+      data: {bounds :{uplat:NECorner.lat(),downlat:SWCorner.lat(),rightlong:NECorner.lng(),leftlong:SWCorner.lng()}, filter :filtered_allergens},
       success: function(data){
         
         // used for filtering allergens
-        // var i;
-        // var marker_types_in_bounds = data[2];
-        // for (i = 0; i < marker_types_in_bounds.length; i++) {
-        //   filter_id = 'filter-'+marker_types_in_bounds[i];
-        //   if (! $('#'+filter_id).length) {
-        //     $('#filter-header').append('<div><input type="checkbox" value="'+marker_types_in_bounds[i]+'" class="filter_checkbox" id="'+filter_id+'" checked/><label for="'+filter_id+'">&nbsp&nbsp&nbsp&nbsp'+marker_types_in_bounds[i]+'</div>');
-        //   }
-        // }
-        //
+        var i;
+        var marker_types_in_bounds = data[2];
+        for (i = 0; i < marker_types_in_bounds.length; i++) {
+          filter_id = 'filter-'+marker_types_in_bounds[i];
+          if (! $('#'+filter_id).length) {
+            $('#filter-header').append('<div><input type="checkbox" value="'+marker_types_in_bounds[i]+'" class="filter_checkbox" id="'+filter_id+'" checked/><label for="'+filter_id+'">&nbsp&nbsp&nbsp&nbsp'+marker_types_in_bounds[i]+'</div>');
+          }
+        }
+        
         
         heatmapData = [];
         // if (data.length > 1){
@@ -89,10 +88,10 @@ var autocomplete2 = new google.maps.places.Autocomplete(
             heatmapData.push(new google.maps.LatLng(heatmap_marker.lat, heatmap_marker.lng));
           }
           
-          for (var i=0;i<data[0].length; i++) {
+          for (var j=0;j<data[0].length; j++) {
           
             
-            var user_marker = data[0][i];
+            var user_marker = data[0][j];
         
             if (true) {
               // if (id != client_id){
@@ -110,7 +109,7 @@ var autocomplete2 = new google.maps.places.Autocomplete(
                       position: location,
                       map: map,
                       icon: customMarker,
-                      draggable: false,
+                      draggable: false
                 });
                 bubble = new InfoBubble({
                   shadowStyle: 0,
@@ -157,7 +156,7 @@ var autocomplete2 = new google.maps.places.Autocomplete(
             'rgba(117, 142, 255, 1)',
             'rgba(118, 103, 252, 1)',
             'rgba(101, 84, 249, 1)',
-            'rgba(100, 22, 226, 1)',
+            'rgba(100, 22, 226, 1)'
           
             ],
             map:map
@@ -166,7 +165,7 @@ var autocomplete2 = new google.maps.places.Autocomplete(
       }
     })
   }
-  // window.fetchMarkers = fetchMarkers;
+  window.fetchMarkers = fetchMarkers;
   function deleteMarker(id) {
 
     $.ajax({
@@ -297,7 +296,7 @@ var autocomplete2 = new google.maps.places.Autocomplete(
                   getTileUrl:  function(coord,  zoom)  {  
                         return  'https://tiles.waqi.info/tiles/usepa-aqi/'  +  zoom  +  "/"  +  coord.x  +  "/"  +  coord.y  +  ".png?token=c18b43c1fe86c25643ca8e4fecbc1f23be1cc78a";  
                   },  
-                  name:  "Air  Quality",  
+                  name:  "Air  Quality" 
         });  
         
   map.overlayMapTypes.insertAt(0,waqiMapOverlay);  
@@ -376,7 +375,7 @@ function removeOverlay() {
   
 cleanAirBtn2.onclick = function() {
   $('#myonoffswitch').trigger("click");
-  if (global1 == true) {
+  if (global1 === true) {
     addOverlay();
     global1 = false;
   }
@@ -506,7 +505,7 @@ cleanAirBtn2.onclick = function() {
               var specific_address = results[1].formatted_address;
               var city_address = results[1].address_components[1].short_name;
     
-              if (!((specific_address == false) || (specific_address.length == 0))) {
+              if (!((specific_address === false) || (specific_address.length === 0))) {
                 document.getElementById("pac-input").value = specific_address;
                 document.getElementById("search-button").onclick();
                 document.getElementById("pac-input").value = "";
@@ -523,7 +522,7 @@ cleanAirBtn2.onclick = function() {
                   position: new google.maps.LatLng(pos.lat, pos.lng),
                   map: map,
                   optimized: false,
-                  icon: image,
+                  icon: image
                   // animation: google.maps.Animation.DROP
                 })
     
@@ -741,7 +740,7 @@ cleanAirBtn2.onclick = function() {
       label: "",
       position: location,
       map: map,
-      draggable: true,
+      draggable: true
     })
     
   function getContent() {
@@ -982,7 +981,7 @@ var page_trans_work = function() {
       }
       
 
-      if (other_way == true) {
+      if (other_way === true) {
 	        $("#right-col").insertAfter("#left-col");
 	     // $("#pac-input").css('text-align','right');
 	     // $("#search-button").css('right','611px !important');
@@ -1010,7 +1009,7 @@ $("body").on("change", "#google_translate_element select", function (e) {
   
   // now change current pages language
   document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";";
-  document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";" + "domain=.c9users.io"
+  document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";domain=.c9users.io"
   page_trans_work();
 });  
       
