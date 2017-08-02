@@ -61,8 +61,8 @@ class Marker < ActiveRecord::Base
             id_set = Set.new
             zoom_markers.each do |zoom_marker_to_output|
               if (!id_set.include? zoom_marker.client_id)
-                id_set << zoom_marker.client_id
-                output << zoom_marker 
+                id_set << zoom_marker_to_output.client_id
+                output << zoom_marker_to_output 
               end
             end
             break
