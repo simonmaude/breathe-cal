@@ -85,9 +85,10 @@ Rails.application.configure do
   # example: export DOMAIN = "gmail.com"
   # for heroku, do: 
   # heroku config:set DOMAIN gmail.com
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
     :address              => "smtp.mailgun.org",
-    :port                 => 587,
+    :port                 => 2525,
     :domain               => ENV['DOMAIN'],
     :user_name            => ENV['MAILGUN_USER_NAME'],
     :password             =>  ENV['MAILGUN_PASSWORD'],
