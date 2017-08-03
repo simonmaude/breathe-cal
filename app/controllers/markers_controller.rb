@@ -25,32 +25,25 @@ class MarkersController < ApplicationController
     current_user_id = session[:client_id]
     coords = {top: bound_params[:uplat], bottom: bound_params[:downlat], 
               left: bound_params[:leftlong], right: bound_params[:rightlong]}
-    search_allergen = params[:allergen] ? Marker.sanitize(params[:allergen]) : ''
     
-    all_markers = Marker.find_all_in_bounds(coords,'',search_allergen)
-    user_markers = Marker.find_all_in_bounds(coords,"client_id = #{current_user_id}",search_allergen)
+    all_markers = Marker.find_all_in_bounds(coords,'','')
+    user_markers = all_markers.select { |m| m.client_id == current_user_id }
+    global_markers = []
     
     # gets all possible markers in bounds
     @marker_types_in_bounds = user_markers.uniq { |m| m.title }
     @marker_types_in_bounds = @marker_types_in_bounds.map { |m| m.title }
     
 #     # do the filtering
-#     if params[:filter] && (params[:filter].keys.length > 0)
-#       filtered_allergens = params[:filter]
-#       user_markers = user_markers.select { |m| filtered_allergens.include? m.title }
-#       all_markers = all_markers.select { |m| filtered_allergens.include? m.title }
-#     end
+    if params[:filter] && (params[:filter].keys.length > 0)
+      # filtered_allergens = ''
+      filtered_allergen = Marker.sanitize(params[:filter])
+      all_markers = all_markers.select { |m| filtered_allergen == m.title }
+      global_markers = Marker.get_global_markers(all_markers,global_number_show,coords,filtered_allergen)
+    end
     
-
-    # if params[:allergen] && (params[:allergen].keys.length > 0)
-      global_markers = Marker.get_global_markers(all_markers,global_number_show,coords,search_allergen)
-    # else
-      # global_markers = []
-    # end
-    
-
     # pass collection to gmaps.js
-    marker_container = [user_markers, global_markers]
+    marker_container = [user_markers, global_markers, @marker_types_in_bounds]
     
     
     # respond_to do |format|

@@ -69,6 +69,7 @@ RSpec.describe Marker, type: :model do
       Marker.create!(lat: 15, lng: 15, client_id: 3, title: "dog")
       markers = Marker.find_all_in_bounds({top:20, bottom:10, left:20, right:10})
       expect(markers.length).to eq(4)
+      p Marker.get_global_markers(markers,global_number_show,{top:20, bottom:10, left:20, right:10})
       expect(Marker.get_global_markers(markers,global_number_show,{top:20, bottom:10, left:20, right:10}).length).to eq(0)
     end   
     
@@ -95,6 +96,42 @@ RSpec.describe Marker, type: :model do
       expect(markers.length).to eq(5)
       expect(Marker.get_global_markers(markers,global_number_show,{top:20, bottom:10, left:20, right:10}).length).to eq(5)
     end
+        
+    it "returns markers if greater than the global_number_show are present in a zoomed area from multiple clusters" do
+      global_number_show = 4
+      Marker.create!(lat: 15, lng: 15, client_id: 1, title: "dog")
+      Marker.create!(lat: 15, lng: 15, client_id: 2, title: "dog")
+      Marker.create!(lat: 15, lng: 15, client_id: 3, title: "dog")
+      Marker.create!(lat: 15, lng: 15, client_id: 4, title: "dog")
+      Marker.create!(lat: 15, lng: 15, client_id: 5, title: "dog")
+      
+      Marker.create!(lat: 25, lng: 25, client_id: 1, title: "dog")
+      Marker.create!(lat: 25, lng: 25, client_id: 2, title: "dog")
+      Marker.create!(lat: 25, lng: 25, client_id: 3, title: "dog")
+      Marker.create!(lat: 25, lng: 25, client_id: 4, title: "dog")
+      Marker.create!(lat: 25, lng: 25, client_id: 5, title: "dog")
+      markers = Marker.find_all_in_bounds({top:30, bottom:10, left:30, right:10})
+      expect(markers.length).to eq(10)
+      expect(Marker.get_global_markers(markers,global_number_show,{top:30, bottom:10, left:30, right:10}).length).to eq(10)
+    end     
+    
+    # it "returns only markers in specified allergen if greater than the global_number_show are present in a zoomed area from multiple clusters" do
+    #   global_number_show = 4
+    #   Marker.create!(lat: 15, lng: 15, client_id: 1, title: "dog")
+    #   Marker.create!(lat: 15, lng: 15, client_id: 2, title: "dog")
+    #   Marker.create!(lat: 15, lng: 15, client_id: 3, title: "dog")
+    #   Marker.create!(lat: 15, lng: 15, client_id: 4, title: "dog")
+    #   Marker.create!(lat: 15, lng: 15, client_id: 5, title: "dog")
+      
+    #   Marker.create!(lat: 25, lng: 25, client_id: 1, title: "dog")
+    #   Marker.create!(lat: 25, lng: 25, client_id: 2, title: "dog")
+    #   Marker.create!(lat: 25, lng: 25, client_id: 3, title: "dog")
+    #   Marker.create!(lat: 25, lng: 25, client_id: 4, title: "dog")
+    #   Marker.create!(lat: 25, lng: 25, client_id: 5, title: "dog")
+    #   markers = Marker.find_all_in_bounds({top:30, bottom:10, left:30, right:10})
+    #   expect(markers.length).to eq(10)
+    #   expect(Marker.get_global_markers(markers,global_number_show,{top:30, bottom:10, left:30, right:10}).length).to eq(10)
+    # end
   end
 
 end
