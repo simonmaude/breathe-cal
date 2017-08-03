@@ -1,18 +1,14 @@
-require 'mailgun'
 class UserMailer < ApplicationMailer
-  default from: 'breathcaliforniadigest@gmail.com'
-  def signup_email(user)
-      @user = user
-      mail(to: @user.email, subject: 'Sample email')
-  end
-  
-  def mailgunner(user)
-    @user = user
-    mg_client = Mailgun::Client.new(ENV[MAILGUN_KEY])
-    message_params = {:from    => "postmaster@sandbox0880c15a47cd403ea19793a12bd76d5f.mailgun.org",
-                      :to      => 'albertytung@berkeley.edu',
-                      :subject => 'Sample Mail using Mailgun API',
-                      :text    => 'This mail is sent using Mailgun API via mailgun-ruby'}
-    mg_client.send_message("sandbox0880c15a47cd403ea19793a12bd76d5f.mailgun.org", message_params)
+
+  default from: "ENV['MAILGUN_USER_NAME']"
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.user_mailer.daily_digest.subject
+  #
+  def daily_digest
+    @greeting = "Hi"
+
+    mail to: "albertytung@berkeley.edu", subject: "Success! You did it."
   end
 end

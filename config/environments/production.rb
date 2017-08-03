@@ -77,7 +77,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-  config.action_mailer.delivery_method = :smtp
   
   # SMTP settings for gmail
   # ENV indicates environment variables 
@@ -86,14 +85,16 @@ Rails.application.configure do
   # example: export DOMAIN = "gmail.com"
   # for heroku, do: 
   # heroku config:set DOMAIN gmail.com
+  config.action_mailer.delivery_method = :smtp
+  
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.mailgun.org",
-    :port                 => 587,
-    :domain               => ENV['DOMAIN'],
-    :user_name            => ENV['MAILGUN_USER_NAME'],
-    :password             =>  ENV['MAILGUN_PASSWORD'],
-    :authentication       => "plain",
-    #:enable_starttls_auto => true
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    #:port => 587,
+    :port => 2525,
+    :domain => "ENV['DOMAIN']",
+    :user_name => "ENV['MAILGUN_USER_NAME']",
+    :password => "ENV['MAILGUN_PASSWORD']"
   }
 
 end
