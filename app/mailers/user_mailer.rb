@@ -6,34 +6,28 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.daily_digest.subject
   #
-  def daily_digest
-    @greeting = "Hi"
+  def daily_digest(user, alert)
+    @user = user
+    @alert = alert
 
-    #@user = user
-    @user = Client.new(name: 'albert tung', email: 'albertytung@berkeley.edu')
-    @alert = 'no alert'
     attachments.inline["bcba_logo.png"] = 
     File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
     
     attachments.inline["email_borderup.png"] =  
     File.read("#{Rails.root}/app/assets/images/email_borderup.png")
-     
 
-    mail to: "albertytung@berkeley.edu", subject: "Daily Digest"
+    mail to: @user.email, subject: "Daily Digest"
   end
   
   def email_alert(user, alert)
-    #@user = user
-    
-    @user = Client.new(name: 'albert tung', email: 'albertytung@berkeley.edu')
-    @alert = 'no alert'
+    @user = user
+    @alert = alert
     
     attachments.inline["bcba_logo.png"] = 
     File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
       
     attachments.inline["email_borderup.png"] =  
     File.read("#{Rails.root}/app/assets/images/email_borderup.png")
-     
     
     mail to: @user.email, subject: "Emergency Air Alert"
   end
