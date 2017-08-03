@@ -9,6 +9,8 @@ class UserMailer < ApplicationMailer
   def daily_digest
     @greeting = "Hi"
 
+    @user = Client.new(name: 'albert tung', email: 'albertytung@berkeley.edu')
+    @alert = 'no alert'
     attachments.inline["bcba_logo.png"] = 
     File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
     
