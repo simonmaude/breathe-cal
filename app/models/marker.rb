@@ -17,12 +17,12 @@ class Marker < ActiveRecord::Base
   
   def self.find_all_in_bounds(coords, client_id = '', search_allergen = '')
     search_allergen != '' ? (search_allergen = "title = '#{search_allergen}'") : (search_allergen = '')
-    markers = Marker.where(client_id)
+    markers = Marker.where(search_allergen)
+                    .where(client_id)
                     .where("lat < ?", coords[:top].to_s)
                     .where("lat > ?", coords[:bottom].to_s)
                     .where("lng < ?", coords[:left].to_s)
                     .where("lng > ?", coords[:right].to_s)
-                    .where(search_allergen)
     # markersBottom = Marker.where("lat > ?", coords[:bottom].to_s).where(client_id)
     # markersLeft = Marker.where("lng < ?", coords[:left].to_s).where(client_id)
     # markersRight = Marker.where("lng > ?", coords[:right].to_s).where(client_id)
@@ -52,14 +52,20 @@ class Marker < ActiveRecord::Base
         zoom_markers = self.find_all_in_zoom(coords, marker.lat.to_f, marker.lng.to_f, search_allergen, client_id)
         allergen_count = 1 
         zoom_markers.each do |zoom_marker|
-          if ((!id_set.include? zoom_marker.client_id) && (!output.include? zoom_marker))
-            allergen_count += 1
+          if (!id_set.include? zoom_marker.client_id)
             id_set << zoom_marker.client_id
-            if (allergen_count >= global_number_show) 
-              output << marker 
-              output.merge(zoom_markers.to_a) 
-              break
+            allergen_count += 1 
+          end
+          if (allergen_count >= global_number_show) 
+            output << marker
+            id_set = Set.new
+            zoom_markers.each do |zoom_marker_to_output|
+              if (!id_set.include? zoom_marker.client_id)
+                id_set << zoom_marker.client_id
+                output << zoom_marker 
+              end
             end
+            break
           end
         end
       end
