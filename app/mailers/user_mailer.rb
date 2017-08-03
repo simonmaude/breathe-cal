@@ -1,6 +1,5 @@
 class UserMailer < ApplicationMailer
 
-  #default from: "postmaster@sandbox0880c15a47cd403ea19793a12bd76d5f.mailgun.org"
   default from: ENV['MAILGUN_USER_NAME']
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -9,6 +8,13 @@ class UserMailer < ApplicationMailer
   #
   def daily_digest
     @greeting = "Hi"
+
+    attachments.inline["bcba_logo.png"] = 
+    File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
+    
+    attachments.inline["email_borderup.png"] =  
+    File.read("#{Rails.root}/app/assets/images/email_borderup.png")
+     
 
     mail to: "albertytung@berkeley.edu", subject: "Success! You did it."
   end
