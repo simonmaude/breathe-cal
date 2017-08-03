@@ -7,15 +7,16 @@ class UserMailer < ApplicationMailer
   #   en.user_mailer.daily_digest.subject
   #
   def daily_digest(user, alert)
+    @alert = alert 
     @user = user
-    @alert = alert
 
-    attachments.inline["bcba_logo.png"] = 
-    File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
-    
+   
     attachments.inline["email_borderup.png"] =  
     File.read("#{Rails.root}/app/assets/images/email_borderup.png")
 
+    attachments.inline["bcba_logo.png"] = 
+    File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
+ 
     mail to: @user.email, subject: "Daily Digest"
   end
   
