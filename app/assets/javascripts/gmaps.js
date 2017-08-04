@@ -19,11 +19,11 @@ var markers = [];
 var waqiMapOverlay;
 var canMark;
 
-// ****************************************************** MAP ***************************************** //
+// ****************************************************** VARS: MAP ***************************************** //
 var map;
 var infowindow;
 var reverseGC;
-// ****************************************************** UI ***************************************** //
+// ****************************************************** VARS: UI ***************************************** //
 var input
 var searchBtn
 var searchBox
@@ -34,7 +34,7 @@ var signIn;
 var dropdown;
 var profile;
 
-// ****************************************************** ICONS ***************************************** //
+// ****************************************************** VARS: ICONS ***************************************** //
 var icons;
 var moldMarker;
 var smokeMarker;
@@ -47,6 +47,10 @@ var perfumeMarker;
 var catMarker;
 var beeMarker;
 window.fetchMarkers = fetchMarkers;
+
+// ****************************************************** VARS: TRANSLATE ***************************************** //
+var right_to_left_languages
+var search_in_other_lang
 
 // Page should be in English by default
 document.cookie = "googtrans=/en/en;"
@@ -63,8 +67,27 @@ document.cookie = "googtrans=/en/en; domain=.c9users.io"
 //   document.cookie = "googtrans=/en/...; domain=.c9users.io"
 // }
   
+  
+// ****************************************************** RUN ***************************************** //
+setLanguageVars();
+page_trans_work();
+setTranslateListner();
 
-// ****************************************************** MAP ***************************************** //
+setTimeout(function(){
+  $("#find-my-location").click();
+}, 3000);  
+
+
+// ****************************************************** METHODS: LOAD/CHANGE ***************************************** //
+
+$(document).ready(initAutocomplete);
+$(document).on('page:load', initAutocomplete);
+$(document).on('page:change', initAutocomplete);
+
+
+
+
+// ****************************************************** METHODS: MAP ***************************************** //
 function mapLoad() {
   if (!map) {
     createMap();
@@ -75,10 +98,10 @@ function mapLoad() {
     // Reverse lat/lon city lookup
     reverseGC = new google.maps.Geocoder;
     setUIelements();
-    setMapListeners();
     setSettingsLocationAutoComplete();
     
   }
+  setMapListeners();
 }
 
 
@@ -116,7 +139,7 @@ function setMapListeners(){
 
 
 
-// ****************************************************** UI ***************************************** //
+// ****************************************************** METHODS: UI ***************************************** //
 
 function setUIelements(){
   $('#marker-cta').css('cursor','pointer');
@@ -326,7 +349,7 @@ function setUIListerners(){
 }
   
 
-// ****************************************************** OVERLAYS ***************************************** //
+// ****************************************************** METHODS: OVERLAYS ***************************************** //
 
 function createHeatMap(){
   heatmap = new google.maps.visualization.HeatmapLayer({
@@ -385,7 +408,7 @@ function removeOverlay() {
 }
 
 
-// ****************************************************** LOCATION ***************************************** // 
+// ****************************************************** METHODS: LOCATION ***************************************** // 
 
 
 function point2LatLng(point, map) {
@@ -415,7 +438,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 
-// ****************************************************** ICONS ***************************************** // 
+// ****************************************************** METHODS: ICONS ***************************************** // 
 function setMarkerImages(){
       beeMarker = {
           url: 'https://image.flaticon.com/icons/svg/235/235425.svg', 
@@ -498,7 +521,7 @@ function getIcon(marker) {
   return null;
 }
 
-// ****************************************************** MARKERS ***************************************** //
+// ****************************************************** METHODS: MARKERS ***************************************** //
 
 function clearMarkers() {
     setMapOnAll(null);
@@ -777,7 +800,7 @@ function placeMarker(location) {
   
 }
 
-// ****************************************************** CONTENT STRINGS ***************************************** //
+// ****************************************************** METHODS: CONTENT STRINGS ***************************************** //
 
 
 function getContentS() {
@@ -878,7 +901,7 @@ function createContentString(data){
 }
 
 
-// ****************************************************** PROFILE ***************************************** //
+// ****************************************************** METHODS: PROFILE ***************************************** //
 
 
 function loggedIn(){
@@ -901,7 +924,76 @@ function loggedIn(){
   });
 }
 
-// ****************************************************** INITAUTOCOMPLETE ***************************************** //
+
+// ****************************************************** METHODS: TRANSLATE ***************************************** //
+
+function page_trans_work() {
+  var other_way = false;
+  for (var i = 0; i < right_to_left_languages.length; i++) {
+     if (String(document.cookie).indexOf("/en/"+right_to_left_languages[i]) > -1) {
+      other_way = true;
+    }
+  }
+  
+  if (other_way === true) {
+      $("#right-col").insertAfter("#left-col");
+   // $("#pac-input").css('text-align','right');
+   // $("#search-button").css('right','611px !important');
+
+ 	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="right" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
+  } else {
+    $("#left-col").insertAfter("#right-col");
+    $("#pac-input").css('text-align','left');
+
+ 	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="left" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
+  }
+  
+  
+  setTimeout(function(){
+    if (search_in_other_lang.hasOwnProperty(String(document.cookie).slice(14, 16))) {
+      document.getElementById("pac-input").placeholder = search_in_other_lang[String(document.cookie).slice(14, 16)];
+    }
+  }, 1000);
+}
+
+
+// ****************************************************** METHODS: TRANSLATE ***************************************** //
+
+function setLanguageVars(){
+  right_to_left_languages = ["ar", "az", "fa", "jw", "kk", "ku", 
+  "ms", "ml", "ps", "pa", "sd", "so", "iw", "yi", "ur"];
+  
+  search_in_other_lang = {
+  	"af": "Soek","sq": "kërkim","am": "ፈልግ","ar": "بحث","hy": "Որոնում","az": "Axtarış","eu": "Search","be": "пошук",
+  	"bn": "অনুসন্ধান","bs": "Pretraga","bg": "Търсене","ca": "Cerca","ceb": "Pagpangita","ny": "Sakani","zh-CN": "搜索",
+  	"zh-TW": "搜索","co": "Ricerca","hr": "traži","cs": "Vyhledávání","da": "Søg","nl": "Zoeken","en": "Search","eo": "Serĉu",
+  	"et": "Otsing","tl": "Paghahanap","fi": "Haku","fr": "Recherche","fy": "Search","gl": "Busca","ka": "ძებნა","de": "Suche",
+  	"el": "έρευνα","gu": "શોધ","ht": "Search","ha": "Search","haw": "Search","iw": "חיפוש","hi": "खोज","hmn": "Nrhiav",
+  	"hu": "Keresés","is": "Leit","ig": "Search","id": "Pencarian","ga": "Cuardach","it": "Ricerca","ja": "検索","jw": "Search",
+  	"kn": "ಹುಡುಕು","kk": "іздеу","km": "ស្វែងរក","ko": "수색","ku": "Search","ky": "издөө","lo": "ຄົ້ນຫາ","la": "Quaerere","lv": "Meklēšana",
+  	"lt": "Paieška","lb": "Sich","mk": "Барај","mg": "Search","ms": "Carian","ml": "തിരയൽ","mt": "Fittex","mi": "Rapu","mr": "शोध",
+  	"mn": "хайх","my": "ရှာဖှေ","ne": "खोज","no": "Søk","ps": "لټون","fa": "جستجو","pl": "Poszukiwanie","pt": "Pesquisa","pa": "ਖੋਜ",
+  	"ro": "Căutare","ru": "поиск","sm": "Suʻe","gd": "Rannsachadh","sr": "претраживање","st": "Search","sn": "kutsvaka","sd": "ڳولا",
+  	"si": "සොයන්න","sk": "Vyhľadávanie","sl": "Iskanje","so": "Search","es": "Búsqueda","su": "Neangan","sw": "Search","sv": "Sök",
+  	"tg": "кофтуков","ta": "தேடல்","te": "శోధన","th": "ค้นหา","tr": "Arama","uk": "пошук","ur": "تلاش کریں","uz": "Qidiruv",
+  	"vi": "Tìm kiếm","cy": "Chwilio","xh": "Search","yi": "זוכן","yo": "Search","zu": "Ukucinga"
+  };
+}
+
+function setTranslateListner(){
+  $("body").on("change", "#google_translate_element select", function (e) {
+    // change data base language for user
+    // user.language = $(".goog-te-combo").val() 
+    
+    // now change current pages language
+    document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";";
+    document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";domain=.c9users.io"
+    page_trans_work();
+  });  
+}
+
+
+// ****************************************************** METHODS: INITAUTOCOMPLETE ***************************************** //
 
 
 function initAutocomplete() {
@@ -926,89 +1018,7 @@ function initAutocomplete() {
     })
     return false;
   });
-
-
 }
 
 
-
-$(document).ready(initAutocomplete);
-$(document).on('page:load', initAutocomplete);
-$(document).on('page:change', initAutocomplete);
-
-
-
-
-  var right_to_left_languages = ["ar", "az", "fa", "jw", "kk", "ku", 
-  "ms", "ml", "ps", "pa", "sd", "so", "iw", "yi", "ur"];
-  
-  
-  
- 
-
-  var search_in_other_lang = {
-  	"af": "Soek","sq": "kërkim","am": "ፈልግ","ar": "بحث","hy": "Որոնում","az": "Axtarış","eu": "Search","be": "пошук",
-  	"bn": "অনুসন্ধান","bs": "Pretraga","bg": "Търсене","ca": "Cerca","ceb": "Pagpangita","ny": "Sakani","zh-CN": "搜索",
-  	"zh-TW": "搜索","co": "Ricerca","hr": "traži","cs": "Vyhledávání","da": "Søg","nl": "Zoeken","en": "Search","eo": "Serĉu",
-  	"et": "Otsing","tl": "Paghahanap","fi": "Haku","fr": "Recherche","fy": "Search","gl": "Busca","ka": "ძებნა","de": "Suche",
-  	"el": "έρευνα","gu": "શોધ","ht": "Search","ha": "Search","haw": "Search","iw": "חיפוש","hi": "खोज","hmn": "Nrhiav",
-  	"hu": "Keresés","is": "Leit","ig": "Search","id": "Pencarian","ga": "Cuardach","it": "Ricerca","ja": "検索","jw": "Search",
-  	"kn": "ಹುಡುಕು","kk": "іздеу","km": "ស្វែងរក","ko": "수색","ku": "Search","ky": "издөө","lo": "ຄົ້ນຫາ","la": "Quaerere","lv": "Meklēšana",
-  	"lt": "Paieška","lb": "Sich","mk": "Барај","mg": "Search","ms": "Carian","ml": "തിരയൽ","mt": "Fittex","mi": "Rapu","mr": "शोध",
-  	"mn": "хайх","my": "ရှာဖှေ","ne": "खोज","no": "Søk","ps": "لټون","fa": "جستجو","pl": "Poszukiwanie","pt": "Pesquisa","pa": "ਖੋਜ",
-  	"ro": "Căutare","ru": "поиск","sm": "Suʻe","gd": "Rannsachadh","sr": "претраживање","st": "Search","sn": "kutsvaka","sd": "ڳولا",
-  	"si": "සොයන්න","sk": "Vyhľadávanie","sl": "Iskanje","so": "Search","es": "Búsqueda","su": "Neangan","sw": "Search","sv": "Sök",
-  	"tg": "кофтуков","ta": "தேடல்","te": "శోధన","th": "ค้นหา","tr": "Arama","uk": "пошук","ur": "تلاش کریں","uz": "Qidiruv",
-  	"vi": "Tìm kiếm","cy": "Chwilio","xh": "Search","yi": "זוכן","yo": "Search","zu": "Ukucinga"
-  };
-
-
-
-var page_trans_work = function() {
-      var other_way = false;
-      for (var i = 0; i < right_to_left_languages.length; i++) {
-         if (String(document.cookie).indexOf("/en/"+right_to_left_languages[i]) > -1) {
-          other_way = true;
-        }
-      }
       
-
-      if (other_way === true) {
-	        $("#right-col").insertAfter("#left-col");
-	     // $("#pac-input").css('text-align','right');
-	     // $("#search-button").css('right','611px !important');
-
-	   	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="right" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
-      } else {
-        $("#left-col").insertAfter("#right-col");
-        $("#pac-input").css('text-align','left');
-
-	   	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="left" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
-      }
-      
-      
-      setTimeout(function(){
-        if (search_in_other_lang.hasOwnProperty(String(document.cookie).slice(14, 16))) {
-          document.getElementById("pac-input").placeholder = search_in_other_lang[String(document.cookie).slice(14, 16)];
-        }
-      }, 1000);
-}
-
-
-$("body").on("change", "#google_translate_element select", function (e) {
-  // change data base language for user
-  // user.language = $(".goog-te-combo").val() 
-  
-  // now change current pages language
-  document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";";
-  document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";domain=.c9users.io"
-  page_trans_work();
-});  
-      
-// Need to change the language of the page to the current cookie value, set at the top of the page   
-page_trans_work();
-
-
-   setTimeout(function(){
-     $("#find-my-location").click();
-    }, 3000);
