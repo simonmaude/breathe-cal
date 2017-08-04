@@ -13,7 +13,7 @@ class EmailManager < ActiveRecord::Base
     
     # Sometimes the website is down, so prepare for timeout
     begin
-     Timeout::timeout(timeout_in_seconds) do
+    Timeout::timeout(timeout_in_seconds) do
      html = open('http://www.baaqmd.gov/Feeds/AlertRSS.aspx').read
      html = Nokogiri::HTML(html)
      return html.xpath('//item/description').text
@@ -31,8 +31,9 @@ class EmailManager < ActiveRecord::Base
  # Should be called from config/schedule.rb (daily at 6AM)
  # template file is in app/views/user_mailer/email_digest.html.erb
  def email_digest
+  @alert = new_alert_status
   Client.where(email_digest: true).each do |user|
-   email_digest(user)
+   UserMailer.send_email(user, @alert, :daily_digest)
   end
  end
 
@@ -52,7 +53,7 @@ class EmailManager < ActiveRecord::Base
      else 
      #  Otherwise, email everyone
        Client.where(email_alerts: true).each do |user|
-       email_alert(user, @alert)
+       UserMailer.send_email(user, @alert, :email_alert)
        end
      end
  end

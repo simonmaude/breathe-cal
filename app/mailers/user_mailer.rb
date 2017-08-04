@@ -6,30 +6,32 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.daily_digest.subject
   #
-  def daily_digest(user, alert)
+  def send_email(user, alert, template_name)
     @alert = alert 
     @user = user
-
    
+   render_name = :error
+   email_subject = :error
+   
+    case template_name
+    when :daily_digest
+     render_name = 'daily_digest.html.erb'
+     email_subject = 'Daily Digest'
+    when :email_alert 
+      render_name =  'email_alert.html.erb'
+      email_subject = 'Air Quality Alert'
+    else
+      render_name = 'error.html.erb'
+      email_subject = 'Error Email'
+    end
+    
     attachments.inline["email_borderup.png"] =  
     File.read("#{Rails.root}/app/assets/images/email_borderup.png")
 
     attachments.inline["bcba_logo.png"] = 
     File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
  
-    mail to: @user.email, subject: "Daily Digest"
-  end
-  
-  def email_alert(user, alert)
-    @user = user
-    @alert = alert
     
-    attachments.inline["bcba_logo.png"] = 
-    File.read("#{Rails.root}/app/assets/images/bcba_logo.png")
-      
-    attachments.inline["email_borderup.png"] =  
-    File.read("#{Rails.root}/app/assets/images/email_borderup.png")
-    
-    mail to: @user.email, subject: "Emergency Air Alert"
+    mail to: @user.email, subject: email_subject, template_name: render_name 
   end
 end
