@@ -1,8 +1,29 @@
-<div id = "alert">
-<h5 style="padding-left: 125px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;"> <%= flash[:notice] %> </h5>
-</div>
-<div id = "check" style="padding: 10px 15px;; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
-  <div id = "left"><h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 10px; color: #575757;"><%= link_to "Back", city_data_back_path, remote: true %></h5></div>
+<div class = 'sidebar-header'>
+  <div class="nav-menu">
+    <div class="sidebar-cell">
+      <div id="home-icon"></div>
+      <div class="sidebar-cell-title">
+        <%= link_to "Home", city_data_back_path, remote: true %>
+      </div>
+    </div>
+     
+    <div class="sidebar-cell">
+      <div id = 'recent-icon'></div>
+      <div class="sidebar-cell-title">
+        <%= link_to "Recent Searches", city_data_back_path, remote: true%>
+      </div>
+    </div>
+    <div class="sidebar-cell">
+      <div id = 'favorites-icon'></div>
+      <div class="sidebar-cell-title">
+        <%= link_to "View Favorites", display_favorite_cities_path, remote: true %>
+      </div>
+    </div>
+  </div>
+  <div class="control-center">
+    <button id = 'marker-cta' class = 'sidebar-btn'>Add Allergen</button>
+    <button class = 'sidebar-btn'>Filter Allergens</button>
+    <button class = 'sidebar-btn'>Add to Favorites</button>
     <%if session[:client_id] %> 
     <% if Client.find(session[:client_id]).cities.include?(City.find_by(name: @data[0])) %>
       <div id = "right"><h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 10px; color: #575757;"><%= link_to "remove as a favorite city", favorite_city_path(:name => @data[0], :remove => true), remote: true, :id => "remove"%></h5></div>
@@ -10,6 +31,20 @@
       <div id = "right"><h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 10px; color: #575757;"><%= link_to "add as a favorite city", favorite_city_path(:name => @data[0], :remove => false), remote: true, :id => "include" %></h5></div>
     <% end %>
     <% end %>
+   
+  </div>
+</div>
+
+<div class = 'sidebar-detail'>
+  
+
+<div id = "alert">
+<h5 style="padding-left: 125px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;"> <%= flash[:notice] %> </h5>
+</div>
+
+<div id = "check" style="padding: 10px 15px;; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
+
+
 
 <div id="weather-box">
   <%= render 'breathe/weather_box'%>
@@ -126,4 +161,5 @@
   <div class="row" style="text-align: right; padding: 15px 20px; border-top-style: solid; border-top-width: 0.5px; border-top-color: #eee;font-family: 'Open Sans', sans-serif; font-weight: 400; font-size: 12px; color: #989898;">
     Data from AccuWeather
   </div> 
+</div>
 </div>
