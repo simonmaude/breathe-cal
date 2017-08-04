@@ -78,6 +78,7 @@ setTimeout(function(){
 }, 3000);  
 
 
+
 // ****************************************************** METHODS: LOAD/CHANGE ***************************************** //
 
 $(document).ready(initAutocomplete);
@@ -85,6 +86,32 @@ $(document).on('page:load', initAutocomplete);
 $(document).on('page:change', initAutocomplete);
 
 
+// ****************************************************** METHODS: INITAUTOCOMPLETE ***************************************** //
+
+
+function initAutocomplete() {
+  mapLoad();
+  placeMarkerListener();
+  $(document).on('submit', '#markerEdit', function(e){
+    e.preventDefault();
+    var newTitle = $('#title-edit').val();
+    var id = editedMarker.id;
+    $.ajax({
+      type: "PUT",
+      contentType: "application/json; charset=utf-8",
+      url: "markers",
+      data: JSON.stringify({title: newTitle, id: editedMarker.id}),
+      success: function(d){
+        console.log(id);
+        bubble_map[id].bubble.close();
+        fetchMarkers();
+        bubble_map[id].bubble.open(map, bubble_map[id].bubble);
+        editedMarker = null;
+      }
+    })
+    return false;
+  });
+}
 
 
 // ****************************************************** METHODS: MAP ***************************************** //
@@ -991,34 +1018,5 @@ function setTranslateListner(){
     page_trans_work();
   });  
 }
-
-
-// ****************************************************** METHODS: INITAUTOCOMPLETE ***************************************** //
-
-
-function initAutocomplete() {
-  mapLoad();
-  placeMarkerListener();
-  $(document).on('submit', '#markerEdit', function(e){
-    e.preventDefault();
-    var newTitle = $('#title-edit').val();
-    var id = editedMarker.id;
-    $.ajax({
-      type: "PUT",
-      contentType: "application/json; charset=utf-8",
-      url: "markers",
-      data: JSON.stringify({title: newTitle, id: editedMarker.id}),
-      success: function(d){
-        console.log(id);
-        bubble_map[id].bubble.close();
-        fetchMarkers();
-        bubble_map[id].bubble.open(map, bubble_map[id].bubble);
-        editedMarker = null;
-      }
-    })
-    return false;
-  });
-}
-
 
       
