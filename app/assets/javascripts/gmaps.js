@@ -79,7 +79,7 @@ setTimeout(function(){
 
 
 
-// ****************************************************** METHODS: LOAD/CHANGE ***************************************** //
+// ****************************************************** METHODS: DOC. LOAD/CHANGE ***************************************** //
 
 $(document).ready(initAutocomplete);
 $(document).on('page:load', initAutocomplete);
@@ -91,7 +91,6 @@ $(document).on('page:change', initAutocomplete);
 
 function initAutocomplete() {
   mapLoad();
-  placeMarkerListener();
   $(document).on('submit', '#markerEdit', function(e){
     e.preventDefault();
     var newTitle = $('#title-edit').val();
@@ -126,7 +125,7 @@ function mapLoad() {
     reverseGC = new google.maps.Geocoder;
     setUIelements();
     setSettingsLocationAutoComplete();
-    
+    placeMarkerListener();
   }
   setMapListeners();
 }
@@ -708,6 +707,7 @@ function placeMarkerListener(){
       $("#marker-cta span").text("SEARCH BOX, BUT NOW CLICK HERE TO ADD ALLERGEN");
     }
   });
+  
 }
 
 function placeMarker(location) {
