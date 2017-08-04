@@ -9,12 +9,12 @@ class EmailManager < ActiveRecord::Base
  def self.new_alert_status
     #first read the website (RSS feed for air alert)
     # with maximum wait of 5 seconds
-    timeout_in_seconds = 5 
+    timeout_in_seconds = 3 
     
     # Sometimes the website is down, so prepare for timeout
     begin
     Timeout::timeout(timeout_in_seconds) do
-     html = open('http://www.baaqmd.gov/Feeds/AlertRSS.aspx').read
+     html = open('http://www.baaqmd.gov/Feeds/AlertRSS.aspx', 'read_timeout' => timeout_in_seconds).read
      html = Nokogiri::HTML(html)
      return html.xpath('//item/description').text
     end
