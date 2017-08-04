@@ -298,6 +298,29 @@
         }
     });
   }
+  
+  function openTab(evt, tabName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+// window.onload=opentab(event, 'London')
 </script>
 <!-- profile sign in and profile icon END -->
 
@@ -315,10 +338,56 @@
     <div id="list-box" style="position: absolute; width: 100%;">
       <%= render 'list' %>  
     </div>
+    
     <div id="detail-box" style="margin-left: 500px; background-color: white; position: absolute; width: 100%; overflow-x: hidden; overflow-y: scroll; z-index: 10;">
+    
     </div>
     <div id="detail-box-mask" style="margin-left: 500px; background-color: white; position: absolute; width: 100%; overflow-x: hidden; overflow-y: scroll; z-index: 10;"></div>
+    
+
     <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="tab" >
+  <button class="tablinks" onclick="openTab(event, 'Recent')">Recent Searches</button>
+  <button class="tablinks" onclick="openTab(event, 'Favorites')">View Favorites</button>
+  <button class="tablinks" onclick="openTab(event, 'Weather')">Weather Report</button>
+  <button class="tablinks" onclick="openTab(event, 'Allergens')">Allergens</button>
+  <button class="tablinks" onclick="openTab(event, 'Breathing')">Breathing Info</button>
+  <button class="tablinks" onclick="openTab(event, 'Air')">Air Quality</button>
+</div>
+
+<div id="Recent" class="tabcontent">
+  <h3>Recent Searches</h3>
+  <p>Show Recent Searches Here.</p>
+</div>
+
+<div id="Favorites" class="tabcontent">
+  <h3>View Favorites</h3>
+  <p>View Favorites Here.</p> 
+</div>
+
+<div id="Weather" class="tabcontent">
+  <h3>Weather Report</h3>
+  <p>View Weather Here.</p>
+</div>
+
+<div id="Allergens" class="tabcontent">
+  <h3>Allergens</h3>
+  <p>Add and Filter Allergens Here.</p>
+</div>
+
+<div id="Breathing" class="tabcontent">
+  <h3>Breathing</h3>
+  <p>View Breathing Info Here.</p>
+</div>
+
+<div id="Air" class="tabcontent">
+  <h3>Air Quality</h3>
+  <p>View Air Quality Here.</p>
+</div>
     <div id="logo" style="text-align: center; position: absolute; width: 100%; bottom: 10px; z-index: 5;">
       <%= link_to(image_tag('bcal.jpg', :style => "width: 160px;"), "http://www.breathebayarea.org") %>
           <div type="button" data-toggle="modal" data-target="#myModal">

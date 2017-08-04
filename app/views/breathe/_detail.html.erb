@@ -1,33 +1,64 @@
 <div id = "alert">
 <h5 style="padding-left: 125px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;"> <%= flash[:notice] %> </h5>
 </div>
-<div id = "check" style="padding: 10px 15px;; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
-  <div id = "left"><h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 10px; color: #575757;"><%= link_to "Back", city_data_back_path, remote: true %></h5></div>
-    <%if session[:client_id] %> 
-    <% if Client.find(session[:client_id]).cities.include?(City.find_by(name: @data[0])) %>
-      <div id = "right"><h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 10px; color: #575757;"><%= link_to "remove as a favorite city", favorite_city_path(:name => @data[0], :remove => true), remote: true, :id => "remove"%></h5></div>
-    <% else %> 
-      <div id = "right"><h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 10px; color: #575757;"><%= link_to "add as a favorite city", favorite_city_path(:name => @data[0], :remove => false), remote: true, :id => "include" %></h5></div>
-    <% end %>
-    <% end %>
 
-<div id="weather-box">
-  <%= render 'breathe/weather_box'%>
+
+<div id = "check" style="padding: 10px 15px;; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
+  <div id = "left">
+    <h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 10px; color: #575757;"><%= link_to "Back", city_data_back_path, remote: true %></h5>
+  </div>
+  <%if session[:client_id] %> 
+    <% if Client.find(session[:client_id]).cities.include?(City.find_by(name: @data[0])) %>
+      <div id = "right">
+        <h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 10px; color: #575757;"><%= link_to "remove as a favorite city", favorite_city_path(:name => @data[0], :remove => true), remote: true, :id => "remove"%></h5>
+      </div>
+    <% else %> 
+      <div id = "right">
+        <h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 10px; color: #575757;"><%= link_to "add as a favorite city", favorite_city_path(:name => @data[0], :remove => false), remote: true, :id => "include" %></h5>
+      </div>
+    <% end %>
+  <% end %>
+
+
+
+  <div id="weather-box">
+    <%= render 'breathe/weather_box'%>
+    
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
 </div>
-<div style="text-align: right; padding: 0 20px;">
-  <p style="margin-bottom: 0; font-family: 'Open Sans', sans-serif; font-weight: 400; font-size: 14px; color: #989898;">Good to Unhealthy</p>
-  <%= image_tag('scale.png') %>  
+
+<div id="London" class="tabcontent">
+  <h3>London</h3>
+  <p>London is the capital city of England.</p>
 </div>
+
+<div id="Paris" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p> 
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h3>Tokyo</h3>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+  </div>
+  <div style="text-align: right; padding: 0 20px;">
+    <p style="margin-bottom: 0; font-family: 'Open Sans', sans-serif; font-weight: 400; font-size: 14px; color: #989898;">Good to Unhealthy</p>
+    <%= image_tag('scale.png') %>  
+  </div>
 
 <!--<div style="padding: 10px;" class="panel-group" id="accordion1" role="tablist" aria-multiselectable="true">-->
-<div style="padding: 10px;" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div style="padding: 10px;" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         <!--  <a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">-->
         <!--  Allergens-->
         <!--</a>-->
         <!--<div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne">-->
 <!--<div class="row" role="tab" id="headingAllergens" style="padding: 15px 10px; border-top-style: solid; border-top-width: 0.5px; border-top-color: #eee;"-->
 <!--        data-toggle="collapse" data-parent="#accordion1" href="#collapsOne1" aria-expanded="false" aria-controls="collapsOne1"> -->
-        <h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;">Allergens</h5>
+  <h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;">Allergens</h5>
     <% get_pollen(@data).each do |p| %>
       <% if p["Name"] != "AirQuality" %>
         <div class="row" role="tab" id="heading<%= p["Name"]%>" style="padding: 15px 10px; border-top-style: solid; border-top-width: 0.5px; border-top-color: #eee;"
