@@ -21,7 +21,7 @@ class BreatheController < ApplicationController
     
     
       @welcome_message = "Spare the Air Day Info"
-      @alert = "No Alert"
+      @alert = EmailManager.new_alert_status
     # if no alert or webpage error, display following
     rescue
       @welcome_message = "Spare the Air Day Info"
