@@ -3,6 +3,7 @@
 </div>
 <div id = "check" style="padding: 10px 15px;; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
   <div id = "left"><h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 10px; color: #575757;"><%= link_to "Back", city_data_back_path, remote: true %></h5></div>
+    
     <%if session[:client_id] %> 
     <% if Client.find(session[:client_id]).cities.include?(City.find_by(name: @data[0])) %>
       <div id = "right"><h5 style="padding-left: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 10px; color: #575757;"><%= link_to "remove as a favorite city", favorite_city_path(:name => @data[0], :remove => true), remote: true, :id => "remove"%></h5></div>

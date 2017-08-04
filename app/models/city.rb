@@ -9,10 +9,12 @@ class City < ActiveRecord::Base
   #and going to this link for those that intend on taking this project on after: http://bit.ly/2uwNsb8
   
   
+
+  
 #Defined as a function 
   def self.get_api_key(i)
     #Second key corresponds to working accuweather API key.
-    ["suOzyD8RtK8Um5eDfXmAun7EEBDs42cz", "bR7GAIQ7GOI6aVzu01bSrD2amGwOChgG", "5NMWDxuXmQpNLf7AQ2gj0Y8uBkLXT8q3", "CdE0YANGAu4AsDAReO0e6CZ01RwfFe9a"][i]
+    ["suOzyD8RtK8Um5eDfXmAun7EEBDs42cz", "NmxlG2ZseEhLeOw824i8jSJWQFnK2zoP", "5NMWDxuXmQpNLf7AQ2gj0Y8uBkLXT8q3", "CdE0YANGAu4AsDAReO0e6CZ01RwfFe9a"][i]
   end
   def self.rescue_api(res, i, url, query, iMAX=3)
     if i == iMAX or res.code == 200

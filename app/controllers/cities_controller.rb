@@ -32,6 +32,8 @@ class CitiesController < ApplicationController
     end
     
     def city_data
+      p "1 -------------------------------------------"
+      p "2 -------------------------------------------"
       if params[:geo]
         latlng = params[:geo]
         loc_key = City.get_loc_key(latlng["lat"], latlng["lng"], params[:name])
@@ -39,19 +41,22 @@ class CitiesController < ApplicationController
       end
       city.update_city_data
       @data = [city.name, city.daily_data]
-      unless a_in_b_as_c?(city.name, session[:cities], "name")
-        if (@quality.nil?)
-          @quality = city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
-        end
-        session[:cities] << { "name" => city.name, "quality" => @quality }
-      end
+      p @data
+      # unless a_in_b_as_c?(city.name, session[:cities], "name")
+      #   if (@quality.nil?)
+      #     @quality = city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
+      #   end
+      #   session[:cities] << { "name" => city.name, "quality" => @quality }
+      # end
     
-      respond_to do |format|
-        format.js {
-          render :template => "cities/city_data.js.erb"
-        }
-      end
+      # respond_to do |format|
+      #   format.js {
+      #     render :template => "cities/city_data.js.erb"
+      #   }
+      # end
       # render :json => city.daily_data.to_json
+      p "3 -------------------------------------------"
+      p "4 -------------------------------------------"
     end
     
     def city_data_back
