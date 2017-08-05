@@ -645,11 +645,12 @@ function editMarker(data) {
     minWidth: '600px',
     minHeight: 75,
     height: '100%',
-    arrowStyle: 0
+    arrowStyle: 0,
+    closeSrc: 'https://www.google.com/intl/en_us/mapfiles/close.gif'
   });
   
   bubble.open(map, marker);
-  bubble.setContent(getContentS());
+  bubble.setContent(createContentString2(id));
   marker.bubble = bubble;
   editedMarker = marker;
   editedMarker.bubble = bubble;
@@ -854,9 +855,7 @@ function getContentS() {
         "<div id= 'input-title'>Allergen:</div>" +
         "<div id='spacing'></div>"+
         "<input id = 'title-edit' class = 'text-box' type='text' name='title' list='options'>" + 
-        "<div id='spacing'></div>"+
-        "<div id='spacing'></div>"+
-        "<div id='spacing'></div>"+
+     
         //"<input id = 'plus-button' type='submit' value='+'>"+
       "</form>" +
     "</div>"
@@ -883,9 +882,7 @@ function getContent() {
         "<div id= 'input-title'>Allergen:</div>" +
         "<div id='spacing'></div>"+
         "<input class = 'text-box' type='text' name='title' list='options'>" + 
-        "<div id='spacing'></div>"+
-        "<div id='spacing'></div>"+
-        "<div id='spacing'></div>"+
+      
         //"<input id = 'plus-button' type='submit' value='+'>"+
       "</form>" +
     "</div>"
@@ -893,52 +890,67 @@ function getContent() {
   return contentString[0];
 }
 
-/*
-function createContentString2(data) {
+
+function createContentString2(id) {
+  var title = document.createElement('div');
+  title.innerHTML = 'Allergen:';
+  title.setAttribute('id', 'input-title');
+  var spacing = document.createElement('div');
+  spacing.setAttribute('id', 'spacing');
   var markerBubbleDiv = document.createElement('div');
   var markerEditForm = document.createElement('form');
-  markerEditForm.setAttribute('method','PUT');
-  markerEditForm.setAttribute('action','markers');
+  markerEditForm.setAttribute('id', 'form'+id);
+
   var dataList = document.createElement('datalist');
   dataList.setAttribute('id', 'options');
   
-  //for (int i = 0)
-  var optionVal = document.createElement('option');
-  optionVal.setAttribute('value', name);
+  var optionList = ['Bees', 'Cats', 'Dog', 'Dust', 'Gluten', 'Mold', 'Oak', 'Peanut', 'Perfume', 'Smoke']
+  for (var i = 0; i <optionList.length; i += 1) {
+    name = optionList[i];
+    var optionVal = document.createElement('option');
+    optionVal.setAttribute('value', name);
+    dataList.appendChild(optionVal);
+  }
   
-    "<div id= 'marker-bubble' class='scrollFix'>" + 
-      "<form id='markerEdit' action='markers' method='PUT'>"+
-        "<datalist id='options'>"+
-          "<option value='Cats'>" +
-          "<option value='Bees'>" +
-          "<option value='Perfume'>" +
-          "<option value='Oak'>" +
-          "<option value='Peanut'>" +
-          "<option value='Gluten'>" +
-          "<option value='Dog'>" +
-          "<option value='Dust'>" +
-          "<option value='Smoke'>" +
-          "<option value='Mold'>" +
-          "</datalist>" +
-        "<div id= 'input-title'>Allergen:</div>" +
-        "<div id='spacing'></div>"+
-        "<input id = 'title-edit' class = 'text-box' type='text' name='title' list='options'>" + 
-        "<div id='spacing'></div>"+
-        "<div id='spacing'></div>"+
-        "<div id='spacing'></div>"+
-        //"<input id = 'plus-button' type='submit' value='+'>"+
-      "</form>" +
-    "</div>"
+  var input = document.createElement('input');
+  input.setAttribute('id', 'title-edit'+id);
+  input.setAttribute('class','text-box');
+  input.setAttribute('type', 'text');
+  input.setAttribute('name', 'title');
+  input.setAttribute('list', 'options');
   
+  markerEditForm.appendChild(dataList);
+  markerEditForm.appendChild(input);
+  markerBubbleDiv.appendChild(title);
+  markerBubbleDiv.appendChild(spacing);
+  markerBubbleDiv.appendChild(markerEditForm);
+ 
+  google.maps.event.addDomListener(markerEditForm,'submit', function(e){
+ 
+    e.preventDefault();
+    var newTitle = $('#title-edit'+id).val();
+    
+    $.ajax({
+      type: "PUT",
+      contentType: "application/json; charset=utf-8",
+      url: "markers",
+      data: JSON.stringify({title: newTitle, id: id}),
+      success: function(d){
+        console.log(newTitle);  
+        bubble_map[id].bubble.close();
+        fetchMarkers();
+        bubble_map[id].bubble.open(map, bubble_map[id].bubble);
+        delete markerBubbleDiv;
+        
+      }
+    })
   
+  })
   
-  
-  var input = document.createElement("input");
-  input.type = "text";
-  input.className = "css-class-name"; // set the CSS class
-  
+  return markerBubbleDiv;
 }
-*/
+
+
 function createContentString(data){
   var title = data.title;
   var editBtn = document.createElement("button");
