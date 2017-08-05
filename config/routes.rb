@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :cities, :clients
   
   get '/email_confirm/:id/:num' => 'email_confirm#confirming'
+  get '/delete_email/:id/:num' => 'email_confirm#delete_email'
 
   
   # You can have the root of your site routed with "root"
