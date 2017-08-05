@@ -5,8 +5,8 @@ class ConfirmMailer < ApplicationMailer
     @root_email = "https://tranquil-wildwood-40360.herokuapp.com/"
     @user_email = user_email
     @user_name = name
-    @confirm_link = @root_email + user_id + "/" + random_number
-    @delete_link = @root_email + user_id + "/" + random_number
+    @confirm_link = @root_email + "email_confirm/" + user_id + "/" + random_number
+    @delete_link = @root_email + "delete_email/" + user_id + "/" + random_number
     mail to: user_email, subject: "Please Confirm Your Email", template_name: 'confirm_email.html.erb'
   end
   
