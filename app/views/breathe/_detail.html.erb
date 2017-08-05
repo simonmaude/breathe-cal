@@ -1,7 +1,8 @@
 <div id = "alert">
 <h5 style="padding-left: 125px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #575757;"> <%= flash[:notice] %> </h5>
+<h5 style="text-align: right;"><%= link_to "Add to Favorites", favorite_city_path(:name => @data[0]), remote: true %></h5>
 </div>
-
+      
 
 <div id = "check" style="padding: 10px 15px;; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
   <div id = "left">
@@ -23,27 +24,6 @@
 
   <div id="weather-box">
     <%= render 'breathe/weather_box'%>
-    
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-</div>
-
-<div id="London" class="tabcontent">
-  <h3>London</h3>
-  <p>London is the capital city of England.</p>
-</div>
-
-<div id="Paris" class="tabcontent">
-  <h3>Paris</h3>
-  <p>Paris is the capital of France.</p> 
-</div>
-
-<div id="Tokyo" class="tabcontent">
-  <h3>Tokyo</h3>
-  <p>Tokyo is the capital of Japan.</p>
-</div>
   </div>
   <div style="text-align: right; padding: 0 20px;">
     <p style="margin-bottom: 0; font-family: 'Open Sans', sans-serif; font-weight: 400; font-size: 14px; color: #989898;">Good to Unhealthy</p>
