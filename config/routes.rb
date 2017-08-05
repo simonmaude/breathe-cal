@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   
   get 'authcheck' => "sessions#checklogged"
+  
 
 
   post '/markers' => 'markers#create'
@@ -33,6 +34,8 @@ Rails.application.routes.draw do
   
   resources :cities, :clients
   
+  get '/email_confirm/:num' => 'email_confirm#confirming'
+
   
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
