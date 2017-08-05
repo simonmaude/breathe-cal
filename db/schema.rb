@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170730003252) do
+ActiveRecord::Schema.define(version: 20170805091252) do
 
   create_table "cities", force: :cascade do |t|
     t.string   "name"
@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20170730003252) do
     t.string   "name"
     t.string   "email"
     t.text     "searches"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.string   "provider"
     t.string   "uid"
     t.string   "oauth_token"
@@ -44,6 +44,9 @@ ActiveRecord::Schema.define(version: 20170730003252) do
     t.string   "location"
     t.boolean  "email_digest"
     t.boolean  "email_alerts"
+    t.string   "email_key"
+    t.string   "language"
+    t.string   "email_is_confirmed"
   end
 
   create_table "markers", force: :cascade do |t|
