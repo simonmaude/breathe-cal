@@ -41,7 +41,6 @@ var autocomplete2 = new google.maps.places.Autocomplete(
     /** @type {!HTMLInputElement} */(document.getElementById('autocomplete2')),
     {types: ['geocode']});
   var place = autocomplete2.getPlace();
-  autocomplete2.addListener('place_changed', fillInAddress(place)); 
         
   function point2LatLng(point, map) {
     var topRight = map.getProjection().fromLatLngToPoint(map.getBounds().getNorthEast());

@@ -1,15 +1,14 @@
 class ClientsController < ApplicationController
+skip_before_action :verify_authenticity_token
 
   def update
-    test_check = params[:test_check]
-    if test_check
-      client = Client.from_omniauth(env["omniauth.auth"])
-      # client_id = params[:id]
+    if params[:email] || params[:location]
+      client = Client.find(params[:id])
       if params[:location] then client.location = params[:location] end
       if params[:email] then client.email = params[:email] end
       client.save!
+      render json: "success"
     end 
-    session[:client_id] = client.id
   end
 
   
