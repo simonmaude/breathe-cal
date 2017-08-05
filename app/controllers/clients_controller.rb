@@ -7,7 +7,10 @@ skip_before_action :verify_authenticity_token
       if params[:location] then client.location = params[:location] end
         
       if params[:email] 
-        ConfirmMailer.confirm_email("Soroosh", params[:email]).deliver_now
+        p "******************************************************"
+        p client.name
+        p "******************************************************"
+        ConfirmMailer.confirm_email(client.name, params[:email]).deliver_now
         client.email = params[:email]
       end
       
