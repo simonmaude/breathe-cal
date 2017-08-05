@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  root 'breathe#index'
-  
+  root 'breathe#index', as: 'root'
+
   post '/city_data' => 'cities#city_data'
   get '/cached_city_data' => 'cities#cached_city_data'
   get '/city_data_back' => 'cities#city_data_back'
@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create, :destroy]
   
   get 'authcheck' => "sessions#checklogged"
+  
 
 
   post '/markers' => 'markers#create'
@@ -33,6 +34,9 @@ Rails.application.routes.draw do
   
   resources :cities, :clients
   
+  get '/email_confirm/:id/:num' => 'email_confirm#confirming', as: 'email_confirm'
+  get '/delete_email/:id/:num' => 'email_confirm#delete_email', as: 'delete_email'
+
   
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

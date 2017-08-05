@@ -75,25 +75,46 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  # Do not dump schema after migrations.
-  config.active_record.dump_schema_after_migration = false
+  # # Do not dump schema after migrations.
+  # config.active_record.dump_schema_after_migration = false
+  # config.action_mailer.delivery_method = :smtp
+  # # SMTP settings for gmail
+  # # ENV indicates environment variables 
+  # # To set environment variables on C9/local, use:
+  # # export NAME = "ENVNAME"
+  # # example: export DOMAIN = "gmail.com"
+  # # for heroku, do: 
+  # # heroku config:set DOMAIN gmail.com
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.smtp_settings = {
+  #   :address              => "smtp.mailgun.org",
+  #   :port                 => 2525,
+  #   :domain               => ENV['DOMAIN'],
+  #   :user_name            => ENV['MAILGUN_USER_NAME'],
+  #   :password             =>  ENV['MAILGUN_PASSWORD'],
+  #   :authentication       => "plain",
+  #   #:enable_starttls_auto => true
+  # }
+  
+  
+  
+  config.action_mailer.raise_delivery_errors = true
+  
   config.action_mailer.delivery_method = :smtp
-  # SMTP settings for gmail
-  # ENV indicates environment variables 
-  # To set environment variables on C9/local, use:
-  # export NAME = "ENVNAME"
-  # example: export DOMAIN = "gmail.com"
-  # for heroku, do: 
-  # heroku config:set DOMAIN gmail.com
-  config.action_mailer.perform_deliveries = true
+  
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.mailgun.org",
-    :port                 => 2525,
-    :domain               => ENV['DOMAIN'],
-    :user_name            => ENV['MAILGUN_USER_NAME'],
-    :password             =>  ENV['MAILGUN_PASSWORD'],
-    :authentication       => "plain",
-    #:enable_starttls_auto => true
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            'BreatheCaliforniaOfTheBay@gmail.com',
+    password:             'Team1ForTheWin',
+    authentication:       'plain',
+    enable_starttls_auto: true
   }
+  
+  
+  
+  
+  
 
 end

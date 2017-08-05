@@ -7,7 +7,6 @@ class BreatheController < ApplicationController
   # (The RSS feed is improperly formatted as of July 12, 2017
   # So stuff like Feedjira did not work
   
-  
   # begin rescue block (maybe webpage unavailable)
   begin
   
