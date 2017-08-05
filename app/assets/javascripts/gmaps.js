@@ -451,7 +451,6 @@ function setSettingsLocationAutoComplete(){
     {types: ['geocode']});
   // bias results around current location
   var curr_location = autocomplete2.getPlace();
-  autocomplete2.addListener('place_changed', fillInAddress(curr_location)); 
 }
 
 // Handle location finder error
