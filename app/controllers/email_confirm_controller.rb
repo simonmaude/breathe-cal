@@ -18,10 +18,10 @@ class EmailConfirmController < ApplicationController
         if (params[:num] != client.email_key)
                 render 'confirm_mailer/delete_email.html'
            
-            elsif (params[:num] == client.email_key)
-                client.email_is_confirmed = false
-                render 'confirm_mailer/delete_email.html'
-            end
+        elsif (params[:num] == client.email_key)
+            client.email_is_confirmed = false
+            render 'confirm_mailer/delete_email.html'
+        end
     end
 
 end
