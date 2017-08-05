@@ -508,7 +508,7 @@ button[id="find-my-location"]:hover {
 
 .dropdown-sub-title-collapse{
   font-size: 14px;
-  margin-left: 0px;
+  text-align: left;
 }
 
 .dropdown-sub-title-update{
@@ -553,9 +553,15 @@ input[type="submit"]{
    margin-right: 10px;
   // margin-bottom: 20px;
 }
+
 input[type="text"]{
   // margin-left: 5px;
    margin-bottom: 0px;
+}
+
+input[type="checkbox"]{
+  margin-left: 0px;
+  margin-bottom: 0px;
 }
 
 .marker-title {
@@ -712,7 +718,7 @@ input[type="text"]{
   display: inline-block;
   width: 42px;
   height: 23px;
-  margin-right: 10px;
+  margin-right: 0px;
   margin-bottom: 10px;
 }
 
