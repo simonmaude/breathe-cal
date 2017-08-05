@@ -789,7 +789,7 @@ function placeMarker(location) {
   
   $(document).on('submit', '#markerForm', function(e){
     
-    if (marker != null) {
+    if (marker !== null) {
       console.log('call')
       e.preventDefault();
       infowindow.close();
@@ -813,7 +813,7 @@ function placeMarker(location) {
           
           var newContent = createContentString(d);
           var customMarker = getIcon(d);
-          console.log(marker == null)
+          console.log(marker === null)
           marker.setIcon(customMarker);
           marker.markerInfo.setContent(newContent[0]);
           marker.markerInfo.open(map,recentMarker);
