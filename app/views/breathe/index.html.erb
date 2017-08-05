@@ -285,17 +285,29 @@
     });    
   }  
   
+  function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+    
   function fillInEmail(id) {
-    document.getElementById("email_updated_text").style.display = "block"
-    $.ajax({
-        type: "PUT",
-        url: "clients/"+id,
-        data: JSON.stringify({email: $('#saved_email_text').val()}),
-        contentType: "application/json; charset=utf-8",
-        success: function(data) {
-            console.log(data);
-        }
-    });    
+ 
+    if (validateEmail($('#saved_email_text').val()) == true) {
+      document.getElementById("email_updated_text").style.display = "block"
+      document.getElementById("email_updated_text").innerHTML = "<div class='dropdown-sub-title-update' id='email_updated_text' style='display: block;'>Email updated</div>";
+      $.ajax({
+          type: "PUT",
+          url: "clients/"+id,
+          data: JSON.stringify({email: $('#saved_email_text').val()}),
+          contentType: "application/json; charset=utf-8",
+          success: function(data) {
+              console.log(data);
+          }
+      });    
+    } else {
+        document.getElementById("email_updated_text").style.display = "block"
+        document.getElementById("email_updated_text").innerHTML = "<div class='dropdown-sub-title-update' id='email_updated_text' style='display: block;'>Invalid email, please try again.</div>";
+    }
   }
 
   function deleteMarker(id) {

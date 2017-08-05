@@ -5,7 +5,12 @@ skip_before_action :verify_authenticity_token
     if params[:email] || params[:location]
       client = Client.find(params[:id])
       if params[:location] then client.location = params[:location] end
-      if params[:email] then client.email = params[:email] end
+      if params[:email] 
+        p "********************************************************************"
+        p params[:email] 
+        p "********************************************************************"
+        client.email = params[:email]
+      end
       client.save!
       render json: "success"
     end 
