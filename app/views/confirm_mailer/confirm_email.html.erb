@@ -298,8 +298,8 @@
                   <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p>Hi <%= @user_name %>,</p>
-                        <p>Please confirm your email by clicking below.</p>
+                        <p>Hello <%= @user_name %>,</p>
+                        <p>Please confirm your email (<%= @user_email %>) by clicking below.</p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -316,6 +316,8 @@
                           </tbody>
                         </table>
                         <p>Thanks!</p>
+                        <p>If you did not make this request, or would like to remove your email from this service, please click <a href="https://work-sordem.c9users.io/email_confirm/20">here.</a> </p>
+                        
                       </td>
                     </tr>
                   </table>

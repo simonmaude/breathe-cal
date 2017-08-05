@@ -3,7 +3,9 @@
 <!--<![endif]-->
 <head>
 
-<title>Confirmation Failed</title>
+<meta charset="UTF-8"/>
+
+<title>Email Confirmed</title>
 
 
 </head>
@@ -14,20 +16,17 @@
 	<!--header-->
 	<header>
 	<div class="banner row" id="banner">		
-		<body id = "backimg" background="http://cdn.pcwallart.com/images/solid-color-red-background-wallpaper-1.jpg">
+		<body id = "backimg" background="http://cdn.pcwallart.com/images/sky-blue-wallpaper-1.jpg">
 		<div class="container text-center" style="height:900px;padding-top:100px;">
-			<a href="#"><img id="site-title" style= "height:300px" class=" wow fadeInDown" wow-data-delay="0.0s" wow-data-duration="0.9s" src="https://image.flaticon.com/icons/png/512/55/55811.png" alt="logo"/></a>
-			<h2 class="intro wow zoomIn" style="font-size: 70px; padding-top:40px; font-family: Trebuchet MS; font-weight: 10 !important; color: black" wow-data-delay="0.4s" wow-data-duration="0.9s">Sorry! Confirmation failed.</h2>
-			<p class="intro wow zoomIn" style="font-size: 20px; padding-top:10px; font-family: Trebuchet MS; color: black" wow-data-delay="0.4s" wow-data-duration="0.9s"> This link has expired. Please go back to the homepage and enter your email again.</p>
+			<a href="#"><img id="site-title" style= "height:300px" class=" wow fadeInDown" wow-data-delay="0.0s" wow-data-duration="0.9s" src="https://safeneedledisposal.org/wp-content/themes/safeneedle/images/state-waste-icon.png" alt="logo"/></a>
+			<h2 class="intro wow zoomIn" style="font-size: 70px; padding-top:40px; font-family: Trebuchet MS; font-weight: 10 !important; color: white" wow-data-delay="0.4s" wow-data-duration="0.9s">Email Successfully Deleted</h2>
+			<p class="intro wow zoomIn" style="font-size: 20px; padding-top:10px; font-family: Trebuchet MS; color: white" wow-data-delay="0.4s" wow-data-duration="0.9s"> Redirecting to home page in <span id="countdowntimer">6 </span> seconds</p>
 
-			<p class="intro wow zoomIn" style="font-size: 20px; padding-top:10px; font-family: Trebuchet MS; color: black" wow-data-delay="0.4s" wow-data-duration="0.9s"> Redirecting to home page in <span id="countdowntimer">10 </span> seconds</p>
-
-			 <meta http-equiv="refresh" content="10;url=https://work-sordem.c9users.io"/> 
+			 <!--<meta http-equiv="refresh" content="6;url=https://work-sordem.c9users.io"/> -->
 		
 		</div>
 
 	</div>	
-
 
 
 <!--Javascripts-->
@@ -44,11 +43,6 @@
     jQuery(function ($) {
 
     'use strict';
-	
-// =============================================
-// BEGIN THEME SCRIPTS
-// =============================================
-
 
 // Script Wow Animation
 new WOW().init();
@@ -98,7 +92,7 @@ $(function() {
 </style>
 
 <script type="text/javascript">
-    var timeleft = 10;
+    var timeleft = 6;
     var downloadTimer = setInterval(function(){
     timeleft--;
     document.getElementById("countdowntimer").textContent = timeleft;
