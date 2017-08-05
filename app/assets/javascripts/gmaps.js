@@ -93,20 +93,23 @@ function initAutocomplete() {
   mapLoad();
   placeMarkerListener();
   $(document).on('submit', '#markerEdit', function(e){
+    console.log('prints twice');
     e.preventDefault();
     var newTitle = $('#title-edit').val();
     var id = editedMarker.id;
+    e.stopImmediatePropagation();
     $.ajax({
       type: "PUT",
       contentType: "application/json; charset=utf-8",
       url: "markers",
       data: JSON.stringify({title: newTitle, id: editedMarker.id}),
       success: function(d){
-        console.log(id);
+        console.log(newTitle);  
         bubble_map[id].bubble.close();
         fetchMarkers();
         bubble_map[id].bubble.open(map, bubble_map[id].bubble);
         editedMarker = null;
+        
       }
     })
     return false;
@@ -619,7 +622,7 @@ function setMarkers(data){
       google.maps.event.addListener(marker, 'click', function(){
         this.bubble.open(map, this);
       });
-  
+      
       markers.push(marker);
     } 
   }
@@ -764,31 +767,30 @@ function placeMarker(location) {
   });
 
 
-  var infowindow = new google.maps.InfoWindow();
-  //infowindow.open(map,marker);
-  infowindow.setContent(contentString[0]);
-  marker.infowindow = infowindow;
-  recentMarker = marker;
+
 
   markerInfo.open(map, marker);
   markerInfo.setContent(contentString[0]);
   marker.markerInfo = markerInfo;
-  recentMarker = marker;
+  //recentMarker = marker;
 
   google.maps.event.addListener(marker, 'click', function(){
-    markerInfo.open(map,marker);
+    bubble_map[marker.id].bubble.open();
+    //markerInfo.open(map,marker);
   });
   
   var listenerHandle = google.maps.event.addListener(infowindow, 'closeclick', function(){
-    recentMarker.setMap(null);
-    recentMarker = null;
+    marker.setMap(null);
+    marker = null;
   });
   
   // disallow marker spawn if its already here. this means i need the UniqueID 
   
   
   $(document).on('submit', '#markerForm', function(e){
-    if (recentMarker != null) {
+    
+    if (marker != null) {
+      console.log('call')
       e.preventDefault();
       infowindow.close();
       var postData = $(this).serializeArray();
@@ -806,18 +808,21 @@ function placeMarker(location) {
         url: "markers",
         data: JSON.stringify({marker: convData}),
         success: function(d){
+      
           fetchedMarkers[d.id] = true;
           
           var newContent = createContentString(d);
           var customMarker = getIcon(d);
-          console.log(recentMarker == null)
-          recentMarker.setIcon(customMarker);
-          recentMarker.markerInfo.setContent(newContent[0]);
-          recentMarker.markerInfo.open(map,recentMarker);
-          recentMarker.draggable = false;
-          recentMarker = null;
+          console.log(marker == null)
+          marker.setIcon(customMarker);
+          marker.markerInfo.setContent(newContent[0]);
+          marker.markerInfo.open(map,recentMarker);
+          marker.draggable = false;
+         // recentMarker = null;
           //google.maps.event.removeEventListener(listenerHandle);
-          markers.push(recentMarker);
+          markers.push(marker);
+          marker = null;
+          
           
         }
       })
@@ -889,6 +894,52 @@ function getContent() {
   return contentString[0];
 }
 
+/*
+function createContentString2(data) {
+  var markerBubbleDiv = document.createElement('div');
+  var markerEditForm = document.createElement('form');
+  markerEditForm.setAttribute('method','PUT');
+  markerEditForm.setAttribute('action','markers');
+  var dataList = document.createElement('datalist');
+  dataList.setAttribute('id', 'options');
+  
+  //for (int i = 0)
+  var optionVal = document.createElement('option');
+  optionVal.setAttribute('value', name);
+  
+    "<div id= 'marker-bubble' class='scrollFix'>" + 
+      "<form id='markerEdit' action='markers' method='PUT'>"+
+        "<datalist id='options'>"+
+          "<option value='Cats'>" +
+          "<option value='Bees'>" +
+          "<option value='Perfume'>" +
+          "<option value='Oak'>" +
+          "<option value='Peanut'>" +
+          "<option value='Gluten'>" +
+          "<option value='Dog'>" +
+          "<option value='Dust'>" +
+          "<option value='Smoke'>" +
+          "<option value='Mold'>" +
+          "</datalist>" +
+        "<div id= 'input-title'>Allergen:</div>" +
+        "<div id='spacing'></div>"+
+        "<input id = 'title-edit' class = 'text-box' type='text' name='title' list='options'>" + 
+        "<div id='spacing'></div>"+
+        "<div id='spacing'></div>"+
+        "<div id='spacing'></div>"+
+        //"<input id = 'plus-button' type='submit' value='+'>"+
+      "</form>" +
+    "</div>"
+  
+  
+  
+  
+  var input = document.createElement("input");
+  input.type = "text";
+  input.className = "css-class-name"; // set the CSS class
+  
+}
+*/
 function createContentString(data){
   var title = data.title;
   var editBtn = document.createElement("button");
