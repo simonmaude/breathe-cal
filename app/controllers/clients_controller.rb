@@ -17,7 +17,6 @@ skip_before_action :verify_authenticity_token
         client.email_key =  random_num
         client.key_creation_time =  Time.now()
       end
-      
       client.save!
       render json: "success"
     end 
