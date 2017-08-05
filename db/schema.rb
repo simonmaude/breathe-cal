@@ -46,7 +46,8 @@ ActiveRecord::Schema.define(version: 20170805091252) do
     t.boolean  "email_alerts"
     t.string   "email_key"
     t.string   "language"
-    t.string   "email_is_confirmed"
+    t.boolean  "email_is_confirmed"
+    t.datetime "key_creation_time"
   end
 
   create_table "markers", force: :cascade do |t|
