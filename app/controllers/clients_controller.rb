@@ -5,9 +5,8 @@ class ClientsController < ApplicationController
 skip_before_action :verify_authenticity_token
 
   def update
-    do_it = params[:email] || params[:location] || params[:language]
-    
-    if do_it
+  
+    if params[:email] || params[:location] || params[:language]
       client = Client.find(params[:id])
      
       if params[:location] then client.location = params[:location] end
