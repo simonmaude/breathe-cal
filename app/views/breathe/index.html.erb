@@ -285,6 +285,20 @@
     
     function openTab(evt, tabName) {
       var i, tabcontent, tablinks;
+      
+      if (tabName == 'Cities') {
+        <% fox_box = render 'breathe/fox_box.html' %>
+        $("#fox-box").html("<%= j fox_box %>");
+      }
+      
+      else {
+        console.log('here')
+        if ($("#cheater-display").html() != "") {
+          $("#fox-box").html($("#cheater-display").html());
+        }
+        
+      }
+    
   
       // Get all elements with class="tabcontent" and hide them
       tabcontent = document.getElementsByClassName("tabcontent");
@@ -307,6 +321,7 @@
 
 
 <!-- profile sign in and profile icon END -->
+  <div id = 'cheater-display' style= "display:none"></div>
 
   <div class="col-md-4 col-ms-12" style="padding-left: 0; padding-right: 0; max-width: 500px;" id="right-col">
     <!--<div style="text-align: right; font-size: 15px; padding: 10px 15px; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid;">-->
@@ -329,8 +344,8 @@
  
     <div class="tab" >
 
-      <button class="tablinks" onclick="openTab(event, 'Cities')"><%=  link_to "Cities", display_favorite_cities_path, remote: true %></button>
-      <button class="tablinks" onclick="openTab(event, 'Allergens')">Allergens</button>
+      <button class="tablinks" onclick="openTab(event, 'Cities')"><%=  link_to "Home", display_favorite_cities_path, remote: true, style: 'text-decoration: none;' %></button>
+      <button id = 'allergen-display' class="tablinks" onclick="openTab(event, 'Allergens')">Allergens</button>
       <button class="tablinks" onclick="openTab(event, 'Breathing')">Breathing Information</button>
       <button class="tablinks" onclick="openTab(event, 'Air')">Air Quality</button>
     </div>
@@ -359,9 +374,14 @@
           searchBar.value = "";
          }
       </script>
-      <h3>Cities</h3>
-      <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center, float: right;" id="marker-cta"  <%=  link_to "Add Allergen", remote: true %>  </span>
-
+      <div class="tab-header">
+        <div id="allergen-title">
+          Home
+        </div>
+        <div class = 'allergen-btn'>
+          <button id = 'marker-cta' class = 'sidebar-btn'>Add Allergen</button>
+        </div>
+      </div>
     <hr>
       <br>
       

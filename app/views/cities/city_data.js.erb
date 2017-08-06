@@ -112,9 +112,10 @@ $("#logo").html("");
 $("#allergen-render").html("<%= j render 'breathe/allergens.html' %>");
 $("#breathing-render").html("<%= j render 'breathe/breathing.html' %>");
 $("#fox-box").html("<%= j render 'breathe/fox_box_city.html' %>");
+$("#cheater-display").html("<%= j render 'breathe/fox_box_city.html' %>");
 $("#weather-box").html("<%= j render 'breathe/weather_box.html' %>");
 <% end %>
 
 
-$("#Allergen").show();
+$("#allergen-display").click();
 map.overlayMapTypes.insertAt(0,waqiMapOverlay);  
