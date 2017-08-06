@@ -1,19 +1,16 @@
-<% begin; first_name = current_client.name.split(" ").first; rescue Exception; first_name = nil; end %>
-<% begin; dt = (DateTime.now + Rational(-8,24)).to_formatted_s(:custom); rescue Exception; dt = nil; end%>
-
 
 <div class = 'fox-box-content' >
-    <%= link_to raw("<div class = 'fox-box-logo'></div>"), "http://www.breathebayarea.org" %> 
-
-    
-    <div style=" float: left;  color: white; padding-left: 1px; ">
+    <%= link_to raw("<div class = 'fox-box-logo'></div>"), "http://www.breathebayarea.org", id: 'logo' %> 
+    <% begin; first_name = current_client.name.split(" ").first; rescue Exception; first_name = nil; end %>
+    <% begin; dt = (DateTime.now + Rational(-8,24)).to_formatted_s(:custom); rescue Exception; dt = nil; end%>
+    <div style=" float: left;  color: white; padding-left: 10%; width: 70%">
         <div style="font-family: 'Open Sans', sans-serif; font-size: 24px">Welcome <%= first_name || "user" %></div>
         <div style="font-family: 'Open Sans', sans-serif; font-size: 20px"><%= dt%></div>
-    </div>
-    <div id = "rolling-rolling-rolling">
+        <div id = "rolling-rolling-rolling">
     <marquee behavior="scroll" direction="left" scrollamount="5" >
         <div id = "spare_alert" > High pollen levels in Berkeley, CA </div>
     </marquee>
+    </div>
     </div>
     
 </div>
