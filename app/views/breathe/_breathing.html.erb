@@ -8,7 +8,7 @@ data-toggle="collapse" data-parent="#accordion" href="#collapseWind" aria-expand
     <div style="float: right; margin-right: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= get_wind(@data) %></div>
   </div>
 </div>
-<div id="collapseWind" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingWind">
+<div id="collapseWind" class="panel-collapse " role="tabpanel" aria-labelledby="headingWind">
   <div class="panel-body" style="padding-top: 0;">
     <% get_pollen_detail("Wind").each do |d| %>
       <h5 style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
@@ -30,7 +30,7 @@ data-toggle="collapse" data-parent="#accordion" href="#collapsePrecip" aria-expa
     <div style="float: right; margin-right: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= get_precip(@data) %></div>
   </div>
 </div>
-<div id="collapsePrecip" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPrecip">
+<div id="collapsePrecip" class="panel-collapse " role="tabpanel" aria-labelledby="headingPrecip">
   <div class="panel-body" style="padding-top: 0;">
     <% get_pollen_detail("Precip").each do |d| %>
       <h5 style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">

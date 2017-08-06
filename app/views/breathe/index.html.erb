@@ -384,11 +384,16 @@
           searchBar.value = "";
          }
       </script>
-      <h3>Cities</h3>
-      <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center, float: right;" id="marker-cta"  <%=  link_to "Add Allergen", remote: true %>  </span>
-
+      
+      <div class="tab-header">
+        <div id="allergen-title">
+          Cities
+        </div>
+        <div class = 'allergen-btn'>
+          <button id = 'marker-cta' class = 'sidebar-btn'>Add Allergen</button>
+        </div>
+      </div>
     <hr>
-      <br>
       
       <h4>Current Location: </h4>
       <div style='margin-left: 10px;'>
@@ -434,9 +439,9 @@
         <% end %>
       </div>
       <h4>Recent Searches: </h4>
-      <% if !@searches.nil? and @searches.length > 0 %>
+      <% if !@cities.nil? and @cities.length > 0 %>
           <%= "found recent searches"%>
-          <% @searches.each do |c| %>
+          <% @cities.each do |c| %>
             <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
               <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
                 <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
@@ -488,18 +493,20 @@
         </div>
       </div>
       <div id ='breathing-render'>
-        
+
       </div>
     </div>
     
     <div id="Air" class="tabcontent">
       <div class="tab-header">
         <div id="allergen-title">
-          Air Quality
+          Air / UV Levels
         </div>
         <div class = 'allergen-btn'>
           <button id = 'marker-cta' class = 'sidebar-btn'>Add Allergen</button>
         </div>
+      </div>
+      <div id ='breathing-render'>
       </div>
     </div>
     
