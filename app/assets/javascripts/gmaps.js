@@ -56,7 +56,7 @@ var search_in_other_lang
 
 // Page should be in English by default
 
-var not_logged_in = (document.getElementById("profile-image") == null);
+var not_logged_in = (document.getElementById("profile-image") === null);
 
 if (not_logged_in) {
   document.cookie = "googtrans=/en/en;"
@@ -1035,6 +1035,13 @@ function loggedIn(){
 // ****************************************************** METHODS: TRANSLATE ***************************************** //
 
 function page_trans_work() {
+   setTimeout(function(){
+    if (search_in_other_lang.hasOwnProperty(String(document.cookie).slice(14, 16))) {
+      document.getElementById("pac-input").placeholder = search_in_other_lang[String(document.cookie).slice(14, 16)];
+    }
+  }, 1000);
+  
+  
   var other_way = false;
   for (var i = 0; i < right_to_left_languages.length; i++) {
      if (String(document.cookie).indexOf("/en/"+right_to_left_languages[i]) > -1) {
@@ -1054,13 +1061,6 @@ function page_trans_work() {
 
  	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="left" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
   }
-  
-  
-  setTimeout(function(){
-    if (search_in_other_lang.hasOwnProperty(String(document.cookie).slice(14, 16))) {
-      document.getElementById("pac-input").placeholder = search_in_other_lang[String(document.cookie).slice(14, 16)];
-    }
-  }, 1000);
 }
 
 
