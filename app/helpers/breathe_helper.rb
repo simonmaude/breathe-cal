@@ -163,19 +163,34 @@ Think about replacing your grass lawn with low pollen ground cover - Irish Moss,
     end
   end
   def get_quality_color(q)
-      m = {"good" => "7FDBFF", "low" => "1cbfff", "moderate" => "00ce5a", "high" => "FFDC00", "unhealthy" => "FF851B", "hazardous" => "FF4136"}
+      m = {"good" => "7FDBFF", "low" => "1cbfff", "moderate" => "00ce5a", "high" => "FFDC00", "unhealthy" => "FF851B","very high" => "FF851B", "hazardous" => "FF4136"}
       m[q.downcase]    
   end
   def get_fox_color(data)
     c = air_quality(data)
     if c != "Unknown"
-      m = {"good" => "badfc2", "low" => "baded8", "moderate" => "dcd8c2", "high" => "deccc0", "unhealthy" => "e1bdbe", "hazardous" => "ff5507"}
+      m = {"good" => "badfc2", "low" => "baded8", "moderate" => "dcd8c2", "high" => "deccc0", "unhealthy" => "e1bdbe", "hazardous" => "ff5507", "extreme" => "ff5507"}
       m[c.downcase]
     else
       "baded8"
     end
   end
 
+  def get_photo(name)
+    if name == 'Grass'
+      return asset_path('grass.jpg')
+    elsif name == 'Mold'
+      return asset_path('mold.jpg')
+    elsif name =='Ragweed'
+      return asset_path('ragweed.jpg')
+    elsif name =='Tree'
+      return asset_path('tree.jpg')
+    elsif name =='UVIndex'
+      return asset_path('sun.jpg')
+      
+      
+    end
+  end
   def get_allergen_image(a)
     a.downcase + ".png"
   end

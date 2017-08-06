@@ -1,0 +1,44 @@
+<div class="row" role="tab" id="headingWind" style="padding: 15px 10px; border-top-style: solid; border-top-width: 0.5px; border-top-color: #eee;"
+data-toggle="collapse" data-parent="#accordion" href="#collapseWind" aria-expanded="false" aria-controls="collapseWind">
+  <%= image_tag('wind.png', :style => "position: absolute; width: 15px; height: 15px; margin-left: 10px; margin-top: 1px;") %>
+  <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+    <div style="padding-left: 15px;">Wind<span class='glyphicon glyphicon-chevron-down' style="margin-left: 10px; font-size: 10px;"></span></div>
+  </div>
+  <div class="col-lg-4">
+    <div style="float: right; margin-right: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= get_wind(@data) %></div>
+  </div>
+</div>
+<div id="collapseWind" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingWind">
+  <div class="panel-body" style="padding-top: 0;">
+    <% get_pollen_detail("Wind").each do |d| %>
+      <h5 style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+        <%= d[0] %>
+      </h5>
+      <p style="font-family: 'Open Sans', sans-serif; font-weight: 400; font-size: 14px; color: #989898;">
+        <%= d[1] %>
+      </p>
+    <% end %>
+  </div>
+</div>
+<div class="row" role="tab" id="headingPrecip" style="padding: 15px 10px; border-top-style: solid; border-top-width: 0.5px; border-top-color: #eee;"
+data-toggle="collapse" data-parent="#accordion" href="#collapsePrecip" aria-expanded="false" aria-controls="collapsePrecip">
+  <%= image_tag('precip.png', :style => "position: absolute; width: 15px; height: 15px; margin-left: 10px; margin-top: 1px;") %>
+  <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+    <div style="padding-left: 15px;">Precip<span class='glyphicon glyphicon-chevron-down' style="margin-left: 10px; font-size: 10px;"></span></div>
+  </div>
+  <div class="col-lg-4">
+    <div style="float: right; margin-right: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= get_precip(@data) %></div>
+  </div>
+</div>
+<div id="collapsePrecip" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPrecip">
+  <div class="panel-body" style="padding-top: 0;">
+    <% get_pollen_detail("Precip").each do |d| %>
+      <h5 style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+        <%= d[0] %>
+      </h5>
+      <p style="font-family: 'Open Sans', sans-serif; font-weight: 400; font-size: 14px; color: #989898;">
+        <%= d[1] %>
+      </p>
+    <% end %>
+  </div>
+</div>
