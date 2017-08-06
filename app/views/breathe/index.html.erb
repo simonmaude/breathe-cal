@@ -411,11 +411,16 @@
       
     <hr>
       <h4>Favorites Cities: </h4>
-  <%=  link_to "View Favorites", display_favorite_cities_path, remote: true, :style => 'color: 3672B2' %>
       <br><!--<h5 style="text-align: right;"><%#= link_to "Add to Favorites", favorite_city_path(:name => @data[0]), remote: true %></h5>-->
       <div style="padding: 0 10px;"> 
+        
+        <% if @fav_cities.nil? %>
+          @fav_cities = nil
+        <% @fav_cities = session[:favorites] %>
+
+        <% end %>
+        
         <% if !@fav_cities.nil? and @fav_cities.length > 0 %>
-          found fav cities
           <% @fav_cities.each do |c| %>
             <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
               <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
@@ -429,7 +434,6 @@
               </div>
             </div>  <% end %>
           <% else %> 
-            <%= "could not find fav cities"%>
             <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
               <div id="sidebar-favorite" class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
                 
@@ -442,36 +446,43 @@
         <% end %>
       </div>
       
-      <h4>Recent Searches: </h4>
-      <%= link_to "Recent Searches", city_data_back_path, remote: true, :style => 'color: 3672B2' %> 
-      <!--<h5 style="text-align: right;"><%#= link_to "Add to Favorites", favorite_city_path(:name => @data[0]), remote: true %></h5>-->
-      <br>
-      <% if !@recent_cities.nil? and @recent_cities.length > 0 %>
-          <%= "found recent searches"%>
-          <% @recent_cities.each do |c| %>
-            <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
-              <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
-                <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
-                  <%= c["name"].capitalize %>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(c["quality"]) %>; margin-top: 2px;"></div>
-                <div style="float: right; margin-right: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= c["quality"] %></div>
-              </div>
-            </div>  <% end %>
-          <% else %> 
-            <%= "could not find recent searches"%>
-            <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
-              <div id="sidebar-favorite" class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
-                
-              </div>
-            <div id="sidebar-filter" class="col-lg-10" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898; display: none">
-              <div id='filter-header'>Allergens on Map</div>
-              <button id='filter-btn' style="color: black" onclick="filter()">Filter</button>
-            </div>
-          </div>
+      <div id='recent_searches'>
+        
+        <h4>Recent Searches: </h4>
+        <!--<h5 style="text-align: right;"><%#= link_to "Add to Favorites", favorite_city_path(:name => @data[0]), remote: true %></h5>-->
+        <br>
+        <% if @recent_cities.nil? %>
+          @recent_cities = nil
+          <% @recent_cities = session[:cities].reverse %>
         <% end %>
+        <script>
+          console.log("recent searches redrawn")
+        </script>
+        <% if !@recent_cities.nil? and @recent_cities.length > 0 %>
+            <% @recent_cities.each do |c| %>
+              <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
+                <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+                  <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
+                    <%= c["name"].capitalize %>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(c["quality"]) %>; margin-top: 2px;"></div>
+                  <div style="float: right; margin-right: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= c["quality"] %></div>
+                </div>
+              </div>  <% end %>
+            <% else %> 
+              <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
+                <div id="sidebar-favorite" class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+                  
+                </div>
+              <div id="sidebar-filter" class="col-lg-10" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898; display: none">
+                <div id='filter-header'>Allergens on Map</div>
+                <button id='filter-btn' style="color: black" onclick="filter()">Filter</button>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     
     <div id="Allergens" class="tabcontent">

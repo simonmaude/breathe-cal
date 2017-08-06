@@ -91,6 +91,7 @@ $(document).on('page:change', initAutocomplete);
 
 function initAutocomplete() {
   mapLoad();
+  
   $(document).on('submit', '#markerEdit', function(e){
     console.log('prints twice');
     e.preventDefault();
@@ -278,6 +279,7 @@ function setUIListerners(){
     map.fitBounds(bounds);
     fetchMarkers();
     
+    updateCitySearches();
   });
   
   
@@ -376,6 +378,30 @@ function setUIListerners(){
     }
   }
 }
+
+function updateCitySearches(){
+    $.ajax({
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    url: "city_data_back",
+    data: {},
+    success: function(){
+      console.log("called updateRecentSearches")
+    }
+  });
+    $.ajax({
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    url: "display_favorite_cities",
+    data: {},
+    success: function(){
+      console.log("called updateFavouriteCities")
+    }
+  });
+}
+
+
+
   
 
 // ****************************************************** METHODS: OVERLAYS ***************************************** //

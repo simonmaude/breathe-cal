@@ -55,13 +55,18 @@ class CitiesController < ApplicationController
     end
     
     def city_data_back
+        # p 'session cities1 = ' + (session[:cities]).to_s
       @text = "Recent Searches"
-      if session[:cities] && session[:cities].length > 5
-        session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
+      if session[:cities] && session[:cities].length > 0
+        p 'session cities2 = ' + (session[:cities]).to_s
+        if session[:cities].length > 5
+          session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
+        end
         @recent_cities = session[:cities].reverse
-      else
-        @recent_cities = []
-        session[:cities] = []
+        p 'recent cities = ' + @recent_cities.to_s
+      # else
+        # @recent_cities = []
+        # session[:cities] = []
       end
       respond_to do |format|
         format.js {
@@ -74,6 +79,7 @@ class CitiesController < ApplicationController
       @text = "Favorite Cities"
       if session[:client_id]
         @fav_cities = session[:favorites]
+        p 'fav_cities = ' + @fav_cities.to_s
         if @fav_cities == nil || @fav_cities.empty? 
           @no_cities = "You currently have no favorite cities!"
         end
