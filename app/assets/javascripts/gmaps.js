@@ -66,9 +66,9 @@ if (not_logged_in) {
 } else if (!not_logged_in) {
   var lang_selected = $('.temp_information').data('temp');
   if (lang_selected) {
-    document.cookie = "googtrans=/en/" + lang_selected + ";";
-    document.cookie = "googtrans=/en/" + lang_selected + ";" + "domain=.c9users.io"
-    document.cookie = "googtrans=/en/" + lang_selected + ";" + "domain=tranquil-wildwood-40360.herokuapp.com"
+    document.cookie = 'googtrans=/en/' + lang_selected + ';';
+    document.cookie = 'googtrans=/en/' + lang_selected + ';' + 'domain=.c9users.io'
+    document.cookie = 'googtrans=/en/' + lang_selected + ';' + 'domain=tranquil-wildwood-40360.herokuapp.com'
   }
 }
 
