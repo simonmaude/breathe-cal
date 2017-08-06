@@ -1013,14 +1013,22 @@ body {
   width: auto;
   background: url('/assets/breath-cal-logo.png');
   background-repeat: no-repeat;
-  background-size: 80% 80%;
-  height:100px;
-  width: 100px;
+  background-size: 100% 100%;
+  height: 75px;
+  width: 75px;
+
 }
 
 #rolling-rolling-rolling {
-  position: absolute;
-  padding-top: 78px;
+  position: relative;
+  padding-top: 1px;
   width: 100%;
   margin: 0;
+
 }
+
+.fox-box-content a {
+  width:100px;
+  height:100px;
+}
+
