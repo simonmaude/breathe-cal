@@ -64,21 +64,12 @@ if (!logged_in) {
   document.cookie = "googtrans=/en/en; domain=tranquil-wildwood-40360.herokuapp.com"
   
 } else if (logged_in) {
-  document.cookie = "googtrans=/en/en;"
-  document.cookie = "googtrans=/en/en; domain=.c9users.io"
-  document.cookie = "googtrans=/en/en; domain=tranquil-wildwood-40360.herokuapp.com"
-  
-  $.ajax({
-    type: "GET",
-    contentType: "application/json; charset=utf-8",
-    url: "clients",
-    data: {},
-    success: function(data){
-      alert("did it");
-    }
-  });
-  
-  
+  var lang_selected = $('.temp_information').data('temp');
+  if (lang_selected) {
+    document.cookie = "googtrans=/en/" + lang_selected + ";";
+    document.cookie = "googtrans=/en/" + lang_selected + ";" + "domain=.c9users.io"
+    document.cookie = "googtrans=/en/" + lang_selected + ";" + "domain=tranquil-wildwood-40360.herokuapp.com"
+  }
 }
 
 
@@ -1105,10 +1096,12 @@ function setTranslateListner(){
     document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";";
     document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";domain=.c9users.io"
     document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + "; domain=tranquil-wildwood-40360.herokuapp.com";
+    var current_id = $('.temp_information2').data('temp');
 
+   
     $.ajax({
         type: "PUT",
-        url: "clients/1",
+        url: "clients/" + current_id,
         data: JSON.stringify({language: $(".goog-te-combo").val()}),
         contentType: "application/json; charset=utf-8",
         success: function(data) {
