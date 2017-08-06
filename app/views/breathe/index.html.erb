@@ -404,12 +404,15 @@
     <hr>
       <h4>My Saved Location: </h4>
       <div style='margin-left: 10px;'>
-        <%= location_placeholder %>
+        <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
+          <%= location_placeholder %>
+        </div>
       </div>
       
     <hr>
       <h4>Favorites Cities: </h4>
-      <!--<h5 style="text-align: right;"><%#= link_to "Add to Favorites", favorite_city_path(:name => @data[0]), remote: true %></h5>-->
+  <%=  link_to "View Favorites", display_favorite_cities_path, remote: true, :style => 'color: 3672B2' %>
+      <br><!--<h5 style="text-align: right;"><%#= link_to "Add to Favorites", favorite_city_path(:name => @data[0]), remote: true %></h5>-->
       <div style="padding: 0 10px;"> 
         <% if !@fav_cities.nil? and @fav_cities.length > 0 %>
           found fav cities
@@ -440,6 +443,9 @@
       </div>
       
       <h4>Recent Searches: </h4>
+      <%= link_to "Recent Searches", city_data_back_path, remote: true, :style => 'color: 3672B2' %> 
+      <!--<h5 style="text-align: right;"><%#= link_to "Add to Favorites", favorite_city_path(:name => @data[0]), remote: true %></h5>-->
+      <br>
       <% if !@recent_cities.nil? and @recent_cities.length > 0 %>
           <%= "found recent searches"%>
           <% @recent_cities.each do |c| %>
@@ -508,6 +514,8 @@
         </div>
       </div>
       <div id ='breathing-render'>
+        <% begin; air_quality = @data[1]["DailyForecasts"][0]["AirAndPollen"][0]["Category"]; rescue Exception; air_quality = nil; end %>            
+        <div style="font-family: 'Open Sans', sans-serif; font-size: 20px">Air quality: <%= air_quality %></div>
       </div>
     </div>
     
