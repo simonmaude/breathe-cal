@@ -6,8 +6,9 @@ skip_before_action :verify_authenticity_token
 
   def update
 
-    if params[:email] || params[:location]
+    if params[:email] || params[:location] || params[:language]
       client = Client.find(params[:id])
+     
       if params[:location] then client.location = params[:location] end
         
       if params[:email] 
@@ -17,6 +18,11 @@ skip_before_action :verify_authenticity_token
         client.email_key =  random_num
         client.key_creation_time =  Time.now()
       end
+      
+      if params[:language]
+        client.language = params[:language]
+      end
+      
       client.save!
       render json: "success"
     end 

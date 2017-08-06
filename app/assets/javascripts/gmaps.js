@@ -52,9 +52,36 @@ window.fetchMarkers = fetchMarkers;
 var right_to_left_languages
 var search_in_other_lang
 
+
+
 // Page should be in English by default
-document.cookie = "googtrans=/en/en;"
-document.cookie = "googtrans=/en/en; domain=.c9users.io"
+
+var logged_in = (document.getElementById("profile-image") != null);
+
+if (!logged_in) {
+  document.cookie = "googtrans=/en/en;"
+  document.cookie = "googtrans=/en/en; domain=.c9users.io"
+  document.cookie = "googtrans=/en/en; domain=tranquil-wildwood-40360.herokuapp.com"
+  
+} else if (logged_in) {
+  document.cookie = "googtrans=/en/en;"
+  document.cookie = "googtrans=/en/en; domain=.c9users.io"
+  document.cookie = "googtrans=/en/en; domain=tranquil-wildwood-40360.herokuapp.com"
+  
+  $.ajax({
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    url: "clients",
+    data: {},
+    success: function(data){
+      alert("did it");
+    }
+  });
+  
+  
+}
+
+
 // **** add extra domain when deployed to heroku
 // **** also add heroku link to google online 
 
@@ -1077,8 +1104,21 @@ function setTranslateListner(){
     // now change current pages language
     document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";";
     document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";domain=.c9users.io"
+    document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + "; domain=tranquil-wildwood-40360.herokuapp.com";
+
+    $.ajax({
+        type: "PUT",
+        url: "clients/1",
+        data: JSON.stringify({language: $(".goog-te-combo").val()}),
+        contentType: "application/json; charset=utf-8",
+        success: function(data) {
+            console.log(data);
+        }
+    }); 
+      
     page_trans_work();
   });  
 }
 
+page_trans_work();
       
