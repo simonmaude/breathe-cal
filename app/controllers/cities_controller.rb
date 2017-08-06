@@ -58,9 +58,9 @@ class CitiesController < ApplicationController
       @text = "Recent Searches"
       if session[:cities] && session[:cities].length > 5
         session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
-        @cities = session[:cities].reverse
+        @recent_cities = session[:cities].reverse
       else
-        @cities = []
+        @recent_cities = []
         session[:cities] = []
       end
       respond_to do |format|
@@ -73,12 +73,12 @@ class CitiesController < ApplicationController
     def display_favorite_cities
       @text = "Favorite Cities"
       if session[:client_id]
-        @cities = session[:favorites]
-        if @cities == nil || @cities.empty? 
+        @fav_cities = session[:favorites]
+        if @fav_cities == nil || @fav_cities.empty? 
           @no_cities = "You currently have no favorite cities!"
         end
       else 
-        @cities = []
+        @fav_cities = []
         @no_cities = "Please login in order to favorite a city!"
       end
       respond_to do |format|
