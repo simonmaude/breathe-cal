@@ -320,6 +320,7 @@
     <!--</div>-->
     
     <div id="detail-box" style="margin-left: 500px; background-color: white; position: absolute; width: 100%; overflow-x: hidden; overflow-y: scroll; z-index: 10;">
+  
     </div>
     <div id="detail-box-mask" style="margin-left: 500px; background-color: white; position: absolute; width: 100%; overflow-x: hidden; overflow-y: scroll; z-index: 10;">
     </div>
@@ -327,48 +328,66 @@
 
  
     <div class="tab" >
-      <button class="tablinks" onclick="openTab(event, 'Favorites')"><%=  link_to "Cities", display_favorite_cities_path, remote: true, :style => 'color: 3672B2' %></button>
+      <button class="tablinks" onclick="openTab(event, 'Cities')"><%=  link_to "Cities", display_favorite_cities_path, remote: true %></button>
       <button class="tablinks" onclick="openTab(event, 'Allergens')">Allergens</button>
       <button class="tablinks" onclick="openTab(event, 'Breathing')">Breathing Info</button>
       <button class="tablinks" onclick="openTab(event, 'Air')">Air Quality</button>
     </div>
 
-
+      
     <div id="Cities" class="tabcontent">
+      <script>
+        // simulating a search when clicked on a favorite city
+        var favClicked = document.getElementsByClassName("favCity");
+  
+        var seeCity = function(cityDiv) {
+          var searchText = cityDiv.innerHTML;
+          searchBar = document.getElementById('pac-input');
+          
+          // Need to get rid of any tags in order to search
+          // specially important when page is translated
+          searchText = String(searchText);
+          while (searchText.indexOf("<font>") !== -1) {
+            searchText = searchText.replace("<font>",'');
+          }
+          while (searchText.indexOf("</font>") !== -1) {
+            searchText = searchText.replace("</font>",'');
+          }
+          searchBar.value += searchText;
+          document.getElementById('search-button').click();
+          searchBar.value = "";
+         }
+      </script>
       <h3>Cities</h3>
-      <p>View Favorites Here.</p>
+      <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center, float: right;" id="marker-cta"  <%=  link_to "Add Allergen", remote: true %>  </span>
+
+    <hr>
+      <br>
+      
+      <h4>Current Location: </h4>
+      <div style='margin-left: 10px;'>
+        <% begin; current_city = @data[0]; rescue Exception; current_city = "no current city found"; end %>
+        <%= current_city%>
+      </div>
+      
+    <hr>
+      <h4>My Saved Location: </h4>
+      <div style='margin-left: 10px;'>
+        <%= location_placeholder %>
+      </div>
+      
+    <hr>
+      <h4>Favorites Cities: </h4>
       <!--<h5 style="text-align: right;"><%#= link_to "Add to Favorites", favorite_city_path(:name => @data[0]), remote: true %></h5>-->
       <div style="padding: 0 10px;"> 
         <% if !@cities.nil? and @cities.length > 0 %>
+          <%= "found fav cities"%>
           <% @cities.each do |c| %>
             <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
               <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
                 <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
                   <%= c["name"].capitalize %>
                 </div>
-                <script>
-                  // simulating a search when clicked on a favorite city
-                  var favClicked = document.getElementsByClassName("favCity");
-      
-                  var seeCity = function(cityDiv) {
-                    var searchText = cityDiv.innerHTML;
-                    searchBar = document.getElementById('pac-input');
-                    
-                    // Need to get rid of any tags in order to search
-                    // specially important when page is translated
-                    searchText = String(searchText);
-                    while (searchText.indexOf("<font>") !== -1) {
-                      searchText = searchText.replace("<font>",'');
-                    }
-                    while (searchText.indexOf("</font>") !== -1) {
-                      searchText = searchText.replace("</font>",'');
-                    }
-                    searchBar.value += searchText;
-                    document.getElementById('search-button').click();
-                    searchBar.value = "";
-                   }
-                </script>
-                <%= link_to c["name"].capitalize, cached_city_data_path(name: c["name"]), remote: true %>
               </div>
               <div class="col-lg-4">
                 <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(c["quality"]) %>; margin-top: 2px;"></div>
@@ -376,6 +395,7 @@
               </div>
             </div>  <% end %>
           <% else %> 
+            <%= "could not find fav cities"%>
             <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
               <div id="sidebar-favorite" class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
                 <%= @no_cities %>
@@ -387,27 +407,52 @@
           </div>
         <% end %>
       </div>
-    </div>
-    
-    <!--<div id="Recent" class="tabcontent">-->
-    <!--  <h3>Recent Searches</h3>-->
-    <!--  <p>Show Recent Searches Here.</p>-->
-    <!--</div>-->
+      <h4>Recent Searches: </h4>
+      <% if !@searches.nil? and @searches.length > 0 %>
+          <%= "found recent searches"%>
+          <% @searches.each do |c| %>
+            <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
+              <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+                <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
+                  <%= c["name"].capitalize %>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(c["quality"]) %>; margin-top: 2px;"></div>
+                <div style="float: right; margin-right: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= c["quality"] %></div>
+              </div>
+            </div>  <% end %>
+          <% else %> 
+            <%= "could not find recent searches"%>
+            <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
+              <div id="sidebar-favorite" class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+                <%= @no_searches %>
+              </div>
+            <div id="sidebar-filter" class="col-lg-10" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898; display: none">
+              <div id='filter-header'>Allergens on Map</div>
+              <button id='filter-btn' style="color: black" onclick="filter()">Filter</button>
+            </div>
+          </div>
+        <% end %>
+      </div>
     
     <div id="Allergens" class="tabcontent">
       <h3>Allergens</h3>
-      <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center;" id="marker-cta" class = "controls" <%=  link_to "Add Allergen", remote: true %>  </span>
-      | <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center;" id="filter" class = "">
-        <%=  link_to "Filter Allergens", 'javascript:;',  :onclick => "showFilterCheckboxes()" %>  </span>
+      <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center, float: right;" id="marker-cta" class = "controls" <%=  link_to "Add Allergen", remote: true %>  </span>
+       
     </div>
     
     <div id="Breathing" class="tabcontent">
       <h3>Breathing</h3>
+      <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center, float: right;" id="marker-cta"  <%=  link_to "Add Allergen", remote: true %>  </span>
+
       <p>View Breathing Info Here.</p>
     </div>
     
     <div id="Air" class="tabcontent">
       <h3>Air Quality</h3>
+      <span style="font-family: 'Open Sans', sans-serif; font-weight: 550; font-size: 16px; color: #3672B2; cursor: pointer; text-align: center, float: right;" id="marker-cta"  <%=  link_to "Add Allergen", remote: true %>  </span>
+
       <p>View Air Quality Here.</p>
     </div>
     
