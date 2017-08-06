@@ -56,14 +56,14 @@ var search_in_other_lang
 
 // Page should be in English by default
 
-var logged_in = (document.getElementById("profile-image") != null);
+var not_logged_in = (document.getElementById("profile-image") == null);
 
-if (!logged_in) {
+if (not_logged_in) {
   document.cookie = "googtrans=/en/en;"
   document.cookie = "googtrans=/en/en; domain=.c9users.io"
   document.cookie = "googtrans=/en/en; domain=tranquil-wildwood-40360.herokuapp.com"
   
-} else if (logged_in) {
+} else if (!not_logged_in) {
   var lang_selected = $('.temp_information').data('temp');
   if (lang_selected) {
     document.cookie = "googtrans=/en/" + lang_selected + ";";
