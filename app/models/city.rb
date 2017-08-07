@@ -14,7 +14,7 @@ class City < ActiveRecord::Base
     #Second key corresponds to working accuweather API key.
     p '*' * 100
     p ["suOzyD8RtK8Um5eDfXmAun7EEBDs42cz", "7Zb2lXYjtShB8ndGEDPYf4TCjjSFf3CQ", "5NMWDxuXmQpNLf7AQ2gj0Y8uBkLXT8q3", "CdE0YANGAu4AsDAReO0e6CZ01RwfFe9a"][i]
-   ["suOzyD8RtK8Um5eDfXmAun7EEBDs42cz", "7Zb2lXYjtShB8ndGEDPYf4TCjjSFf3CQ", "5NMWDxuXmQpNLf7AQ2gj0Y8uBkLXT8q3", "CdE0YANGAu4AsDAReO0e6CZ01RwfFe9a"][i]
+   ["suOzyD8RtK8Um5eDfXmAun7EEBDs42cz", "suOzyD8RtK8Um5eDfXmAun7EEBDs42cz", "5NMWDxuXmQpNLf7AQ2gj0Y8uBkLXT8q3", "CdE0YANGAu4AsDAReO0e6CZ01RwfFe9a"][i]
   end
   def self.rescue_api(res, i, url, query, iMAX=3)
     if i == iMAX or res.code == 200

@@ -387,6 +387,9 @@
       
       <h4>Current Location: </h4>
       <div style='margin-left: 10px;'>
+        <div id = 'current_city'>
+          
+        </div>
         <% begin; current_city = @data[0]; rescue Exception; current_city = "no current city found"; end %>
         <%= current_city%>
       </div>
