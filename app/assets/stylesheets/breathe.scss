@@ -193,25 +193,11 @@ button[id="search-button"]:hover {
 }
 
 button[id="clean-air-button"] {
-  border-color: transparent;
-  background-color: transparent;
-  box-shadow: none;
-  font-family: Roboto;
-  font-size: 16px;
-  font-weight: 300;
-  margin-left: 48px;
-  margin-top: 10px;
-  padding: 0 11px 0 0px;
-  text-overflow: ellipsis;
-  width: 130px;
-  height: 29px;
-  opacity: 0.75;
-  left: 411px !important;
+  visibility: hidden;
 }
 
-button[id="clean-air"]:hover {
-  opacity: 0.9;
-  left: 411px !important;
+button[id="clean-air-off"] {
+  visibility: hidden;
 }
 
 button[id="find-my-location"] {

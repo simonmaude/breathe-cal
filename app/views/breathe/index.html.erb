@@ -310,7 +310,7 @@
     
     function openTab(evt, tabName) {
       var i, tabcontent, tablinks;
-  
+    
       // Get all elements with class="tabcontent" and hide them
       tabcontent = document.getElementsByClassName("tabcontent");
       for (i = 0; i < tabcontent.length; i++) {
@@ -326,6 +326,13 @@
       // Show the current tab, and add an "active" class to the link that opened the tab
       document.getElementById(tabName).style.display = "block";
       evt.currentTarget.className += " active";
+      
+      if (tabName == 'Air') {
+        document.getElementById("clean-air-button").click();
+      } else {
+        document.getElementById("clean-air-off").click();
+      }
+      
     }
   
   </script>
@@ -545,15 +552,16 @@
     <input id="pac-input" class="controls" type="text" placeholder="Search">
     <button id="search-button" class="controls">🔍</button>
     <button id="find-my-location"> <img id = "loc-img" height="30" width="30" src="https://cdn3.iconfinder.com/data/icons/glypho-travel/64/map-pin-marker-circle-512.png"> </button>
-     <button id="clean-air-button" class="controls"></button>
-  
-    <div id="clean-air" class="onoffswitch">
-      <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-      <label class="onoffswitch-label" for="myonoffswitch">
-        <span class="onoffswitch-inner"></span>
-        <span class="onoffswitch-switch"></span>
-      </label>
-    </div>
+    <button id="clean-air-button" class="controls"></button>
+    <button id='clean-air-off' class="controls"></button>
+
+    <!--<div id="clean-air" class="onoffswitch">-->
+    <!--  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>-->
+    <!--  <label class="onoffswitch-label" for="myonoffswitch">-->
+    <!--    <span class="onoffswitch-inner"></span>-->
+    <!--    <span class="onoffswitch-switch"></span>-->
+    <!--  </label>-->
+    <!--</div>-->
 
     <div id="map" style="height: 100%; width: 100%;"></div>
   </div>
