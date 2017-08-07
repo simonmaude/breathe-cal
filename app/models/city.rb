@@ -12,10 +12,11 @@ class City < ActiveRecord::Base
 #Defined as a function 
   def self.get_api_key(i)
     #Second key corresponds to working accuweather API key.
-    p '*' * 100
-    p ["suOzyD8RtK8Um5eDfXmAun7EEBDs42cz", "7Zb2lXYjtShB8ndGEDPYf4TCjjSFf3CQ", "5NMWDxuXmQpNLf7AQ2gj0Y8uBkLXT8q3", "CdE0YANGAu4AsDAReO0e6CZ01RwfFe9a"][i]
-   ["suOzyD8RtK8Um5eDfXmAun7EEBDs42cz", "7Zb2lXYjtShB8ndGEDPYf4TCjjSFf3CQ", "5NMWDxuXmQpNLf7AQ2gj0Y8uBkLXT8q3", "CdE0YANGAu4AsDAReO0e6CZ01RwfFe9a"][i]
+    "fFGf7ed6tqQCtPaiMaqFNihyjcjSkgMc"
+  # ["suOzyD8RtK8Um5eDfXmAun7EEBDs42cz", "7Zb2lXYjtShB8ndGEDPYf4TCjjSFf3CQ", "5NMWDxuXmQpNLf7AQ2gj0Y8uBkLXT8q3", "CdE0YANGAu4AsDAReO0e6CZ01RwfFe9a"][i]
   end
+  
+  
   def self.rescue_api(res, i, url, query, iMAX=3)
     if i == iMAX or res.code == 200
       return res
@@ -24,6 +25,8 @@ class City < ActiveRecord::Base
       return City.rescue_api(HTTParty.get(url, query: query), i + 1, url, query)
     end
   end
+  
+  
   def update_city_data
     location_key = self.location_key
     if self.updated_at <= Date.today.to_time.beginning_of_day or !self.daily_data

@@ -327,6 +327,7 @@
       document.getElementById(tabName).style.display = "block";
       evt.currentTarget.className += " active";
     }
+    
   
   </script>
 
@@ -349,12 +350,11 @@
     </div>
     <div id="detail-box-mask" style="margin-left: 500px; background-color: white; position: absolute; width: 100%; overflow-x: hidden; overflow-y: scroll; z-index: 10;">
     </div>
-    
+  
 
  
-    <div class="tab" >
-
-      <button class="tablinks" onclick="openTab(event, 'Cities')"><%=  link_to "Cities", display_favorite_cities_path, remote: true %></button>
+    <div id="tabs" class="tab" >
+      <button class='tablinks' onclick="openTab(event, 'Cities')">Home</button>
       <button class="tablinks" onclick="openTab(event, 'Allergens')">Allergens</button>
       <button class="tablinks" onclick="openTab(event, 'Breathing')">Breathing Information</button>
       <button class="tablinks" onclick="openTab(event, 'Air')">Air Quality</button>
@@ -394,12 +394,14 @@
         </div>
       </div>
     <hr>
-      
+    <div> 
+      <h5 style="float: right;"><%= link_to "Add to Favorites", favorite_city_path(:name => "current_city"), remote: true %></h5>
       <h4>Current Location: </h4>
       <div style='margin-left: 10px;'>
-        <% begin; current_city = @data[0]; rescue Exception; current_city = "no current city found"; end %>
-        <%= current_city%>
+        current city
       </div>
+    </div>
+      
       
     <hr>
       <h4>My Saved Location: </h4>
@@ -410,57 +412,46 @@
       </div>
       
     <hr>
-      <h4>Favorites Cities: </h4>
-      <br><!--<h5 style="text-align: right;"><%#= link_to "Add to Favorites", favorite_city_path(:name => @data[0]), remote: true %></h5>-->
-      <div style="padding: 0 10px;"> 
+      <div id="favorite_cities"> 
         
+        <h4>Favorites Locations: </h4>
         <% if @fav_cities.nil? %>
-          @fav_cities = nil
-        <% @fav_cities = session[:favorites] %>
-
+          <% @fav_cities = session[:favorites] %>
         <% end %>
-        
         <% if !@fav_cities.nil? and @fav_cities.length > 0 %>
           <% @fav_cities.each do |c| %>
-            <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
+            <div class="row" style="padding: 15px 10px;">
               <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
                 <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
                   <%= c["name"].capitalize %>
                 </div>
               </div>
               <div class="col-lg-4">
-                <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(c["quality"]) %>; margin-top: 2px;"></div>
-                <div style="float: right; margin-right: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= c["quality"] %></div>
+                <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(c["quality"]) %>; margin-top: 2px; "></div>
+                <div style="float: right; margin-right: 9px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= c["quality"] %></div>
               </div>
-            </div>  <% end %>
+            </div>  
+            <% end %>
           <% else %> 
-            <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
+            <div class="row" style="padding: 15px 10px; ">
               <div id="sidebar-favorite" class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
-                
               </div>
             <div id="sidebar-filter" class="col-lg-10" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898; display: none">
-              <div id='filter-header'>Allergens on Map</div>
-              <button id='filter-btn' style="color: black" onclick="filter()">Filter</button>
             </div>
           </div>
         <% end %>
       </div>
       
+    <hr>
+      
       <div id='recent_searches'>
-        
         <h4>Recent Searches: </h4>
-        <!--<h5 style="text-align: right;"><%#= link_to "Add to Favorites", favorite_city_path(:name => @data[0]), remote: true %></h5>-->
-        <br>
         <% if @recent_cities.nil? %>
-          @recent_cities = nil
           <% @recent_cities = session[:cities].reverse %>
         <% end %>
-        <script>
-          console.log("recent searches redrawn")
-        </script>
         <% if !@recent_cities.nil? and @recent_cities.length > 0 %>
             <% @recent_cities.each do |c| %>
-              <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
+              <div class="row" style="padding: 15px 10px; ">
                 <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
                   <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
                     <%= c["name"].capitalize %>
@@ -468,11 +459,12 @@
                 </div>
                 <div class="col-lg-4">
                   <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(c["quality"]) %>; margin-top: 2px;"></div>
-                  <div style="float: right; margin-right: 10px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= c["quality"] %></div>
+                <div style="float: right; margin-right: 9px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= c["quality"] %></div>
                 </div>
-              </div>  <% end %>
+              </div>  
+              <% end %>
             <% else %> 
-              <div class="row" style="padding: 15px 10px; border-bottom-style: solid; border-bottom-width: 0.5px; border-bottom-color: #eee;">
+              <div class="row" style="padding: 15px 10px; ">
                 <div id="sidebar-favorite" class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
                   
                 </div>

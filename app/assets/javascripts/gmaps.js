@@ -386,7 +386,6 @@ function updateCitySearches(){
     url: "city_data_back",
     data: {},
     success: function(){
-      console.log("called updateRecentSearches")
     }
   });
     $.ajax({
@@ -395,7 +394,6 @@ function updateCitySearches(){
     url: "display_favorite_cities",
     data: {},
     success: function(){
-      console.log("called updateFavouriteCities")
     }
   });
 }
