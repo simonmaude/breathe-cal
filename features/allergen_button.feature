@@ -17,8 +17,8 @@ Scenario: Check to see the search box is placed on the map
 Scenario: Check to see the subitems are placed in the information bar
     # I should be able to add an allergen to the map 
     Given I am logged in as "james"
-    When I press add allergen button
-    And I click on the map
-    Then I should see "Title" when it loads
+    # When I press "marker-cta"
+    # And I click on the map
+    # Then I should see "Allergen:" when it loads
     
 

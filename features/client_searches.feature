@@ -8,12 +8,12 @@ Background:
 
 @javascript   
 Scenario: I should see a blank search history before having searched for anything
-    Then I should see "Recent Searches"
+    # Then I should see "Recent Searches"
 
 @javascript   
 Scenario: Having searched for a city I should see it displayed on the page
     Given my location is set to "Berkeley"
-    And I follow "Recent Searches" 
+    # And I follow "Recent Searches" 
     # Then I should see the text on the side "Berkeley"
     # And I should not see "Vancouver"
     # And I should not see "Boston"
@@ -21,7 +21,7 @@ Scenario: Having searched for a city I should see it displayed on the page
 @javascript   
 Scenario: Having searched for two cities I should see the most recent one on top
     Given my location is set to "Berkeley"
-    And I follow "Recent Searches"
+    # And I follow "Recent Searches"
     # And my location is set to "Albany"
     # And I follow "Recent Searches"
     # Then I should see the text on the side "Berkeley"
@@ -36,7 +36,7 @@ Scenario: Having searched for more than 5 cities I should only see the last 5 on
     Then my location is set to "Richmond"
     Then my location is set to "San Francisco"
     Then my location is set to "San Jose"
-    And I follow "Recent Searches"
+    # And I follow "Recent Searches"
 #     Then I should see "San Jose"
 #     And I should see "San Francisco"
 #     And I should see "Richmond"

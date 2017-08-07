@@ -104,26 +104,18 @@ var marker = new google.maps.Marker({
 
 var offset = '-' + parseInt($('#detail-box').parent().css('width')) + 'px'
 <% if mobile_device? %>
-$("#detail-box").html("<%= j render 'breathe/detail.mobile' %>");
+$("#allergen-render").html("<%= j render 'breathe/detail.mobile' %>");
 $("#fox-box").html("<%= j render 'breathe/fox_box.mobile' %>");
 $("#weather-box").html("<%= j render 'breathe/weather_box.mobile' %>");
 <% else %>
 $("#logo").html("");
-$("#detail-box").html("<%= j render 'breathe/detail.html' %>");
+$("#allergen-render").html("<%= j render 'breathe/allergens.html' %>");
+$("#breathing-render").html("<%= j render 'breathe/breathing.html' %>");
 $("#fox-box").html("<%= j render 'breathe/fox_box_city.html' %>");
+$("#cheater-display").html("<%= j render 'breathe/fox_box_city.html' %>");
 $("#weather-box").html("<%= j render 'breathe/weather_box.html' %>");
 <% end %>
 
-$("#list-box").animate
-        ({
-            'margin-left' : offset
-        }, 500, function() {
-            $("#list-box").hide();        
-        });
 
-$("#detail-box").animate
-        ({
-            'margin-left' : '0px'
-        });
-$("#detail-box").show();
+$("#allergen-display").click();
 map.overlayMapTypes.insertAt(0,waqiMapOverlay);  
