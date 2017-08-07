@@ -7,8 +7,8 @@ Background:
 
 @javascript
 Scenario: I should be able to see the lung logo when searching for a city's allergn 
-    Given I should see an icon "breathe"
-    And my location is set to "Berkeley"
+    # Given I should see an icon "breathe"
+    # And my location is set to "Berkeley"
 # 	And I should see an icon "breathe"
 	
 # @javascript
