@@ -497,7 +497,7 @@ button[id="find-my-location"]:hover {
 
 .dropdown-sub-title-collapse{
   font-size: 14px;
-  margin-left: 0px;
+  text-align: left;
 }
 
 .dropdown-sub-title-update{
@@ -543,9 +543,15 @@ input[type="submit"]{
    margin-right: 10px;
   // margin-bottom: 20px;
 }
+
 input[type="text"]{
   // margin-left: 5px;
    margin-bottom: 0px;
+}
+
+input[type="checkbox"]{
+  margin-left: 0px;
+  margin-bottom: 0px;
 }
 
 .marker-title {
@@ -702,7 +708,7 @@ input[type="text"]{
   display: inline-block;
   width: 42px;
   height: 23px;
-  margin-right: 10px;
+  margin-right: 0px;
   margin-bottom: 10px;
 }
 
@@ -959,6 +965,98 @@ body {
   color: blue;
 }
 
+
+.sidebar-detail {
+  margin-top: 100px;
+}
+
+.nav-menu a {
+  color: black;
+  text-decoration: none;
+}
+
+.nav-menu a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.fox-box-content {
+  height: 100%; 
+  width: 100%;
+  float: left; 
+  padding: 18px 20px;
+  
+}
+
+.fox-box-logo {
+  float: left;
+  margin: 0;
+  height: auto;
+  width: auto;
+  background: url('/assets/breath-cal-logo.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 75px;
+  width: 75px;
+
+}
+
+#rolling-rolling-rolling {
+  position: relative;
+  padding-top: 1px;
+  width: 100%;
+  margin: 0;
+
+}
+
+.fox-box-content a {
+  width:100px;
+  height:100px;
+}
+
+/* Style the tab */
+div.tab {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 20%;
+    height: 100%;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 80%;
+    border-left: none;
+    height: 100%;
+}
+
 .sidebar-btn:focus {outline:0;}
 
 .nav-menu {
@@ -977,6 +1075,35 @@ body {
 }
 
 
+.tab-header {
+  margin-top: 5px;
+  height: 50px;
+  width: 100%;
+}
+
+.allergen-btn {
+  float:right;
+  margin-right:5px;
+  margin-top: 5px;
+  
+}
+
+#allergen-title {
+  float:left;
+  width: 50%;
+  font-size: 28px;
+}
+
+.tab a {
+  color: black;
+  
+}
+
+.tab a:hover {
+  color: black;
+  text-decoration:none;
+  
+}
 
 .sidebar-detail {
   margin-top: 100px;
