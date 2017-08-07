@@ -531,7 +531,7 @@
           <button id = 'marker-cta' class = 'sidebar-btn'>Add Allergen</button>
         </div>
       </div>
-      <div id ='breathing-render' style="overflow-y: scroll; height:690px; overflow-x: hidden;">
+      <div id ='breathing-render'>
         <% begin; air_quality = @data[1]["DailyForecasts"][0]["AirAndPollen"][0]["Category"]; rescue Exception; air_quality = nil; end %>            
         <div style="font-family: 'Open Sans', sans-serif; font-size: 20px">Air quality: <%= air_quality %></div>
         
@@ -557,9 +557,9 @@
 </center>
 <p style="font-family: 'Open Sans', sans-serif; font-size: 15px;">  The numbers are the Air Quality Indexes, which is based on a scale from 0 (good) to 500 (bad).The colors correspond to the different health impact categories (good, moderate, unhealthy... hazardous) </p>
      
-     <div id="legend-full-x">
+     <div id="legend-full-x" style="height:300px; overflow-y: scroll;">
        
-   <table class="pure-table" width="360" align="center" style="margin-top:20px; overflow-y: scroll">
+   <table class="pure-table" width="360" align="center" style="margin-top:4px;font-family: 'Open Sans', sans-serif; font-size:12px;">
       <thead>
          <tr>
             <td style="font-family: 'Open Sans', sans-serif; background-color:#B8C9FF;" align="center">AQI</td>
@@ -657,28 +657,7 @@ striping:
 
 
 
-/* Let's get this party started */
-::-webkit-scrollbar {
-    width: 6px;
-}
- 
-/* Track */
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    background: #B8C9FF; 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-}
-::-webkit-scrollbar-thumb:window-inactive {
-	background: rgba(255,0,0,0.4); 
-}
+
 
 </style>
 
