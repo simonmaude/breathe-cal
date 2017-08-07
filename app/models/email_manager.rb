@@ -33,7 +33,7 @@ class EmailManager < ActiveRecord::Base
  def email_digest
   @alert = new_alert_status
   Client.where(email_digest: true).each do |user|
-   UserMailer.send_email(user, @alert, :daily_digest)
+   UserMailer.send_email(user, @alert, :daily_digest).deliver_now
   end
  end
 
@@ -53,7 +53,7 @@ class EmailManager < ActiveRecord::Base
      else 
      #  Otherwise, email everyone
        Client.where(email_alerts: true).each do |user|
-       UserMailer.send_email(user, @alert, :email_alert)
+       UserMailer.send_email(user, @alert, :email_alert).deliver_now
        end
      end
  end
