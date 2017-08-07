@@ -75,7 +75,11 @@
 
     <div class="dropdown-sub-title-content" style="margin-left: -10px;">  
      <div id="google_translate_element" ></div>
-    </div>
+        <%= content_tag :div, class: "temp_information", data: {temp: current_client.language} do %>
+        <% end %>
+        <%= content_tag :div, class: "temp_information2", data: {temp: current_client.id} do %>
+        <% end %>
+      </div>
 
 
         <script type="text/javascript">
