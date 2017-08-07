@@ -522,7 +522,7 @@
       </div>
     </div>
     
-    <div id="Air" class="tabcontent">
+    <div id="Air" class="tabcontent" >
       <div class="tab-header">
         <div id="allergen-title">
           Air / UV Levels
@@ -531,11 +531,11 @@
           <button id = 'marker-cta' class = 'sidebar-btn'>Add Allergen</button>
         </div>
       </div>
-      <div id ='breathing-render'>
+      <div id ='breathing-render' style="overflow-y: scroll; height:690px; overflow-x: hidden;">
         <% begin; air_quality = @data[1]["DailyForecasts"][0]["AirAndPollen"][0]["Category"]; rescue Exception; air_quality = nil; end %>            
         <div style="font-family: 'Open Sans', sans-serif; font-size: 20px">Air quality: <%= air_quality %></div>
         
-    <center style="margin-top:20px; margin-bottom:15px; margin-left:5px; margin-right:5px;">
+    <center style="margin-top:20px; margin-bottom:15px;">
    <div style="display:inline-block;width:50px;text-align:center;padding:3px;margin:3px;">
       <div class="saqi item" style="text-shadow: 1px 1px 0 #000000;color:#ffffff;background-color:#009966;">50</div>
    </div>
@@ -555,52 +555,133 @@
       <div class="saqi item" style="text-shadow: 1px 1px 0 #000000;color:#ffffff;background-color:#7e0023;">500</div>
    </div>
 </center>
-<p style="font-family: 'Open Sans', sans-serif; font-size: 15px;">  The numbers are the Air Quality Indexes, which is based on a scale from 0 (good) to 500 (bad).The colors correspond to the different health impact categories (good, moderate, unhealthy... hazardous) <br></br> </p>
+<p style="font-family: 'Open Sans', sans-serif; font-size: 15px;">  The numbers are the Air Quality Indexes, which is based on a scale from 0 (good) to 500 (bad).The colors correspond to the different health impact categories (good, moderate, unhealthy... hazardous) </p>
      
      <div id="legend-full-x">
-   <table class="infoaqitable cautionary" width="350" align="center">
+       
+   <table class="pure-table" width="360" align="center" style="margin-top:20px; overflow-y: scroll">
       <thead>
          <tr>
-            <td style="font-family: 'Open Sans', sans-serif; background-color:#FBFEB6;" align="center">AQI</td>
-            <td style="font-family: 'Open Sans', sans-serif; background-color:#FBFEB6;" align="center">Pollution</td>
-            <td style="font-family: 'Open Sans', sans-serif; background-color:#FBFEB6;" align="center">Health Implications</td>
+            <td style="font-family: 'Open Sans', sans-serif; background-color:#B8C9FF;" align="center">AQI</td>
+            <td style="font-family: 'Open Sans', sans-serif; background-color:#B8C9FF;" align="center">Pollution</td>
+            <td style="font-family: 'Open Sans', sans-serif; background-color:#B8C9FF;" align="center">Health Implications</td>
          </tr>
       </thead>
       <tbody>
          <tr style="background-color:#009966; font-family: 'Open Sans', sans-serif;">
-            <td class="aqiwtxt" nowrap="true">0 - 50</td>
-            <td class="aqiwtxt">Good</td>
+            <td class="aqiwtxt" nowrap="true" style="margin-right:5px;">0 - 50</td>
+            <td class="aqiwtxt" style="text-align:center;">Good</td>
             <td class="aqiwtxt">Air quality is considered satisfactory, and air pollution poses little or no risk</td>
          </tr>
          <tr style="background-color:#ffde33; font-family: 'Open Sans', sans-serif;" class="aqibtxt">
             <td class="aqibtxt" nowrap="true">51 -100</td>
-            <td class="aqibtxt">Moderate</td>
+            <td class="aqibtxt" style="text-align:center;">Moderate</td>
             <td class="aqibtxt">Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution.</td>
          </tr>
          <tr style="background-color:#ff9933; font-family: 'Open Sans', sans-serif;">
             <td class="aqibtxt" nowrap="true">101-150</td>
-            <td class="aqibtxt">Unhealthy for Sensitive Groups</td>
+            <td class="aqibtxt" style="text-align:center;">Unhealthy for Sensitive Groups</td>
             <td class="aqibtxt">Members of sensitive groups may experience health effects. The general public is not likely to be affected.</td>
          </tr>
          <tr style="background-color:#cc0033; font-family: 'Open Sans', sans-serif;">
-            <td class="aqiwtxt" style="color: #21DD41;" nowrap="true">151-200</td>
-            <td class="aqiwtxt" style="color: #21DD41;">Unhealthy</td>
-            <td class="aqiwtxt" style="color: #21DD41;">Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects</td>
+            <td class="aqiwtxt" style="color: white;" nowrap="true">151-200</td>
+            <td class="aqiwtxt" style="color: white; text-align:center;">Unhealthy</td>
+            <td class="aqiwtxt" style="color: white;">Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects</td>
          </tr>
          <tr style="background-color:#660099; font-family: 'Open Sans', sans-serif;">
-            <td class="aqiwtxt" style="color: #21DD41;" nowrap="true">201-300</td>
-            <td class="aqiwtxt" style="color: #21DD41;">Very Unhealthy</td>
-            <td class="aqiwtxt" style="color: #21DD41;">Health warnings of emergency conditions. The entire population is more likely to be affected.</td>
+            <td class="aqiwtxt" style="color: white;" nowrap="true">201-300</td>
+            <td class="aqiwtxt" style="color: white; text-align:center;">Very Unhealthy</td>
+            <td class="aqiwtxt" style="color: white;">Health warnings of emergency conditions. The entire population is more likely to be affected.</td>
          </tr>
          <tr style="background-color:#7e0023; font-family: 'Open Sans', sans-serif;">
-            <td class="aqiwtxt" style="color: #EAF41C;" nowrap="true">300+</td>
-            <td class="aqiwtxt" style="color: #EAF41C;">Hazardous</td>
-            <td class="aqiwtxt" style="color: #EAF41C;">Health alert: everyone may experience more serious health effects</td>
+            <td class="aqiwtxt" style="color: white; padding-right:5px;" nowrap="true">300+</td>
+            <td class="aqiwtxt" style="color: white; padding-right:5px; text-align:center;">Hazardous</td>
+            <td class="aqiwtxt" style="color: white;">Health alert: everyone may experience more serious health effects</td>
          </tr>
       </tbody>
    </table>
 </div>
-     
+
+<style>
+.pure-table {
+    /* Remove spacing between table cells (from Normalize.css) */
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid #cbcbcb;
+}
+
+.pure-table caption {
+    color: #000;
+    font: italic 85%/1 arial, sans-serif;
+    padding: 1em 0;
+    text-align: center;
+}
+
+.pure-table td,
+.pure-table th {
+    border-left: 1px solid #cbcbcb;/*  inner column border */
+    border-width: 0 0 0 1px;
+    font-size: inherit;
+    margin: 0;
+    overflow: visible; /*to make ths where the title is really long work*/
+    padding: 0.5em 1em; /* cell padding */
+}
+
+/* Consider removing this next declaration block, as it causes problems when
+there's a rowspan on the first cell. Case added to the tests. issue#432 */
+.pure-table td:first-child,
+.pure-table th:first-child {
+    border-left-width: 0;
+}
+
+.pure-table thead {
+    background-color: #e0e0e0;
+    color: #000;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+/*
+striping:
+   even - #fff (white)
+   odd  - #f2f2f2 (light gray)
+*/
+.pure-table td {
+    background-color: transparent;
+}
+.pure-table-odd td {
+    background-color: #f2f2f2;
+}
+
+
+
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 6px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background: #B8C9FF; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,0,0,0.4); 
+}
+
+</style>
+
       </div>
     </div>
     
