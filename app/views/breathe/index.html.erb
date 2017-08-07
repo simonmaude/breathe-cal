@@ -62,8 +62,8 @@
         </div> 
        <% location_placeholder = current_client.location || "no location saved"%>
         <div class="dropdown-sub-title-content">  
-          <input id="autocomplete2" placeholder='<%= location_placeholder %>' onchange='$("#location_updated_text").show()' type="text"></input>
-           <!--<button id='location-btn' onClick='fillInAddress("")' class='settings-btn' type="submit" value="Reset" style="float: right">Reset</button>-->
+          <input id="autocomplete2" style="width: 65%;" placeholder='<%= location_placeholder %>' type="text" data-id='{id: <%= current_client.id%>}'></input>
+           <button id='location-btn' onClick='fillInAddress(<%=current_client.id%>)' class='settings-btn' type="submit" value="Reset" style="float: right">Save</button>
           <div class="dropdown-sub-title-update" id="location_updated_text">Location updated</div> 
         </div> 
         
@@ -73,7 +73,13 @@
         </div>
 
 
-   <div id="google_translate_element"></div>
+    <div class="dropdown-sub-title-content" style="margin-left: -10px;">  
+     <div id="google_translate_element" ></div>
+        <%= content_tag :div, class: "temp_information", data: {temp: current_client.language} do %>
+        <% end %>
+        <%= content_tag :div, class: "temp_information2", data: {temp: current_client.id} do %>
+        <% end %>
+      </div>
 
 
     <script type="text/javascript">
@@ -147,79 +153,90 @@
             <% email_placeholder = "" %>
             <% email_value = current_client.email %>
           <% end %>  
-          <input type="text" style="width: 65%;" placeholder='<%= email_placeholder %>' value='<%= email_value %>' id="saved_email_text"/>
-          <button id='email-btn' onclick=fillInEmail() class='settings-btn' type="submit" value="Save" style="float: right">Save</button>
+          <input type="text" style="width: 65%;" placeholder='<%= email_placeholder %>' value='<%= email_value %>' id="saved_email_text" />
+          <button id='email-btn' onclick='fillInEmail(<%=current_client.id%>)' class='settings-btn' type="submit" value="Save" style="float: right">Save</button>
           <div class="dropdown-sub-title-update" id="email_updated_text">Email updated</div>
-          </br>
         </div> 
         <div class="dropdown-sub-title-content" id="accordion">
-          Receive alert emails? 
+          Spare The Air: </br>
+          </br>
+            Receive alert emails? 
             <label class="switch" style="float: right" data-toggle="collapse" data-target="#collapseAlertEmails">
               <input type="checkbox">
               <span class="slider round"></span>
             </label>
           </br>
-          <div id="collapseAlertEmails" class="dropdown-sub-title collapse out">
-              
-            <div>
-              <ul class="checkbox"> 
-                <li><input type="checkbox" id="cb1" value="Cats" /><label for="cb1">Cats</label></li> 
-                <li><input type="checkbox" id="cb2" value="Bees" /><label for="cb2">Bees</label></li> 
-                <li><input type="checkbox" id="cb3" value="Perfume" /><label for="cb3">Perfume</label></li> 
-                <li><input type="checkbox" id="cb4" value="Oak" /><label for="cb4">Oak</label></li> 
-                <li><input type="checkbox" id="cb5" value="Peanut" /><label for="cb5">Peanut</label></li> 
-              </ul> 
-            </div>
-            
-            <div >
-              <ul class="checkbox"> 
-                <li><input type="checkbox" id="cb6" value="Gluten" /><label for="cb6>">Gluten</label></li> 
-                <li><input type="checkbox" id="cb7" value="Dog" /><label for="cb7>">Dog</label></li> 
-                <li><input type="checkbox" id="cb8" value="Dust" /><label for="cb8>">Dust</label></li> 
-                <li><input type="checkbox" id="cb9" value="Smoke" /><label for="cb9>">Smoke</label></li> 
-                <li><input type="checkbox" id="cb10" value="Mold" /><label for="cb10>">Mold</label></li> 
-              </ul> 
-            </div>
-            
-          </div>
+          <!--<div id="collapseAlertEmails" class="dropdown-sub-title-collapse collapse out"> -->
+          <!--<table>-->
+          <!--  <tr>-->
+          <!--    <td>-->
+          <!--      <div>-->
+          <!--        <ul class="checkbox"> -->
+          <!--          <li><input type="checkbox" id="cb1" value="Cats" /><label for="cb1">Cats</label></li> -->
+          <!--          <li><input type="checkbox" id="cb2" value="Bees" /><label for="cb2">Bees</label></li> -->
+          <!--          <li><input type="checkbox" id="cb3" value="Perfume" /><label for="cb3">Perfume</label></li> -->
+          <!--          <li><input type="checkbox" id="cb4" value="Oak" /><label for="cb4">Oak</label></li> -->
+          <!--          <li><input type="checkbox" id="cb5" value="Peanut" /><label for="cb5">Peanut</label></li> -->
+          <!--        </ul> -->
+          <!--      </div>-->
+          <!--    </td>-->
+          <!--    <td>-->
+          <!--      <div >-->
+          <!--        <ul class="checkbox"> -->
+          <!--          <li><input type="checkbox" id="cb6" value="Gluten" /><label for="cb6>">Gluten</label></li> -->
+          <!--          <li><input type="checkbox" id="cb7" value="Dog" /><label for="cb7>">Dog</label></li> -->
+          <!--          <li><input type="checkbox" id="cb8" value="Dust" /><label for="cb8>">Dust</label></li> -->
+          <!--          <li><input type="checkbox" id="cb9" value="Smoke" /><label for="cb9>">Smoke</label></li> -->
+          <!--          <li><input type="checkbox" id="cb10" value="Mold" /><label for="cb10>">Mold</label></li> -->
+          <!--        </ul> -->
+          <!--      </div>-->
+          <!--    </td>-->
+          <!--  </tr>-->
+          <!--</table> -->    
+          <!--</div> -->
         </div> 
         
         
         <div class="dropdown-sub-title-content" id="accordion">
-          Receive daily update? 
+          Receive daily update?   
             <label class="switch" style="float: right" data-toggle="collapse" data-target="#collapseDailyUpdate">
               <input type="checkbox">
               <span class="slider round"></span>
             </label>
           </br>
-          <div id="collapseDailyUpdate" class="dropdown-sub-title-collapse collapse out">
-              
-            <div>
-              <ul class="checkbox"> 
-                <li><input type="checkbox" id="cb1" value="Cats" /><label for="cb1">Cats</label></li> 
-                <li><input type="checkbox" id="cb2" value="Bees" /><label for="cb2">Bees</label></li> 
-                <li><input type="checkbox" id="cb3" value="Perfume" /><label for="cb3">Perfume</label></li> 
-                <li><input type="checkbox" id="cb4" value="Oak" /><label for="cb4">Oak</label></li> 
-                <li><input type="checkbox" id="cb5" value="Peanut" /><label for="cb5">Peanut</label></li> 
-              </ul> 
-            </div>
-            
-            <div >
-              <ul class="checkbox"> 
-                <li><input type="checkbox" id="cb6" value="Gluten" /><label for="cb6>">Gluten</label></li> 
-                <li><input type="checkbox" id="cb7" value="Dog" /><label for="cb7>">Dog</label></li> 
-                <li><input type="checkbox" id="cb8" value="Dust" /><label for="cb8>">Dust</label></li> 
-                <li><input type="checkbox" id="cb9" value="Smoke" /><label for="cb9>">Smoke</label></li> 
-                <li><input type="checkbox" id="cb10" value="Mold" /><label for="cb10>">Mold</label></li> 
-              </ul> 
-            </div>
-            
-          </div>
+          <!--<div id="collapseDailyUpdate" class="dropdown-sub-title-collapse collapse out">-->    
+          <!--<table>-->
+          <!--  <tr>-->
+          <!--    <td>-->
+          <!--      <div>-->
+          <!--        <ul class="checkbox"> -->
+          <!--          <li><input type="checkbox" id="cb1" value="Cats" /><label for="cb1">Cats</label></li> -->
+          <!--          <li><input type="checkbox" id="cb2" value="Bees" /><label for="cb2">Bees</label></li> -->
+          <!--          <li><input type="checkbox" id="cb3" value="Perfume" /><label for="cb3">Perfume</label></li> -->
+          <!--          <li><input type="checkbox" id="cb4" value="Oak" /><label for="cb4">Oak</label></li> -->
+          <!--          <li><input type="checkbox" id="cb5" value="Peanut" /><label for="cb5">Peanut</label></li> -->
+          <!--        </ul> -->
+          <!--      </div>-->
+          <!--    </td>-->
+          <!--    <td>-->
+          <!--      <div >-->
+          <!--        <ul class="checkbox"> -->
+          <!--          <li><input type="checkbox" id="cb6" value="Gluten" /><label for="cb6>">Gluten</label></li> -->
+          <!--          <li><input type="checkbox" id="cb7" value="Dog" /><label for="cb7>">Dog</label></li> -->
+          <!--          <li><input type="checkbox" id="cb8" value="Dust" /><label for="cb8>">Dust</label></li> -->
+          <!--          <li><input type="checkbox" id="cb9" value="Smoke" /><label for="cb9>">Smoke</label></li> -->
+          <!--          <li><input type="checkbox" id="cb10" value="Mold" /><label for="cb10>">Mold</label></li> -->
+          <!--        </ul> -->
+          <!--      </div>-->
+          <!--    </td>-->
+          <!--  </tr>-->
+          <!--</table> -->
+          <!--</div>-->
         </div> 
         
         
         <div onclick= "backClick()", class="dropdown-sub-title">
-          <a>Back</a>
+          <a>Close</a>
         </div>
       </div>
       
@@ -258,33 +275,42 @@
     document.getElementById("email_updated_text").style.display = "none"
   }
   
-  function fillInAddress(place) {
-    
+  function fillInAddress(id) {
+    document.getElementById("location_updated_text").style.display = "block"
     $.ajax({
         type: "PUT",
-        url: "client/" + $('uID'),
-        data: JSON.stringify({location: place, id: $('uID')}),
+        url: "clients/" +id,
+        data: JSON.stringify({location: $('#autocomplete2').val()}),
         contentType: "application/json; charset=utf-8",
-        dataType: 'json',
         success: function(data) {
             console.log(data);
         }
     });    
   }  
   
-  function fillInEmail(email) {
-    document.getElementById("email_updated_text").style.display = "block"
+  function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
     
-    $.ajax({
-        type: "PUT",
-        url: "client/" + $('uID'),
-        data: JSON.stringify({email: $('#saved_email_text').val(), id: $('uID')}),
-        contentType: "application/json; charset=utf-8",
-        dataType: 'json',
-        success: function(data) {
-            console.log(data);
-        }
-    });    
+  function fillInEmail(id) {
+ 
+    if (validateEmail($('#saved_email_text').val()) == true) {
+      document.getElementById("email_updated_text").style.display = "block"
+      document.getElementById("email_updated_text").innerHTML = "<div class='dropdown-sub-title-update' id='email_updated_text' style='display: block;'>Email updated</div>";
+      $.ajax({
+          type: "PUT",
+          url: "clients/"+id,
+          data: JSON.stringify({email: $('#saved_email_text').val()}),
+          contentType: "application/json; charset=utf-8",
+          success: function(data) {
+              console.log(data);
+          }
+      });    
+    } else {
+        document.getElementById("email_updated_text").style.display = "block"
+        document.getElementById("email_updated_text").innerHTML = "<div class='dropdown-sub-title-update' id='email_updated_text' style='display: block;'>Invalid email, please try again.</div>";
+    }
   }
 
   function deleteMarker(id) {
