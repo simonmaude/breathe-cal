@@ -112,6 +112,7 @@ function initAutocomplete() {
   $(document).on('submit', '#markerEdit', function(e){
     console.log('prints twice');
     e.preventDefault();
+    setWaqiOverlay();
     var newTitle = $('#title-edit').val();
     var id = editedMarker.id;
     e.stopImmediatePropagation();
@@ -133,12 +134,14 @@ function initAutocomplete() {
   });
 }
 
+
 // ****************************************************** METHODS: MAP ***************************************** //
 function mapLoad() {
   if (!map) {
     createMap();
     setMarkerImages();
     createHeatMap();
+    setWaqiOverlay();
     infowindow = new google.maps.InfoWindow;
     // Reverse lat/lon city lookup
     reverseGC = new google.maps.Geocoder;
@@ -404,7 +407,6 @@ function updateCitySearches(){
     url: "city_data_back",
     data: {},
     success: function(){
-      console.log("city_data_back success")
     }
   });
     $.ajax({
@@ -413,7 +415,6 @@ function updateCitySearches(){
     url: "display_favorite_cities",
     data: {},
     success: function(){
-      console.log("display_favorite_cities success")
     }
   });
 }
