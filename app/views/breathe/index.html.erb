@@ -289,6 +289,7 @@
       if (tabName == 'Cities') {
         <% fox_box = render 'breathe/fox_box.html' %>
         $("#fox-box").html("<%= j fox_box %>");
+        $('#current_city').html($('#cur-city-fox').html());
       }
       
       else {
@@ -388,10 +389,8 @@
       <h4>Current Location: </h4>
       <div style='margin-left: 10px;'>
         <div id = 'current_city'>
-          
+          no current city found
         </div>
-        <% begin; current_city = @data[0]; rescue Exception; current_city = "no current city found"; end %>
-        <%= current_city%>
       </div>
       
     <hr>
