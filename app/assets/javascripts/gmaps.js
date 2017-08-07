@@ -200,21 +200,24 @@ function setUIelements(){
   searchBtn = document.getElementById('search-button');
   searchBox = new google.maps.places.SearchBox(input);
   myLocationBtn = document.getElementById('find-my-location');
-  cleanAirBtn = document.getElementById('clean-air');
-  cleanAirBtn2 = document.getElementById('clean-air-button');
+  cleanAirBtnOff = document.getElementById('clean-air-off');
+  cleanAirBtnOn = document.getElementById('clean-air-button');
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchBtn);
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(myLocationBtn);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtn);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtn2);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtnOff);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtnOn);
 
   // add listener for airquality button
-  cleanAirBtn2.onclick = function() {
-    $('#myonoffswitch').trigger("click");
+  cleanAirBtnOn.onclick = function() {
     if (global1) {
       addOverlay();
       global1 = false;
-    } else {
+    }
+  }  
+  
+  cleanAirBtnOff.onclick = function() {
+    if (global1 == false) {
       global1 = true;
       removeOverlay(); 
     }
