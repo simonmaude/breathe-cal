@@ -270,9 +270,48 @@ a[x-apple-data-detectors=true] {
 	  <% if City.where(client_id: @user.id).any? %> 
 	  &nbsp;&nbsp;&nbsp;&nbsp; Your favorite cities are:<br>
 	    <% City.where(client_id: @user.id).each do |city| %>
-	      <%= city %>
+	    
+	      <%#= city %>
+	      
+	      <% api_key = City.get_api_key(1) %>
+        <% url = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/#{city.location_key}" %>
+        <% query = {apikey: City.get_api_key(0), language:"en-us", details: "true"} %>
+        <% data = City.rescue_api(HTTParty.get(url, query: query), 0, url, query) %>
+        <% data = [city.name, data] %>
+        
+        <%= "In " + data[0]  + ":" %>
+        
+        <% todaysForecast = data[1]["DailyForecasts"][0] %>
+        
+        <% tempVals = todaysForecast["Temperature"] %>
+        <% min = tempVals["Minimum"]["Value"] %>
+        <% max = tempVals["Maximum"]["Value"] %>
+        <% ave = (min + max) / 2 %>
+        <%= "The average temp is: " + ave.round.to_s + tempVals["Minimum"]["Unit"] %>
+        
+        <% windSpeedHash = todaysForecast["Day"]["Wind"]["Speed"] %>
+        <% windSpeed = windSpeedHash["Value"] %>
+        <% windSpeedUnit = windSpeedHash["Unit"] %>
+        <%= "The wind speed is: " + windSpeed.to_s + " " + windSpeedUnit.to_s %>
+  
+        <% precipitation = todaysForecast["Day"]["PrecipitationProbability"] %>
+        <%= 'The precipitation probability is: ' + precipitation.to_s + "%" %>
+
+        <% airinfo = todaysForecast["AirAndPollen"] %>
+        <% value = "Category" %>
+        <% airquality =  airinfo[0] %>
+        <%= "The air quality is: " + airquality[value] %>
+        <% grass =  airinfo[1] %>
+        <%= "The grass level is: " + grass[value] %>
+        <%= mold =  airinfo[2] %>
+        <%= "The mold level is: " + mold[value] %>
+        <%= ragweed =  airinfo[3]  %>
+        <%= "The ragweed level is: " + ragweed[value] %>
+        <% tree =  airinfo[4] %>
+        <%= "The tree level is: " + tree[value] %>
+        <% uvindex =  airinfo[5] %>
+        <%= "The UV level is: " + uvindex[value] %>
 	    <% end %>
-	  .
 	  <% else %>
 	  &nbsp;&nbsp;&nbsp;&nbsp; You currently have no favorite cities.
 	  <% end %>
