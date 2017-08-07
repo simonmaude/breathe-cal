@@ -73,7 +73,6 @@
         </div>
 
 
-
     <div class="dropdown-sub-title-content" style="margin-left: -10px;">  
      <div id="google_translate_element" ></div>
     </div>
@@ -307,9 +306,25 @@
           }
       });
     }
+
     
     function openTab(evt, tabName) {
       var i, tabcontent, tablinks;
+      
+      if (tabName == 'Cities') {
+        <% fox_box = render 'breathe/fox_box.html' %>
+        $("#fox-box").html("<%= j fox_box %>");
+        $('#current_city').html($('#cur-city-fox').html());
+      }
+      
+      else {
+        console.log('here')
+        if ($("#cheater-display").html() != "") {
+          $("#fox-box").html($("#cheater-display").html());
+        }
+        
+      }
+    
   
       // Get all elements with class="tabcontent" and hide them
       tabcontent = document.getElementsByClassName("tabcontent");
@@ -327,16 +342,17 @@
       document.getElementById(tabName).style.display = "block";
       evt.currentTarget.className += " active";
     }
-    
   
   </script>
 
 
 <!-- profile sign in and profile icon END -->
+  <div id = 'cheater-display' style= "display:none"></div>
 
   <div class="col-md-4 col-ms-12" style="padding-left: 0; padding-right: 0; max-width: 500px;" id="right-col">
     <!--<div style="text-align: right; font-size: 15px; padding: 10px 15px; border-bottom-width: 1px; border-bottom-color: #eee; border-bottom-style: solid;">-->
     <!--</div>-->
+
 
     <div id="fox-box" style="height: 120px;">
       <%= render 'fox_box' %>
@@ -350,12 +366,13 @@
     </div>
     <div id="detail-box-mask" style="margin-left: 500px; background-color: white; position: absolute; width: 100%; overflow-x: hidden; overflow-y: scroll; z-index: 10;">
     </div>
-  
+    
 
  
-    <div id="tabs" class="tab" >
-      <button class='tablinks' onclick="openTab(event, 'Cities')">Home</button>
-      <button class="tablinks" onclick="openTab(event, 'Allergens')">Allergens</button>
+    <div class="tab" >
+
+      <button class="tablinks" onclick="openTab(event, 'Cities')"><%=  link_to "Home", display_favorite_cities_path, remote: true, style: 'text-decoration: none;' %></button>
+      <button id = 'allergen-display' class="tablinks" onclick="openTab(event, 'Allergens')">Allergens</button>
       <button class="tablinks" onclick="openTab(event, 'Breathing')">Breathing Information</button>
       <button class="tablinks" onclick="openTab(event, 'Air')">Air Quality</button>
     </div>
@@ -384,31 +401,28 @@
           searchBar.value = "";
          }
       </script>
-      
       <div class="tab-header">
         <div id="allergen-title">
-          Cities
+          Home
         </div>
         <div class = 'allergen-btn'>
           <button id = 'marker-cta' class = 'sidebar-btn'>Add Allergen</button>
         </div>
       </div>
     <hr>
-    <div> 
-      <h5 style="float: right;"><%= link_to "Add to Favorites", favorite_city_path(:name => "current_city"), remote: true %></h5>
+      <br>
+      
       <h4>Current Location: </h4>
       <div style='margin-left: 10px;'>
-        current city
+        <div id = 'current_city'>
+          no current city found
+        </div>
       </div>
-    </div>
-      
       
     <hr>
       <h4>My Saved Location: </h4>
       <div style='margin-left: 10px;'>
-        <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
-          <%= location_placeholder %>
-        </div>
+        <%= location_placeholder %>
       </div>
       
     <hr>
@@ -503,22 +517,18 @@
         </div>
       </div>
       <div id ='breathing-render'>
-
+        
       </div>
     </div>
     
     <div id="Air" class="tabcontent">
       <div class="tab-header">
         <div id="allergen-title">
-          Air / UV Levels
+          Air Quality
         </div>
         <div class = 'allergen-btn'>
           <button id = 'marker-cta' class = 'sidebar-btn'>Add Allergen</button>
         </div>
-      </div>
-      <div id ='breathing-render'>
-        <% begin; air_quality = @data[1]["DailyForecasts"][0]["AirAndPollen"][0]["Category"]; rescue Exception; air_quality = nil; end %>            
-        <div style="font-family: 'Open Sans', sans-serif; font-size: 20px">Air quality: <%= air_quality %></div>
       </div>
     </div>
     
@@ -530,8 +540,7 @@
     </div>
   </div>
     
-    
-  
+
   
   <div class="col-md-8 col-ms-12" style="padding-left: 0; padding-right: 0; z-index: 10; height: 100%;" id="left-col">
     <input id="pac-input" class="controls" type="text" placeholder="Search">

@@ -1,3 +1,4 @@
+
 <script>
 
 var acc = document.getElementsByClassName("accordion");
@@ -46,6 +47,7 @@ function setClass(els, className, fnName) {
               <div style="float: right; margin-right: 5px; 60%; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898; margin-top: 18px;"><%= p["Category"]%></div>
             </div>
           </div>
+    
         <div id="collapse<%= p["Name"]%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= p["Name"]%>">
           <div class="panel-body" style="padding-top: 0;">
             <h5 style="float: right; margin-top: 0; font-family: 'Open Sans', sans-serif; font-weight: 400; font-size: 12px; color: #989898;"><%= get_pollen_range(p["Name"], p["Category"]) %></h5>

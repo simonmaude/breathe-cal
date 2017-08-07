@@ -163,7 +163,7 @@ Think about replacing your grass lawn with low pollen ground cover - Irish Moss,
     end
   end
   def get_quality_color(q)
-      m = {"good" => "7FDBFF", "low" => "1cbfff", "moderate" => "00ce5a", "high" => "FFDC00", "unhealthy" => "FF851B","very high" => "FF851B", "hazardous" => "FF4136"}
+      m = {"good" => "7FDBFF", "low" => "1cbfff", "moderate" => "00ce5a", "high" => "FFDC00", "unhealthy" => "FF851B","very high" => "FF851B", "hazardous" => "FF4136", "extreme" => "ff5507"}
       m[q.downcase]    
   end
   def get_fox_color(data)

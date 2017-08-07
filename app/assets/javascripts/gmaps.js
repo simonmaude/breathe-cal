@@ -53,8 +53,24 @@ var right_to_left_languages
 var search_in_other_lang
 
 // Page should be in English by default
-document.cookie = "googtrans=/en/en;"
-document.cookie = "googtrans=/en/en; domain=.c9users.io"
+
+var not_logged_in = (document.getElementById("profile-image") === null);
+
+if (not_logged_in) {
+  document.cookie = "googtrans=/en/en;"
+  document.cookie = "googtrans=/en/en; domain=.c9users.io"
+  document.cookie = "googtrans=/en/en; domain=tranquil-wildwood-40360.herokuapp.com"
+  
+} else if (!not_logged_in) {
+  var lang_selected = $('.temp_information').data('temp');
+  if (lang_selected) {
+    document.cookie = 'googtrans=/en/' + lang_selected + ';';
+    document.cookie = 'googtrans=/en/' + lang_selected + ';' + 'domain=.c9users.io'
+    document.cookie = 'googtrans=/en/' + lang_selected + ';' + 'domain=tranquil-wildwood-40360.herokuapp.com'
+  }
+}
+
+
 // **** add extra domain when deployed to heroku
 // **** also add heroku link to google online 
 
@@ -91,7 +107,6 @@ $(document).on('page:change', initAutocomplete);
 
 function initAutocomplete() {
   mapLoad();
-  
   $(document).on('submit', '#markerEdit', function(e){
     console.log('prints twice');
     e.preventDefault();
@@ -398,9 +413,6 @@ function updateCitySearches(){
   });
 }
 
-
-
-  
 
 // ****************************************************** METHODS: OVERLAYS ***************************************** //
 
@@ -792,7 +804,6 @@ function placeMarker(location) {
 
 
 
-
   markerInfo.open(map, marker);
   markerInfo.setContent(contentString[0]);
   marker.markerInfo = markerInfo;
@@ -914,7 +925,6 @@ function getContent() {
   return contentString[0];
 }
 
-
 function createContentString2(id) {
   var title = document.createElement('div');
   title.innerHTML = 'Allergen:';
@@ -964,7 +974,7 @@ function createContentString2(id) {
         bubble_map[id].bubble.close();
         fetchMarkers();
         bubble_map[id].bubble.open(map, bubble_map[id].bubble);
-        delete markerBubbleDiv;
+        $('#title-edit'+id).remove();
         
       }
     })
@@ -1041,6 +1051,13 @@ function loggedIn(){
 // ****************************************************** METHODS: TRANSLATE ***************************************** //
 
 function page_trans_work() {
+   setTimeout(function(){
+    if (search_in_other_lang.hasOwnProperty(String(document.cookie).slice(14, 16))) {
+      document.getElementById("pac-input").placeholder = search_in_other_lang[String(document.cookie).slice(14, 16)];
+    }
+  }, 1000);
+  
+  
   var other_way = false;
   for (var i = 0; i < right_to_left_languages.length; i++) {
      if (String(document.cookie).indexOf("/en/"+right_to_left_languages[i]) > -1) {
@@ -1060,13 +1077,39 @@ function page_trans_work() {
 
  	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="left" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
   }
-  
-  
-  setTimeout(function(){
+}
+
+
+
+// ****************************************************** METHODS: TRANSLATE ***************************************** //
+
+function page_trans_work() {
+   setTimeout(function(){
     if (search_in_other_lang.hasOwnProperty(String(document.cookie).slice(14, 16))) {
       document.getElementById("pac-input").placeholder = search_in_other_lang[String(document.cookie).slice(14, 16)];
     }
   }, 1000);
+  
+  
+  var other_way = false;
+  for (var i = 0; i < right_to_left_languages.length; i++) {
+     if (String(document.cookie).indexOf("/en/"+right_to_left_languages[i]) > -1) {
+      other_way = true;
+    }
+  }
+  
+  if (other_way === true) {
+      $("#right-col").insertAfter("#left-col");
+   // $("#pac-input").css('text-align','right');
+   // $("#search-button").css('right','611px !important');
+
+ 	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="right" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
+  } else {
+    $("#left-col").insertAfter("#right-col");
+    $("#pac-input").css('text-align','left');
+
+ 	  document.getElementById("rolling-rolling-rolling").innerHTML = '<marquee behavior="scroll" direction="left" scrollamount="5" ><div id = "spare_alert" > High pollen levels in Berkeley, CA </div></marquee>'
+  }
 }
 
 
@@ -1101,8 +1144,24 @@ function setTranslateListner(){
     // now change current pages language
     document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";";
     document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + ";domain=.c9users.io"
+    document.cookie = "googtrans=/en/" + $(".goog-te-combo").val() + "; domain=tranquil-wildwood-40360.herokuapp.com";
+    var current_id = $('.temp_information2').data('temp');
+
+   
+    $.ajax({
+        type: "PUT",
+        url: "clients/" + current_id,
+        data: JSON.stringify({language: $(".goog-te-combo").val()}),
+        contentType: "application/json; charset=utf-8",
+        success: function(data) {
+            console.log(data);
+        }
+    }); 
+      
     page_trans_work();
   });  
 }
 
+page_trans_work();
       
+
