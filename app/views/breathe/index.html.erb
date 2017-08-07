@@ -464,7 +464,7 @@
       
       <div id='recent_searches'>
         <h4>Recent Searches: </h4>
-        <% if @recent_cities.nil? %>
+        <% if @recent_cities.nil? && !(session[:cities].nil?)%>
           <% @recent_cities = session[:cities].reverse %>
         <% end %>
         <% if !@recent_cities.nil? and @recent_cities.length > 0 %>
