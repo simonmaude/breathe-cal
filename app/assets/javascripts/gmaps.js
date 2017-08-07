@@ -296,6 +296,7 @@ function setUIListerners(){
     map.fitBounds(bounds);
     fetchMarkers();
     
+    updateCitySearches();
   });
   
   
@@ -394,7 +395,26 @@ function setUIListerners(){
     }
   }
 }
-  
+
+function updateCitySearches(){
+    $.ajax({
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    url: "city_data_back",
+    data: {},
+    success: function(){
+    }
+  });
+    $.ajax({
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    url: "display_favorite_cities",
+    data: {},
+    success: function(){
+    }
+  });
+}
+
 
 // ****************************************************** METHODS: OVERLAYS ***************************************** //
 
@@ -786,7 +806,6 @@ function placeMarker(location) {
 
 
 
-
   markerInfo.open(map, marker);
   markerInfo.setContent(contentString[0]);
   marker.markerInfo = markerInfo;
@@ -908,7 +927,6 @@ function getContent() {
   return contentString[0];
 }
 
-
 function createContentString2(id) {
   var title = document.createElement('div');
   title.innerHTML = 'Allergen:';
@@ -958,7 +976,7 @@ function createContentString2(id) {
         bubble_map[id].bubble.close();
         fetchMarkers();
         bubble_map[id].bubble.open(map, bubble_map[id].bubble);
-        delete markerBubbleDiv;
+        $('#title-edit'+id).remove();
         
       }
     })
@@ -1030,6 +1048,8 @@ function loggedIn(){
     }
   });
 }
+
+
 
 
 // ****************************************************** METHODS: TRANSLATE ***************************************** //
@@ -1114,4 +1134,3 @@ function setTranslateListner(){
 }
 
 page_trans_work();
-      

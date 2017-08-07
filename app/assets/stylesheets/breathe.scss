@@ -44,7 +44,7 @@ html, body {
 }
 
 #spare_alert {
-  position:relative;
+ 
   font-weight:bold;
   color: white;
 }
@@ -251,22 +251,11 @@ button[id="find-my-location"]:hover {
 }
 
 #marker-cta {
-  border-bottom-color: transparent;
-  background-color: white;
-  box-shadow: none;
-  color: #3672B2;
-  // font-family: Roboto;
-  // font-size: 14px;
-  // font-weight: 600;
-  // padding: 0 0px 0 0px;
-  text-overflow: ellipsis;
-  width: 60px;
-  height: 40px;
+
 }
 
 #marker-cta:hover {
-    text-decoration: underline;
-    color : #3B3E80 !important;
+
 }
 
 #marker-cta-mobile {
@@ -522,7 +511,8 @@ button[id="find-my-location"]:hover {
 
 #fox-box {
   background: #1DA1F2;
-  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); /* Standard syntax */
+  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%); 
+  box-shadow: 0 1px 2px 2px #e8e8e8;
 }
 
 .marker-backdrop {
@@ -772,7 +762,6 @@ input:checked + .slider:before {
 
 .settings-btn {
   background-color: transparent;
-  
   color: #4387fd;
   border: solid;
   border-radius: 5px;
@@ -905,9 +894,337 @@ body {
   font-size: 15px;
 }
 
+.sidebar-header {
+  padding-top: 15px;
+  width: 100%;
+  height: 100px;
+  background-color: transparent;
+  border-bottom: thin solid #eaeaea;
+  float: left;
+}
+
+.sidebar-cell {
+  width: 100%;
+  height: 25px;
+}
+
+.sidebar-cell:hover {
+  background-color: #dddddd;
+}
+
+#favorites-icon {
+  float: left;
+  background: url('/assets/favorites.svg');
+  background-repeat: no-repeat;
+  background-size: 90% 90%;
+  height: 20px;
+  width: 30px;
+}
+
+#recent-icon {
+  float: left;
+  background: url('/assets/recent.svg');
+  background-repeat: no-repeat;
+  background-size: 90% 90%;
+  height: 20px;
+  width: 30px;
+}
+
+#home-icon {
+  float: left;
+  background: url('/assets/home.svg');
+  background-repeat: no-repeat;
+  background-size: 90% 90%;
+  height: 20px;
+  width: 30px;
+}
+
+.sidebar-cell-title a{
+  color: black;
+  text-decoration: none;
+  width: 100%;
+}
+
+.sidebar-btn {
+  margin-left: 5px;
+  margin-bottom: 5px;
+  background-color:transparent;
+  color: #0074D9;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #0074D9;
+}
+
+.sidebar-btn:hover {
+  background-color:#0074D9;
+  color: white;
+  border-color: #0074D9;
+}
+.button-text {
+  color: blue;
+}
 
 
+.sidebar-detail {
+  margin-top: 100px;
+}
+
+.nav-menu a {
+  color: black;
+  text-decoration: none;
+}
+
+.nav-menu a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.fox-box-content {
+  height: 100%; 
+  width: 100%;
+  float: left; 
+  padding: 18px 20px;
+  
+}
+
+.fox-box-logo {
+  float: left;
+  margin: 0;
+  height: auto;
+  width: auto;
+  background: url('/assets/breath-cal-logo.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 75px;
+  width: 75px;
+
+}
+
+#rolling-rolling-rolling {
+  position: relative;
+  padding-top: 1px;
+  width: 100%;
+  margin: 0;
+
+}
+
+.fox-box-content a {
+  width:100px;
+  height:100px;
+}
+
+/* Style the tab */
+div.tab {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 20%;
+    height: 100%;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 80%;
+    border-left: none;
+    height: 100%;
+}
+
+.sidebar-btn:focus {outline:0;}
+
+.nav-menu {
+  float:left;
+  width:50%;
+  background:white;
+  height: 100px;
+  border-right: thin solid #eaeaea;
+}
+
+.control-center {
+  //float:left;
+  margin-left: 5px;
+  height: 100px;
+  background: white;
+}
 
 
+.tab-header {
+  margin-top: 5px;
+  height: 50px;
+  width: 100%;
+}
+
+.allergen-btn {
+  float:right;
+  margin-right:5px;
+  margin-top: 5px;
+  
+}
+
+#allergen-title {
+  float:left;
+  width: 50%;
+  font-size: 28px;
+}
+
+.tab a {
+  color: black;
+  
+}
+
+.tab a:hover {
+  color: black;
+  text-decoration:none;
+  
+}
+
+.sidebar-detail {
+  margin-top: 100px;
+}
+
+.nav-menu a {
+  color: black;
+  text-decoration: none;
+}
+
+.nav-menu a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.fox-box-content {
+  height: 100%; 
+  width: 100%;
+  float: left; 
+  padding: 18px 20px;
+  
+}
+
+.fox-box-logo {
+  float: left;
+  margin: 0;
+  height: auto;
+  width: auto;
+  background: url('/assets/breath-cal-logo.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 75px;
+  width: 75px;
+
+}
+
+#rolling-rolling-rolling {
+  position: relative;
+  padding-top: 1px;
+  width: 100%;
+  margin: 0;
+
+}
+
+.fox-box-content a {
+  width:100px;
+  height:100px;
+}
+
+/* Style the tab */
+div.tab {
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 20%;
+    height: 100%;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    float: left;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    width: 80%;
+    border-left: none;
+    height: 100%;
+}
+
+
+.tab-header {
+  margin-top: 5px;
+  height: 50px;
+  width: 100%;
+}
+
+.allergen-btn {
+  float:right;
+  margin-right:5px;
+  margin-top: 5px;
+  
+}
+
+#allergen-title {
+  float:left;
+  width: 50%;
+  font-size: 28px;
+}
+
+.tab a {
+  color: black;
+  
+}
+
+.tab a:hover {
+  color: black;
+  text-decoration:none;
+  
+}
 
 

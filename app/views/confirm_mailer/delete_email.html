@@ -17,14 +17,20 @@
 	<header>
 	<div class="banner row" id="banner">		
 		<body id = "backimg" background="http://cdn.pcwallart.com/images/sky-blue-wallpaper-1.jpg">
-		<div class="container text-center" style="height:900px;padding-top:100px;">
+		  
+		<div class="container text-center" id = "all-in" style="height:900px;padding-top:100px;">
 			<a href="#"><img id="site-title" style= "height:300px" class=" wow fadeInDown" wow-data-delay="0.0s" wow-data-duration="0.9s" src="https://safeneedledisposal.org/wp-content/themes/safeneedle/images/state-waste-icon.png" alt="logo"/></a>
-			<h2 class="intro wow zoomIn" style="font-size: 50px; padding-top:40px; font-family: Trebuchet MS; font-weight: 10 !important; color: white" wow-data-delay="0.4s" wow-data-duration="0.9s">Email Successfully Deleted</h2>
-			<p class="intro wow zoomIn" style="font-size: 20px; padding-top:10px; font-family: Trebuchet MS; color: white" wow-data-delay="0.4s" wow-data-duration="0.9s"> Redirecting to home page in <span id="countdowntimer">6 </span> seconds</p>
+			<h2 class="intro wow zoomIn" style="font-size: 50px; padding-top:40px; font-family: Trebuchet MS; font-weight: 10 !important; color: white" wow-data-delay="0.4s" wow-data-duration="0.9s">Email Successfully Deleted
+			<br>
+			<p style="font-size: 20px"><br>
+			</br>Redirecting to home page in <span id="countdowntimer">6 </span> seconds </p>
+			</br>
+			</h2>
 
 			 <meta http-equiv="refresh" content="6;url=https://tranquil-wildwood-40360.herokuapp.com/"/> 
 		
 		</div>
+		
 <div id="google_translate_element"></div><script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
@@ -86,13 +92,29 @@ $(function() {
 });
 </script>
 
-<style>
+<style>  
 #backimg {
 -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
 }
+
+#all-in {
+position: fixed;
+  top: 47%;
+  left: 50%;
+  right: 50%;
+  bottom: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
 </style>
 
 <script type="text/javascript">
@@ -197,6 +219,92 @@ Copyright (c) 2014 Daniel Eden
   -webkit-animation-name: zoomIn;
           animation-name: zoomIn;
 }
+
+
+
+.goog-tooltip {
+    display: none !important;
+}
+.goog-tooltip:hover {
+    display: none !important;
+}
+.goog-text-highlight {
+    background-color: transparent !important;
+    border: none !important; 
+    box-shadow: none !important;
+}
+
+
+#searchTrans {
+  font-size:16px;
+  left: 30px !important;
+
+  
+}
+
+
+
+#google_translate_element {
+  font-family: Roboto;
+  font-weight: 100;
+  padding: 0 0px 0px 15px;
+  text-overflow: ellipsis;
+  width: 15px;
+  height: 40px;
+  top: 5px !important;
+  text-align: center;
+  left: 60px !important;
+visibility: hidden;}
+
+
+.goog-te-banner-frame.skiptranslate { 
+  display: none !important;
+  visibility: hidden;
+} 
+body { 
+  top: 0px !important; 
+  
+visibility: hidden;}
+#goog-gt-tt{
+  display: none !important; 
+  top: 0px !important; 
+  
+visibility: hidden;} 
+.goog-tooltip skiptranslate{
+  display: none !important;
+  top: 0px !important; 
+  
+visibility: hidden;} 
+.activity-root { 
+  display: hide !important;
+  
+visibility: hidden;} 
+.status-message { 
+  display: hide !important;
+  
+visibility: hidden;}
+.started-activity-container { 
+  display: hide !important;
+  
+visibility: hidden;}
+
+.goog-logo-link {
+   display:none !important;
+visibility: hidden;}
+.goog-te-gadget{
+   color: transparent !important;
+visibility: hidden;}
+.goog-te-gadget .goog-te-combo{
+  color: black !important;
+  font-family: Roboto;
+  font-size: 15px;
+visibility: hidden;}
+
+
+
+
+
+
 
 
 
