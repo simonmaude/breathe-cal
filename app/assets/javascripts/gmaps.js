@@ -140,7 +140,6 @@ function mapLoad() {
     createMap();
     setMarkerImages();
     createHeatMap();
-    setWaqiOverlay();
     infowindow = new google.maps.InfoWindow;
     // Reverse lat/lon city lookup
     reverseGC = new google.maps.Geocoder;
