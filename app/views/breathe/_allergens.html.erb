@@ -34,7 +34,7 @@ function setClass(els, className, fnName) {
     <% get_pollen(@data).each do |p| %>
       <%p p["Category"]%>
       
-      <% if p["Name"] != "AirQuality" %>
+      <% if p["Name"] != "AirQuality" and p["Name"] != "UVIndex" %>
       <div class="accordion">
           <div class="row" role="tab" id="heading<%= p["Name"]%>" style="width: 100%; height: 60px; margin-left:2px; border-top-style: solid; border-top-width: 0.5px; border-top-color: #eee;"
            data-toggle="collapse" data-parent="#accordion" href="#collapse<%= p["Name"]%>" aria-expanded="false" aria-controls="collapse<%= p["Name"]%>">
