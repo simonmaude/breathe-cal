@@ -112,7 +112,6 @@ function initAutocomplete() {
   $(document).on('submit', '#markerEdit', function(e){
     console.log('prints twice');
     e.preventDefault();
-    setWaqiOverlay();
     var newTitle = $('#title-edit').val();
     var id = editedMarker.id;
     e.stopImmediatePropagation();
@@ -133,7 +132,6 @@ function initAutocomplete() {
     return false;
   });
 }
-
 
 // ****************************************************** METHODS: MAP ***************************************** //
 function mapLoad() {
