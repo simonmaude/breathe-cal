@@ -142,7 +142,7 @@
           <% end %>  
           <input type="text" style="width: 65%;" placeholder='<%= email_placeholder %>' value='<%= email_value %>' id="saved_email_text" />
           <button id='email-btn' onclick='fillInEmail(<%=current_client.id%>)' class='settings-btn' type="submit" value="Save" style="float: right">Save</button>
-          <div class="dropdown-sub-title-update" id="email_updated_text">Email updated</div>
+          <div class="dropdown-sub-title-update" id="email_updated_text">Confirmation sent</div>
         </div> 
         <div class="dropdown-sub-title-content" id="accordion">
           Spare The Air: </br>
@@ -270,7 +270,7 @@
    
       if (validateEmail($('#saved_email_text').val()) == true) {
         document.getElementById("email_updated_text").style.display = "block"
-        document.getElementById("email_updated_text").innerHTML = "<div class='dropdown-sub-title-update' id='email_updated_text' style='display: block;'>Email updated</div>";
+        document.getElementById("email_updated_text").innerHTML = "<div class='dropdown-sub-title-update' id='email_updated_text' style='display: block;'>Confirmation sent</div>";
         $.ajax({
             type: "PUT",
             url: "clients/"+id,
