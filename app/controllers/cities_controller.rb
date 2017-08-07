@@ -32,6 +32,7 @@ class CitiesController < ApplicationController
     end
     
     def city_data
+      p '*************************************************************9'
       if params[:geo]
         latlng = params[:geo]
         loc_key = City.get_loc_key(latlng["lat"], latlng["lng"], params[:name])
@@ -41,9 +42,14 @@ class CitiesController < ApplicationController
       @data = [city.name, city.daily_data]
       unless a_in_b_as_c?(city.name, session[:cities], "name")
         if (@quality.nil?)
+          # catch exception
           @quality = city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
         end
+        p city.name
+        p @quality
         session[:cities] << { "name" => city.name, "quality" => @quality }
+        p 'added to session'
+        p session[:cities]
       end
     
       respond_to do |format|
@@ -55,7 +61,8 @@ class CitiesController < ApplicationController
     end
     
     def city_data_back
-        # p 'session cities1 = ' + (session[:cities]).to_s
+      p '*************************************************************9'
+        p 'session cities1 = ' + (session[:cities]).to_s
       @text = "Recent Searches"
       if session[:cities] && session[:cities].length > 0
         p 'session cities2 = ' + (session[:cities]).to_s
