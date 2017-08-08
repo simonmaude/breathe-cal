@@ -38,16 +38,16 @@ class BreatheController < ApplicationController
     # marker.lng user.longitude
     # end
     # @cityname = "Berkeley"
-    if session[:cities]
-      if session[:cities].length > 5
-        session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
-      end
-      @cities = session[:cities]
-    else
-      @cities = []
-      session[:cities] = []
-    end
-    @cities = @cities.reverse
+    # if session[:cities]
+    #   if session[:cities].length > 5
+    #     session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
+    #   end
+    #   @cities = session[:cities]
+    # else
+    #   @cities = []
+    #   session[:cities] = []
+    # end
+    # @cities = @cities.reverse
     
     @text = "Recent Searches"
     Time::DATE_FORMATS[:custom] = lambda { |time| time.strftime("%B #{time.day.ordinalize}, %Y") }
