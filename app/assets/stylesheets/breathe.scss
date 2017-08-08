@@ -687,11 +687,22 @@ input[type="checkbox"]{
 }
 
 
+.col-lg-8 .favCity{
+  color: #4387fd ;
+}
+
 .favCity:hover {
   text-decoration: underline;
   cursor: pointer;
-  color : #3B3E80 !important;
+  color : #4387fd !important;
 }
+
+.favCity:visited {
+  text-decoration: underline;
+  cursor: pointer;
+  color : #4387fd !important;
+}
+
 
 
 .switch {

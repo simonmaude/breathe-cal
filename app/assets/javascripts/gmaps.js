@@ -442,7 +442,7 @@ function setHeatMap(){
   heatmap = new google.maps.visualization.HeatmapLayer({
     data: heatmapData,
     radius: 50,
-    opacity: 0.1,
+    opacity: 0.3,
     gradient: [     
     'rgba(24, 249, 235, 0)',
     '#0fb8ad',

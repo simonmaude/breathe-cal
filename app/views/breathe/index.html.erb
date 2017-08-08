@@ -447,9 +447,9 @@
         <% if !@fav_cities.nil? and @fav_cities.length > 0 %>
           <% @fav_cities.each do |c| %>
             <div class="row" style="padding: 15px 10px;">
-              <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
-                <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
-                  <%= c["name"].capitalize %>
+              <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px;">
+                <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; " onclick="seeCity(this)">
+                  <%= c["name"]%>
                 </div>
               </div>
               <div class="col-lg-4">
@@ -479,13 +479,13 @@
             <% @recent_cities.each do |c| %>
               <div class="row" style="padding: 15px 10px; ">
                 <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
-                  <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
-                    <%= c["name"].capitalize %>
+                  <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #4387fd;" onclick="seeCity(this)">
+                    <%= c["name"] %>
                   </div>
                 </div>
                 <div class="col-lg-4">
                   <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(c["quality"]) %>; margin-top: 2px;"></div>
-                <div style="float: right; margin-right: 9px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= c["quality"] %></div>
+                <div style="float: right; margin-right: 5px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= c["quality"].split.first %></div>
                 </div>
               </div>  
               <% end %>

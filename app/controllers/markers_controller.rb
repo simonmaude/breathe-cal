@@ -21,7 +21,7 @@ class MarkersController < ApplicationController
   end
   
   def show
-    global_number_show = 4
+    global_number_show = 2
     current_user_id = session[:client_id]
     coords = {top: bound_params[:uplat], bottom: bound_params[:downlat], 
               left: bound_params[:leftlong], right: bound_params[:rightlong]}
@@ -35,12 +35,12 @@ class MarkersController < ApplicationController
     @marker_types_in_bounds = @marker_types_in_bounds.map { |m| m.title }
     
 #     # do the filtering
-    if params[:filter] && (params[:filter].keys.length > 0)
-      # filtered_allergens = ''
-      filtered_allergen = Marker.sanitize(params[:filter])
-      all_markers = all_markers.select { |m| filtered_allergen == m.title }
+    # if params[:filter] && (params[:filter].keys.length > 0)
+      filtered_allergen = ''
+      # filtered_allergen = Marker.sanitize(params[:filter])
+      # all_markers = all_markers.select { |m| filtered_allergen == m.title }
       global_markers = Marker.get_global_markers(all_markers,global_number_show,coords,filtered_allergen)
-    end
+   # end
     
     # pass collection to gmaps.js
     marker_container = [user_markers, global_markers, @marker_types_in_bounds]
