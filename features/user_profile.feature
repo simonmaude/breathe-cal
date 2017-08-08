@@ -28,17 +28,17 @@ Scenario: User should see change profile picture when logged in
   # When I press the button "Change Picture"
   # Then I should see "Choose Photo"
 
-Scenario: User sees add friend button 
-  Given I am on the landing page 
-  And I successfully authenticated with Google as "Oski Bear"
-  When I press the user icon
-  Then I should see "Friends"
+#Scenario: User sees add friend button 
+#  Given I am on the landing page 
+#  And I successfully authenticated with Google as "Oski Bear"
+#  When I press the user icon
+#  Then I should see "Friends"
   
-Scenario: User sees friends list
-  Given I am on the landing page 
-  And I successfully authenticated with Google as "Oski Bear"
-  When I press the user icon
-  Then I should see "Friends"
+#Scenario: User sees friends list
+#  Given I am on the landing page 
+#  And I successfully authenticated with Google as "Oski Bear"
+#  When I press the user icon
+#  Then I should see "Friends"
  
   
 
