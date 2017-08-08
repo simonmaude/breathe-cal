@@ -1,32 +1,3 @@
-
-<script>
-
-var acc = document.getElementsByClassName("accordion");
-console.log("acc:" + acc.length);
-var panel = document.getElementsByClassName('panel-collapse');
-console.log("panel:" + panel.length);
-
-for (var i = 0; i < acc.length; i++) {
-   acc[i].onclick = function() {
-     var setClasses = !this.classList.contains('active');
-     setClass(acc, 'active', 'remove');
-     setClass(panel, 'show', 'remove');
-     if (setClasses) {
-       this.classList.toggle("active");
-       this.nextElementSibling.classList.toggle("show");
-     }
-   }
-}
-
-function setClass(els, className, fnName) {
-   for (var i = 0; i < els.length; i++) {
-     els[i].classList[fnName](className);
-   }
-}
-</script>
-
-
-
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
     
@@ -34,7 +5,7 @@ function setClass(els, className, fnName) {
     <% get_pollen(@data).each do |p| %>
       <%p p["Category"]%>
       
-      <% if p["Name"] != "AirQuality" and p["Name"] != "UVIndex" %>
+      <% if p["Name"] != "AirQuality" and p["Name"] == 'UVIndex' %>
       <div class="accordion">
           <div class="row" role="tab" id="heading<%= p["Name"]%>" style="width: 100%; height: 60px; margin-left:2px; border-top-style: solid; border-top-width: 0.5px; border-top-color: #eee;"
            data-toggle="collapse" data-parent="#accordion" href="#collapse<%= p["Name"]%>" aria-expanded="false" aria-controls="collapse<%= p["Name"]%>">
@@ -65,8 +36,5 @@ function setClass(els, className, fnName) {
       <% end %>
     <% end %>
     
-  <div class="row" style="text-align: right; padding: 15px 20px; border-top-style: solid; border-top-width: 0.5px; border-top-color: #eee;font-family: 'Open Sans', sans-serif; font-weight: 400; font-size: 12px; color: #989898;">
-    Data from AccuWeather
-  </div> 
 </div>
 </div>
