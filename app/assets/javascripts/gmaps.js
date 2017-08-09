@@ -62,7 +62,10 @@ if (not_logged_in) {
   document.cookie = "googtrans=/en/en;"
   document.cookie = "googtrans=/en/en; domain=.c9users.io"
   document.cookie = "googtrans=/en/en; domain=tranquil-wildwood-40360.herokuapp.com"
-  
+  setTimeout(function(){
+    $("#find-my-location").click();
+  }, 3000);  
+
 } else if (!not_logged_in) {
   if (document.getElementById("google_translate_element") === null) {
     location.reload();
@@ -103,10 +106,6 @@ if (not_logged_in) {
 setLanguageVars();
 page_trans_work();
 setTranslateListner();
-
-setTimeout(function(){
-  $("#find-my-location").click();
-}, 3000);  
 
 
 
