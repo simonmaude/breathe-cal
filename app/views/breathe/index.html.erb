@@ -293,15 +293,15 @@
       }
     }
       
-    function fillInAddress(place) {
+    function fillInAddress(id) {
+      document.getElementById("location_updated_text").style.display = "block"
       $.ajax({
           type: "PUT",
-          url: "client/" + $('uID'),
-          data: JSON.stringify({location: place, id: $('uID')}),
+          url: "clients/" + id,
+          data: JSON.stringify({location: $('#autocomplete2').val()}),
           contentType: "application/json; charset=utf-8",
           dataType: 'json',
-          success: function(data) {
-              console.log(data);
+          success: function() {
           }
       });    
     }  
