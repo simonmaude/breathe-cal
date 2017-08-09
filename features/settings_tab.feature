@@ -13,12 +13,20 @@ Scenario: User is logged in and clicks settings
   Given I successfully authenticated with Google as "James Jones"
   Then I should be on the landing page
   When I press the user icon
+<<<<<<< HEAD
   And I should see "Settings"
+=======
+  And I should see "Email preferences"
+>>>>>>> location_and_email
   And I should see "Sign Out"
   
 Scenario: User is not logged in and clicks settings
   And I am not logged in
+<<<<<<< HEAD
   And I should not see "Settings"
+=======
+  And I should not see "Email preferences"
+>>>>>>> location_and_email
   And I should not see "Sign Out"
   
 Scenario: User is in settings and clicks notifications
