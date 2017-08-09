@@ -322,7 +322,7 @@
       }
       
       else {
-        console.log('here')
+
         if ($("#cheater-display").html() != "") {
           $("#fox-box").html($("#cheater-display").html());
         }
@@ -422,7 +422,6 @@
         </div>
       </div>
     <hr>
-      <br>
       
       <h4>Current Location: </h4>
       <div style='margin-left: 10px;'>
@@ -439,22 +438,25 @@
       
     <hr>
       <div id="favorite_cities"> 
-        
+
         <h4>Favorites Locations: </h4>
         <% if @fav_cities.nil? %>
-          <% @fav_cities = session[:favorites] %>
+          <% @fav_cities = session[:favorites]; favs = [] %>
         <% end %>
         <% if !@fav_cities.nil? and @fav_cities.length > 0 %>
           <% @fav_cities.each do |c| %>
+            <% favs.append(c['name']) %>
             <div class="row" style="padding: 15px 10px;">
+              
               <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px;">
+                <%= link_to raw("<div class='favorite-star-checked'></div>"), favorite_city_path(:name => c["name"], :remove => true), remote: true, :id => "remove"%>
                 <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; " onclick="seeCity(this)">
                   <%= c["name"]%>
                 </div>
               </div>
               <div class="col-lg-4">
                 <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(c["quality"]) %>; margin-top: 2px; "></div>
-                <div style="float: right; margin-right: 9px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= c["quality"] %></div>
+                <div style="float: right; margin-right: 5px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= c["quality"].split.first %></div>
               </div>
             </div>  
             <% end %>
@@ -475,10 +477,16 @@
         <% if @recent_cities.nil? && !(session[:cities].nil?)%>
           <% @recent_cities = session[:cities].reverse %>
         <% end %>
+  
         <% if !@recent_cities.nil? and @recent_cities.length > 0 %>
             <% @recent_cities.each do |c| %>
               <div class="row" style="padding: 15px 10px; ">
                 <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+                  <% if favs.include? c['name']%>
+                    <%= link_to raw("<div class='favorite-star-checked'></div>"), favorite_city_path(:name => c["name"], :remove => true), remote: true, :id => "remove"%>
+                  <% else %>
+                    <%= link_to raw("<div class='favorite-star-unchecked'></div>"), favorite_city_path(:name => c["name"], :remove => false), remote: true, :id => "include"%>
+                  <% end %>
                   <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #4387fd;" onclick="seeCity(this)">
                     <%= c["name"] %>
                   </div>

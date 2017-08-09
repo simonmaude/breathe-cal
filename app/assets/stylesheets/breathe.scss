@@ -1230,3 +1230,24 @@ div.tab button.active {
 }
 
 
+.favorite-star-checked {
+  background: url('/assets/favorites_checked.svg');
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-color: transparent;
+  height: 16px;
+  width: 32px;
+  border: none;
+  float: left;
+}
+
+.favorite-star-unchecked {
+  background: url('/assets/favorites_unchecked.svg');
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-color: transparent;
+  height: 16px;
+  width: 32px;
+  border: none;
+  float: left;
+}
