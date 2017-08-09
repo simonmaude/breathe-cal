@@ -12,14 +12,17 @@
     
     <%firstLetter = userName[0]%>
   
-    <div onclick= "profileClick()" id = "profile-icon" class = "round-hover">
-      <% if is_default%>
-        <div  id = "profile-image">
-          <%= firstLetter %>
-        </div>
-      <% else %>
-        <img class= "img-circle round" src=<%=source%>>
-      <% end %>
+    <div id = "profile-icon" onblur= "profileClick()" class = "round-hover">
+      <div onclick= "profileClick()" >
+        
+        <% if is_default%>
+          <div  id = "profile-image">
+            <%= firstLetter %>
+          </div>
+        <% else %>
+          <img class= "img-circle round" src=<%=source%>>
+        <% end %>
+      </div>
       <div id="arrow" class = "arrow-up"></div> 
       <div id="myDropdown" class="dropdown-content drop-allign">
         <div id="user-name-header">
@@ -224,7 +227,7 @@
         
         
         <div onclick= "backClick()", class="dropdown-sub-title">
-          <a>Close</a>
+          <a>Back</a>
         </div>
       </div>
       
@@ -236,27 +239,31 @@
   <script>
 
     function profileClick() {
-      if (document.getElementById("myDropdown").style.display == "none"){
-        document.getElementById("arrow").classList.toggle("show")
+      if (document.getElementById("myDropdown").style.display === "block"){
+        document.getElementById("arrow").style.display = "none"
+        document.getElementById("myDropdown").style.display = "none"
         
-        console.log(document.getElementById("myDropdown").style.visibility);
-        document.getElementById("settingsDropdown").classList.toggle("show");
-      } else{
-        console.log(document.getElementById("myDropdown").style.visibility);
-        document.getElementById("myDropdown").classList.toggle("show");
+      } else if (document.getElementById("settingsDropdown").style.display === "block"){
+        document.getElementById("arrow").style.display = "none"
+        document.getElementById("settingsDropdown").style.display = "none"
+        document.getElementById("myDropdown").style.display = "none"
+        
+      } else {
+        document.getElementById("myDropdown").style.display = "block"
+        document.getElementById("arrow").style.display = "block"
       }
     }
   
     function settingsClick() {
-      document.getElementById("myDropdown").classList.toggle("show");
-      document.getElementById("arrow").classList.toggle("show");
-      document.getElementById("settingsDropdown").classList.toggle("show");
+      document.getElementById("arrow").style.display = "block"
+      document.getElementById("settingsDropdown").style.display = "block"
+      document.getElementById("myDropdown").style.display = "none"
     }
     
     function backClick() {
-      document.getElementById("settingsDropdown").classList.toggle("show");
-      document.getElementById("arrow").classList.toggle("show");
-      document.getElementById("myDropdown").classList.toggle("show");
+      document.getElementById("arrow").style.display = "block"
+      document.getElementById("myDropdown").style.display = "block"
+      document.getElementById("settingsDropdown").style.display = "none"
       document.getElementById("location_updated_text").style.display = "none"
       document.getElementById("language_updated_text").style.display = "none"
       document.getElementById("email_updated_text").style.display = "none"
@@ -287,22 +294,23 @@
       }
     }
       
-    function fillInAddress(place) {
-      reverseGC.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK)
-          {
-            var lat =  results[0].geometry.location.latitude
-            var lng =  results[0].geometry.location.longitude
-          }
+    function fillInAddress(id) {
+      document.getElementById("location_updated_text").style.display = "block"
+        reverseGC.geocode( { 'address': address}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK)
+            {
+              var lat =  results[0].geometry.location.latitude
+              var lng =  results[0].geometry.location.longitude
+            }
          });
+=
       $.ajax({
           type: "PUT",
-          url: "client/" + $('uID'),
-          data: JSON.stringify({location: place, id: $('uID'), lat: lat, lng: lng}),
+          url: "clients/" + id,
+          data: JSON.stringify({location: $('#autocomplete2').val(), lat: lat, lng: lng}),
           contentType: "application/json; charset=utf-8",
           dataType: 'json',
-          success: function(data) {
-              console.log(data);
+          success: function() {
           }
       });    
     }  

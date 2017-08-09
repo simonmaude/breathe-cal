@@ -10,7 +10,6 @@ skip_before_action :verify_authenticity_token
       client = Client.find(params[:id])
      
       if params[:location] 
-        city_name = params[:location]
         location_key = City.get_loc_key(params[:lat], params[:lng], params[:location])
         client.location = params[:location] 
         client.loc_key = location_key
