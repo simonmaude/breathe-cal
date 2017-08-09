@@ -64,12 +64,25 @@ if (not_logged_in) {
   document.cookie = "googtrans=/en/en; domain=tranquil-wildwood-40360.herokuapp.com"
   
 } else if (!not_logged_in) {
+  if (document.getElementById("google_translate_element") === null) {
+    location.reload();
+  }
   var lang_selected = $('.temp_information').data('temp');
   if (lang_selected) {
     document.cookie = 'googtrans=/en/' + lang_selected + ';';
     document.cookie = 'googtrans=/en/' + lang_selected + ';' + 'domain=.c9users.io'
     document.cookie = 'googtrans=/en/' + lang_selected + ';' + 'domain=tranquil-wildwood-40360.herokuapp.com'
   }
+  
+  var current_city = $('.temp_information3').data('temp');
+  setTimeout(function () {
+      if ((current_city != null) && (current_city.length > 1)) {
+          document.getElementById("pac-input").value = current_city;
+          document.getElementById("search-button").onclick();
+          document.getElementById("pac-input").value = "";
+      }
+    }, 1000);
+  
 }
 
 
@@ -1137,4 +1150,8 @@ function setTranslateListner(){
   });  
 }
 
-page_trans_work();
+  setTimeout(function () {
+      page_trans_work();
+    }, 1000);
+    
+
