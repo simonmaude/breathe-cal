@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170805091252) do
+ActiveRecord::Schema.define(version: 20170809004802) do
 
   create_table "cities", force: :cascade do |t|
     t.string   "name"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170805091252) do
     t.string   "language"
     t.boolean  "email_is_confirmed"
     t.datetime "key_creation_time"
+    t.integer  "loc_key"
   end
 
   create_table "markers", force: :cascade do |t|

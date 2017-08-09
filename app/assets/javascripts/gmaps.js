@@ -496,6 +496,11 @@ function setSettingsLocationAutoComplete(){
     {types: ['geocode']});
   // bias results around current location
   var curr_location = autocomplete2.getPlace();
+  var loc_curr = curr_location.geometry.location;
+  
+  //document.getElementById('autocomplete_latLng').value = loc_curr;
+  
+  
 }
 
 // Handle location finder error

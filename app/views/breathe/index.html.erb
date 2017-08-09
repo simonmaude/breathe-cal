@@ -65,6 +65,7 @@
           <input id="autocomplete2" style="width: 65%;" placeholder='<%= location_placeholder %>' type="text" data-id='{id: <%= current_client.id%>}'></input>
            <button id='location-btn' onClick='fillInAddress(<%=current_client.id%>)' class='settings-btn' type="submit" value="Reset" style="float: right">Save</button>
           <div class="dropdown-sub-title-update" id="location_updated_text">Location updated</div> 
+          <div style='display: none' id="autocomplete_latLng" value=''></div>
         </div> 
         
         <div class="dropdown-sub-title-settings"> 
@@ -287,10 +288,17 @@
     }
       
     function fillInAddress(place) {
+      reverseGC.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK)
+          {
+            var lat =  results[0].geometry.location.latitude
+            var lng =  results[0].geometry.location.longitude
+          }
+         });
       $.ajax({
           type: "PUT",
           url: "client/" + $('uID'),
-          data: JSON.stringify({location: place, id: $('uID')}),
+          data: JSON.stringify({location: place, id: $('uID'), lat: lat, lng: lng}),
           contentType: "application/json; charset=utf-8",
           dataType: 'json',
           success: function(data) {
