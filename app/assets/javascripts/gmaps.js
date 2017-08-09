@@ -247,10 +247,12 @@ function setUIListerners(){
   
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
+    
 
     if (places.length === 0) {
       return;
     }
+
 
     markers.forEach(function(marker) {
       marker.setMap(null);
