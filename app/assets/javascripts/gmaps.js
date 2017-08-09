@@ -76,7 +76,7 @@ if (not_logged_in) {
   
   var current_city = $('.temp_information3').data('temp');
   setTimeout(function () {
-      if ((current_city != null) && (current_city.length > 1)) {
+      if ((current_city !== null) && (current_city.length > 1)) {
           document.getElementById("pac-input").value = current_city;
           document.getElementById("search-button").onclick();
           document.getElementById("pac-input").value = "";
