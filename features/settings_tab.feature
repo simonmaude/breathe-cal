@@ -13,13 +13,11 @@ Scenario: User is logged in and clicks settings
   Given I successfully authenticated with Google as "James Jones"
   Then I should be on the landing page
   When I press the user icon
-  Then I should see "Friends"
   And I should see "Email preferences"
   And I should see "Sign Out"
   
 Scenario: User is not logged in and clicks settings
   And I am not logged in
-  Then I should not see "Friends"
   And I should not see "Email preferences"
   And I should not see "Sign Out"
   
