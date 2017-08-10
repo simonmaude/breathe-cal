@@ -32,13 +32,13 @@ Scenario: User sees add friend button
   Given I am on the landing page 
   And I successfully authenticated with Google as "Oski Bear"
   When I press the user icon
-  Then I should see "Friends"
+  Then I should see "Settings"
   
 Scenario: User sees friends list
   Given I am on the landing page 
   And I successfully authenticated with Google as "Oski Bear"
   When I press the user icon
-  Then I should see "Friends"
+  Then I should see "Settings"
  
   
 
