@@ -86,8 +86,17 @@ if (not_logged_in) {
       }
     }, 1000);
     
-  document.getElementById("get_alerts_check_box").checked = true;
-  document.getElementById("get_daily_alerts_check_box").checked = true;
+    
+  var email_digest = $('.temp_information4').data('temp');
+  var email_alerts = $('.temp_information5').data('temp');
+  if (email_digest == true) {
+    document.getElementById("get_alerts_check_box").checked = true;
+  }
+  
+  if (email_alerts == true) {
+    document.getElementById("get_daily_alerts_check_box").checked = true;
+  }
+  
 
 }
 
@@ -1190,15 +1199,55 @@ var deleteEverything = function() {
         }
     }); 
       
+      
+              $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({daily_digest: "false"}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
+        
+        
+                $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({alerts: "false"}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
+        
 }
 
 
     function daily_digest_clicked() {
+      var current_id = $('.temp_information2').data('temp');
       if (document.getElementById('get_daily_alerts_check_box').checked) 
       {
-
+        $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({daily_digest: "true"}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        });   
+              
       } else {
-        alert("daily digest off");
+        $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({daily_digest: "false"}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
       }
     }
     
@@ -1209,7 +1258,7 @@ var deleteEverything = function() {
           $.ajax({
             type: "PUT",
             url: "clients/"+current_id,
-            data: JSON.stringify({language: 'en'}),
+            data: JSON.stringify({alerts: "true"}),
             contentType: "application/json; charset=utf-8",
             success: function(data) {
                 console.log(data);
@@ -1219,7 +1268,7 @@ var deleteEverything = function() {
         $.ajax({
             type: "PUT",
             url: "clients/"+current_id,
-            data: JSON.stringify({language: 'en'}),
+            data: JSON.stringify({alerts: "false"}),
             contentType: "application/json; charset=utf-8",
             success: function(data) {
                 console.log(data);
@@ -1227,4 +1276,8 @@ var deleteEverything = function() {
         }); 
       }
     }
+    
+    
+    
+    
     

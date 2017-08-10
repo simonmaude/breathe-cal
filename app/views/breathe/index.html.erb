@@ -84,7 +84,12 @@
         <% end %>
         <%= content_tag :div, class: "temp_information3", data: {temp: current_client.location} do %>
         <% end %>
-    </div>
+
+        <%= content_tag :div, class: "temp_information4", data: {temp: current_client.email_digest} do %>
+        <% end %>
+        <%= content_tag :div, class: "temp_information5", data: {temp: current_client.email_alerts} do %>
+        <% end %>
+        </div>
 
 
         <script type="text/javascript">
@@ -394,8 +399,8 @@
       
       
     }
-    
 
+    
     
   
   </script>

@@ -6,10 +6,7 @@ skip_before_action :verify_authenticity_token
 
   def update
   
-    if params[:email] || params[:location] || params[:language] || params[:alerts]
-        p "****************************************"
-        p params
-        p "****************************************"
+    if params[:email] || params[:location] || params[:language] || params[:alerts] || params[:daily_digest]
       client = Client.find(params[:id])
      
       if params[:location] then client.location = params[:location] end
@@ -31,10 +28,22 @@ skip_before_action :verify_authenticity_token
       end
       
       if params[:alerts]
-        p "****************************************"
-        p params[:language]
-        p "****************************************"
+        if (params[:alerts] == "false")
+          client.email_alerts = false;
+        elsif (params[:alerts] == "true")
+          client.email_alerts = true;
+        end
       end
+      
+      
+      if params[:daily_digest]
+        if (params[:daily_digest] == "false")
+          client.email_digest = false;
+        elsif (params[:daily_digest] == "true")
+          client.email_digest = true;
+        end
+      end
+      
       
       client.save!
       render json: "success"
