@@ -1,7 +1,8 @@
 <div id='recent_searches'>
     <h4>Recent Searches: </h4>
     <% if @recent_cities.nil? %>
-    <% p "no recent cities found %>"
+    <% p "no recent cities found "%>
+    <%@recent_cities = session[:cities]%>  
     <% end %>
     <% if !@recent_cities.nil? and @recent_cities.length > 0 %>
         <% @recent_cities.each do |c| %>
