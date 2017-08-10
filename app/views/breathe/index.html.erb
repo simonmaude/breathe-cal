@@ -457,6 +457,7 @@
           <% @fav_cities.each do |c| %>
             <div class="row" style="padding: 15px 10px;">
               <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+                <%= link_to raw("<div class='favorite-star-checked'></div>"), favorite_city_path(:name => c["name"], :remove => true), remote: true, :id => "remove"%>
                 <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
                   <%= c["name"].capitalize %>
                 </div>

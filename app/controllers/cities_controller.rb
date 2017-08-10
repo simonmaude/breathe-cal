@@ -33,48 +33,74 @@ class CitiesController < ApplicationController
     
     def city_data
       p '*************************************************************9'
-      if params[:geo]
-        latlng = params[:geo]
-        loc_key = City.get_loc_key(latlng["lat"], latlng["lng"], params[:name])
-        city = City.find_by(location_key: loc_key)
-      end
-      city.update_city_data
-      @data = [city.name, city.daily_data]
-      unless a_in_b_as_c?(city.name, session[:cities], "name")
-        if (@quality.nil?)
-          # catch exception
-          @quality = city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
+      if session[:client_id]
+        if params[:geo]
+          latlng = params[:geo]
+          loc_key = City.get_loc_key(latlng["lat"], latlng["lng"], params[:name])
+          city = City.find_by(location_key: loc_key)
+        else
+          city = City.find_by(name: params[:name])
         end
-        p city.name
-        p @quality
+        city.update_city_data
+        @data = [city.name, city.daily_data]
+        unless a_in_b_as_c?(city.name, session[:cities], "name")
+          if city.daily_data
+            # catch exception
+            @quality = city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
+          else 
+            @quality = "no current data"
+          end
+        client = Client.find_by(id: session[:client_id])
+        # session[:cities] = []
         session[:cities] << { "name" => city.name, "quality" => @quality }
-        p 'added to session'
-        p session[:cities]
-      end
-    
-      respond_to do |format|
-        format.js {
-          render :template => "cities/city_data.js.erb"
-        }
-      end
+        stored_searches = client.searches
+        p "pulled stored_searches"
+        if stored_searches
+          stored_searches.each do |city_name|
+            stored_city = City.find_by(name: city_name)
+            stored_quality = stored_city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
+            session[:cities] << { "name" => city_name, "quality" => stored_quality }
+          end
+        end
+        p 'session cities2 = ' + (session[:cities]).to_s
+        if session[:cities].length > 5
+          session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
+        end
+        
+        to_store_searches = []
+        session[:cities].each do |c|
+          to_store_searches << c["name"]
+        end
+        client.searches = to_store_searches
+        client.save!
+          p city.name
+          p @quality
+          p 'added to session'
+          p session[:cities]
+        end
+      
+        respond_to do |format|
+          format.js {
+            render :template => "cities/city_data.js.erb"
+          }
+        end
+      else
+        session[:cities] = []
+        p "You must be logged in to see recent searches!"
       # render :json => city.daily_data.to_json
+      end
     end
     
     def city_data_back
       p '*************************************************************9'
         p 'session cities1 = ' + (session[:cities]).to_s
       @text = "Recent Searches"
-      if session[:cities] && session[:cities].length > 0
-        p 'session cities2 = ' + (session[:cities]).to_s
-        if session[:cities].length > 5
-          session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
-        end
         @recent_cities = session[:cities].reverse
         p 'recent cities = ' + @recent_cities.to_s
       # else
         # @recent_cities = []
         # session[:cities] = []
-      end
+      
       respond_to do |format|
         format.js {
           render :template => "cities/city_data_back.js.erb"
@@ -106,7 +132,7 @@ class CitiesController < ApplicationController
       city = City.find_by(name: params[:name])
       if session[:client_id]
         client = Client.find_by(id: session[:client_id])
-        session[:favorites] = client.searches
+        session[:favorites] = client.favorites
         if (@quality.nil?)
           @quality = city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
         end
@@ -116,15 +142,15 @@ class CitiesController < ApplicationController
           if remove == "true"
             session[:favorites].each do |favorite_city| 
               if favorite_city['name'] == params[:name]
-                session[:favorites].delete(favorite_city)
-                client.searches = session[:favorites]
+                session[:favorites].deletge(favorite_city)
+                client.favorites = session[:favorites]
               end
             end
             flash.now[:notice] = "Removed " + params[:name] + " from your favorite cities!"
           else
             unless a_in_b_as_c?(city.name, session[:favorites], "name")
               session[:favorites] << { "name" => city.name, "quality" => @quality }
-              client.searches = session[:favorites]
+              client.favorites = session[:favorites]
               flash.now[:notice] = "Added " + params[:name] + " to your favorite cities!"
             else
               flash.now[:notice] = params[:name] + " is already one of your favorite cities!"
@@ -133,7 +159,7 @@ class CitiesController < ApplicationController
         else
           session[:favorites] = []
           session[:favorites] << { "name" => city.name, "quality" => @quality }
-          client.searches = session[:favorites]
+          client.favorites = session[:favorites]
           flash.now[:notice] = "Added " + params[:name] + " to your favorite cities!"
         end
       else
