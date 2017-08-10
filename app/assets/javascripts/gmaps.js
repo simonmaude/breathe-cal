@@ -101,6 +101,7 @@ setTimeout(function(){
 
 $(document).ready(initAutocomplete);
 $(document).on('page:load', initAutocomplete);
+
 $(document).on('page:change', initAutocomplete);
 
 
@@ -109,6 +110,8 @@ $(document).on('page:change', initAutocomplete);
 
 function initAutocomplete() {
   mapLoad();
+  
+
   $(document).on('submit', '#markerEdit', function(e){
     console.log('prints twice');
     e.preventDefault();
@@ -150,6 +153,11 @@ function mapLoad() {
     placeMarkerListener();
   }
   setMapListeners();
+  
+  google.maps.event.addListenerOnce(map, 'idle', function(){
+    fetchMarkers();
+  });
+
 }
 
 
@@ -210,6 +218,9 @@ function setUIelements(){
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtnOn);
 
   // add listener for airquality button
+  
+
+
   cleanAirBtnOn.onclick = function() {
     if (global1) {
       addOverlay();
@@ -498,6 +509,8 @@ function setSettingsLocationAutoComplete(){
     {types: ['geocode']});
   // bias results around current location
   var curr_location = autocomplete2.getPlace();
+  
+  
 }
 
 // Handle location finder error

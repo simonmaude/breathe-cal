@@ -1,5 +1,7 @@
 <div style="height: 100%;">
 
+<div id="save_location"></div>
+
 <!-- profile sign in and profile icon START -->
   <% if current_client %>
     <% p asset_path("images/bee_marker.png")%>
@@ -439,11 +441,6 @@
         </div>
    
       
-    <hr>
-      <h4>My Saved Location: </h4>
-      <div style='margin-left: 10px;'>
-        <%= location_placeholder %>
-      </div>
       
     <hr>
       <div id="favorite_cities"> 
