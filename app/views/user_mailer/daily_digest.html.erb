@@ -272,7 +272,8 @@ a[x-apple-data-detectors=true] {
 	  <% if City.where(client_id: @user.id).any? %> 
 	  &nbsp;&nbsp;&nbsp;&nbsp; Your favorite cities and air quality:
 	  <table style="table-layout:fixed">
-	    <% City.where(client_id: @user.id).each do |city| %>
+	    <% session[:favorites].each do |city_hash| %> 
+	      <% city = City.where(name: city_hash[:name]).first %>
 	    
 	      <%#= city %>
 	      
