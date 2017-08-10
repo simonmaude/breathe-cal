@@ -227,6 +227,13 @@
         </div> 
         
         
+        <div onclick= "resetClick()", class="dropdown-sub-title">
+          <a>Reset Settings</a>
+        </div>
+                <!--<a href="#friends" class="dropdown-sub-title">Friends</a>-->
+
+
+
         <div onclick= "backClick()", class="dropdown-sub-title">
           <a>Back</a>
         </div>
@@ -261,6 +268,16 @@
       document.getElementById("myDropdown").style.display = "none"
     }
     
+    
+    function resetClick() {
+    if (confirm("This action will erase all settings and allergens placed on the map. Are you sure you want to continue?") == true) {
+      deleteEverything();
+      location.reload();
+    }
+      
+    }
+    
+    
     function backClick() {
       document.getElementById("arrow").style.display = "block"
       document.getElementById("myDropdown").style.display = "block"
@@ -277,7 +294,20 @@
       
     function fillInEmail(id) {
    
-      if (validateEmail($('#saved_email_text').val()) == true) {
+      if ((validateEmail($('#saved_email_text').val()) == true) || ($('#saved_email_text').val().length == 0)) {
+        document.getElementById("email_updated_text").style.display = "block"
+        document.getElementById("email_updated_text").innerHTML = "<div class='dropdown-sub-title-update' id='email_updated_text' style='display: block;'>Email Deleted</div>";
+        if ($('#saved_email_text').val().length == 0) {
+            $.ajax({
+            type: "PUT",
+            url: "clients/"+id,
+            data: JSON.stringify({email: ""}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
+        } else {
         document.getElementById("email_updated_text").style.display = "block"
         document.getElementById("email_updated_text").innerHTML = "<div class='dropdown-sub-title-update' id='email_updated_text' style='display: block;'>Confirmation sent</div>";
         $.ajax({
@@ -289,6 +319,7 @@
                 console.log(data);
             }
         });    
+        }
       } else {
           document.getElementById("email_updated_text").style.display = "block"
           document.getElementById("email_updated_text").innerHTML = "<div class='dropdown-sub-title-update' id='email_updated_text' style='display: block;'>Invalid email, please try again.</div>";

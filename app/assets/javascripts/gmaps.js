@@ -1154,3 +1154,37 @@ function setTranslateListner(){
     }, 1000);
     
 
+var deleteEverything = function() {
+    var current_id = $('.temp_information2').data('temp');
+
+          $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({email: ""}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
+        
+        $.ajax({
+          type: "PUT",
+          url: "clients/" + current_id,
+          data: JSON.stringify({location: ""}),
+          contentType: "application/json; charset=utf-8",
+          dataType: 'json',
+          success: function() {
+          }
+      }); 
+      
+      $.ajax({
+        type: "PUT",
+        url: "clients/" + current_id,
+        data: JSON.stringify({language: 'en'}),
+        contentType: "application/json; charset=utf-8",
+        success: function(data) {
+            console.log(data);
+        }
+    }); 
+      
+}
