@@ -272,10 +272,11 @@ a[x-apple-data-detectors=true] {
 	  <% if City.where(client_id: @user.id).any? %> 
 	  &nbsp;&nbsp;&nbsp;&nbsp; Your favorite cities and air quality:
 	  <table style="table-layout:fixed">
-	    <% City.where(client_id: @user.id).each do |city| %>
+	    <% @user.favorites.each do |city_name| %>
 	    
 	      <%#= city %>
 	      
+	      <% city = City.where(name: city_name).first %>
 	      <% api_key = City.get_api_key(1) %>
         <% url = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/#{city.location_key}" %>
         <% query = {apikey: City.get_api_key(0), language:"en-us", details: "true"} %>
