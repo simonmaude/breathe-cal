@@ -106,6 +106,7 @@ class CitiesController < ApplicationController
       city = City.find_by(name: params[:name])
       if session[:client_id]
         client = Client.find_by(id: session[:client_id])
+        session[:favorites] = client.searches
         if (@quality.nil?)
           @quality = city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
         end
@@ -114,16 +115,16 @@ class CitiesController < ApplicationController
           remove = params[:remove]
           if remove == "true"
             session[:favorites].each do |favorite_city| 
-                if favorite_city['name'] == params[:name]
-                  session[:favorites].delete(favorite_city)
-                  client.cities.delete(city)
-                end
+              if favorite_city['name'] == params[:name]
+                session[:favorites].delete(favorite_city)
+                client.searches = session[:favorites]
+              end
             end
             flash.now[:notice] = "Removed " + params[:name] + " from your favorite cities!"
           else
             unless a_in_b_as_c?(city.name, session[:favorites], "name")
               session[:favorites] << { "name" => city.name, "quality" => @quality }
-              client.cities << city
+              client.searches = session[:favorites]
               flash.now[:notice] = "Added " + params[:name] + " to your favorite cities!"
             else
               flash.now[:notice] = params[:name] + " is already one of your favorite cities!"
@@ -132,14 +133,18 @@ class CitiesController < ApplicationController
         else
           session[:favorites] = []
           session[:favorites] << { "name" => city.name, "quality" => @quality }
-          client.cities << city
+          client.searches = session[:favorites]
           flash.now[:notice] = "Added " + params[:name] + " to your favorite cities!"
         end
       else
+        session[:favorites] = [] 
         #need to figure out how to redirect to google oauth page
         flash.now[:notice] = "You must be logged in order to favorite a city!"
       end
+      client.save!
       @data = [city.name, city.daily_data]
+      p "calling display_favorite_cities"
+      display_favorite_cities()
       respond_to do |format|
         format.js {
           render :template => "cities/city_data.js.erb"

@@ -1,7 +1,8 @@
 class Client < ActiveRecord::Base
     has_many :cities
     validates_presence_of :provider, :oauth_token, :oauth_expires_at
-    serialize :searches, JSON
+    serialize :searches, Hash
+    serialize :favorites, Hash
     
     
     def self.from_omniauth(auth)
