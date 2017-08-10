@@ -113,6 +113,7 @@ setTranslateListner();
 
 $(document).ready(initAutocomplete);
 $(document).on('page:load', initAutocomplete);
+
 $(document).on('page:change', initAutocomplete);
 
 
@@ -121,6 +122,8 @@ $(document).on('page:change', initAutocomplete);
 
 function initAutocomplete() {
   mapLoad();
+  
+
   $(document).on('submit', '#markerEdit', function(e){
     console.log('prints twice');
     e.preventDefault();
@@ -162,6 +165,11 @@ function mapLoad() {
     placeMarkerListener();
   }
   setMapListeners();
+  
+  google.maps.event.addListenerOnce(map, 'idle', function(){
+    fetchMarkers();
+  });
+
 }
 
 
@@ -222,6 +230,9 @@ function setUIelements(){
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtnOn);
 
   // add listener for airquality button
+  
+
+
   cleanAirBtnOn.onclick = function() {
     if (global1) {
       addOverlay();
@@ -259,10 +270,12 @@ function setUIListerners(){
   
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
+    
 
     if (places.length === 0) {
       return;
     }
+
 
     markers.forEach(function(marker) {
       marker.setMap(null);
@@ -454,7 +467,7 @@ function setHeatMap(){
   heatmap = new google.maps.visualization.HeatmapLayer({
     data: heatmapData,
     radius: 50,
-    opacity: 0.1,
+    opacity: 0.3,
     gradient: [     
     'rgba(24, 249, 235, 0)',
     '#0fb8ad',
@@ -508,6 +521,8 @@ function setSettingsLocationAutoComplete(){
     {types: ['geocode']});
   // bias results around current location
   var curr_location = autocomplete2.getPlace();
+  
+  
 }
 
 // Handle location finder error
