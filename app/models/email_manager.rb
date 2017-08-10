@@ -3,6 +3,10 @@ require 'open-uri'
 require 'nokogiri'
 class EmailManager < ActiveRecord::Base
  
+ @@alert = 'No Alert'
+ 
+ @@previous_alert = 'No Alert'
+ 
  # Return email status for the url below
  # May be given to break at any time
  # (Summer 2017, Feedjira did not work because of 
@@ -28,13 +32,18 @@ class EmailManager < ActiveRecord::Base
 
  end
  
+ def self.update_alert_status
+  @@previous_alert = @@alert
+  @@alert = EmailManager.new_alert_status
+ end
+ 
  # Send user a daily digest
  # Should be called from config/schedule.rb (daily at 6AM)
  # template file is in app/views/user_mailer/email_digest.html.erb
  def self.email_digest
-  @alert = new_alert_status
+  @@alert = new_alert_status
   Client.where(email_digest: true).each do |user|
-   UserMailer.send_email(user, @alert, :daily_digest).deliver_now
+   UserMailer.send_email(user, @@alert, :daily_digest).deliver_now
   end
  end
 
@@ -44,17 +53,17 @@ class EmailManager < ActiveRecord::Base
  # template file is in app/views/user_mailer/email_digest.html.erb
  def self.email_alerts
   # Keep track of previous and current alert
-     @previous_alert = @alert
-     @alert = EmailManager.new_alert_status
+     @@previous_alert = @alert
+     @@alert = EmailManager.new_alert_status
      
      # Stop if status is same as previous or no alert
-     if @previous_alert == @alert or
+     if @@previous_alert == @@alert or
          new_alert_status == "No Alert"
          return
      else 
      #  Otherwise, email everyone
        Client.where(email_alerts: true).each do |user|
-       UserMailer.send_email(user, @alert, :email_alert).deliver_now
+       UserMailer.send_email(user, @@alert, :email_alert).deliver_now
        end
      end
  end
