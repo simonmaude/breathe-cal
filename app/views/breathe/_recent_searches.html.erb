@@ -1,0 +1,31 @@
+<div id='recent_searches'>
+    <h4>Recent Searches: </h4>
+    <% if @recent_cities.nil? %>
+    <% p "no recent cities found %>"
+    <% end %>
+    <% if !@recent_cities.nil? and @recent_cities.length > 0 %>
+        <% @recent_cities.each do |c| %>
+          <div class="row" style="padding: 15px 10px; ">
+            <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+              <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; color: #6B57B9;" onclick="seeCity(this)">
+                <%= c["name"] %>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(c["quality"]) %>; margin-top: 2px;"></div>
+            <div style="float: right; margin-right: 9px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= c["quality"] %></div>
+            </div>
+          </div>  
+          <% end %>
+        <% else %> 
+          <div class="row" style="padding: 15px 10px; ">
+            <div id="sidebar-favorite" class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;">
+              
+            </div>
+          <div id="sidebar-filter" class="col-lg-10" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898; display: none">
+            <div id='filter-header'>Allergens on Map</div>
+            <button id='filter-btn' style="color: black" onclick="filter()">Filter</button>
+          </div>
+        </div>
+      <% end %>
+</div>
