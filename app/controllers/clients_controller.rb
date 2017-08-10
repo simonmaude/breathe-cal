@@ -9,7 +9,11 @@ skip_before_action :verify_authenticity_token
     if params[:email] || params[:location] || params[:language]
       client = Client.find(params[:id])
      
-      if params[:location] then client.location = params[:location] end
+      if params[:location] 
+        location_key = City.get_loc_key(params[:lat], params[:lng], params[:location])
+        client.location = params[:location] 
+        client.loc_key = location_key
+      end
         
       if params[:email] 
         random_num = SecureRandom.hex(256)

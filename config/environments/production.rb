@@ -114,7 +114,11 @@ Rails.application.configure do
   
   
   
-  
+  config.after_initialize do
+    EmailManager.update_alert_status    
+  end
+
+
   
 
 end
