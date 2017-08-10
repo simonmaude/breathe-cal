@@ -6,7 +6,10 @@ skip_before_action :verify_authenticity_token
 
   def update
   
-    if params[:email] || params[:location] || params[:language]
+    if params[:email] || params[:location] || params[:language] || params[:alerts]
+        p "****************************************"
+        p params
+        p "****************************************"
       client = Client.find(params[:id])
      
       if params[:location] then client.location = params[:location] end
@@ -25,6 +28,12 @@ skip_before_action :verify_authenticity_token
       
       if params[:language]
         client.language = params[:language]
+      end
+      
+      if params[:alerts]
+        p "****************************************"
+        p params[:language]
+        p "****************************************"
       end
       
       client.save!

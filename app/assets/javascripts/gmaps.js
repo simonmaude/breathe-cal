@@ -85,7 +85,10 @@ if (not_logged_in) {
           document.getElementById("pac-input").value = "";
       }
     }, 1000);
-  
+    
+  document.getElementById("get_alerts_check_box").checked = true;
+  document.getElementById("get_daily_alerts_check_box").checked = true;
+
 }
 
 
@@ -1188,3 +1191,40 @@ var deleteEverything = function() {
     }); 
       
 }
+
+
+    function daily_digest_clicked() {
+      if (document.getElementById('get_daily_alerts_check_box').checked) 
+      {
+
+      } else {
+        alert("daily digest off");
+      }
+    }
+    
+    function get_alerts_clicked() {
+      var current_id = $('.temp_information2').data('temp');
+      if (document.getElementById('get_alerts_check_box').checked) 
+      {
+          $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({language: 'en'}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
+      } else {
+        $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({language: 'en'}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
+      }
+    }
+    

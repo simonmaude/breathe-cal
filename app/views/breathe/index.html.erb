@@ -154,7 +154,7 @@
           </br>
             Receive alert emails? 
             <label class="switch" style="float: right" data-toggle="collapse" data-target="#collapseAlertEmails">
-              <input type="checkbox">
+              <input type="checkbox" id = "get_alerts_check_box" onclick="get_alerts_clicked()">
               <span class="slider round"></span>
             </label>
           </br>
@@ -192,7 +192,7 @@
         <div class="dropdown-sub-title-content" id="accordion">
           Receive daily update?   
             <label class="switch" style="float: right" data-toggle="collapse" data-target="#collapseDailyUpdate">
-              <input type="checkbox">
+              <input type="checkbox" id = "get_daily_alerts_check_box" onclick="daily_digest_clicked()">
               <span class="slider round"></span>
             </label>
           </br>
@@ -394,6 +394,9 @@
       
       
     }
+    
+
+    
   
   </script>
 
