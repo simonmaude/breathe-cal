@@ -31,7 +31,7 @@ class EmailManager < ActiveRecord::Base
  # Send user a daily digest
  # Should be called from config/schedule.rb (daily at 6AM)
  # template file is in app/views/user_mailer/email_digest.html.erb
- def email_digest
+ def self.email_digest
   @alert = new_alert_status
   Client.where(email_digest: true).each do |user|
    UserMailer.send_email(user, @alert, :daily_digest).deliver_now
@@ -42,7 +42,7 @@ class EmailManager < ActiveRecord::Base
  # Whenever there is an air quality alert from baaqmd
  # Should be called from config/schedule.rb (hourly)
  # template file is in app/views/user_mailer/email_digest.html.erb
- def email_alerts
+ def self.email_alerts
   # Keep track of previous and current alert
      @previous_alert = @alert
      @alert = EmailManager.new_alert_status
