@@ -110,6 +110,7 @@ $("#weather-box").html("<%= j render 'breathe/weather_box.mobile' %>");
 <% else %>
 $("#logo").html("");
 $("#allergen-render").html("<%= j render 'breathe/allergens.html' %>");
+$("#current_city").html("<%= j render 'breathe/home.html' %>");
 $("#uvindex").html("<%= j render 'breathe/uvindex.html' %>");
 $("#breathing-render").html("<%= j render 'breathe/breathing.html' %>");
 $("#fox-box").html("<%= j render 'breathe/fox_box_city.html' %>");
@@ -119,4 +120,8 @@ $("#weather-box").html("<%= j render 'breathe/weather_box.html' %>");
 
 
 $("#allergen-display").click();
+$("#allergen-display").click();
 map.overlayMapTypes.insertAt(0,waqiMapOverlay);  
+
+
+
