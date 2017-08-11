@@ -1,6 +1,8 @@
 class City < ActiveRecord::Base
   belongs_to :client
   serialize :daily_data, JSON
+  serialize :searches
+  serialize :favorites
   
   #Temporary Notes:
   #API key for Accuweather 5 day forecast is pulled through the second key in the get_api_key(i) array.

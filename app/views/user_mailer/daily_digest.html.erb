@@ -265,62 +265,70 @@ a[x-apple-data-detectors=true] {
                     <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 30px; padding-left: 30px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
 <div style="color:#555555;line-height:180%;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif; padding-right: 30px; padding-left: 30px; padding-top: 10px; padding-bottom: 10px;">	
 	<div style="font-size:12px;line-height:22px;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;color:#555555;text-align:left;"><span style="font-size:16px; line-height:29px;">&#160;<span style="line-height: 28px; font-size: 16px;">Hello <%=@user.name %>,</span></span><br><span style="font-size:16px; line-height:29px;"><span style="line-height: 28px; font-size: 16px;"> &nbsp; &nbsp; &nbsp; This is your Daily Digest from Breathe California.</span></span></div><div style="font-size:12px;line-height:22px;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;color:#555555;text-align:left;"><span style="font-size:16px; line-height:29px; "><span style="line-height: 28px; font-size: 16px;">
-
-<!--[if mso]></td></tr></table><![endif]-->
-
-             
-
-<% if City.where(client_id: @user.id).any? %> 
-	  &nbsp;&nbsp;&nbsp;&nbsp; Your favorite cities are:<br>
-	    <% City.where(client_id: @user.id).each do |city| %>
+	  &nbsp;&nbsp;&nbsp;&nbsp; Current air alert: <%= @alert %>  
+	  <br>
+	  <% if not @user.favorites.empty? %> 
+	  &nbsp;&nbsp;&nbsp;&nbsp; Your favorite cities and air quality:
+	  <table style="table-layout:fixed">
+	    <% @user.favorites.each do |city_name| %>
 	    
 	      <%#= city %>
 	      
+	      <% city = City.where(name: city_name).first %>
 	      <% api_key = City.get_api_key(1) %>
         <% url = "http://dataservice.accuweather.com/forecasts/v1/daily/5day/#{city.location_key}" %>
         <% query = {apikey: City.get_api_key(0), language:"en-us", details: "true"} %>
         <% data = City.rescue_api(HTTParty.get(url, query: query), 0, url, query) %>
         <% data = [city.name, data] %>
         
-        <%= "In " + data[0]  + ":" %>
+        
         
         <% todaysForecast = data[1]["DailyForecasts"][0] %>
         
-        <% tempVals = todaysForecast["Temperature"] %>
-        <% min = tempVals["Minimum"]["Value"] %>
-        <% max = tempVals["Maximum"]["Value"] %>
-        <% ave = (min + max) / 2 %>
-        <%= "The average temp is: " + ave.round.to_s + tempVals["Minimum"]["Unit"] %>
+        <%# tempVals = todaysForecast["Temperature"] %>
+        <%# min = tempVals["Minimum"]["Value"] %>
+        <%# max = tempVals["Maximum"]["Value"] %>
+        <%# ave = (min + max) / 2 %>
+        <%# "The average temp is: " + ave.round.to_s + tempVals["Minimum"]["Unit"] %>
         
-        <% windSpeedHash = todaysForecast["Day"]["Wind"]["Speed"] %>
-        <% windSpeed = windSpeedHash["Value"] %>
-        <% windSpeedUnit = windSpeedHash["Unit"] %>
-        <%= "The wind speed is: " + windSpeed.to_s + " " + windSpeedUnit.to_s %>
+        <%# windSpeedHash = todaysForecast["Day"]["Wind"]["Speed"] %>
+        <%# windSpeed = windSpeedHash["Value"] %>
+        <%# windSpeedUnit = windSpeedHash["Unit"] %>
+        <%# "The wind speed is: " + windSpeed.to_s + " " + windSpeedUnit.to_s %>
   
-        <% precipitation = todaysForecast["Day"]["PrecipitationProbability"] %>
-        <%= 'The precipitation probability is: ' + precipitation.to_s + "%" %>
+        <%# precipitation = todaysForecast["Day"]["PrecipitationProbability"] %>
+        <%# 'The precipitation probability is: ' + precipitation.to_s + "%" %>
 
         <% airinfo = todaysForecast["AirAndPollen"] %>
         <% value = "Category" %>
         <% airquality =  airinfo[0] %>
-        <%= "The air quality is: " + airquality[value] %>
-        <% grass =  airinfo[1] %>
-        <%= "The grass level is: " + grass[value] %>
-        <%= mold =  airinfo[2] %>
-        <%= "The mold level is: " + mold[value] %>
-        <%= ragweed =  airinfo[3]  %>
-        <%= "The ragweed level is: " + ragweed[value] %>
-        <% tree =  airinfo[4] %>
-        <%= "The tree level is: " + tree[value] %>
-        <% uvindex =  airinfo[5] %>
-        <%= "The UV level is: " + uvindex[value] %>
+        <tr>
+          <div class ="digester">
+          <td><%= data[0]  %></td>
+          <td> &nbsp; &nbsp; &nbsp; &nbsp; <%= airquality[value] %></td>
+          </div>
+        </tr>
+        <%# grass =  airinfo[1] %>
+        <%# "The grass level is: " + grass[value] %>
+        <%# mold =  airinfo[2] %>
+        <%# "The mold level is: " + mold[value] %>
+        <%# ragweed =  airinfo[3]  %>
+        <%# "The ragweed level is: " + ragweed[value] %>
+        <%# tree =  airinfo[4] %>
+        <%# "The tree level is: " + tree[value] %>
+        <%# uvindex =  airinfo[5] %>
+        <%# "The UV level is: " + uvindex[value] %>
 	    <% end %>
+      </table>
 	  <% else %>
 	  &nbsp;&nbsp;&nbsp;&nbsp; You currently have no favorite cities.
 	  <% end %>
-	  <br>
-	  &nbsp;&nbsp;&nbsp;&nbsp; Current air alert: <%= @alert %>  
-	  </span></span><span style="font-size:18px; line-height:32px;"></span>     
+	  
+	  </span></span><span style="font-size:18px; line-height:32px;"></span></div>	
+</div>
+<!--[if mso]></td></tr></table><![endif]-->
+
+                  
               <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
               </div>
             </div>
