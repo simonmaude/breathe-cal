@@ -60,9 +60,12 @@ class CitiesController < ApplicationController
           p "pulled stored_searches"
           if stored_searches
             stored_searches.each do |city_name|
-              stored_city = City.find_by(name: city_name)
-              stored_quality = stored_city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
-              session[:cities] << { "name" => city_name, "quality" => stored_quality }
+              unless a_in_b_as_c?(city.name, session[:favorites], "name")
+                stored_city = City.find_by(name: city_name)
+                stored_city.update_city_data
+                stored_quality = stored_city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
+                session[:cities] << { "name" => city_name, "quality" => stored_quality }
+              end
             end
           end
           p 'session cities2 = ' + (session[:cities]).to_s
@@ -96,15 +99,37 @@ class CitiesController < ApplicationController
     
     
     def city_data_back
+      if session[:client_id]
+        client = Client.find_by(id: session[:client_id])
         p '*************************************************************9'
         p "Recent Searches - City_data_back"
+        stored_searches = client.searches
+        p "pulled stored_searches"
+        if stored_searches
+          stored_searches.each do |city_name|
+            unless a_in_b_as_c?(city_name, session[:cities], "name")
+              stored_city = City.find_by(name: city_name)
+              stored_city.update_city_data
+              stored_quality = stored_city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
+              session[:cities] << { "name" => city_name, "quality" => stored_quality }
+            end
+          end
+        end
+        p 'session cities2 = ' + (session[:cities]).to_s
+        if session[:cities].length > 5
+          session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
+        end
         @recent_cities = session[:cities]
         p 'recent cities = ' + @recent_cities.to_s
-      respond_to do |format|
+        respond_to do |format|
         format.js {
           render :template => "cities/city_data_back.js.erb"
         }
-      end      
+        end  
+      else
+        session[:cities] = []
+        p "You must be logged in to see recent searches!"
+      end
     end
     
     def display_favorite_cities
