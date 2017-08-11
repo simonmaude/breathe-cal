@@ -5,7 +5,7 @@
     <div style="float: left ;margin-left: 10px; color: white;">
         <div class = 'fox-box-text'>
           <div id = 'cur-city-fox' style="font-family: 'Open Sans', sans-serif; font-size: 28px"><%= current_city || "Current City"%></div>
-            <div style="font-family: 'Open Sans', sans-serif; font-size: 20px">Air quality: <%= air_quality %></div>
+            <div style="font-family: 'Open Sans', sans-serif; font-size: 20px">Air quality: <%= air_quality.split.first %></div>
         </div>
     </div>
       <div style="font-family: 'Open Sans', sans-serif; font-size: 24px; color: white;  margin-right:15px; float:right; padding-top:5px"><%= get_weather_num(@data) %></div>
