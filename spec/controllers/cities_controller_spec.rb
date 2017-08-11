@@ -31,6 +31,7 @@ RSpec.describe CitiesController, type: :controller do
                 controller.instance_variable_set(:@quality, 'something')
                 get :city_data, name: @city.name, geo: latlng, format: 'js'
                 expect(response).to render_template("cities/city_data")
+
             end
         end
         
@@ -50,13 +51,13 @@ RSpec.describe CitiesController, type: :controller do
                     #     expect(response).to render_template('cities/city_data.js.erb')
                     # end
                     
-                #     it 'favorites do not contain this city' do
-                #         request.session[:client_id] = @client.id
-                #         request.session[:favorites] = [{"name" => 'not Berkeley'}]
-                #         controller.instance_variable_set(:@quality, 'something')
-                #         get :favorite_city, name: @city.name, format: 'js'
-                #         expect(response).to render_template('cities/city_data.js.erb')
-                #     end
+                    it 'favorites do not contain this city' do
+                        request.session[:client_id] = @client.id
+                        request.session[:favorites] = [{"name" => 'not Berkeley'}]
+                        controller.instance_variable_set(:@quality, 'something')
+                        get :favorite_city, name: @city.name, format: 'js'
+                        expect(response).to render_template('cities/city_data.js.erb')
+                    end
                     
                     it 'favorites should contain the city now' do
                         request.session[:favorites] = [{"name" => 'not Berkeley'}]
@@ -72,24 +73,24 @@ RSpec.describe CitiesController, type: :controller do
                         expect(response).to render_template('cities/city_data_back.js.erb')
                     end
                     
-                    # it 'no favorites yet but signed in' do
-                    #     request.session[:client_id] = @client.id
-                    #     request.session[:favorites] = nil
-                    #     controller.instance_variable_set(:@quality, 'something')
-                    #     get :favorite_city, name: @city.name, format: 'js'
-                    #     expect(response).to render_template('cities/city_data.js.erb')
-                    # end
+                    it 'no favorites yet but signed in' do
+                        request.session[:client_id] = @client.id
+                        request.session[:favorites] = nil
+                        controller.instance_variable_set(:@quality, 'something')
+                        get :favorite_city, name: @city.name, format: 'js'
+                        expect(response).to render_template('cities/city_data.js.erb')
+                    end
                     
                 end 
             end
             
-            # context 'the user is not signed in' do
-            #     it 'he can not add a favorite this way' do
-            #         request.session[:client_id] = nil
-            #         get :favorite_city, name: @city.name, format: 'js'
-            #         expect(response).to render_template('cities/city_data.js.erb')
-            #     end
-            # end 
+            context 'the user is not signed in' do
+                it 'he can not add a favorite this way' do
+                    request.session[:client_id] = nil
+                    get :favorite_city, name: @city.name, format: 'js'
+                    expect(response).to render_template('cities/city_data.js.erb')
+                end
+            end 
         end
         
         describe '#city_data_back' do
