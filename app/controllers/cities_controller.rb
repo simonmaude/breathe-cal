@@ -35,7 +35,6 @@ class CitiesController < ApplicationController
     end
     
     def city_data
-      p '*************************************************************8'
       if session[:client_id]
         if params[:geo]
           latlng = params[:geo]
@@ -48,16 +47,15 @@ class CitiesController < ApplicationController
         @data = [city.name, city.daily_data]
         session[:cities] ||= []
         # unless a_in_b_as_c?(city.name, session[:cities], "name")
-          if city.daily_data
+          begin
             # catch exception
             @quality = city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
-          else 
+          rescue 
             @quality = "no current data"
           end
           client = Client.find_by(id: session[:client_id])
           session[:cities] << { "name" => city.name, "quality" => @quality }
           stored_searches = client.searches
-          p "pulled stored_searches"
           if stored_searches
             stored_searches.each do |city_name|
               unless a_in_b_as_c?(city.name, session[:favorites], "name")
@@ -68,7 +66,6 @@ class CitiesController < ApplicationController
               end
             end
           end
-          p 'session cities2 = ' + (session[:cities]).to_s
           if session[:cities].length > 5
             session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
           end
@@ -79,10 +76,6 @@ class CitiesController < ApplicationController
           end
           client.searches = to_store_searches
           client.save!
-          p city.name
-          p @quality
-          p 'added to session'
-          p session[:cities]
         # end
       
         respond_to do |format|
@@ -92,7 +85,6 @@ class CitiesController < ApplicationController
         end
       else
         session[:cities] = []
-        p "You must be logged in to see recent searches!"
       # render :json => city.daily_data.to_json
       end
     end
@@ -101,10 +93,7 @@ class CitiesController < ApplicationController
     def city_data_back
       if session[:client_id]
         client = Client.find_by(id: session[:client_id])
-        p '*************************************************************9'
-        p "Recent Searches - City_data_back"
         stored_searches = client.searches
-        p "pulled stored_searches"
         if stored_searches
           stored_searches.each do |city_name|
             unless a_in_b_as_c?(city_name, session[:cities], "name")
@@ -115,12 +104,10 @@ class CitiesController < ApplicationController
             end
           end
         end
-        p 'session cities2 = ' + (session[:cities]).to_s
         if session[:cities].length > 5
           session[:cities] = session[:cities][session[:cities].length - 5, session[:cities].length - 1]
         end
         @recent_cities = session[:cities]
-        p 'recent cities = ' + @recent_cities.to_s
         respond_to do |format|
         format.js {
           render :template => "cities/city_data_back.js.erb"
@@ -128,7 +115,6 @@ class CitiesController < ApplicationController
         end  
       else
         session[:cities] = []
-        p "You must be logged in to see recent searches!"
       end
     end
     
@@ -136,7 +122,6 @@ class CitiesController < ApplicationController
       @text = "Favorite Cities"
       if session[:client_id]
         @fav_cities = session[:favorites]
-        p 'fav_cities = ' + @fav_cities.to_s
         if @fav_cities == nil || @fav_cities.empty? 
           @no_cities = "You currently have no favorite cities!"
         end
@@ -169,10 +154,10 @@ class CitiesController < ApplicationController
           stored_favorites = []
         end
         
-        if city.daily_data
+        begin
           # catch exception
           @quality = city.daily_data["DailyForecasts"][0]["AirAndPollen"][0]["Category"]
-        else 
+        rescue 
           @quality = "no current data"
         end
         
@@ -214,7 +199,6 @@ class CitiesController < ApplicationController
       client.save!
       
       @data = [city.name, city.daily_data]
-      p "calling display_favorite_cities"
       display_favorite_cities()
       respond_to do |format|
         format.js {
