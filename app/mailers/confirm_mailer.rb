@@ -2,7 +2,7 @@ class ConfirmMailer < ApplicationMailer
 
   
   def confirm_email(name, user_id, user_email, random_number)
-    @root_add = "https://work-sordem.c9users.io/"
+    @root_add = "https://tranquil-wildwood-40360.herokuapp.com/"
     @user_email = user_email
     @user_name = name
     @confirm_link = @root_add + "email_confirm/" + user_id + "/" + random_number
