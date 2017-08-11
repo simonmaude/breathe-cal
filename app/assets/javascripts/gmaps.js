@@ -85,7 +85,19 @@ if (not_logged_in) {
           document.getElementById("pac-input").value = "";
       }
     }, 1000);
+    
+    
+  var email_digest = $('.temp_information4').data('temp');
+  var email_alerts = $('.temp_information5').data('temp');
+  if (email_digest == true) {
+    document.getElementById("get_alerts_check_box").checked = true;
+  }
   
+  if (email_alerts == true) {
+    document.getElementById("get_daily_alerts_check_box").checked = true;
+  }
+  
+
 }
 
 
@@ -113,6 +125,7 @@ setTranslateListner();
 
 $(document).ready(initAutocomplete);
 $(document).on('page:load', initAutocomplete);
+
 $(document).on('page:change', initAutocomplete);
 
 
@@ -121,6 +134,8 @@ $(document).on('page:change', initAutocomplete);
 
 function initAutocomplete() {
   mapLoad();
+  
+
   $(document).on('submit', '#markerEdit', function(e){
     console.log('prints twice');
     e.preventDefault();
@@ -162,6 +177,11 @@ function mapLoad() {
     placeMarkerListener();
   }
   setMapListeners();
+  
+  google.maps.event.addListenerOnce(map, 'idle', function(){
+    fetchMarkers();
+  });
+
 }
 
 
@@ -222,6 +242,9 @@ function setUIelements(){
   map.controls[google.maps.ControlPosition.TOP_LEFT].push(cleanAirBtnOn);
 
   // add listener for airquality button
+  
+
+
   cleanAirBtnOn.onclick = function() {
     if (global1) {
       addOverlay();
@@ -259,10 +282,12 @@ function setUIListerners(){
   
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
+    
 
     if (places.length === 0) {
       return;
     }
+
 
     markers.forEach(function(marker) {
       marker.setMap(null);
@@ -454,7 +479,7 @@ function setHeatMap(){
   heatmap = new google.maps.visualization.HeatmapLayer({
     data: heatmapData,
     radius: 50,
-    opacity: 0.1,
+    opacity: 0.3,
     gradient: [     
     'rgba(24, 249, 235, 0)',
     '#0fb8ad',
@@ -508,6 +533,8 @@ function setSettingsLocationAutoComplete(){
     {types: ['geocode']});
   // bias results around current location
   var curr_location = autocomplete2.getPlace();
+  
+  
 }
 
 // Handle location finder error
@@ -1154,3 +1181,118 @@ function setTranslateListner(){
     }, 1000);
     
 
+var deleteEverything = function() {
+    var current_id = $('.temp_information2').data('temp');
+
+          $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({email: ""}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
+        
+        $.ajax({
+          type: "PUT",
+          url: "clients/" + current_id,
+          data: JSON.stringify({location: ""}),
+          contentType: "application/json; charset=utf-8",
+          dataType: 'json',
+          success: function() {
+          }
+      }); 
+      
+      $.ajax({
+        type: "PUT",
+        url: "clients/" + current_id,
+        data: JSON.stringify({language: 'en'}),
+        contentType: "application/json; charset=utf-8",
+        success: function(data) {
+            console.log(data);
+        }
+    }); 
+      
+      
+              $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({daily_digest: "false"}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
+        
+        
+                $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({alerts: "false"}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
+        
+}
+
+
+    function daily_digest_clicked() {
+      var current_id = $('.temp_information2').data('temp');
+      if (document.getElementById('get_daily_alerts_check_box').checked) 
+      {
+        $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({daily_digest: "true"}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        });   
+              
+      } else {
+        $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({daily_digest: "false"}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
+      }
+    }
+    
+    function get_alerts_clicked() {
+      var current_id = $('.temp_information2').data('temp');
+      if (document.getElementById('get_alerts_check_box').checked) 
+      {
+          $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({alerts: "true"}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
+      } else {
+        $.ajax({
+            type: "PUT",
+            url: "clients/"+current_id,
+            data: JSON.stringify({alerts: "false"}),
+            contentType: "application/json; charset=utf-8",
+            success: function(data) {
+                console.log(data);
+            }
+        }); 
+      }
+    }
+    
+    
+    
+    
+    

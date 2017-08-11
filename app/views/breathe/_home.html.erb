@@ -1,0 +1,16 @@
+ 
+<% p '$' * 80; p 'render home' %>
+
+  <div class="row" style="padding: 15px 10px;">
+              
+    <div class="col-lg-8" style="font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px;">
+      <%= link_to raw("<div class='favorite-star-checked'></div>"), favorite_city_path(:name => @data[0], :remove => true), remote: true, :id => "remove"%>
+      <div class = "favCity" style="font-family: 'Open Sans'; font-weight: 600; font-size: 14px; " onclick="seeCity(this)">
+        <%= @data[0]%>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div style="float: right; width: 16px; height: 16px; border-radius: 8px; background-color: #<%= get_quality_color(@data[1]["DailyForecasts"][0]["AirAndPollen"][0]["Category"]) %>; margin-top: 2px; "></div>
+      <div style="float: right; margin-right: 5px; font-family: 'Open Sans', sans-serif; font-weight: 600; font-size: 14px; color: #989898;"><%= @data[1]["DailyForecasts"][0]["AirAndPollen"][0]["Category"].split.first %></div>
+    </div>
+  </div>

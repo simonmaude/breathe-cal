@@ -23,6 +23,9 @@ class CitiesController < ApplicationController
     end
     
     def a_in_b_as_c?(a, b, c) # a in b as c
+    if b == nil
+      return false
+    end
       b.each do |i|
         if i[c] == a
           return true

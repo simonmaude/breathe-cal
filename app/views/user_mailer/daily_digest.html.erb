@@ -209,7 +209,7 @@ a[x-apple-data-detectors=true] {
                     <!--div align="center" class="img-container center" style="padding-right: 0px;  padding-left: 0px;">
 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px;" align="center"><![endif]-->
   <div align="center" border="0" class="image">
-  <%= image_tag attachments['bcba_logo.png'].url -%>
+    <img style = "max-height:100%; max-width:100%;" src="https://docs.google.com/uc?id=0B2mBBduV8KjLV25BZlJ4NUg1Rkk" >
   </div>
 <!--[if mso]></td></tr></table><![endif]-->
 </div>
@@ -233,9 +233,7 @@ a[x-apple-data-detectors=true] {
 
                   
                     <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 15px; padding-left: 15px; padding-top: 15px; padding-bottom: 15px;"><![endif]-->
-<div style="font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;color:#555555;line-height:120%; padding-right: 15px; padding-left: 15px; padding-top: 15px; padding-bottom: 15px;">	
-	<div style="font-size:12px;line-height:14px;color:#555555;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;text-align:left;"><p style="margin: 0;font-size: 12px;line-height: 14px;text-align: center"><a style="color:#67CCDE;text-decoration: none;" href="https://github.com/simonmaude/breathe-cal" target="_blank" rel="noopener noreferrer">Visit Site</a>&#160; &#160; | &#160; <a style="color:#67CCDE;text-decoration: none;" href="http://www.breathebayarea.org/" target="_blank" rel="noopener noreferrer">Breathe California</a>&#160; &#160;| <a style="color:#67CCDE;text-decoration: none;" href="https://github.com/simonmaude/breathe-cal" target="_blank" rel="noopener noreferrer">Github</a>&#160; &#160;<br></p></div>	
-</div>
+
 <!--[if mso]></td></tr></table><![endif]-->
 
                   
@@ -267,7 +265,12 @@ a[x-apple-data-detectors=true] {
                     <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 30px; padding-left: 30px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
 <div style="color:#555555;line-height:180%;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif; padding-right: 30px; padding-left: 30px; padding-top: 10px; padding-bottom: 10px;">	
 	<div style="font-size:12px;line-height:22px;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;color:#555555;text-align:left;"><span style="font-size:16px; line-height:29px;">&#160;<span style="line-height: 28px; font-size: 16px;">Hello <%=@user.name %>,</span></span><br><span style="font-size:16px; line-height:29px;"><span style="line-height: 28px; font-size: 16px;"> &nbsp; &nbsp; &nbsp; This is your Daily Digest from Breathe California.</span></span></div><div style="font-size:12px;line-height:22px;font-family:Lato, Tahoma, Verdana, Segoe, sans-serif;color:#555555;text-align:left;"><span style="font-size:16px; line-height:29px; "><span style="line-height: 28px; font-size: 16px;">
-	  <% if City.where(client_id: @user.id).any? %> 
+
+<!--[if mso]></td></tr></table><![endif]-->
+
+             
+
+<% if City.where(client_id: @user.id).any? %> 
 	  &nbsp;&nbsp;&nbsp;&nbsp; Your favorite cities are:<br>
 	    <% City.where(client_id: @user.id).each do |city| %>
 	    
@@ -317,11 +320,7 @@ a[x-apple-data-detectors=true] {
 	  <% end %>
 	  <br>
 	  &nbsp;&nbsp;&nbsp;&nbsp; Current air alert: <%= @alert %>  
-	  </span></span><span style="font-size:18px; line-height:32px;"></span></div>	
-</div>
-<!--[if mso]></td></tr></table><![endif]-->
-
-                  
+	  </span></span><span style="font-size:18px; line-height:32px;"></span>     
               <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
               </div>
             </div>
@@ -365,10 +364,26 @@ a[x-apple-data-detectors=true] {
                   
                     <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;"><![endif]-->
 <div style="color:#555555;line-height:120%;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif; padding-right: 10px; padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">	
-	<div style="font-size:12px;line-height:14px;color:#555555;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;text-align:left;"><p style="margin: 0;font-size: 12px;line-height: 14px;text-align: center"><span style="font-size: 11px; line-height: 13px;">To unsubscribe from daily emails, please visit <a href="github.com"> our website</a>, sign in and unsubscribe from there.</span></p></div>	
+	<div style="font-size:12px;line-height:14px;color:#555555;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;text-align:left;"><p style="margin: 0;font-size: 12px;line-height: 14px;text-align: center"><span style="font-size: 11px; line-height: 13px;">To unsubscribe from daily emails, please visit <a href="http://www.breathebayarea.org/"> our website</a>, sign in and unsubscribe from there.</span></p></div>	
 </div>
 <!--[if mso]></td></tr></table><![endif]-->
-
+                      <div class="column" style="width:100%;display:inline-block;vertical-align:top;">
+                        <table width="100%" style="border-spacing:0">
+                          <tr>
+                            <td class="inner" style="padding-top:0px;padding-bottom:10px; padding-right:10px;padding-left:10px;"><table class="contents" style="border-spacing:0; width:100%">
+                                <tr>
+                                  <td width="32%" align="center" valign="top" style="padding-top:10px"><table width="150" border="0" cellspacing="0" cellpadding="0">
+                                      <tr>
+                                        <td width="33" align="center"><a href="https://www.facebook.com/BreatheCaliforniaBA/" target="_blank"><img src="https://gallery.mailchimp.com/fdcaf86ecc5056741eb5cbc18/images/1f9161ee-46b5-4bdf-86db-9e32d4b98336.jpg" alt="facebook" width="36" height="36" border="0" style="border-width:0; max-width:36px;height:auto; display:block; max-height:36px"/></a></td>
+                                        <td width="34" align="center"><a href="https://twitter.com/BreatheCA_BA" target="_blank"><img src="https://gallery.mailchimp.com/fdcaf86ecc5056741eb5cbc18/images/4e449140-ec71-4978-97bf-8e0f15b5ff23.jpg" alt="twitter" width="36" height="36" border="0" style="border-width:0; max-width:36px;height:auto; display:block; max-height:36px"/></a></td>
+                                        <td width="33" align="center"><a href="https://www.linkedin.com/company/66908?trk=tyah&trkInfo=clickedVertical%3Acompany%2CclickedEntityId%3A66908%2Cidx%3A4-4-12%2CtarId%3A1481842410758%2Ctas%3Abreathe%20" target="_blank"><img src="https://gallery.mailchimp.com/fdcaf86ecc5056741eb5cbc18/images/d21cca91-335e-4fa4-9313-b0ea37e0452b.jpg" alt="linkedin" width="36" height="36" border="0" style="border-width:0; max-width:36px;height:auto; display:block; max-height:36px"/></a></td>
+                                      </tr>
+                                    </table></td>
+                                </tr>
+                              </table></td>
+                          </tr>
+                        </table>
+                      </div>
                   
               <!--[if (!mso)&(!IE)]><!--></div><!--<![endif]-->
               </div>
@@ -390,7 +405,6 @@ a[x-apple-data-detectors=true] {
                     <div align="center" class="img-container center fullwidth" style="padding-right: 0px;  padding-left: 0px;">
 <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px;" align="center"><![endif]-->
   <div align="center" border="0" class="image">
-  <%= image_tag attachments['email_borderup.png'].url -%>
   </div>
 <!--[if mso]></td></tr></table><![endif]-->
 </div>
@@ -464,3 +478,4 @@ a[x-apple-data-detectors=true] {
 
 
 </body></html>
+

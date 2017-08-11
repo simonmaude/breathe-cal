@@ -687,11 +687,22 @@ input[type="checkbox"]{
 }
 
 
+.col-lg-8 .favCity{
+  color: #4387fd ;
+}
+
 .favCity:hover {
   text-decoration: underline;
   cursor: pointer;
-  color : #3B3E80 !important;
+  color : #4387fd !important;
 }
+
+.favCity:visited {
+  text-decoration: underline;
+  cursor: pointer;
+  color : #4387fd !important;
+}
+
 
 
 .switch {
@@ -1218,4 +1229,31 @@ div.tab button.active {
   
 }
 
+
+.favorite-star-checked {
+  background: url('/assets/favorites_checked.svg');
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-color: transparent;
+  height: 16px;
+  width: 32px;
+  border: none;
+  float: left;
+}
+
+.favorite-star-unchecked {
+  background: url('/assets/favorites_unchecked.svg');
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-color: transparent;
+  height: 16px;
+  width: 32px;
+  border: none;
+  float: left;
+}
+
+.empty-tab {
+  color:#888888;
+  margin-top: 20px;
+}
 
