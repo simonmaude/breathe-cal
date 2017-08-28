@@ -3,10 +3,6 @@
 {<img src="https://travis-ci.org/simonmaude/breathe-cal.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/simonmaude/breathe-cal]
 {<img src="https://codeclimate.com/github/simonmaude/breathe-cal/badges/coverage.svg" />}[https://codeclimate.com/github/simonmaude/breathe-cal/coverage]
 
-Pivotal Link
-
-https://www.pivotaltracker.com/projects/2070837
-
 Heroku Link
 
 https://tranquil-wildwood-40360.herokuapp.com/
@@ -19,6 +15,11 @@ Client Site
 http://www.breathebayarea.org/
 
 Our overall goal is to improve provide adequate information to individuals so that they may be better prepared in the case of an adverse lung health event.
+
+
+Pivotal Link
+
+https://www.pivotaltracker.com/projects/2070837
 
 
 Intallation
