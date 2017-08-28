@@ -20,11 +20,6 @@ http://www.breathebayarea.org/
 
 Our overall goal is to improve provide adequate information to individuals so that they may be better prepared in the case of a adverse lung health event.
 
-Requested Features:
-
-We would like the students to improve on an application that that has already been built by this program by making it more user friendly as well as general improvements. An input feature for specific allergens as well as a way to specify location within the bay area. Being able to input specific allergens is critical to helping individuals actively identify allergens that are harmful to them and prepare against them. Being able to chose a specific area is also critical to helping the individual using the application to prepare and avoid an allergy induced event. 
-
-(Note: The client did not have time for a meeting so this explanation of the client's business needs was taken from the project listing description.)
 
 Intallation
  
@@ -36,7 +31,7 @@ Intallation
      gem 'rspec-rails'
      gem 'capybara'
      gem 'poltergeist'
-     gem 'phantomjs', '1.9.8'
+     gem 'phantomjs', '2.1.1'
      gem 'selenium-webdriver'
      gem 'omniauth-google-oauth2'
      gem 'gmaps4rails'
