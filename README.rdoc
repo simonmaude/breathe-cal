@@ -11,7 +11,7 @@ Heroku Link
 
 https://tranquil-wildwood-40360.herokuapp.com/
 
-(previous semester: https://afternoon-temple-78844.herokuapp.com/)
+(previous group: https://afternoon-temple-78844.herokuapp.com/)
 
 
 Client Site
