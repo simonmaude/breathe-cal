@@ -56,12 +56,4 @@ Since the app integrates Google Map API, be sure to add your development website
 https://console.developers.google.com/apis/credentials/oauthclient/140496364556-f0lvk46ni0jm0ke4k41nfnlp5mj7j8tl.apps.googleusercontent.com?project=breathe-149522&authuser=1
 
 Likewise, the API key for the Accuweather 5 day forecast that is used to get weather and allergen data is set in city.rb of the model folder. The free version of this key will last 6 months, allows 500 queries a day and can be renewed or upgraded here: http://bit.ly/2uwNsb8
- 
-Finally, run the migration file with  
- rake db:migrate in the terminal line
- 
-To run cucumber features 
- cucumber features/*
 
-Please feel free to use a different markup language if you do not plan to run
- <tt>rake doc:app</tt>.
