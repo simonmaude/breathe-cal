@@ -3,6 +3,8 @@
 {<img src="https://travis-ci.org/simonmaude/breathe-cal.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/simonmaude/breathe-cal]
 {<img src="https://codeclimate.com/github/simonmaude/breathe-cal/badges/coverage.svg" />}[https://codeclimate.com/github/simonmaude/breathe-cal/coverage]
 
+Our overall goal is provide individuals access to relevant allergen and air quality data so that they may be better prepared in the case of an adverse lung health event.
+
 Heroku Link
 
 https://tranquil-wildwood-40360.herokuapp.com/
@@ -14,15 +16,13 @@ Client Site
 
 http://www.breathebayarea.org/
 
-Our overall goal is to improve provide adequate information to individuals so that they may be better prepared in the case of an adverse lung health event.
-
 
 Pivotal Link
 
 https://www.pivotaltracker.com/projects/2070837
 
 
-Intallation
+Installation
  
  Because of some customizations that were made in the develpoment process, one first has to perform multiple steps in order to be able to run the included testing features
  
@@ -38,9 +38,9 @@ Intallation
      gem 'gmaps4rails'
      gem 'geocoder'
      
- And then run bundle install command in the terminal.
+ Follow with Bundle install.
  
- In order to make Capybara use PhantomJS headless browser through the Poltergeist driver there is one change that needs to be done:
+ In order to make Capybara use PhantomJS headless browser through the Poltergeist driver the code below should be added to the test setup file.:
  
  require 'capybara/poltergeist'
  
@@ -50,7 +50,6 @@ Intallation
    Capybara::Poltergeist::Driver.new(app, js_error: false)
  end  
  
- Add the above to the test setup file.
  
 Since the app integrates Google Map API, be sure to add your development website to Google Map API 
 https://console.developers.google.com/apis/credentials/oauthclient/140496364556-f0lvk46ni0jm0ke4k41nfnlp5mj7j8tl.apps.googleusercontent.com?project=breathe-149522&authuser=1
