@@ -4,12 +4,12 @@ Individual Screencasts:
 
 Jeffrey Spitz: https://youtu.be/xaQiePa1GDM
 
-Alex Beraut:
+Alexandra Beraut: https://youtu.be/UF_scuiGTFI
 
-Maadhav Shah:
+Maadhav Shah: 
 
-Michael Park:
+Michael Park: 
 
-Steven Ma:
+Steven Ma: 
 
-Tinh Nguyen:
+Tinh Nguyen: 
