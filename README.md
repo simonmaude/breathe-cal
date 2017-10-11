@@ -1,4 +1,4 @@
-<a href="https://codeclimate.com/github/MaadhavShah/breathe-cal"><img src="https://codeclimate.com/github/MaadhavShah/breathe-cal/badges/gpa.svg" /></a>
+<a href="https://codeclimate.com/github/simonmaude/breathe-cal"><img src="https://codeclimate.com/github/simonmaude/breathe-cal/badges/gpa.svg" /></a>
 <a href="https://travis-ci.org/simonmaude/breathe-cal"><img src="https://travis-ci.org/simonmaude/breathe-cal.svg?branch=master" alt="Build Status" /></a>
 <a href=https://codeclimate.com/github/simonmaude/breathe-cal/coverage><img src="https://codeclimate.com/github/simonmaude/breathe-cal/badges/coverage.svg" /></a>
 
