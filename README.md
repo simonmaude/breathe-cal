@@ -1,5 +1,5 @@
 == README
-{<img src="https://codeclimate.com/github/simonmaude/breathe-cal/badges/gpa.svg" />}[https://codeclimate.com/github/simonmaude/breathe-cal]
+<a href="https://codeclimate.com/github/simonmaude/breathe-cal"><img src="https://codeclimate.com/github/simonmaude/breathe-cal/badges/gpa.svg" /></a>
 {<img src="https://travis-ci.org/simonmaude/breathe-cal.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/simonmaude/breathe-cal]
 {<img src="https://codeclimate.com/github/simonmaude/breathe-cal/badges/coverage.svg" />}[https://codeclimate.com/github/simonmaude/breathe-cal/coverage]
 
