@@ -12,4 +12,5 @@ Michael Park: https://youtu.be/kxDMWrdlfW4
 
 Steven Ma: https://youtu.be/lGNUMUk5Dxs
 
-Tinh Nguyen: 
+Tinh Nguyen: https://youtu.be/9wEOJlFPtCU
+
