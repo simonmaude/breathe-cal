@@ -54,6 +54,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
   gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
+  gem 'rspec-rails' #tryna get output in dev env
 end
 # setup Cucumber, RSpec, Guard support
 group :test do
