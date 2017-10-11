@@ -11,8 +11,8 @@ CodeClimate Badge with GPA and code coverage:
 
 
 Heroku Link:
-https://tranquil-wildwood-40360.herokuapp.com/
-(previous group: https://afternoon-temple-78844.herokuapp.com/)
+https://git.heroku.com/powerful-hamlet-80194.git
+(previous groups: https://tranquil-wildwood-40360.herokuapp.com/, https://afternoon-temple-78844.herokuapp.com/)
 
 Client Site:
 http://www.breathebayarea.org/
