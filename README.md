@@ -1,7 +1,7 @@
 == README
-{<img src="https://codeclimate.com/github/MaadhavShah/breathe-cal/badges/gpa.svg" />}[https://codeclimate.com/github/MaadhavShah/breathe-cal]
-{<img src="https://travis-ci.org/MaadhavShah/breathe-cal.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/MaadhavShah/breathe-cal]
-{<img src="https://codeclimate.com/github/MaadhavShah/breathe-cal/badges/coverage.svg" />}[https://codeclimate.com/github/MaadhavShah/breathe-cal/coverage]
+{<img src="https://codeclimate.com/github/simonmaude/breathe-cal/badges/gpa.svg" />}[https://codeclimate.com/github/simonmaude/breathe-cal]
+{<img src="https://travis-ci.org/simonmaude/breathe-cal.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/simonmaude/breathe-cal]
+{<img src="https://codeclimate.com/github/simonmaude/breathe-cal/badges/coverage.svg" />}[https://codeclimate.com/github/simonmaude/breathe-cal/coverage]
 
 Our overall goal is provide individuals access to relevant allergen and air quality data so that they may be better prepared in the case of an adverse lung health event.
 
