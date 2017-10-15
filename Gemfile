@@ -54,10 +54,10 @@ group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
   gem 'jasmine-rails' # if you plan to use JavaScript/CoffeeScript
+  gem 'rspec-rails'
 end
 # setup Cucumber, RSpec, Guard support
 group :test do
-  gem 'rspec-rails'
   gem 'guard-rspec'
   gem 'simplecov', :require => false
   gem 'cucumber-rails', :require => false

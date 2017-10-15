@@ -1,16 +1,16 @@
-Customer Meeting (previous semester - client has yet to get back to us in Summer'17):   
-https://www.youtube.com/watch?v=hivkpOmqyRM
-  
+Customer Meeting: https://youtu.be/tUVdk2MgrIE
 
-Individual ScreenCasts:    
-Albert Tung: https://www.youtube.com/watch?v=pt4gJpDjS3M&  # No audio; need to turn on captioning for comments   
-Angus Hung: https://youtu.be/SjJhdMcz5cI   
-Dominic Bueno: https://youtu.be/qnPKTKrFqoU    
-Simon Maude: https://youtu.be/9B1JBODWMKs   
-<<<<<<< HEAD
-Smit Vachhani: https://www.youtube.com/watch?v=8qSQPOJzQ8g&feature=youtu.be   
-Soroosh Demooei: https://www.youtube.com/watch?v=o5qwafbed2s     
-=======
-Smit Vachhani: https://www.youtube.com/watch?v=8qSQPOJzQ8g&feature=youtu.be  :)!
-Soroosh Demooei: https://www.youtube.com/watch?v=o5qwafbed2s
->>>>>>> d9b487ae51e452ce893c0ff6940b4a6517735f45
+Individual Screencasts:
+
+Jeffrey Spitz: https://youtu.be/xaQiePa1GDM
+
+Alexandra Beraut: https://youtu.be/UF_scuiGTFI
+
+Maadhav Shah: https://youtu.be/eT7roRfbric
+
+Michael Park: https://youtu.be/kxDMWrdlfW4
+
+Steven Ma: https://youtu.be/lGNUMUk5Dxs
+
+Tinh Nguyen: https://youtu.be/9wEOJlFPtCU
+
